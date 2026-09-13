@@ -1,0 +1,11 @@
+[package]
+name = "ofd2pdf"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+easyofd = "0.1.2"
+
+[profile.release]
+opt-level = 3
+lto = true
