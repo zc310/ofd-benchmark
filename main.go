@@ -94,7 +94,7 @@ func main() {
 		},
 		"rust": {
 			Name:       "github.com/easy-4-rust/easyofd-rust",
-			Command:    []string{filepath.Join(binDir, "easyofd"), "to-pdf", inputFile, filepath.Join(binDir, "output_rust.pdf")},
+			Command:    []string{filepath.Join(binDir, "easyofd"), inputFile, filepath.Join(binDir, "output_rust.pdf")},
 			OutputFile: filepath.Join(binDir, "output_rust.pdf"),
 		},
 	}

@@ -4,33 +4,34 @@
 
 ### 已测试（支持 OFD→PDF）
 
-| 库 | 版本 |
-|---|------|
-| [github.com/xiaoqidun/ofdgo](https://github.com/xiaoqidun/ofdgo) | v0.0.0-20260912163201 |
-| [github.com/zc310/ofd](https://github.com/zc310/ofd) | v0.1.0 |
-| [github.com/easy-4-rust/easyofd-rust](https://github.com/easy-4-rust/easyofd-rust) | v0.1.2 |
+| 库                                                                                 | 版本                  |
+|------------------------------------------------------------------------------------|-----------------------|
+| [github.com/xiaoqidun/ofdgo](https://github.com/xiaoqidun/ofdgo)                   | v0.0.0-20260912163201 |
+| [github.com/zc310/ofd](https://github.com/zc310/ofd)                               | v0.1.0                |
+| [github.com/easy-4-rust/easyofd-rust](https://github.com/easy-4-rust/easyofd-rust) | v0.1.2                |
 
 ### 未测试（不支持 OFD→PDF）
 
-| 库 | 原因 |
-|---|------|
+| 库                                                                   | 原因                                                       |
+|----------------------------------------------------------------------|------------------------------------------------------------|
 | [github.com/feuvan/ofdmanager](https://github.com/feuvan/ofdmanager) | 仅支持 OFD→PNG，桌面应用有基于图片的 PDF 导出但 CLI 不支持 |
-| [github.com/geniusnut/rs_ofd](https://github.com/geniusnut/rs_ofd) | 仅支持 OFD→PNG |
+| [github.com/geniusnut/rs_ofd](https://github.com/geniusnut/rs_ofd)   | 仅支持 OFD→PNG                                             |
 
 ## 测试环境
 
 - 字体目录：`~/.local/share/fonts`（已安装各种中文字体）
+- 系统已安装 `apt-get install fonts-wqy-zenhei`
 
 ## 测试结果
 
 | 测试文件       | OFD大小 | ofdgo |     zc310 | easyofd-rust | 胜出          |
 |----------------|--------:|------:|----------:|-------------:|---------------|
-| hello.ofd      |    1.5K |  84ms |     129ms |    **325ms** | ofdgo 3.9x    |
-| ano.ofd        |    702K | 212ms |     365ms |     **83ms** | **rust 2.6x** |
-| intro.ofd      |    7.2M | 2.42s | **1.25s** |        1.94s | zc310 1.5x    |
-| 1000-pages.ofd |    456K | 8.31s |     8.72s |    **1.07s** | **rust 7.8x** |
-| 999.ofd        |     30K | 312ms |     368ms |    **184ms** | rust 1.7x     |
-| zsbk.ofd       |    1.5M | 324ms |     449ms |     **83ms** | **rust 3.9x** |
+| hello.ofd      |    1.5K |  86ms |     134ms |     **53ms** | rust 1.6x     |
+| ano.ofd        |    702K | 218ms |     353ms |     **96ms** | **rust 2.3x** |
+| intro.ofd      |    7.2M | 2.41s | **1.24s** |        1.97s | zc310 1.6x    |
+| 1000-pages.ofd |    456K | 8.35s |     8.70s |    **1.11s** | **rust 7.5x** |
+| 999.ofd        |     30K | 318ms |     369ms |    **191ms** | rust 1.7x     |
+| zsbk.ofd       |    1.5M | 320ms |     449ms |     **87ms** | **rust 3.7x** |
 
 ## PDF 质量对比
 
