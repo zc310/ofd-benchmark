@@ -32,6 +32,12 @@
 |--------------------------------------------------|----------|--------------|------------------------------------|
 | [ofdrw](https://github.com/ofdrw/ofdrw)          | 2.4.0    | ✅           | 需手动下载依赖，全部成功           |
 
+### .NET 库
+
+| 库                                                                                 | 版本     | 支持 OFD→PDF | 备注                               |
+|------------------------------------------------------------------------------------|----------|--------------|------------------------------------|
+| [github.com/zhuovi/XiaoFeng.Ofd](https://github.com/zhuovi/XiaoFeng.Ofd)           | 1.0.0    | ❌           | README 声称支持但代码未实现        |
+
 ### Node.js 库
 
 | 库                                                                           | 版本  | 支持 OFD→PDF | 备注     |
@@ -78,15 +84,15 @@
 
 ### PDF 文件大小
 
-| 转换器           | hello.ofd |   ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd |  zsbk.ofd | 胜出次数 |
-|------------------|----------:|----------:|----------:|---------------:|--------:|----------:|---------:|
-| go-ofdgo         |   14.1KB  |   1119KB  |     35MB  |           66MB |  1234KB |    1941KB |        0 |
-| go-zc310         |    9.9KB  |  96.1KB   |   **14MB**|         1.5MB  | 88.7KB  |   1470KB  |        2 |
-| rust-easyofd     |    37.3KB |   77.1KB  |      29MB |     **614KB**  | 83.3KB  |  **77.8KB**|        2 |
-| python-easyofd   |   FAILED  |   36.1KB  |      38MB |        FAILED  | 73.1KB  |    13.6MB |        1 |
-| python-ofdreader |   FAILED  |    FAILED |     FAILED |        FAILED  |  FAILED |     FAILED |        0 |
-| java-ofdrw       |    4.8KB  |   65.6KB  |     23MB  |       2.0MB   | 76.9KB  |    15.4MB |        1 |
-| node-ofd2pdf     |    1.3KB  |  196.8KB  |    1.1MB  |       4.3MB   | 82.9KB  |    559KB  |        1 |
+| 转换器           | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd |   zsbk.ofd | 胜出次数 |
+|------------------|----------:|--------:|----------:|---------------:|--------:|-----------:|---------:|
+| go-ofdgo         |    14.1KB |  1119KB |      35MB |           66MB |  1234KB |     1941KB |        0 |
+| go-zc310         |     9.9KB |  96.1KB |  **14MB** |          1.5MB |  88.7KB |     1470KB |        2 |
+| rust-easyofd     |    37.3KB |  77.1KB |      29MB |      **614KB** |  83.3KB | **77.8KB** |        2 |
+| python-easyofd   |    FAILED |  36.1KB |      38MB |         FAILED |  73.1KB |     13.6MB |        1 |
+| python-ofdreader |    FAILED |  FAILED |    FAILED |         FAILED |  FAILED |     FAILED |        0 |
+| java-ofdrw       |     4.8KB |  65.6KB |      23MB |          2.0MB |  76.9KB |     15.4MB |        1 |
+| node-ofd2pdf     |     1.3KB | 196.8KB |     1.1MB |          4.3MB |  82.9KB |      559KB |        1 |
 
 ### 文本提取能力
 
