@@ -11,11 +11,11 @@
 
 ### Rust 库
 
-| 库                                                                                 | 版本     | 支持 OFD→PDF | 备注                    |
-|------------------------------------------------------------------------------------|----------|--------------|-------------------------|
-| [github.com/easy-4-rust/easyofd-rust](https://github.com/easy-4-rust/easyofd-rust) | v0.1.2   | ✅           | 已测试                  |
-| [github.com/feuvan/ofdmanager](https://github.com/feuvan/ofdmanager)               | -        | ❌           | 仅支持 OFD→PNG          |
-| [github.com/geniusnut/rs_ofd](https://github.com/geniusnut/rs_ofd)                 | -        | ❌           | 仅支持 OFD→PNG          |
+| 库                                                                                 | 版本   | 支持 OFD→PDF | 备注           |
+|------------------------------------------------------------------------------------|--------|--------------|----------------|
+| [github.com/easy-4-rust/easyofd-rust](https://github.com/easy-4-rust/easyofd-rust) | v0.1.2 | ✅           | 已测试         |
+| [github.com/feuvan/ofdmanager](https://github.com/feuvan/ofdmanager)               | v0.2.0 | ❌           | 仅支持 OFD→PNG |
+| [github.com/geniusnut/rs_ofd](https://github.com/geniusnut/rs_ofd)                 | -      | ❌           | 仅支持 OFD→PNG |
 
 ### Python 库
 
