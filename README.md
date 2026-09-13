@@ -40,6 +40,7 @@
 
 ## 测试环境
 
+- 系统：Ubuntu 26.04.1 LTS (64-bit)
 - 字体目录：`~/.local/share/fonts`（已安装各种中文字体）
 - 系统已安装 `apt-get install fonts-wqy-zenhei fonts-noto-cjk`
 
