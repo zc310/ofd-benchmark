@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"os/exec"
@@ -39,6 +40,23 @@ func runConverter(name string, args []string, outputFile string) (time.Duration,
 	return duration, size
 }
 
+func copyFile(src, dst string) error {
+	in, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer in.Close()
+
+	out, err := os.Create(dst)
+	if err != nil {
+		return err
+	}
+	defer out.Close()
+
+	_, err = io.Copy(out, in)
+	return err
+}
+
 func main() {
 	if len(os.Args) < 2 {
 		log.Fatal("Usage: ofd-benchmark <file.ofd> [converter1] [converter2] ...")
@@ -54,6 +72,14 @@ func main() {
 		log.Fatal(err)
 	}
 	binDir := filepath.Join(filepath.Dir(exePath))
+
+	// Create output directory
+	outputDir := filepath.Join(binDir, "output")
+	os.MkdirAll(outputDir, 0755)
+
+	// Get input filename without extension
+	inputBase := filepath.Base(inputFile)
+	inputName := inputBase[:len(inputBase)-len(filepath.Ext(inputBase))]
 
 	converters := map[string]Converter{
 		"ofdgo": {
@@ -88,6 +114,14 @@ func main() {
 			duration, size := runConverter(c.Name, c.Command, c.OutputFile)
 			results[name] = duration
 			sizes[name] = size
+
+			// Copy to output directory
+			dstFile := filepath.Join(outputDir, fmt.Sprintf("%s_%s.pdf", inputName, name))
+			if err := copyFile(c.OutputFile, dstFile); err != nil {
+				fmt.Printf("Failed to save: %v\n", err)
+			} else {
+				fmt.Printf("Saved: %s\n", filepath.Base(dstFile))
+			}
 			fmt.Println()
 		} else {
 			fmt.Printf("Unknown converter: %s\n\n", name)

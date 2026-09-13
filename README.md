@@ -4,9 +4,11 @@
 
 ### 已测试（支持 OFD→PDF）
 
-- [github.com/xiaoqidun/ofdgo](https://github.com/xiaoqidun/ofdgo) - 纯 Go OFD 渲染库
-- [github.com/zc310/ofd](https://github.com/zc310/ofd) - OFD 文件转换、创建、浏览工具
-- [github.com/easy-4-rust/easyofd-rust](https://github.com/easy-4-rust/easyofd-rust) - Rust OFD 转换库
+| 库 | 版本 |
+|---|------|
+| [github.com/xiaoqidun/ofdgo](https://github.com/xiaoqidun/ofdgo) | v0.0.0-20260912163201 |
+| [github.com/zc310/ofd](https://github.com/zc310/ofd) | v0.1.0 |
+| [github.com/easy-4-rust/easyofd-rust](https://github.com/easy-4-rust/easyofd-rust) | v0.1.2 |
 
 ### 未测试（不支持 OFD→PDF）
 
@@ -15,23 +17,57 @@
 | [github.com/feuvan/ofdmanager](https://github.com/feuvan/ofdmanager) | 仅支持 OFD→PNG，桌面应用有基于图片的 PDF 导出但 CLI 不支持 |
 | [github.com/geniusnut/rs_ofd](https://github.com/geniusnut/rs_ofd) | 仅支持 OFD→PNG |
 
+## 测试环境
+
+- 字体目录：`~/.local/share/fonts`（已安装各种中文字体）
+
 ## 测试结果
 
-| 测试文件 | OFD大小 | ofdgo | ofdgo PDF | zc310 | zc310 PDF | easyofd-rust | easyofd-rust PDF | 胜出 |
-|---------|--------:|------:|----------:|------:|----------:|-----:|---------:|------|
-| hello.ofd | 1.5K | 6ms | 0.7KB | 16ms | 4.9KB | 7ms | 1.5KB | ofdgo 1.2x |
-| ano.ofd | 702K | 212ms | 1099KB | 207ms | 94KB | **14ms** | 5KB | **rust 15x** |
-| intro.ofd | 7.2M | 2.39s | 36MB | **1.26s** | 14MB | 1.50s | 29MB | zc310 1.2x |
-| 1000-pages.ofd | 456K | 517ms | 1056KB | 2.42s | 1459KB | **54ms** | 571KB | **rust 9.6x** |
-| 999.ofd | 30K | 19ms | 6KB | 102ms | 25KB | **12ms** | 8KB | rust 1.6x |
-| zsbk.ofd | 1.5M | 305ms | 1886KB | 303ms | 1459KB | **19ms** | 4KB | **rust 16x** |
+| 测试文件       | OFD大小 | ofdgo |     zc310 | easyofd-rust | 胜出          |
+|----------------|--------:|------:|----------:|-------------:|---------------|
+| hello.ofd      |    1.5K |  84ms |     129ms |    **325ms** | ofdgo 3.9x    |
+| ano.ofd        |    702K | 212ms |     365ms |     **83ms** | **rust 2.6x** |
+| intro.ofd      |    7.2M | 2.42s | **1.25s** |        1.94s | zc310 1.5x    |
+| 1000-pages.ofd |    456K | 8.31s |     8.72s |    **1.07s** | **rust 7.8x** |
+| 999.ofd        |     30K | 312ms |     368ms |    **184ms** | rust 1.7x     |
+| zsbk.ofd       |    1.5M | 324ms |     449ms |     **83ms** | **rust 3.9x** |
 
-## 总结
+## PDF 质量对比
 
-- **easyofd-rust**: 多页/大文件场景下最快（1000页快 9.6x，zsbk 快 16x），输出 PDF 体积最小
-- **ofdgo**: 简单文件表现良好
-- **zc310/ofd**: 在 7.2M 复杂大文件上最快
-- Rust 版本有字体缺失警告，不影响速度对比
+### 文件大小对比
+
+| 文件           |  ofdgo |    zc310 |      rust | 最优  |
+|----------------|-------:|---------:|----------:|-------|
+| hello.ofd      |   15KB | **10KB** |      13KB | zc310 |
+| ano.ofd        | 1119KB |     97KB |  **44KB** | rust  |
+| intro.ofd      |   36MB | **14MB** |      30MB | zc310 |
+| 1000-pages.ofd |   66MB |   1548KB | **591KB** | rust  |
+| 999.ofd        | 1234KB |     89KB |  **50KB** | rust  |
+| zsbk.ofd       | 1941KB |   1470KB |  **43KB** | rust  |
+
+### 文本提取能力
+
+| 文件      | ofdgo |      zc310 |   rust |
+|-----------|------:|-----------:|-------:|
+| hello.ofd |  19字 |       33字 |   34字 |
+| ano.ofd   |   3字 | **9141字** | 6630字 |
+| zsbk.ofd  |  23字 | **2947字** |  714字 |
+
+### 质量总结
+
+| 特性       | ofdgo | zc310 | easyofd-rust |
+|------------|-------|-------|--------------|
+| 页面尺寸   | A4    | A4    | A4           |
+| 矢量图形   | 支持  | 支持  | 支持         |
+| 文本可提取 | 部分  | 最佳  | 良好         |
+| 图片嵌入   | 有    | 有    | 有           |
+| 文件压缩   | 较差  | 良佳  | 最佳         |
+| 中文支持   | 良好  | 最佳  | 良好         |
+
+**结论：**
+- **zc310**: 文本提取最完整，适合需要搜索/复制文本的场景
+- **rust**: 压缩率最好，文件体积最小，速度最快
+- **ofdgo**: 文件体积较大，文本提取较差
 
 ## 使用方法
 
@@ -51,6 +87,8 @@ cp <rust-binary>/easyofd bin/easyofd
 ./bin/ofd-benchmark <file.ofd> rust
 ```
 
+转换后的 PDF 文件保存在 `bin/output/` 目录，命名格式：`{原文件名}_{转换器}.pdf`
+
 ## 项目结构
 
 ```
@@ -59,7 +97,8 @@ ofd-benchmark/
 │   ├── ofd-benchmark
 │   ├── ofdgo-convert
 │   ├── zc310-convert
-│   └── easyofd          # Rust 二进制
+│   ├── easyofd          # Rust 二进制
+│   └── output/          # 转换后的 PDF 文件
 ├── cmd/
 │   ├── ofdgo-convert/
 │   └── zc310-convert/
