@@ -89,6 +89,11 @@ func main() {
 			Command:    []string{"python3", filepath.Join(binDir, "..", "python", "ofd2pdf.py"), inputFile, filepath.Join(binDir, "output_python.pdf")},
 			OutputFile: filepath.Join(binDir, "output_python.pdf"),
 		},
+		"ofd2pdf": {
+			Name:       "python-ofd2pdf",
+			Command:    []string{"python3", filepath.Join(binDir, "..", "python", "ofd2pdf_ofd2pdf.py"), inputFile, filepath.Join(binDir, "output_ofd2pdf.pdf")},
+			OutputFile: filepath.Join(binDir, "output_ofd2pdf.pdf"),
+		},
 		"ofdreader-python": {
 			Name:       "python-ofdreader",
 			Command:    []string{"python3", filepath.Join(binDir, "..", "python", "ofd2pdf_ofdreader.py"), inputFile, filepath.Join(binDir, "output_ofdreader-python.pdf")},
@@ -108,7 +113,7 @@ func main() {
 
 	selectedConverters := os.Args[2:]
 	if len(selectedConverters) == 0 {
-		selectedConverters = []string{"ofdgo", "zc310", "rust", "python", "ofdreader-python", "java", "node"}
+		selectedConverters = []string{"ofdgo", "zc310", "rust", "python", "ofd2pdf", "ofdreader-python", "java", "node"}
 	}
 
 	fmt.Printf("Input file: %s\n\n", inputFile)

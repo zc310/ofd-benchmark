@@ -19,12 +19,13 @@
 
 ### Python 库
 
-| 库                                               | 版本     | 支持 OFD→PDF | 备注                      |
-|--------------------------------------------------|----------|--------------|---------------------------|
-| [easyofd](https://pypi.org/project/easyofd/)     | 20260427 | ✅           | 部分文件失败              |
-| [ofd2img](https://pypi.org/project/ofd2img/)     | 0.1.2    | ✅           | 部分文件失败              |
-| [ofdreader](https://pypi.org/project/ofdreader/) | 0.1.0    | ❌           | 空包，无法使用            |
-| [ofdparser](https://pypi.org/project/ofdparser/) | 0.0.8    | ❌           | 缺 Courier 字体，无法导入 |
+| 库                                               | 版本     | 支持 OFD→PDF | 备注                       |
+|--------------------------------------------------|----------|--------------|----------------------------|
+| [easyofd](https://pypi.org/project/easyofd/)     | 20260427 | ✅           | 部分文件失败               |
+| [ofd2img](https://pypi.org/project/ofd2img/)     | 0.1.2    | ✅           | 部分文件失败               |
+| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)    | 0.0.2    | ✅           | 部分文件失败，基于图片渲染 |
+| [ofdreader](https://pypi.org/project/ofdreader/) | 0.1.0    | ❌           | 空包，无法使用             |
+| [ofdparser](https://pypi.org/project/ofdparser/) | 0.0.8    | ❌           | 缺 Courier 字体，无法导入  |
 
 ### Java 库
 
@@ -73,6 +74,7 @@
 | go-zc310         |     132ms |    350ms | **1.26s** |          8.67s |     369ms |    446ms |        1 |
 | rust-easyofd     |  **43ms** | **74ms** |     1.83s |      **0.99s** | **164ms** | **73ms** |        5 |
 | python-easyofd   |    FAILED |   1122ms |     8.44s |         FAILED |    1041ms |   5188ms |        0 |
+| python-ofd2pdf   |     130ms |   FAILED |    FAILED |          41.4s |     406ms |    197ms |        0 |
 | python-ofdreader |    FAILED |   FAILED |    FAILED |         FAILED |    FAILED |   FAILED |        0 |
 | java-ofdrw       |     510ms |    757ms |     5.12s |          2.14s |     803ms |   5620ms |        0 |
 | node-ofd2pdf     |     240ms |    721ms |     1.18s |          4.67s |     505ms |    800ms |        1 |
@@ -90,6 +92,7 @@
 | go-zc310         |     9.9KB |  96.1KB |  **14MB** |          1.5MB |  88.7KB |     1470KB |        2 |
 | rust-easyofd     |    37.3KB |  77.1KB |      29MB |      **614KB** |  83.3KB | **77.8KB** |        2 |
 | python-easyofd   |    FAILED |  36.1KB |      38MB |         FAILED |  73.1KB |     13.6MB |        1 |
+| python-ofd2pdf   |    36.8KB |  FAILED |    FAILED |         77.9MB | 751.7KB |    128.9KB |        0 |
 | python-ofdreader |    FAILED |  FAILED |    FAILED |         FAILED |  FAILED |     FAILED |        0 |
 | java-ofdrw       |     4.8KB |  65.6KB |      23MB |          2.0MB |  76.9KB |     15.4MB |        1 |
 | node-ofd2pdf     |     1.3KB | 196.8KB |     1.1MB |          4.3MB |  82.9KB |      559KB |        1 |
@@ -102,9 +105,12 @@
 | go-zc310         |       33B | **9141B** | **2947B** |        2 |
 | rust-easyofd     |       34B |     6478B |      714B |        1 |
 | python-easyofd   |    FAILED |     2364B |     3639B |        0 |
+| python-ofd2pdf   |        0B |    FAILED |        0B |        0 |
 | python-ofdreader |    FAILED |    FAILED |    FAILED |        0 |
 | java-ofdrw       |       23B |     6348B |      197B |        0 |
 | node-ofd2pdf     |       23B |     3254B |      545B |        0 |
+
+> `python-ofd2pdf` 基于图片渲染，无法提取文本
 
 ### 质量总结
 
@@ -114,6 +120,7 @@
 | go-zc310       | A4       | 支持     | 最佳       | 有       | 良佳     | 最佳     | 全部     |
 | rust-easyofd   | A4       | 支持     | 良好       | 有       | 最佳     | 良好     | 全部     |
 | python-easyofd | A4       | 支持     | 部分       | 有       | 良佳     | 良好     | 部分失败 |
+| python-ofd2pdf | A4       | 不支持   | 无         | 有       | 一般     | 良好     | 部分失败 |
 | java-ofdrw     | A4       | 支持     | 良好       | 有       | 良佳     | 良好     | 全部     |
 | node-ofd2pdf   | A4       | 支持     | 良好       | 有       | 良佳     | 良好     | 全部     |
 
