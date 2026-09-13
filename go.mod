@@ -3,7 +3,7 @@ module ofd-benchmark
 go 1.26.4
 
 require (
-	github.com/xiaoqidun/ofdgo v0.0.0-20260912163201-e60ad5d6c24f
+	github.com/xiaoqidun/ofdgo v0.0.0-20260913081351-78b34713cc8a
 	github.com/zc310/ofd v0.1.0
 )
 

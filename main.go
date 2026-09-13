@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"log"
 	"os"
 	"os/exec"
@@ -16,45 +15,33 @@ type Converter struct {
 	OutputFile string
 }
 
-func runConverter(name string, args []string, outputFile string) (time.Duration, int64) {
+func runConverter(name string, args []string, outputFile string) (time.Duration, int64, bool) {
 	fmt.Printf("=== %s ===\n", name)
 	start := time.Now()
 
 	cmd := exec.Command(args[0], args[1:]...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
-	cmd.Dir = "/"
+	cmd.Dir = os.TempDir()
 
-	if err := cmd.Run(); err != nil {
-		fmt.Printf("Error: %v\n", err)
-	}
-
+	err := cmd.Run()
 	duration := time.Since(start)
+
+	if err != nil {
+		fmt.Printf("FAILED: %v\n", err)
+		return duration, 0, false
+	}
 
 	var size int64
 	if info, err := os.Stat(outputFile); err == nil {
 		size = info.Size()
+	} else {
+		fmt.Printf("FAILED: output file not created\n")
+		return duration, 0, false
 	}
 
 	fmt.Printf("Time: %v\n", duration)
-	return duration, size
-}
-
-func copyFile(src, dst string) error {
-	in, err := os.Open(src)
-	if err != nil {
-		return err
-	}
-	defer in.Close()
-
-	out, err := os.Create(dst)
-	if err != nil {
-		return err
-	}
-	defer out.Close()
-
-	_, err = io.Copy(out, in)
-	return err
+	return duration, size, true
 }
 
 func main() {
@@ -83,44 +70,69 @@ func main() {
 
 	converters := map[string]Converter{
 		"ofdgo": {
-			Name:       "github.com/xiaoqidun/ofdgo",
+			Name:       "go-ofdgo",
 			Command:    []string{filepath.Join(binDir, "ofdgo-convert"), inputFile, filepath.Join(binDir, "output_ofdgo.pdf")},
 			OutputFile: filepath.Join(binDir, "output_ofdgo.pdf"),
 		},
 		"zc310": {
-			Name:       "github.com/zc310/ofd",
+			Name:       "go-zc310",
 			Command:    []string{filepath.Join(binDir, "zc310-convert"), inputFile, filepath.Join(binDir, "output_zc310.pdf")},
 			OutputFile: filepath.Join(binDir, "output_zc310.pdf"),
 		},
 		"rust": {
-			Name:       "github.com/easy-4-rust/easyofd-rust",
+			Name:       "rust-easyofd",
 			Command:    []string{filepath.Join(binDir, "easyofd"), inputFile, filepath.Join(binDir, "output_rust.pdf")},
 			OutputFile: filepath.Join(binDir, "output_rust.pdf"),
+		},
+		"python": {
+			Name:       "python-easyofd",
+			Command:    []string{"python3", filepath.Join(binDir, "..", "python", "ofd2pdf.py"), inputFile, filepath.Join(binDir, "output_python.pdf")},
+			OutputFile: filepath.Join(binDir, "output_python.pdf"),
+		},
+		"ofdreader-python": {
+			Name:       "python-ofdreader",
+			Command:    []string{"python3", filepath.Join(binDir, "..", "python", "ofd2pdf_ofdreader.py"), inputFile, filepath.Join(binDir, "output_ofdreader-python.pdf")},
+			OutputFile: filepath.Join(binDir, "output_ofdreader-python.pdf"),
+		},
+		"java": {
+			Name:       "java-ofdrw",
+			Command:    []string{filepath.Join(binDir, "..", "java", "ofd2pdf_java.sh"), inputFile, filepath.Join(binDir, "output_java.pdf")},
+			OutputFile: filepath.Join(binDir, "output_java.pdf"),
+		},
+		"node": {
+			Name:       "node-ofd2pdf",
+			Command:    []string{filepath.Join(binDir, "..", "node", "ofd2pdf_node.sh"), inputFile, filepath.Join(binDir, "output_node.pdf")},
+			OutputFile: filepath.Join(binDir, "output_node.pdf"),
 		},
 	}
 
 	selectedConverters := os.Args[2:]
 	if len(selectedConverters) == 0 {
-		selectedConverters = []string{"ofdgo", "zc310", "rust"}
+		selectedConverters = []string{"ofdgo", "zc310", "rust", "python", "ofdreader-python", "java", "node"}
 	}
 
 	fmt.Printf("Input file: %s\n\n", inputFile)
 
-	results := make(map[string]time.Duration)
-	sizes := make(map[string]int64)
+	type result struct {
+		duration time.Duration
+		size     int64
+		ok       bool
+	}
+	results := make(map[string]result)
 
 	for _, name := range selectedConverters {
 		if c, ok := converters[name]; ok {
-			duration, size := runConverter(c.Name, c.Command, c.OutputFile)
-			results[name] = duration
-			sizes[name] = size
+			duration, size, ok := runConverter(c.Name, c.Command, c.OutputFile)
+			results[c.Name] = result{duration, size, ok}
 
-			// Copy to output directory
-			dstFile := filepath.Join(outputDir, fmt.Sprintf("%s_%s.pdf", inputName, name))
-			if err := copyFile(c.OutputFile, dstFile); err != nil {
-				fmt.Printf("Failed to save: %v\n", err)
-			} else {
-				fmt.Printf("Saved: %s\n", filepath.Base(dstFile))
+			if ok {
+				// Move to output directory
+				dstFile := filepath.Join(outputDir, fmt.Sprintf("%s_%s.pdf", inputName, c.Name))
+				if err := os.Rename(c.OutputFile, dstFile); err != nil {
+					fmt.Printf("Failed to save: %v\n", err)
+				} else {
+					fmt.Printf("Saved: %s\n", filepath.Base(dstFile))
+				}
 			}
 			fmt.Println()
 		} else {
@@ -130,10 +142,15 @@ func main() {
 
 	fmt.Println("=== Summary ===")
 	for _, name := range selectedConverters {
-		if t, ok := results[name]; ok {
-			size := sizes[name]
-			sizeStr := fmt.Sprintf("%.1f KB", float64(size)/1024)
-			fmt.Printf("%-10s %10v  %s\n", name+":", t, sizeStr)
+		if c, ok := converters[name]; ok {
+			if r, ok := results[c.Name]; ok {
+				if r.ok {
+					sizeStr := fmt.Sprintf("%.1f KB", float64(r.size)/1024)
+					fmt.Printf("%-20s %10v  %s\n", c.Name+":", r.duration, sizeStr)
+				} else {
+					fmt.Printf("%-20s %10v  FAILED\n", c.Name+":", r.duration)
+				}
+			}
 		}
 	}
 }
