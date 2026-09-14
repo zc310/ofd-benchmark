@@ -1,5 +1,7 @@
 # OFD to PDF 速度对比测试
 
+测试输出PDF文件可在 [Releases](https://github.com/zc310/ofd-benchmark/releases) 页面下载。
+
 ## 测试库
 
 ### Go 库
@@ -70,14 +72,14 @@
 
 | 转换器           | hello.ofd |  ano.ofd | intro.ofd | 1000-pages.ofd |   999.ofd | zsbk.ofd | 胜出次数 |
 |------------------|----------:|---------:|----------:|---------------:|----------:|---------:|---------:|
-| go-ofdgo         |      86ms |    213ms |     2.38s |          8.25s |     308ms |    324ms |        0 |
-| go-zc310         |     129ms |    341ms | **1.24s** |          8.70s |     363ms |    429ms |        1 |
-| rust-easyofd     |  **42ms** | **72ms** |     1.80s |      **0.97s** | **143ms** | **70ms** |        5 |
+| go-ofdgo         |      86ms |    213ms |     2.40s |          8.25s |     308ms |    324ms |        0 |
+| go-zc310         |     129ms |    341ms |     1.26s |          8.70s |     363ms |    429ms |        0 |
+| rust-easyofd     |  **42ms** | **72ms** |     1.82s |      **0.97s** | **143ms** | **70ms** |        5 |
 | python-easyofd   |    FAILED |   1084ms |     8.41s |         FAILED |    1020ms |   5122ms |        0 |
 | python-ofd2pdf   |     137ms |   FAILED |    FAILED |          40.8s |     401ms |    198ms |        0 |
 | python-ofdreader |    FAILED |   FAILED |    FAILED |         FAILED |    FAILED |   FAILED |        0 |
-| java-ofdrw       |     497ms |    737ms |     5.15s |          2.13s |     781ms |   5553ms |        0 |
-| node-ofd2pdf     |     240ms |    708ms |     1.22s |          4.66s |     503ms |    795ms |        1 |
+| java-ofdrw       |     497ms |    737ms |     5.13s |          2.13s |     781ms |   5553ms |        0 |
+| node-ofd2pdf     |     240ms |    708ms | **1.18s** |          4.66s |     503ms |    795ms |        1 |
 
 > - `python-easyofd`: `pip install easyofd ofd2img`，自动切换库，部分文件失败
 > - `python-ofd2pdf`: `pip install ofd2pdf`，基于图片渲染，部分文件失败
@@ -89,29 +91,30 @@
 
 | 转换器           | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd |   zsbk.ofd | 胜出次数 |
 |------------------|----------:|--------:|----------:|---------------:|--------:|-----------:|---------:|
-| go-ofdgo         |    14.1KB |  1119KB |      35MB |           66MB |  1234KB |     1941KB |        0 |
-| go-zc310         |     9.9KB |  96.1KB |  **14MB** |      **1.5MB** |  88.7KB |     1470KB |        2 |
+| go-ofdgo         |    14.1KB |   1.1MB |      35MB |           66MB |   1.2MB |      1.9MB |        0 |
+| go-zc310         |     9.9KB |  96.1KB |      14MB |      **1.5MB** |  88.7KB |      1.4MB |        1 |
 | rust-easyofd     |    37.3KB |  77.1KB |      29MB |      **614KB** |  83.3KB | **77.8KB** |        2 |
 | python-easyofd   |    FAILED |  36.1KB |      38MB |         FAILED |  73.1KB |     13.6MB |        1 |
-| python-ofd2pdf   |    36.8KB |  FAILED |    FAILED |         77.9MB | 751.7KB |      129KB |        0 |
+| python-ofd2pdf   |    36.8KB |  FAILED |    FAILED |         76.1MB | 751.7KB |      129KB |        0 |
 | python-ofdreader |    FAILED |  FAILED |    FAILED |         FAILED |  FAILED |     FAILED |        0 |
 | java-ofdrw       |     4.8KB |  65.6KB |      23MB |          2.0MB |  76.9KB |     15.4MB |        1 |
-| node-ofd2pdf     |     1.3KB | 196.8KB |     1.1MB |          4.3MB |  82.9KB |      559KB |        1 |
+| node-ofd2pdf     |     1.3KB | 196.8KB | **1.1MB** |          4.2MB |  82.9KB |      559KB |        2 |
 
 ### 文本提取能力
 
-| 转换器           | hello.ofd |   ano.ofd |  zsbk.ofd | 胜出次数 |
-|------------------|----------:|----------:|----------:|---------:|
-| go-ofdgo         |       19B |        3B |       23B |        0 |
-| go-zc310         |       33B | **9141B** | **2947B** |        2 |
-| rust-easyofd     |       34B |     6478B |      714B |        1 |
-| python-easyofd   |    FAILED |     2364B |     3639B |        0 |
-| python-ofd2pdf   |        0B |    FAILED |        0B |        0 |
-| python-ofdreader |    FAILED |    FAILED |    FAILED |        0 |
-| java-ofdrw       |       23B |     6348B |      197B |        0 |
-| node-ofd2pdf     |       23B |     3254B |      545B |        0 |
+| 转换器           | hello.ofd |  ano.ofd |  999.ofd | zsbk.ofd | 胜出次数 |
+|------------------|----------:|---------:|---------:|---------:|---------:|
+| go-ofdgo         |         8 |        0 |       76 |       19 |        0 |
+| go-zc310         |        22 | **7540** |     4595 |      985 |        1 |
+| rust-easyofd     |        23 |     6357 |     3869 |      369 |        0 |
+| python-easyofd   |         0 |     1469 |     4579 |     2128 |        1 |
+| python-ofd2pdf   |         0 |   FAILED |   FAILED |        0 |        0 |
+| python-ofdreader |    FAILED |   FAILED |   FAILED |   FAILED |        0 |
+| java-ofdrw       |        20 |     6307 |     3581 |      194 |        0 |
+| node-ofd2pdf     |        25 |     7049 | **4905** |     1697 |        1 |
 
-> `python-ofd2pdf` 基于图片渲染，无法提取文本
+> - `python-ofd2pdf` 基于图片渲染，无法提取文本
+> - 单位为字符数（chars）
 
 ### 质量总结
 
@@ -126,11 +129,15 @@
 | node-ofd2pdf   | A4       | 支持     | 良好       | 有       | 良佳     | 良好     | 全部     |
 
 **结论：**
-- **go-zc310**: 文本提取最完整，适合需要搜索/复制文本的场景
-- **rust-easyofd**: 压缩率最好，文件体积最小，速度最快
+- **rust-easyofd**: 速度最快（5胜），压缩率最好（2胜），推荐首选
+- **go-zc310**: 文本提取最完整（ano.ofd 7540字符），适合需要搜索/复制文本的场景
+- **node-ofd2pdf**: intro.ofd 最快（1.18s），兼容性好
 - **go-ofdgo**: 文件体积较大，文本提取较差
-- **python-easyofd**: 体积最小，但部分文件转换失败
-- **java-ofdrw**: 兼容性好，体积较小，但速度较慢
+- **python-easyofd**: 部分文件转换失败
+- **python-ofd2pdf**: 基于图片渲染，无法提取文本
+- **java-ofdrw**: 兼容性好，但速度较慢
+
+> **建议**：手工核对输出 PDF 效果，选择合适的库。不同 OFD 文件结构差异较大，实际效果可能与基准测试结果不同。
 
 > 以上结论由 AI 根据测试数据自动汇总生成
 
