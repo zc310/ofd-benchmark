@@ -4,10 +4,10 @@
 
 ### Go 库
 
-| 库                                                                                 | 版本                  | 支持 OFD→PDF | 备注                    |
-|------------------------------------------------------------------------------------|-----------------------|--------------|-------------------------|
-| [github.com/xiaoqidun/ofdgo](https://github.com/xiaoqidun/ofdgo)                   | v0.0.0-20260912163201 | ✅           | 已测试                  |
-| [github.com/zc310/ofd](https://github.com/zc310/ofd)                               | v0.1.0                | ✅           | 已测试                  |
+| 库                                                               | 版本                  | 支持 OFD→PDF | 备注   |
+|------------------------------------------------------------------|-----------------------|--------------|--------|
+| [github.com/xiaoqidun/ofdgo](https://github.com/xiaoqidun/ofdgo) | v0.0.0-20260912163201 | ✅           | 已测试 |
+| [github.com/zc310/ofd](https://github.com/zc310/ofd)             | v0.1.1-20260914000557 | ✅           | 已测试 |
 
 ### Rust 库
 
@@ -21,9 +21,9 @@
 
 | 库                                               | 版本     | 支持 OFD→PDF | 备注                       |
 |--------------------------------------------------|----------|--------------|----------------------------|
-| [easyofd](https://pypi.org/project/easyofd/)     | 20260427 | ✅           | 部分文件失败               |
-| [ofd2img](https://pypi.org/project/ofd2img/)     | 0.1.2    | ✅           | 部分文件失败               |
-| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)    | 0.0.2    | ✅           | 部分文件失败，基于图片渲染 |
+| [easyofd](https://pypi.org/project/easyofd/)     | 20260427 | ⚠️           | 部分文件失败               |
+| [ofd2img](https://pypi.org/project/ofd2img/)     | 0.1.2    | ⚠️           | 部分文件失败               |
+| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)    | 0.0.2    | ⚠️           | 部分文件失败，基于图片渲染 |
 | [ofdreader](https://pypi.org/project/ofdreader/) | 0.1.0    | ❌           | 空包，无法使用             |
 | [ofdparser](https://pypi.org/project/ofdparser/) | 0.0.8    | ❌           | 缺 Courier 字体，无法导入  |
 
@@ -70,16 +70,17 @@
 
 | 转换器           | hello.ofd |  ano.ofd | intro.ofd | 1000-pages.ofd |   999.ofd | zsbk.ofd | 胜出次数 |
 |------------------|----------:|---------:|----------:|---------------:|----------:|---------:|---------:|
-| go-ofdgo         |      86ms |    216ms |     2.41s |          8.23s |     307ms |    332ms |        0 |
-| go-zc310         |     132ms |    350ms | **1.26s** |          8.67s |     369ms |    446ms |        1 |
-| rust-easyofd     |  **43ms** | **74ms** |     1.83s |      **0.99s** | **164ms** | **73ms** |        5 |
-| python-easyofd   |    FAILED |   1122ms |     8.44s |         FAILED |    1041ms |   5188ms |        0 |
-| python-ofd2pdf   |     130ms |   FAILED |    FAILED |          41.4s |     406ms |    197ms |        0 |
+| go-ofdgo         |      86ms |    213ms |     2.38s |          8.25s |     308ms |    324ms |        0 |
+| go-zc310         |     129ms |    341ms | **1.24s** |          8.70s |     363ms |    429ms |        1 |
+| rust-easyofd     |  **42ms** | **72ms** |     1.80s |      **0.97s** | **143ms** | **70ms** |        5 |
+| python-easyofd   |    FAILED |   1084ms |     8.41s |         FAILED |    1020ms |   5122ms |        0 |
+| python-ofd2pdf   |     137ms |   FAILED |    FAILED |          40.8s |     401ms |    198ms |        0 |
 | python-ofdreader |    FAILED |   FAILED |    FAILED |         FAILED |    FAILED |   FAILED |        0 |
-| java-ofdrw       |     510ms |    757ms |     5.12s |          2.14s |     803ms |   5620ms |        0 |
-| node-ofd2pdf     |     240ms |    721ms |     1.18s |          4.67s |     505ms |    800ms |        1 |
+| java-ofdrw       |     497ms |    737ms |     5.15s |          2.13s |     781ms |   5553ms |        0 |
+| node-ofd2pdf     |     240ms |    708ms |     1.22s |          4.66s |     503ms |    795ms |        1 |
 
 > - `python-easyofd`: `pip install easyofd ofd2img`，自动切换库，部分文件失败
+> - `python-ofd2pdf`: `pip install ofd2pdf`，基于图片渲染，部分文件失败
 > - `python-ofdreader`: `pip install ofdreader`，空包（无 Python 代码），全部失败
 > - `java-ofdrw`: `org.ofdrw:ofdrw-converter:2.4.0`，全部成功
 > - `node-ofd2pdf`: `npm install @miconvert/ofd-to-pdf`，全部成功
@@ -89,10 +90,10 @@
 | 转换器           | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd |   zsbk.ofd | 胜出次数 |
 |------------------|----------:|--------:|----------:|---------------:|--------:|-----------:|---------:|
 | go-ofdgo         |    14.1KB |  1119KB |      35MB |           66MB |  1234KB |     1941KB |        0 |
-| go-zc310         |     9.9KB |  96.1KB |  **14MB** |          1.5MB |  88.7KB |     1470KB |        2 |
+| go-zc310         |     9.9KB |  96.1KB |  **14MB** |      **1.5MB** |  88.7KB |     1470KB |        2 |
 | rust-easyofd     |    37.3KB |  77.1KB |      29MB |      **614KB** |  83.3KB | **77.8KB** |        2 |
 | python-easyofd   |    FAILED |  36.1KB |      38MB |         FAILED |  73.1KB |     13.6MB |        1 |
-| python-ofd2pdf   |    36.8KB |  FAILED |    FAILED |         77.9MB | 751.7KB |    128.9KB |        0 |
+| python-ofd2pdf   |    36.8KB |  FAILED |    FAILED |         77.9MB | 751.7KB |      129KB |        0 |
 | python-ofdreader |    FAILED |  FAILED |    FAILED |         FAILED |  FAILED |     FAILED |        0 |
 | java-ofdrw       |     4.8KB |  65.6KB |      23MB |          2.0MB |  76.9KB |     15.4MB |        1 |
 | node-ofd2pdf     |     1.3KB | 196.8KB |     1.1MB |          4.3MB |  82.9KB |      559KB |        1 |

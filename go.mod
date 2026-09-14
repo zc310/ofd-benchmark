@@ -3,8 +3,8 @@ module ofd-benchmark
 go 1.26.4
 
 require (
-	github.com/xiaoqidun/ofdgo v0.0.0-20260913081351-78b34713cc8a
-	github.com/zc310/ofd v0.1.0
+	github.com/xiaoqidun/ofdgo v0.0.0-20260913164053-dd6818178c83
+	github.com/zc310/ofd v0.1.1-0.20260914000557-65d9748fcc57
 )
 
 require (
@@ -16,7 +16,7 @@ require (
 	github.com/BurntSushi/xgbutil v0.0.0-20190907113008-ad855c713046 // indirect
 	github.com/ByteArena/poly2tri-go v0.0.0-20170716161910-d102ad91854f // indirect
 	github.com/Kagami/go-avif v0.1.0 // indirect
-	github.com/andybalholm/brotli v1.2.3 // indirect
+	github.com/andybalholm/brotli v1.2.4 // indirect
 	github.com/benoitkugler/textlayout v0.3.2 // indirect
 	github.com/benoitkugler/textprocessing v0.0.6 // indirect
 	github.com/dkrisman/gobig2 v0.0.0-20260513123937-51e39052fde6 // indirect
@@ -28,8 +28,8 @@ require (
 	github.com/nao1215/imaging v1.0.10 // indirect
 	github.com/srwiley/rasterx v0.0.0-20220730225603-2ab79fcdd4ef // indirect
 	github.com/srwiley/scanx v0.0.0-20190309010443-e94503791388 // indirect
-	github.com/tdewolff/canvas v0.0.0-20260901160717-dae8cd8e19a7 // indirect
-	github.com/tdewolff/font v0.0.0-20260822205238-d0d2f004b117 // indirect
+	github.com/tdewolff/canvas v0.0.0-20260913163248-dd4999d1c76a // indirect
+	github.com/tdewolff/font v0.0.0-20260913163313-54f98bb59ee6 // indirect
 	github.com/tdewolff/minify/v2 v2.24.17 // indirect
 	github.com/tdewolff/parse/v2 v2.8.16 // indirect
 	github.com/tjfoc/gmsm v1.4.1 // indirect
