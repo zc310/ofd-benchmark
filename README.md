@@ -53,30 +53,30 @@
 | [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 0.2.0 |   ✅    | 2026-08-03 | 全部成功              |
 | [github.com/isee15/ofdjs](https://github.com/isee15/ofdjs)                   | -     |   ❌    | 2026-07-14 | OFD 解析渲染到 Canvas |
 
-## OFD 解析库汇总
+## OFD 库汇总
 
-| 库                                                                |  语言  | 解析 | → 图片 | → PDF | → TXT | → SVG | PDF → OFD | 生成 | 签章 |
-|-------------------------------------------------------------------|:------:|:----:|:------:|:-----:|:-----:|:-----:|:---------:|:----:|:----:|
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                    |   Go   |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |    ❌     |  ❌  |  ✅  |
-| [go-zc310](https://github.com/zc310/ofd)                          |   Go   |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |    ❌     |  ✅  |  ❌  |
-| [easyofd-rust](https://github.com/easy-4-rust/easyofd-rust)       |  Rust  |  ✅  |   ✅   |  ✅   |  ❌   |  ❌   |    ❌     |  ❌  |  ❌  |
-| [ofdmanager](https://github.com/feuvan/ofdmanager)                |  Rust  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |    ❌     |  ❌  |  ❌  |
-| [rs_ofd](https://github.com/geniusnut/rs_ofd)                     |  Rust  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |    ❌     |  ❌  |  ❌  |
-| [ofd-utility](https://github.com/ofd-utility/ofd-utility)         |  Rust  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |    ❌     |  ❌  |  ✅  |
-| [ofdsdk](https://github.com/KaiserY/ofdsdk)                       |  Rust  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |    ❌     |  ❌  |  ❌  |
-| [easyofd](https://pypi.org/project/easyofd/)                      | Python |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |    ❌     |  ✅  |  ❌  |
-| [ofd2img](https://pypi.org/project/ofd2img/)                      | Python |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |    ❌     |  ❌  |  ❌  |
-| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                     | Python |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |    ❌     |  ❌  |  ❌  |
-| [ofdreader](https://pypi.org/project/ofdreader/)                  | Python |  ✅  |   ❌   |  ⚠️   |  ✅   |  ❌   |    ❌     |  ✅  |  ❌  |
-| [pdf2ofd](https://github.com/wanglrebe/pdf2ofd)                   | Python |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |    ✅     |  ❌  |  ❌  |
-| [ofdrw](https://github.com/ofdrw/ofdrw)                           |  Java  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |    ✅     |  ✅  |  ✅  |
-| [easyofd-java](https://github.com/11627685/easyofd-java)          |  Java  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |    ❌     |  ✅  |  ✅  |
-| [ofdbox](https://gitee.com/bookhhu/ofdbox)                        |  Java  |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |    ❌     |  ❌  |  ❌  |
-| [ofd-analyze](https://github.com/cooker/ofd-analyze)              |  Java  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |    ❌     |  ❌  |  ❌  |
-| [XiaoFeng.Ofd](https://github.com/zhuovi/XiaoFeng.Ofd)            |  .NET  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |    ❌     |  ✅  |  ✅  |
-| [ofdparser](https://github.com/wangyi160/ofdparser)               |  .NET  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |    ❌     |  ❌  |  ❌  |
-| [ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |   JS   |  ✅  |   ❌   |  ✅   |  ❌   |  ❌   |    ❌     |  ❌  |  ❌  |
-| [ofdjs](https://github.com/isee15/ofdjs)                          |   JS   |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |    ❌     |  ❌  |  ❌  |
+| 库                                                                |  语言  | 解析 | → 图片 | → PDF | → TXT | → SVG | → Md | PDF → OFD | 生成 | 签章 | 修改 |
+|-------------------------------------------------------------------|:------:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:---------:|:----:|:----:|:----:|
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                    |   Go   |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [go-zc310](https://github.com/zc310/ofd)                          |   Go   |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ✅  |    ❌     |  ✅  |  ❌  |  ❌  |
+| [easyofd-rust](https://github.com/easy-4-rust/easyofd-rust)       |  Rust  |  ✅  |   ✅   |  ✅   |  ❌   |  ❌   |  ✅  |    ❌     |  ✅  |  ✅  |  ✅  |
+| [ofdmanager](https://github.com/feuvan/ofdmanager)                |  Rust  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [rs_ofd](https://github.com/geniusnut/rs_ofd)                     |  Rust  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofd-utility](https://github.com/ofd-utility/ofd-utility)         |  Rust  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
+| [ofdsdk](https://github.com/KaiserY/ofdsdk)                       |  Rust  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [easyofd](https://pypi.org/project/easyofd/)                      | Python |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ✅     |  ✅  |  ❌  |  ❌  |
+| [ofd2img](https://pypi.org/project/ofd2img/)                      | Python |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                     | Python |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofdreader](https://pypi.org/project/ofdreader/)                  | Python |  ✅  |   ❌   |  ✅   |  ✅   |  ❌   |  ❌  |    ❌     |  ✅  |  ❌  |  ❌  |
+| [pdf2ofd](https://github.com/wanglrebe/pdf2ofd)                   | Python |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ✅     |  ❌  |  ❌  |  ❌  |
+| [ofdrw](https://github.com/ofdrw/ofdrw)                           |  Java  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |    ✅     |  ✅  |  ✅  |  ❌  |
+| [easyofd-java](https://github.com/11627685/easyofd-java)          |  Java  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ✅  |  ✅  |  ❌  |
+| [ofdbox](https://gitee.com/bookhhu/ofdbox)                        |  Java  |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofd-analyze](https://github.com/cooker/ofd-analyze)              |  Java  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [XiaoFeng.Ofd](https://github.com/zhuovi/XiaoFeng.Ofd)            |  .NET  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ✅  |  ✅  |  ❌  |
+| [ofdparser](https://github.com/wangyi160/ofdparser)               |  .NET  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |   JS   |  ✅  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofdjs](https://github.com/isee15/ofdjs)                          |   JS   |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
 
 ## 测试环境
 
@@ -101,16 +101,16 @@
 
 ### 转换速度
 
-| 转换器           | hello.ofd |  ano.ofd | intro.ofd | 1000-pages.ofd |   999.ofd | zsbk.ofd | 胜出次数 |
-|------------------|----------:|---------:|----------:|---------------:|----------:|---------:|---------:|
-| go-ofdgo         |      86ms |    213ms |     2.40s |          8.25s |     308ms |    324ms |        0 |
-| go-zc310         |     129ms |    341ms |     1.26s |          8.70s |     363ms |    429ms |        0 |
-| rust-easyofd     |  **42ms** | **72ms** |     1.82s |      **0.97s** | **143ms** | **70ms** |        5 |
-| python-easyofd   |    FAILED |   1084ms |     8.41s |         FAILED |    1020ms |   5122ms |        0 |
-| python-ofd2pdf   |     137ms |   FAILED |    FAILED |          40.8s |     401ms |    198ms |        0 |
-| python-ofdreader |    FAILED |   FAILED |    FAILED |         FAILED |    FAILED |   FAILED |        0 |
-| java-ofdrw       |     497ms |    737ms |     5.13s |          2.13s |     781ms |   5553ms |        0 |
-| node-ofd2pdf     |     240ms |    708ms | **1.18s** |          4.66s |     503ms |    795ms |        1 |
+| 转换器                                                              | hello.ofd |  ano.ofd | intro.ofd | 1000-pages.ofd |   999.ofd | zsbk.ofd | 胜出次数 |
+|---------------------------------------------------------------------|----------:|---------:|----------:|---------------:|----------:|---------:|---------:|
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                      |      86ms |    213ms |     2.40s |          8.25s |     308ms |    324ms |        0 |
+| [go-zc310](https://github.com/zc310/ofd)                            |     129ms |    341ms |     1.26s |          8.70s |     363ms |    429ms |        0 |
+| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)         |  **42ms** | **72ms** |     1.82s |      **0.97s** | **143ms** | **70ms** |        5 |
+| [python-easyofd](https://pypi.org/project/easyofd/)                 |    FAILED |   1084ms |     8.41s |         FAILED |    1020ms |   5122ms |        0 |
+| [python-ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                |     137ms |   FAILED |    FAILED |          40.8s |     401ms |    198ms |        0 |
+| [python-ofdreader](https://pypi.org/project/ofdreader/)             |    FAILED |   FAILED |    FAILED |         FAILED |    FAILED |   FAILED |        0 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw)                        |     497ms |    737ms |     5.13s |          2.13s |     781ms |   5553ms |        0 |
+| [node-ofd2pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |     240ms |    708ms | **1.18s** |          4.66s |     503ms |    795ms |        1 |
 
 > - `python-easyofd`: `pip install easyofd ofd2img`，自动切换库，部分文件失败
 > - `python-ofd2pdf`: `pip install ofd2pdf`，基于图片渲染，部分文件失败
@@ -120,44 +120,44 @@
 
 ### PDF 文件大小
 
-| 转换器           | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd |   zsbk.ofd | 胜出次数 |
-|------------------|----------:|--------:|----------:|---------------:|--------:|-----------:|---------:|
-| go-ofdgo         |    14.1KB |   1.1MB |      35MB |           66MB |   1.2MB |      1.9MB |        0 |
-| go-zc310         |     9.9KB |  96.1KB |      14MB |      **1.5MB** |  88.7KB |      1.4MB |        1 |
-| rust-easyofd     |    37.3KB |  77.1KB |      29MB |      **614KB** |  83.3KB | **77.8KB** |        2 |
-| python-easyofd   |    FAILED |  36.1KB |      38MB |         FAILED |  73.1KB |     13.6MB |        1 |
-| python-ofd2pdf   |    36.8KB |  FAILED |    FAILED |         76.1MB | 751.7KB |      129KB |        0 |
-| python-ofdreader |    FAILED |  FAILED |    FAILED |         FAILED |  FAILED |     FAILED |        0 |
-| java-ofdrw       |     4.8KB |  65.6KB |      23MB |          2.0MB |  76.9KB |     15.4MB |        1 |
-| node-ofd2pdf     |     1.3KB | 196.8KB | **1.1MB** |          4.2MB |  82.9KB |      559KB |        2 |
+| 转换器                                                              | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd |   zsbk.ofd | 胜出次数 |
+|---------------------------------------------------------------------|----------:|--------:|----------:|---------------:|--------:|-----------:|---------:|
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                      |    14.1KB |   1.1MB |      35MB |           66MB |   1.2MB |      1.9MB |        0 |
+| [go-zc310](https://github.com/zc310/ofd)                            |     9.9KB |  96.1KB |      14MB |      **1.5MB** |  88.7KB |      1.4MB |        1 |
+| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)         |    37.3KB |  77.1KB |      29MB |      **614KB** |  83.3KB | **77.8KB** |        2 |
+| [python-easyofd](https://pypi.org/project/easyofd/)                 |    FAILED |  36.1KB |      38MB |         FAILED |  73.1KB |     13.6MB |        1 |
+| [python-ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                |    36.8KB |  FAILED |    FAILED |         76.1MB | 751.7KB |      129KB |        0 |
+| [python-ofdreader](https://pypi.org/project/ofdreader/)             |    FAILED |  FAILED |    FAILED |         FAILED |  FAILED |     FAILED |        0 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw)                        |     4.8KB |  65.6KB |      23MB |          2.0MB |  76.9KB |     15.4MB |        1 |
+| [node-ofd2pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |     1.3KB | 196.8KB | **1.1MB** |          4.2MB |  82.9KB |      559KB |        2 |
 
 ### 文本提取能力
 
-| 转换器           | hello.ofd |  ano.ofd |  999.ofd | zsbk.ofd | 胜出次数 |
-|------------------|----------:|---------:|---------:|---------:|---------:|
-| go-ofdgo         |         8 |        0 |       76 |       19 |        0 |
-| go-zc310         |        22 | **7540** |     4595 |      985 |        1 |
-| rust-easyofd     |        23 |     6357 |     3869 |      369 |        0 |
-| python-easyofd   |         0 |     1469 |     4579 |     2128 |        1 |
-| python-ofd2pdf   |         0 |   FAILED |   FAILED |        0 |        0 |
-| python-ofdreader |    FAILED |   FAILED |   FAILED |   FAILED |        0 |
-| java-ofdrw       |        20 |     6307 |     3581 |      194 |        0 |
-| node-ofd2pdf     |        25 |     7049 | **4905** |     1697 |        1 |
+| 转换器                                                              | hello.ofd |  ano.ofd |  999.ofd | zsbk.ofd | 胜出次数 |
+|---------------------------------------------------------------------|----------:|---------:|---------:|---------:|---------:|
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                      |         8 |        0 |       76 |       19 |        0 |
+| [go-zc310](https://github.com/zc310/ofd)                            |        22 | **7540** |     4595 |      985 |        1 |
+| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)         |        23 |     6357 |     3869 |      369 |        0 |
+| [python-easyofd](https://pypi.org/project/easyofd/)                 |         0 |     1469 |     4579 |     2128 |        1 |
+| [python-ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                |         0 |   FAILED |   FAILED |        0 |        0 |
+| [python-ofdreader](https://pypi.org/project/ofdreader/)             |    FAILED |   FAILED |   FAILED |   FAILED |        0 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw)                        |        20 |     6307 |     3581 |      194 |        0 |
+| [node-ofd2pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |        25 |     7049 | **4905** |     1697 |        1 |
 
 > - `python-ofd2pdf` 基于图片渲染，无法提取文本
 > - 单位为字符数（chars）
 
 ### 质量总结
 
-| 转换器         | 页面尺寸 | 矢量图形 | 文本可提取 | 图片嵌入 | 文件压缩 | 中文支持 | 兼容性   |
-|----------------|----------|----------|------------|----------|----------|----------|----------|
-| go-ofdgo       | A4       | 支持     | 部分       | 有       | 较差     | 良好     | 全部     |
-| go-zc310       | A4       | 支持     | 最佳       | 有       | 良佳     | 最佳     | 全部     |
-| rust-easyofd   | A4       | 支持     | 良好       | 有       | 最佳     | 良好     | 全部     |
-| python-easyofd | A4       | 支持     | 部分       | 有       | 良佳     | 良好     | 部分失败 |
-| python-ofd2pdf | A4       | 不支持   | 无         | 有       | 一般     | 良好     | 部分失败 |
-| java-ofdrw     | A4       | 支持     | 良好       | 有       | 良佳     | 良好     | 全部     |
-| node-ofd2pdf   | A4       | 支持     | 良好       | 有       | 良佳     | 良好     | 全部     |
+| 转换器                                                              | 页面尺寸 | 矢量图形 | 文本可提取 | 图片嵌入 | 文件压缩 | 中文支持 | 兼容性   |
+|---------------------------------------------------------------------|----------|----------|------------|----------|----------|----------|----------|
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                      | A4       | 支持     | 部分       | 有       | 较差     | 良好     | 全部     |
+| [go-zc310](https://github.com/zc310/ofd)                            | A4       | 支持     | 最佳       | 有       | 良佳     | 最佳     | 全部     |
+| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)         | A4       | 支持     | 良好       | 有       | 最佳     | 良好     | 全部     |
+| [python-easyofd](https://pypi.org/project/easyofd/)                 | A4       | 支持     | 部分       | 有       | 良佳     | 良好     | 部分失败 |
+| [python-ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                | A4       | 不支持   | 无         | 有       | 一般     | 良好     | 部分失败 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw)                        | A4       | 支持     | 良好       | 有       | 良佳     | 良好     | 全部     |
+| [node-ofd2pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | A4       | 支持     | 良好       | 有       | 良佳     | 良好     | 全部     |
 
 **结论：**
 - **rust-easyofd**: 速度最快（5胜），压缩率最好（2胜），推荐首选
