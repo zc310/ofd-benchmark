@@ -4,51 +4,79 @@
 
 ### Go 库
 
-| 库                                                               | 版本                  | 支持 OFD→PDF | 更新时间   | 备注   |
-|------------------------------------------------------------------|-----------------------|--------------|------------|--------|
-| [github.com/xiaoqidun/ofdgo](https://github.com/xiaoqidun/ofdgo) | v0.0.0-20260912163201 | ✅           | 2026-09-14 | 已测试 |
-| [github.com/zc310/ofd](https://github.com/zc310/ofd)             | v0.1.1-20260914000557 | ✅           | 2026-09-14 | 已测试 |
+| 库                                                    | 版本                  | OFD→PDF |  更新时间  | 备注   |
+|-------------------------------------------------------|-----------------------|:-------:|:----------:|--------|
+| [xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | v0.0.0-20260914014142 |   ✅    | 2026-09-14 | 已测试 |
+| [zc310-ofd](https://github.com/zc310/ofd)             | v0.1.1-20260914000557 |   ✅    | 2026-09-14 | 已测试 |
 
 ### Rust 库
 
-| 库                                                                                 | 版本   | 支持 OFD→PDF | 更新时间   | 备注                       |
-|------------------------------------------------------------------------------------|--------|--------------|------------|----------------------------|
-| [github.com/easy-4-rust/easyofd-rust](https://github.com/easy-4-rust/easyofd-rust) | v0.1.2 | ✅           | 2026-09-10 | 已测试                     |
-| [github.com/feuvan/ofdmanager](https://github.com/feuvan/ofdmanager)               | v0.2.0 | ❌           | 2026-08-11 | 仅支持 OFD→PNG             |
-| [github.com/geniusnut/rs_ofd](https://github.com/geniusnut/rs_ofd)                 | -      | ❌           | 2024-11-28 | 仅支持 OFD→PNG             |
-| [github.com/ofd-utility/ofd-utility](https://github.com/ofd-utility/ofd-utility)   | -      | ❌           | 2026-08-07 | OFD 解析、校验、渲染到图片 |
+| 库                                                          | 版本   | OFD→PDF |  更新时间  | 备注                       |
+|-------------------------------------------------------------|--------|:-------:|:----------:|----------------------------|
+| [easyofd-rust](https://github.com/easy-4-rust/easyofd-rust) | v0.1.2 |   ✅    | 2026-09-10 | 已测试                     |
+| [ofdmanager](https://github.com/feuvan/ofdmanager)          | v0.2.0 |   ❌    | 2026-08-11 | 仅支持 OFD→PNG             |
+| [rs_ofd](https://github.com/geniusnut/rs_ofd)               | -      |   ❌    | 2024-11-28 | 仅支持 OFD→PNG             |
+| [ofd-utility](https://github.com/ofd-utility/ofd-utility)   | -      |   ❌    | 2026-08-07 | OFD 解析、校验、渲染到图片 |
+| [ofdsdk](https://github.com/KaiserY/ofdsdk)                 | v0.2.3 |   ❌    | 2026-07-09 | OFD SDK，XML 解析和包读写  |
 
 ### Python 库
 
-| 库                                               | 版本     | 支持 OFD→PDF | 更新时间   | 备注                       |
-|--------------------------------------------------|----------|--------------|------------|----------------------------|
-| [easyofd](https://pypi.org/project/easyofd/)     | 20260427 | ⚠️           | 2026-04-27 | 部分文件失败               |
-| [ofd2img](https://pypi.org/project/ofd2img/)     | 0.1.2    | ⚠️           | 2026-05-07 | 部分文件失败               |
-| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)    | 0.0.2    | ⚠️           | 2026-07-08 | 部分文件失败，基于图片渲染 |
-| [ofdreader](https://pypi.org/project/ofdreader/) | 0.1.0    | ❌           | 2026-06-01 | 空包，无法使用             |
-| [ofdparser](https://pypi.org/project/ofdparser/) | 0.0.8    | ❌           | 2023-04-11 | 缺 Courier 字体，无法导入  |
+| 库                                               | 版本     | OFD→PDF |  更新时间  | 备注                       |
+|--------------------------------------------------|----------|:-------:|:----------:|----------------------------|
+| [easyofd](https://pypi.org/project/easyofd/)     | 20260427 |   ⚠️    | 2026-04-27 | 部分文件失败               |
+| [ofd2img](https://pypi.org/project/ofd2img/)     | 0.1.2    |   ⚠️    | 2026-05-07 | 部分文件失败               |
+| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)    | 0.0.2    |   ⚠️    | 2026-07-08 | 部分文件失败，基于图片渲染 |
+| [ofdreader](https://pypi.org/project/ofdreader/) | 0.1.0    |   ❌    | 2026-06-01 | 空包，无法使用             |
+| [ofdparser](https://pypi.org/project/ofdparser/) | 0.0.8    |   ❌    | 2023-04-11 | 缺 Courier 字体，无法导入  |
+| [pdf2ofd](https://github.com/wanglrebe/pdf2ofd)  | 0.1.0    |    -    | 2026-05-22 | PDF→OFD                    |
 
 ### Java 库
 
-| 库                                                   | 版本  | 支持 OFD→PDF | 更新时间   | 备注                         |
-|------------------------------------------------------|-------|--------------|------------|------------------------------|
-| [ofdrw](https://github.com/ofdrw/ofdrw)              | 2.4.0 | ✅           | 2026-08-04 | 需手动下载依赖，全部成功     |
-| [ofdbox](https://gitee.com/bookhhu/ofdbox)           | -     | ⚠️           | 2025-06-08 | OFD→图片可用，PDF 正在开发中 |
-| [ofd-analyze](https://github.com/cooker/ofd-analyze) | -     | ❌           | 2022-05-20 | OFD 解析器，支持 OFD→图片    |
+| 库                                                       | 版本  | OFD→PDF | 更新时间   | 备注                             |
+|----------------------------------------------------------|-------|:-------:|------------|----------------------------------|
+| [ofdrw](https://github.com/ofdrw/ofdrw)                  | 2.4.0 |   ✅    | 2026-08-04 | 需手动下载依赖，全部成功         |
+| [easyofd-java](https://github.com/11627685/easyofd-java) | -     |   ❌    | 2026-09-08 | OFD 生成/读取/签章，不支持转 PDF |
+| [ofdbox](https://gitee.com/bookhhu/ofdbox)               | -     |   ⚠️    | 2025-06-08 | OFD→图片可用，PDF 正在开发中     |
+| [ofd-analyze](https://github.com/cooker/ofd-analyze)     | -     |   ❌    | 2022-05-20 | OFD 解析器，支持 OFD→图片        |
 
 ### .NET 库
 
-| 库                                                                                 | 版本     | 支持 OFD→PDF | 更新时间   | 备注                               |
-|------------------------------------------------------------------------------------|----------|--------------|------------|------------------------------------|
-| [github.com/zhuovi/XiaoFeng.Ofd](https://github.com/zhuovi/XiaoFeng.Ofd)           | 1.0.0    | ❌           | 2025-06-03 | README 声称支持但代码未实现        |
-| [github.com/wangyi160/ofdparser](https://github.com/wangyi160/ofdparser)           | -        | ❌           | 2022-02-11 | OFD 解析器                         |
+| 库                                                                       | 版本  | OFD→PDF |  更新时间  | 备注                        |
+|--------------------------------------------------------------------------|-------|:-------:|:----------:|-----------------------------|
+| [github.com/zhuovi/XiaoFeng.Ofd](https://github.com/zhuovi/XiaoFeng.Ofd) | 1.0.0 |   ❌    | 2025-06-03 | README 声称支持但代码未实现 |
+| [github.com/wangyi160/ofdparser](https://github.com/wangyi160/ofdparser) | -     |   ❌    | 2022-02-11 | OFD 解析器                  |
 
 ### JavaScript 库
 
-| 库                                                                           | 版本  | 支持 OFD→PDF | 更新时间   | 备注                  |
-|------------------------------------------------------------------------------|-------|--------------|------------|-----------------------|
-| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 0.2.0 | ✅           | 2026-08-03 | 全部成功              |
-| [github.com/isee15/ofdjs](https://github.com/isee15/ofdjs)                   | -     | ❌           | 2026-07-14 | OFD 解析渲染到 Canvas |
+| 库                                                                           | 版本  | OFD→PDF |  更新时间  | 备注                  |
+|------------------------------------------------------------------------------|-------|:-------:|:----------:|-----------------------|
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 0.2.0 |   ✅    | 2026-08-03 | 全部成功              |
+| [github.com/isee15/ofdjs](https://github.com/isee15/ofdjs)                   | -     |   ❌    | 2026-07-14 | OFD 解析渲染到 Canvas |
+
+## OFD 解析库汇总
+
+| 库                                                                | 语言   | OFD 解析 | OFD→图片 | OFD→PDF | PDF→OFD | OFD 生成 | 签章 |
+|-------------------------------------------------------------------|--------|:--------:|:--------:|:-------:|:-------:|:--------:|:----:|
+| [xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo)             | Go     |    ✅    |    ✅    |   ✅    |   ❌    |    ❌    |  ✅  |
+| [zc310-ofd](https://github.com/zc310/ofd)                         | Go     |    ✅    |    ✅    |   ✅    |   ❌    |    ✅    |  ❌  |
+| [easyofd-rust](https://github.com/easy-4-rust/easyofd-rust)       | Rust   |    ✅    |    ✅    |   ✅    |   ❌    |    ❌    |  ❌  |
+| [ofdmanager](https://github.com/feuvan/ofdmanager)                | Rust   |    ✅    |    ✅    |   ❌    |   ❌    |    ❌    |  ❌  |
+| [rs_ofd](https://github.com/geniusnut/rs_ofd)                     | Rust   |    ✅    |    ✅    |   ❌    |   ❌    |    ❌    |  ❌  |
+| [ofd-utility](https://github.com/ofd-utility/ofd-utility)         | Rust   |    ✅    |    ✅    |   ❌    |   ❌    |    ❌    |  ✅  |
+| [ofdsdk](https://github.com/KaiserY/ofdsdk)                       | Rust   |    ✅    |    ❌    |   ❌    |   ❌    |    ❌    |  ❌  |
+| [easyofd](https://pypi.org/project/easyofd/)                      | Python |    ✅    |    ✅    |   ⚠️    |   ❌    |    ✅    |  ❌  |
+| [ofd2img](https://pypi.org/project/ofd2img/)                      | Python |    ✅    |    ✅    |   ⚠️    |   ❌    |    ❌    |  ❌  |
+| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                     | Python |    ✅    |    ✅    |   ⚠️    |   ❌    |    ❌    |  ❌  |
+| [ofdreader](https://pypi.org/project/ofdreader/)                  | Python |    ✅    |    ❌    |   ⚠️    |   ❌    |    ✅    |  ❌  |
+| [pdf2ofd](https://github.com/wanglrebe/pdf2ofd)                   | Python |    ❌    |    ❌    |   ❌    |   ✅    |    ❌    |  ❌  |
+| [ofdrw](https://github.com/ofdrw/ofdrw)                           | Java   |    ✅    |    ✅    |   ✅    |   ✅    |    ✅    |  ✅  |
+| [easyofd-java](https://github.com/11627685/easyofd-java)          | Java   |    ✅    |    ❌    |   ❌    |   ❌    |    ✅    |  ✅  |
+| [ofdbox](https://gitee.com/bookhhu/ofdbox)                        | Java   |    ✅    |    ✅    |   ⚠️    |   ❌    |    ❌    |  ❌  |
+| [ofd-analyze](https://github.com/cooker/ofd-analyze)              | Java   |    ✅    |    ✅    |   ❌    |   ❌    |    ❌    |  ❌  |
+| [XiaoFeng.Ofd](https://github.com/zhuovi/XiaoFeng.Ofd)            | .NET   |    ✅    |    ❌    |   ❌    |   ❌    |    ✅    |  ✅  |
+| [ofdparser](https://github.com/wangyi160/ofdparser)               | .NET   |    ✅    |    ❌    |   ❌    |   ❌    |    ❌    |  ❌  |
+| [ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | JS     |    ✅    |    ❌    |   ✅    |   ❌    |    ❌    |  ❌  |
+| [ofdjs](https://github.com/isee15/ofdjs)                          | JS     |    ✅    |    ✅    |   ❌    |   ❌    |    ❌    |  ❌  |
 
 ## 测试环境
 
