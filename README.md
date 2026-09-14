@@ -1,7 +1,5 @@
 # OFD to PDF 速度对比测试
 
-测试输出PDF文件可在 [Releases](https://github.com/zc310/ofd-benchmark/releases) 页面下载。
-
 ## 测试库
 
 ### Go 库
@@ -18,6 +16,7 @@
 | [github.com/easy-4-rust/easyofd-rust](https://github.com/easy-4-rust/easyofd-rust) | v0.1.2 | ✅           | 已测试         |
 | [github.com/feuvan/ofdmanager](https://github.com/feuvan/ofdmanager)               | v0.2.0 | ❌           | 仅支持 OFD→PNG |
 | [github.com/geniusnut/rs_ofd](https://github.com/geniusnut/rs_ofd)                 | -      | ❌           | 仅支持 OFD→PNG |
+| [github.com/ofd-utility/ofd-utility](https://github.com/ofd-utility/ofd-utility)   | -      | ❌           | OFD 解析、校验、渲染到图片 |
 
 ### Python 库
 
@@ -34,18 +33,22 @@
 | 库                                               | 版本     | 支持 OFD→PDF | 备注                               |
 |--------------------------------------------------|----------|--------------|------------------------------------|
 | [ofdrw](https://github.com/ofdrw/ofdrw)          | 2.4.0    | ✅           | 需手动下载依赖，全部成功           |
+| [ofdbox](https://gitee.com/bookhhu/ofdbox)       | -        | ⚠️          | OFD→图片可用，PDF 正在开发中       |
 
 ### .NET 库
 
 | 库                                                                                 | 版本     | 支持 OFD→PDF | 备注                               |
 |------------------------------------------------------------------------------------|----------|--------------|------------------------------------|
 | [github.com/zhuovi/XiaoFeng.Ofd](https://github.com/zhuovi/XiaoFeng.Ofd)           | 1.0.0    | ❌           | README 声称支持但代码未实现        |
+| [github.com/wangyi160/ofdparser](https://github.com/wangyi160/ofdparser)           | -        | ❌           | OFD 解析器                         |
+| [github.com/cooker/ofd-analyze](https://github.com/cooker/ofd-analyze)             | -        | ❌           | OFD 解析器                         |
 
-### Node.js 库
+### JavaScript 库
 
 | 库                                                                           | 版本  | 支持 OFD→PDF | 备注     |
 |------------------------------------------------------------------------------|-------|--------------|----------|
 | [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 0.2.0 | ✅           | 全部成功 |
+| [github.com/isee15/ofdjs](https://github.com/isee15/ofdjs)                   | -     | ❌           | OFD 解析渲染到 Canvas |
 
 ## 测试环境
 
@@ -138,6 +141,8 @@
 - **java-ofdrw**: 兼容性好，但速度较慢
 
 > **建议**：手工核对输出 PDF 效果，选择合适的库。不同 OFD 文件结构差异较大，实际效果可能与基准测试结果不同。
+> 
+> 测试输出 PDF 文件可在 [Releases](https://github.com/zc310/ofd-benchmark/releases) 页面下载。
 
 > 以上结论由 AI 根据测试数据自动汇总生成
 
