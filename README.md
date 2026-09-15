@@ -32,12 +32,13 @@
 
 ### Java 库
 
-| 库                                                       | 版本  | OFD→PDF | 更新时间   | 备注                             |
-|----------------------------------------------------------|-------|:-------:|------------|----------------------------------|
-| [ofdrw](https://github.com/ofdrw/ofdrw)                  | 2.4.0 |   ✅    | 2026-08-04 | 需手动下载依赖，全部成功         |
-| [easyofd-java](https://github.com/11627685/easyofd-java) | -     |   ❌    | 2026-09-08 | OFD 生成/读取/签章，不支持转 PDF |
-| [ofdbox](https://gitee.com/bookhhu/ofdbox)               | -     |   ⚠️    | 2025-06-08 | OFD→图片可用，PDF 正在开发中     |
-| [ofd-analyze](https://github.com/cooker/ofd-analyze)     | -     |   ❌    | 2022-05-20 | OFD 解析器，支持 OFD→图片        |
+| 库                                                         | 版本  | OFD→PDF | 更新时间   | 备注                             |
+|------------------------------------------------------------|-------|:-------:|------------|----------------------------------|
+| [ofdrw](https://github.com/ofdrw/ofdrw)                    | 2.4.0 |   ✅    | 2026-08-04 | 需手动下载依赖，全部成功         |
+| [easyofd-java](https://github.com/11627685/easyofd-java)   | -     |   ❌    | 2026-09-08 | OFD 生成/读取/签章，不支持转 PDF |
+| [ofdbox](https://gitee.com/bookhhu/ofdbox)                 | -     |   ⚠️    | 2025-06-08 | OFD→图片可用，PDF 正在开发中     |
+| [ofdpdfsigner](https://github.com/fanzizheng/ofdpdfsigner) | -     |   ✅    | 2026-08-15 | C++ 实现，提供 Java JNI 接口     |
+| [ofd-analyze](https://github.com/cooker/ofd-analyze)       | -     |   ❌    | 2022-05-20 | OFD 解析器，支持 OFD→图片        |
 
 ### .NET 库
 
@@ -55,28 +56,29 @@
 
 ## OFD 库汇总
 
-| 库                                                                |  语言  | 解析 | → 图片 | → PDF | → TXT | → SVG | → Md | PDF → OFD | 生成 | 签章 | 修改 |
-|-------------------------------------------------------------------|:------:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:---------:|:----:|:----:|:----:|
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                    |   Go   |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [go-zc310](https://github.com/zc310/ofd)                          |   Go   |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ✅  |    ❌     |  ✅  |  ❌  |  ❌  |
-| [easyofd-rust](https://github.com/easy-4-rust/easyofd-rust)       |  Rust  |  ✅  |   ✅   |  ✅   |  ❌   |  ❌   |  ✅  |    ❌     |  ✅  |  ✅  |  ✅  |
-| [ofdmanager](https://github.com/feuvan/ofdmanager)                |  Rust  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [rs_ofd](https://github.com/geniusnut/rs_ofd)                     |  Rust  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [ofd-utility](https://github.com/ofd-utility/ofd-utility)         |  Rust  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
-| [ofdsdk](https://github.com/KaiserY/ofdsdk)                       |  Rust  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [easyofd](https://pypi.org/project/easyofd/)                      | Python |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ✅     |  ✅  |  ❌  |  ❌  |
-| [ofd2img](https://pypi.org/project/ofd2img/)                      | Python |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                     | Python |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [ofdreader](https://pypi.org/project/ofdreader/)                  | Python |  ✅  |   ❌   |  ✅   |  ✅   |  ❌   |  ❌  |    ❌     |  ✅  |  ❌  |  ❌  |
-| [pdf2ofd](https://github.com/wanglrebe/pdf2ofd)                   | Python |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ✅     |  ❌  |  ❌  |  ❌  |
-| [ofdrw](https://github.com/ofdrw/ofdrw)                           |  Java  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |    ✅     |  ✅  |  ✅  |  ✅  |
-| [easyofd-java](https://github.com/11627685/easyofd-java)          |  Java  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ✅  |  ✅  |  ❌  |
-| [ofdbox](https://gitee.com/bookhhu/ofdbox)                        |  Java  |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [ofd-analyze](https://github.com/cooker/ofd-analyze)              |  Java  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [XiaoFeng.Ofd](https://github.com/zhuovi/XiaoFeng.Ofd)            |  .NET  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ✅  |  ✅  |  ❌  |
-| [ofdparser](https://github.com/wangyi160/ofdparser)               |  .NET  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |   JS   |  ✅  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [ofdjs](https://github.com/isee15/ofdjs)                          |   JS   |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| 库                                                                |  语言  |   许可证   | 解析 | → 图片 | → PDF | → TXT | → SVG | → Md | PDF → OFD | 生成 | 签章 | 修改 |
+|-------------------------------------------------------------------|:------:|:----------:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:---------:|:----:|:----:|:----:|
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                    |   Go   | Apache-2.0 |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [go-zc310](https://github.com/zc310/ofd)                          |   Go   | Unlicense  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ✅  |    ❌     |  ✅  |  ❌  |  ❌  |
+| [easyofd-rust](https://github.com/easy-4-rust/easyofd-rust)       |  Rust  | Apache-2.0 |  ✅  |   ✅   |  ✅   |  ❌   |  ❌   |  ✅  |    ❌     |  ✅  |  ✅  |  ✅  |
+| [ofdmanager](https://github.com/feuvan/ofdmanager)                |  Rust  |    MIT     |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [rs_ofd](https://github.com/geniusnut/rs_ofd)                     |  Rust  |    MIT     |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofd-utility](https://github.com/ofd-utility/ofd-utility)         |  Rust  |    MIT     |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
+| [ofdsdk](https://github.com/KaiserY/ofdsdk)                       |  Rust  | Apache-2.0 |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [easyofd](https://pypi.org/project/easyofd/)                      | Python | Apache-2.0 |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ✅     |  ✅  |  ❌  |  ❌  |
+| [ofd2img](https://pypi.org/project/ofd2img/)                      | Python | Apache-2.0 |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                     | Python |     无     |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofdreader](https://pypi.org/project/ofdreader/)                  | Python |    MIT     |  ✅  |   ❌   |  ✅   |  ✅   |  ❌   |  ❌  |    ❌     |  ✅  |  ❌  |  ❌  |
+| [pdf2ofd](https://github.com/wanglrebe/pdf2ofd)                   | Python |    MIT     |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ✅     |  ❌  |  ❌  |  ❌  |
+| [ofdrw](https://github.com/ofdrw/ofdrw)                           |  Java  | Apache-2.0 |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |    ✅     |  ✅  |  ✅  |  ✅  |
+| [easyofd-java](https://github.com/11627685/easyofd-java)          |  Java  | Apache-2.0 |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ✅  |  ✅  |  ❌  |
+| [ofdbox](https://gitee.com/bookhhu/ofdbox)                        |  Java  | Apache-2.0 |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofd-analyze](https://github.com/cooker/ofd-analyze)              |  Java  |     无     |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofdpdfsigner](https://github.com/fanzizheng/ofdpdfsigner)        |  C++   |  BSL-1.1   |  ✅  |   ✅   |  ✅   |  ❌   |  ✅   |  ❌  |    ✅     |  ❌  |  ✅  |  ❌  |
+| [XiaoFeng.Ofd](https://github.com/zhuovi/XiaoFeng.Ofd)            |  .NET  |    MIT     |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ✅  |  ✅  |  ❌  |
+| [ofdparser](https://github.com/wangyi160/ofdparser)               |  .NET  |     无     |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |   JS   | Apache-2.0 |  ✅  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofdjs](https://github.com/isee15/ofdjs)                          |   JS   | Apache-2.0 |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
 
 ## 测试环境
 
