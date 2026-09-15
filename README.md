@@ -69,7 +69,7 @@
 | [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                     | Python |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
 | [ofdreader](https://pypi.org/project/ofdreader/)                  | Python |  ✅  |   ❌   |  ✅   |  ✅   |  ❌   |  ❌  |    ❌     |  ✅  |  ❌  |  ❌  |
 | [pdf2ofd](https://github.com/wanglrebe/pdf2ofd)                   | Python |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ✅     |  ❌  |  ❌  |  ❌  |
-| [ofdrw](https://github.com/ofdrw/ofdrw)                           |  Java  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |    ✅     |  ✅  |  ✅  |  ❌  |
+| [ofdrw](https://github.com/ofdrw/ofdrw)                           |  Java  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |    ✅     |  ✅  |  ✅  |  ✅  |
 | [easyofd-java](https://github.com/11627685/easyofd-java)          |  Java  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ✅  |  ✅  |  ❌  |
 | [ofdbox](https://gitee.com/bookhhu/ofdbox)                        |  Java  |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
 | [ofd-analyze](https://github.com/cooker/ofd-analyze)              |  Java  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
@@ -149,15 +149,15 @@
 
 ### 质量总结
 
-| 转换器                                                              | 页面尺寸 | 矢量图形 | 文本可提取 | 图片嵌入 | 文件压缩 | 中文支持 | 兼容性   |
-|---------------------------------------------------------------------|----------|----------|------------|----------|----------|----------|----------|
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                      | A4       | 支持     | 部分       | 有       | 较差     | 良好     | 全部     |
-| [go-zc310](https://github.com/zc310/ofd)                            | A4       | 支持     | 最佳       | 有       | 良佳     | 最佳     | 全部     |
-| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)         | A4       | 支持     | 良好       | 有       | 最佳     | 良好     | 全部     |
-| [python-easyofd](https://pypi.org/project/easyofd/)                 | A4       | 支持     | 部分       | 有       | 良佳     | 良好     | 部分失败 |
-| [python-ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                | A4       | 不支持   | 无         | 有       | 一般     | 良好     | 部分失败 |
-| [java-ofdrw](https://github.com/ofdrw/ofdrw)                        | A4       | 支持     | 良好       | 有       | 良佳     | 良好     | 全部     |
-| [node-ofd2pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | A4       | 支持     | 良好       | 有       | 良佳     | 良好     | 全部     |
+| 转换器                                                              | 转换成功率 | 页面尺寸 | 矢量图形 | 文本可提取 | 图片嵌入 | 文件压缩 | 中文支持 | 兼容性   |
+|---------------------------------------------------------------------|:----------:|----------|----------|------------|----------|----------|----------|----------|
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                      |    100%    | A4       | 支持     | 部分       | 有       | 较差     | 良好     | 全部     |
+| [go-zc310](https://github.com/zc310/ofd)                            |    100%    | A4       | 支持     | 最佳       | 有       | 良佳     | 最佳     | 全部     |
+| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)         |    100%    | A4       | 支持     | 良好       | 有       | 最佳     | 良好     | 全部     |
+| [python-easyofd](https://pypi.org/project/easyofd/)                 |    67%     | A4       | 支持     | 部分       | 有       | 良佳     | 良好     | 部分失败 |
+| [python-ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                |    67%     | A4       | 不支持   | 无         | 有       | 一般     | 良好     | 部分失败 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw)                        |    100%    | A4       | 支持     | 良好       | 有       | 良佳     | 良好     | 全部     |
+| [node-ofd2pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |    100%    | A4       | 支持     | 良好       | 有       | 良佳     | 良好     | 全部     |
 
 **结论：**
 - **rust-easyofd**: 速度最快（5胜），压缩率最好（2胜），推荐首选
@@ -168,11 +168,22 @@
 - **python-ofd2pdf**: 基于图片渲染，无法提取文本
 - **java-ofdrw**: 兼容性好，但速度较慢
 
+> **测试局限性说明：**
+> - 本测试仅运行 1 次，无方差/置信区间，无法判断差异是否显著
+> - 未记录机器规格（CPU 型号/频率/核数/内存/是否 SSD），绝对耗时不可移植
+> - Java/Node 未预热（JIT 未达稳态），首次运行吃亏，"Java 最慢"的结论需谨慎
+> - 无冷启动/热启动分离，单次测量包含类加载、字体扫描等开销
+> - 仅相对排名有意义，绝对毫秒数在不同机器上会完全不同
+> - Rust 5 胜中含 1000-pages（0.97s）这一极端值，若剔除该文件，rust=4 胜仍成立，但边际收窄
+
+> 以上结论由 AI 根据测试数据自动汇总生成
+ 
+
 > **建议**：手工核对输出 PDF 效果，选择合适的库。不同 OFD 文件结构差异较大，实际效果可能与基准测试结果不同。
 >
 > 测试输出 PDF 文件可在 [Releases](https://github.com/zc310/ofd-benchmark/releases) 页面下载。
 
-> 以上结论由 AI 根据测试数据自动汇总生成
+
 
 ## 使用方法
 
