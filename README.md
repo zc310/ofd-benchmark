@@ -4,10 +4,14 @@
 
 ### Go 库
 
-| 库                                                    | 版本                  | OFD→PDF |  更新时间  | 备注   |
-|-------------------------------------------------------|-----------------------|:-------:|:----------:|--------|
-| [xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | v0.0.0-20260915002242 |   ✅    | 2026-09-17 | 已测试 |
-| [zc310-ofd](https://github.com/zc310/ofd)             | v0.1.1-20260915002405 |   ✅    | 2026-09-17 | 已测试 |
+| 库                                                               | 版本                  | OFD→PDF |  更新时间  | 备注                                      |
+|------------------------------------------------------------------|-----------------------|:-------:|:----------:|-------------------------------------------|
+| [xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo)            | v0.0.0-20260915002242 |   ✅    | 2026-09-17 | 已测试                                    |
+| [zc310-ofd](https://github.com/zc310/ofd)                        | v0.1.1-20260915002405 |   ✅    | 2026-09-17 | 已测试                                    |
+| [itlabers-ofd-go](https://github.com/itlabers/ofd-go)            | -                     |   ❌    | 2024-03-12 | OFD 读取/解析、SM2/SM3 验签，Apache-2.0   |
+| [ppxz2014-go-ofd](https://github.com/ppxz2014/go-ofd)            | -                     |   ❌    | 2024-04-25 | 与 itlabers/ofd-go 代码一致，SM2/SM3 验签 |
+| [leijacob-ofd](https://gitee.com/leijacob/ofd)                   | -                     |   ❌    | 2026-09-14 | Gitee，Go OFD SDK：读/写/改、PDF→OFD      |
+| [leijacob-signer-tools](https://gitee.com/leijacob/signer-tools) | -                     |   ❌    | 2026-04-07 | Gitee，Go 签名/验签工具，支持 OFD/PDF     |
 
 ### Rust 库
 
@@ -66,18 +70,19 @@
 
 ### JavaScript 库
 
-| 库                                                                               | 版本  | OFD→PDF |  更新时间  | 备注                                  |
-|----------------------------------------------------------------------------------|-------|:-------:|:----------:|---------------------------------------|
-| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)     | 0.2.0 |   ✅    | 2026-08-03 | 全部成功                              |
-| [github.com/isee15/ofdjs](https://github.com/isee15/ofdjs)                       | -     |   ❌    | 2026-07-14 | OFD 解析渲染到 Canvas                 |
-| [github.com/Gary-zy/imageConversion](https://github.com/Gary-zy/imageConversion) | -     |   ✅    | 2026-01-06 | Vue/TS 在线工具，OFD→图/PDF、SM2 验签 |
-| [github.com/DLTech21/ofd.js](https://github.com/DLTech21/ofd.js)                 | -     |   ❌    | 2024-06-05 | 纯前端 SVG/Canvas 渲染，342 star      |
-| [github.com/SignitDoc/liteofd](https://github.com/SignitDoc/liteofd)             | 0.2.6 |   ❌    | 2025-07-03 | 轻量前端 SDK，解析/文本/签章          |
-| [github.com/besthqs/bestofdview](https://github.com/besthqs/bestofdview)         | 0.4.1 |   ❌    | 2025-03-24 | Vue3 组件，渲染/验签，npm 包          |
-| [github.com/guinanlin/OFDView](https://github.com/guinanlin/OFDView)             | -     |   ❌    | 2024-10-31 | HTML5/SVG 浏览器阅读器                |
-| [github.com/betgo/ofd-online](https://github.com/betgo/ofd-online)               | 1.0.0 |   ❌    | 2024-07-25 | 纯前端解析，返回 SVG DOM              |
-| [github.com/xxss0903/ofdviewer](https://github.com/xxss0903/ofdviewer)           | 0.0.4 |   ❌    | 2024-02-29 | VSCode 插件，预览 OFD                 |
-| [github.com/zsc347/webofd](https://github.com/zsc347/webofd)                     | -     |   ❌    | 2022-04-21 | 纯 Web Canvas 解析渲染                |
+| 库                                                                                                       | 版本  | OFD→PDF |  更新时间  | 备注                                  |
+|----------------------------------------------------------------------------------------------------------|-------|:-------:|:----------:|---------------------------------------|
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)                             | 0.2.0 |   ✅    | 2026-08-03 | 全部成功                              |
+| [github.com/isee15/ofdjs](https://github.com/isee15/ofdjs)                                               | -     |   ❌    | 2026-07-14 | OFD 解析渲染到 Canvas                 |
+| [github.com/Gary-zy/imageConversion](https://github.com/Gary-zy/imageConversion)                         | -     |   ✅    | 2026-01-06 | Vue/TS 在线工具，OFD→图/PDF、SM2 验签 |
+| [github.com/DLTech21/ofd.js](https://github.com/DLTech21/ofd.js)                                         | -     |   ❌    | 2024-06-05 | 纯前端 SVG/Canvas 渲染，342 star      |
+| [github.com/SignitDoc/liteofd](https://github.com/SignitDoc/liteofd)                                     | 0.2.6 |   ❌    | 2025-07-03 | 轻量前端 SDK，解析/文本/签章          |
+| [github.com/besthqs/bestofdview](https://github.com/besthqs/bestofdview)                                 | 0.4.1 |   ❌    | 2025-03-24 | Vue3 组件，渲染/验签，npm 包          |
+| [github.com/guinanlin/OFDView](https://github.com/guinanlin/OFDView)                                     | -     |   ❌    | 2024-10-31 | HTML5/SVG 浏览器阅读器                |
+| [github.com/betgo/ofd-online](https://github.com/betgo/ofd-online)                                       | 1.0.0 |   ❌    | 2024-07-25 | 纯前端解析，返回 SVG DOM              |
+| [github.com/xxss0903/ofdviewer](https://github.com/xxss0903/ofdviewer)                                   | 0.0.4 |   ❌    | 2024-02-29 | VSCode 插件，预览 OFD                 |
+| [github.com/zsc347/webofd](https://github.com/zsc347/webofd)                                             | -     |   ❌    | 2022-04-21 | 纯 Web Canvas 解析渲染                |
+| [github.com/LamplightShadow/ofd_editor_frontend](https://github.com/LamplightShadow/ofd_editor_frontend) | -     |   ❌    | 2026-07-27 | Vue OFD 编辑前端，批注/签章/导出      |
 
 ### C++ 库
 
@@ -101,6 +106,10 @@
 |-------------------------------------------------------------------------------------------|:------:|:------------:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:---------:|:----:|:----:|:----:|
 | [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                                            |   Go   |  Apache-2.0  |  ✅  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
 | [go-zc310](https://github.com/zc310/ofd)                                                  |   Go   |  Unlicense   |  ✅  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ✅  |    ❌     |  ✅  |  ❌  |  ❌  |
+| [ofd-go](https://github.com/itlabers/ofd-go)                                              |   Go   |  Apache-2.0  |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
+| [go-ofd](https://github.com/ppxz2014/go-ofd)                                              |   Go   |  Apache-2.0  |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
+| [leijacob-ofd](https://gitee.com/leijacob/ofd)                                            |   Go   |      无      |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ✅     |  ✅  |  ✅  |  ✅  |
+| [signer-tools](https://gitee.com/leijacob/signer-tools)                                   |   Go   |      无      |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
 | [easyofd-rust](https://github.com/easy-4-rust/easyofd-rust)                               |  Rust  |  Apache-2.0  |  ❌  |  ✅  |   ✅   |  ✅   |  ❌   |  ❌   |  ✅  |    ❌     |  ✅  |  ✅  |  ✅  |
 | [ofdmanager](https://github.com/feuvan/ofdmanager)                                        |  Rust  |     MIT      |  ✅  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
 | [rs_ofd](https://github.com/geniusnut/rs_ofd)                                             |  Rust  |     MIT      |  ❌  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
@@ -146,7 +155,7 @@
 | [ofd2pdf](https://github.com/lanbo0829/ofd2pdf)                                           |  .NET  |      无      |  ❌  |  ✅  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
 | [ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)                         |   JS   |  Apache-2.0  |  ❌  |  ✅  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
 | [ofdjs](https://github.com/isee15/ofdjs)                                                  |   JS   |  Apache-2.0  |  ✅  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [imageConversion](https://github.com/Gary-zy/imageConversion)      |   JS   |    MIT     |  ✅  |  ✅  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ⚠️  |  ❌  |
+| [imageConversion](https://github.com/Gary-zy/imageConversion)                             |   JS   |     MIT      |  ✅  |  ✅  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ⚠️  |  ❌  |
 | [liteofd](https://github.com/SignitDoc/liteofd)                                           |   JS   |  Apache-2.0  |  ✅  |  ✅  |   ✅   |  ❌   |  ✅   |  ❌   |  ❌  |    ❌     |  ❌  |  ⚠️  |  ❌  |
 | [bestofdview](https://github.com/besthqs/bestofdview)                                     |   JS   |      无      |  ✅  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
 | [OFDView](https://github.com/guinanlin/OFDView)                                           |   JS   |  Apache-2.0  |  ✅  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
@@ -154,6 +163,7 @@
 | [ofd-online](https://github.com/betgo/ofd-online)                                         |   JS   |      无      |  ✅  |  ✅  |   ✅   |  ❌   |  ❌   |  ✅   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
 | [ofdviewer](https://github.com/xxss0903/ofdviewer)                                        |   JS   |     MIT      |  ✅  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
 | [webofd](https://github.com/zsc347/webofd)                                                |   JS   |      无      |  ✅  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofd_editor_frontend](https://github.com/LamplightShadow/ofd_editor_frontend)             |   JS   |      无      |  ✅  |  ✅  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |    ❌     |  ✅  |  ✅  |  ✅  |
 
 ## 测试环境
 
