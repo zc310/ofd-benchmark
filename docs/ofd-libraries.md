@@ -1,13 +1,15 @@
 # OFD 库汇总
 
+> **图例**：✅ 支持 · ❌ 不支持 · ⚠️ 部分/有限支持（已实现但功能不完整，或对复杂输入不可靠）。
+>
 > **预览**：库是否内置 OFD 预览/显示能力（查看器、浏览器渲染或可视化组件）。
 
 ## Go
 
 | 库                                                                                        |    许可证    | 预览 | 解析 | → 图片 | → PDF | → TXT | → SVG | → Md | PDF → OFD | 生成 | 签章 | 修改 |
 |-------------------------------------------------------------------------------------------|:------------:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:---------:|:----:|:----:|:----:|
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                                            |  Apache-2.0  |  ✅  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [go-zc310](https://github.com/zc310/ofd)                                                  |  Unlicense   |  ✅  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ✅  |    ❌     |  ✅  |  ❌  |  ❌  |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                                            |  Apache-2.0  |  ✅  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |    ❌     |  ❌  |  ❌  |  ✅  |
+| [go-zc310](https://github.com/zc310/ofd)                                                  |  Unlicense   |  ✅  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ✅  |    ❌     |  ✅  |  ❌  |  ✅  |
 | [ofd-go](https://github.com/itlabers/ofd-go)                                              |  Apache-2.0  |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
 | [go-ofd](https://github.com/ppxz2014/go-ofd)                                              |  Apache-2.0  |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
 | [leijacob-ofd](https://gitee.com/leijacob/ofd)                                            |      无      |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ✅     |  ✅  |  ✅  |  ✅  |
@@ -17,24 +19,26 @@
 
 | 库                                                                                        |    许可证    | 预览 | 解析 | → 图片 | → PDF | → TXT | → SVG | → Md | PDF → OFD | 生成 | 签章 | 修改 |
 |-------------------------------------------------------------------------------------------|:------------:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:---------:|:----:|:----:|:----:|
-| [easyofd-rust](https://github.com/easy-4-rust/easyofd-rust)                               |  Apache-2.0  |  ❌  |  ✅  |   ✅   |  ✅   |  ❌   |  ❌   |  ✅  |    ❌     |  ✅  |  ✅  |  ✅  |
+| [easyofd-rust](https://github.com/easy-4-rust/easyofd-rust)                               |  Apache-2.0  |  ❌  |  ✅  |   ✅   |  ✅   |  ❌   |  ❌   |  ✅  |    ⚠️     |  ✅  |  ✅  |  ✅  |
 | [ofdmanager](https://github.com/feuvan/ofdmanager)                                        |     MIT      |  ✅  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
 | [rs_ofd](https://github.com/geniusnut/rs_ofd)                                             |     MIT      |  ❌  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
 | [ofd-utility](https://github.com/ofd-utility/ofd-utility)                                 |     MIT      |  ❌  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
 | [ofdsdk](https://github.com/KaiserY/ofdsdk)                                               |  Apache-2.0  |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
 | [rofd](https://github.com/linuxdeepin/rofd)                                               |   LGPL-2.1   |  ✅  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofd-viewer](https://github.com/shaoyi1998/ofd-viewer)                                    |     MIT      |  ✅  |  ✅  |   ❌   |  ✅   |  ✅   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
 
 ## Python
 
-| 库                                                                                        |    许可证    | 预览 | 解析 | → 图片 | → PDF | → TXT | → SVG | → Md | PDF → OFD | 生成 | 签章 | 修改 |
-|-------------------------------------------------------------------------------------------|:------------:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:---------:|:----:|:----:|:----:|
-| [easyofd](https://pypi.org/project/easyofd/)                                              |  Apache-2.0  |  ✅  |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ✅     |  ✅  |  ❌  |  ❌  |
-| [ofd2img](https://pypi.org/project/ofd2img/)                                              |  Apache-2.0  |  ❌  |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                                             |      无      |  ❌  |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [ofdreader](https://pypi.org/project/ofdreader/)                                          |     MIT      |  ❌  |  ✅  |   ❌   |  ✅   |  ✅   |  ❌   |  ❌  |    ❌     |  ✅  |  ❌  |  ❌  |
-| [pdf2ofd](https://github.com/wanglrebe/pdf2ofd)                                           |     MIT      |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ✅     |  ❌  |  ❌  |  ❌  |
-| [ofd-parser](https://github.com/jyh2012/ofd-parser)                                       |      无      |  ✅  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [OfficeMaster](https://github.com/Chingliu/OfficeMaster_document_convert_system)          |     MIT      |  ❌  |  ✅  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |    ✅     |  ✅  |  ❌  |  ❌  |
+| 库                                                                               |   许可证   | 预览 | 解析 | → 图片 | → PDF | → TXT | → SVG | → Md | PDF → OFD | 生成 | 签章 | 修改 |
+|----------------------------------------------------------------------------------|:----------:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:---------:|:----:|:----:|:----:|
+| [easyofd](https://pypi.org/project/easyofd/)                                     | Apache-2.0 |  ✅  |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ✅     |  ✅  |  ❌  |  ❌  |
+| [ofd2img](https://pypi.org/project/ofd2img/)                                     | Apache-2.0 |  ❌  |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                                    |     无     |  ❌  |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [OFDtoPDF](https://github.com/njuzzy1979/OFDtoPDF)                               |     无     |  ❌  |  ✅  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ⚠️  |  ❌  |
+| [ofdreader](https://pypi.org/project/ofdreader/)                                 |    MIT     |  ❌  |  ✅  |   ❌   |  ✅   |  ✅   |  ❌   |  ❌  |    ❌     |  ✅  |  ❌  |  ❌  |
+| [pdf2ofd](https://github.com/wanglrebe/pdf2ofd)                                  |    MIT     |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ✅     |  ❌  |  ❌  |  ❌  |
+| [ofd-parser](https://github.com/jyh2012/ofd-parser)                              |     无     |  ✅  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [OfficeMaster](https://github.com/Chingliu/OfficeMaster_document_convert_system) |    MIT     |  ❌  |  ✅  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |    ✅     |  ✅  |  ❌  |  ❌  |
 
 ## Java
 
@@ -96,3 +100,11 @@
 | [ofdviewer](https://github.com/xxss0903/ofdviewer)                                        |     MIT      |  ✅  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
 | [webofd](https://github.com/zsc347/webofd)                                                |      无      |  ✅  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
 | [ofd_editor_frontend](https://github.com/LamplightShadow/ofd_editor_frontend)             |      无      |  ✅  |  ✅  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |    ❌     |  ✅  |  ✅  |  ✅  |
+| [ofdjs-viewer](https://github.com/Atw-Lee/ofdjs-viewer)                                   |     MIT      |  ✅  |  ✅  |   ✅   |  ❌   |  ✅   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [jsOFD](https://github.com/Hufe921/jsOFD)                                                 |     MIT      |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ✅     |  ✅  |  ❌  |  ❌  |
+
+## Pascal
+
+| 库                                                                                        |    许可证    | 预览 | 解析 | → 图片 | → PDF | → TXT | → SVG | → Md | PDF → OFD | 生成 | 签章 | 修改 |
+|-------------------------------------------------------------------------------------------|:------------:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:---------:|:----:|:----:|:----:|
+| [tinyofd](https://github.com/miemiekurisu/tinyofd)                                        | PolyForm-NC  |  ✅  |  ✅  |   ❌   |  ❌   |  ✅   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |

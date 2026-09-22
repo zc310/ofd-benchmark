@@ -56,6 +56,8 @@
 | 999.ofd        | 30K  | 带签章文件   |
 | zsbk.ofd       | 1.5M | 数科签章文件 |
 
+> 同目录下 `*.pdf` 为各 OFD 的参考转换结果，由**数科版式阅读器**导出，用作像素级对比基准。
+
 ## 测试结果
 
 ### 转换速度
@@ -92,17 +94,68 @@
 
 | 转换器                                                              | hello.ofd |  ano.ofd |  999.ofd | zsbk.ofd | 胜出次数 |
 |---------------------------------------------------------------------|----------:|---------:|---------:|---------:|---------:|
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                      |         8 |        0 |       76 |       19 |        0 |
-| [go-zc310](https://github.com/zc310/ofd)                            |        22 | **7540** |     4595 |      985 |        1 |
-| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)         |        23 |     6357 |     3869 |      369 |        0 |
-| [python-easyofd](https://pypi.org/project/easyofd/)                 |         0 |     1469 |     4579 | **2128** |        1 |
-| [python-ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                |         0 |   FAILED |   FAILED |        0 |        0 |
-| [python-ofdreader](https://pypi.org/project/ofdreader/)             |    FAILED |   FAILED |   FAILED |   FAILED |        0 |
-| [java-ofdrw](https://github.com/ofdrw/ofdrw)                        |        20 |     6307 |     3581 |      194 |        0 |
-| [node-ofd2pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |    **25** |     7049 | **4905** |     1697 |        2 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                      |         8 |        0 |       61 |       13 |        0 |
+| [go-zc310](https://github.com/zc310/ofd)                            |        22 |      934 |     3971 |      355 |        0 |
+| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)         |    **28** |     6553 |     4046 |      490 |        1 |
+| [python-easyofd](https://pypi.org/project/easyofd/)                 |    FAILED |     1208 |     3933 |     1508 |        0 |
+| [python-ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                |         0 |   FAILED |        0 |        0 |        0 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw)                        |        18 |     6456 |     2933 |      181 |        0 |
+| [node-ofd2pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |        26 | **6990** | **4249** | **1938** |        3 |
 
 > - `python-ofd2pdf` 基于图片渲染，无法提取文本
 > - 单位为字符数（chars）
+
+### 与数科版式输出对比
+
+以数科版式阅读器导出的 `test/testdata/*.pdf` 为基准，对比转换效果。
+
+**像素相似度**（96 DPI，1 - 平均归一化色差，100% 为完全相同）：
+
+| 转换器                                                              |  hello.ofd |    ano.ofd |  intro.ofd | 1000-pages.ofd |    999.ofd |   zsbk.ofd | 胜出次数 |
+|---------------------------------------------------------------------|-----------:|-----------:|-----------:|---------------:|-----------:|-----------:|---------:|
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                      |     99.40% |     99.24% |     96.03% |         98.37% |     97.46% | **99.07%** |        1 |
+| [go-zc310](https://github.com/zc310/ofd)                            |     99.54% | **99.25%** | **97.33%** |         98.90% | **98.55%** |     98.80% |        3 |
+| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)         |     99.79% |     97.83% |     46.37% |         73.66% |     96.34% |     94.02% |        0 |
+| [python-easyofd](https://pypi.org/project/easyofd/)                 |     FAILED |     93.82% |     40.96% |         FAILED |     92.41% |     94.41% |        0 |
+| [python-ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                | **99.95%** |     FAILED |     FAILED |     **99.32%** |     97.74% |     94.33% |        2 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw)                        |     99.88% |     98.86% |     95.32% |         98.93% |     97.73% |     98.45% |        0 |
+| [node-ofd2pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |     99.47% |     97.74% |     83.16% |         98.21% |     95.80% |     94.40% |        0 |
+
+**文件大小对比**（转换后 PDF 大小 / 数科参考 PDF 大小，越小表示压缩率越高，`1.00` 表示与数科输出一致；**加粗**为最接近 `1.00` 的转换器）：
+
+| 转换器                                                              | hello.ofd |  ano.ofd | intro.ofd | 1000-pages.ofd |  999.ofd | zsbk.ofd |
+|---------------------------------------------------------------------|----------:|---------:|----------:|---------------:|---------:|---------:|
+| 数科版式阅读器                                                      |      1.00 |     1.00 |      1.00 |           1.00 |     1.00 |     1.00 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                      |      3.90 | **1.19** |      5.13 |          17.85 |    15.34 |     1.17 |
+| [go-zc310](https://github.com/zc310/ofd)                            |      2.79 |     1.20 |      2.24 |           0.77 |     1.08 | **1.13** |
+| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)         |     10.52 |     0.09 |      4.30 |           0.28 | **1.04** |     0.05 |
+| [python-easyofd](https://pypi.org/project/easyofd/)                 |    FAILED |     0.04 |      5.70 |         FAILED |     0.92 |     8.62 |
+| [python-ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                |     10.37 |   FAILED |    FAILED |          33.13 |     9.40 |     0.08 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw)                        |  **1.36** |     0.07 |      3.37 |       **1.07** | **0.96** |     9.78 |
+| [node-ofd2pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |      0.38 |     0.22 |  **0.16** |           3.40 | **1.04** |     0.35 |
+
+> - 像素相似度越高表示输出越贴近数科版式阅读器；仿色/抗锯齿等平滑差异会小幅降低相似度
+> - `python-easyofd` 在 hello、1000-pages 转换失败；`python-ofd2pdf` 在 ano、intro 转换失败
+> - rust-easyofd 在 intro、1000-pages 相似度明显偏低（46%、74%），说明对含复杂图形/签章文件的还原能力弱
+> - 复现命令：`python3 tools/compare_pdf.py 96 <file>`
+
+**文本相似度**（与数科参考 PDF 提取文本的 4-gram Jaccard 相似度，100% 为文本完全一致；`0.00%` 表示无文本或提取失败）：
+
+参考文本长度：`hello=25` · `ano=7139` · `intro=5546` · `1000-pages=323700` · `999=3934` · `zsbk=1150`
+
+| 转换器                                                              |  hello.ofd |    ano.ofd | intro.ofd | 1000-pages.ofd |    999.ofd |   zsbk.ofd | 胜出次数 |
+|---------------------------------------------------------------------|-----------:|-----------:|----------:|---------------:|-----------:|-----------:|---------:|
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                      |      8.33% |      0.00% |     0.00% |          0.35% |      0.64% |      0.64% |        0 |
+| [go-zc310](https://github.com/zc310/ofd)                            |     37.93% |      1.07% |     0.00% |         70.55% | **95.85%** | **29.97%** |        2 |
+| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)         | **45.16%** | **25.44%** |     4.78% |          0.22% |     47.81% |      7.01% |        2 |
+| [python-easyofd](https://pypi.org/project/easyofd/)                 |     FAILED |     12.62% |     0.08% |         FAILED |     80.54% |     11.20% |        0 |
+| [python-ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                |      0.00% |     FAILED |    FAILED |          0.00% |      0.00% |      0.00% |        0 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw)                        |     29.63% |     16.20% | **7.16%** |     **78.68%** |     51.29% |      5.88% |        2 |
+| [node-ofd2pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |     30.00% |     13.57% |     5.88% |         62.90% |     41.24% |      4.86% |        0 |
+
+> - 文本相似度对提取顺序/换行敏感：go-zc310、java-ofdrw、node-ofd2pdf 文本量大但顺序化得分偏低，不代表内容缺失
+> - `python-ofd2pdf` 基于图片渲染，全部无文本；`go-ofdgo` 文本提取能力弱（hello=8/25、999=61/3934 字符）
+> - 复现命令：`python3 tools/compare_text.py <file>`
 
 ### 质量总结
 
@@ -120,11 +173,12 @@
 
 - **rust-easyofd**: 速度最快（5胜），压缩率最好（2胜），推荐首选
 - **node-ofd2pdf**: intro.ofd 最快（1.20s），兼容性好
-- **go-zc310**: 文本提取最完整，适合需要搜索/复制文本的场景
+- **go-zc310**: 文本提取最完整，像素相似度最高（3胜），适合需要搜索/复制文本或还原度高的场景
 - **go-ofdgo**: 文件体积较大，文本提取较差
-- **python-easyofd**: 部分文件转换失败
+- **python-easyofd**: 部分文件转换失败，intro 还原度差
 - **python-ofd2pdf**: 基于图片渲染，无法提取文本
-- **java-ofdrw**: 兼容性好，但速度较慢
+- **java-ofdrw**: 兼容性好，但速度较慢，小文件还原度接近数科
+- **rust-easyofd**: 对含复杂图形/签章文件（intro、1000-pages）还原度差（46%、74%）
 
 > **测试局限性说明：**
 > - 本测试仅运行 1 次，无方差/置信区间，无法判断差异是否显著
