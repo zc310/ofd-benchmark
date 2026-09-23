@@ -4,26 +4,27 @@
 
 ## Go
 
-| 库                                                                                        |    许可证    | 预览 | 解析 | → 图片 | → PDF | → TXT | → SVG | → Md | PDF → OFD | 生成 | 签章 | 修改 |
-|-------------------------------------------------------------------------------------------|:------------:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:---------:|:----:|:----:|:----:|
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                                            |  Apache-2.0  |  ✅  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [go-zc310](https://github.com/zc310/ofd)                                                  |  Unlicense   |  ✅  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ✅  |    ❌     |  ✅  |  ❌  |  ❌  |
-| [ofd-go](https://github.com/itlabers/ofd-go)                                              |  Apache-2.0  |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
-| [go-ofd](https://github.com/ppxz2014/go-ofd)                                              |  Apache-2.0  |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
-| [leijacob-ofd](https://gitee.com/leijacob/ofd)                                            |      无      |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ✅     |  ✅  |  ✅  |  ✅  |
-| [signer-tools](https://gitee.com/leijacob/signer-tools)                                   |      无      |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
+| 库                                                      |   许可证   | 预览 | 解析 | → 图片 | → PDF | → TXT | → SVG | → Md | PDF → OFD | 生成 | 签章 | 修改 |
+|---------------------------------------------------------|:----------:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:---------:|:----:|:----:|:----:|
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)          | Apache-2.0 |  ✅  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |    ❌     |  ✅  |  ❌  |  ✅  |
+| [go-zc310](https://github.com/zc310/ofd)                | Apache-2.0 |  ✅  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ✅  |    ❌     |  ✅  |  ✅  |  ✅  |
+| [ofd-go](https://github.com/itlabers/ofd-go)            | Apache-2.0 |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
+| [go-ofd](https://github.com/ppxz2014/go-ofd)            | Apache-2.0 |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
+| [leijacob-ofd](https://gitee.com/leijacob/ofd)          |     无     |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ✅     |  ✅  |  ✅  |  ✅  |
+| [signer-tools](https://gitee.com/leijacob/signer-tools) |     无     |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
 
 ## Rust
 
-| 库                                                                                        |    许可证    | 预览 | 解析 | → 图片 | → PDF | → TXT | → SVG | → Md | PDF → OFD | 生成 | 签章 | 修改 |
-|-------------------------------------------------------------------------------------------|:------------:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:---------:|:----:|:----:|:----:|
-| [easyofd-rust](https://github.com/easy-4-rust/easyofd-rust)                               |  Apache-2.0  |  ❌  |  ✅  |   ✅   |  ✅   |  ❌   |  ❌   |  ✅  |    ⚠️     |  ✅  |  ✅  |  ✅  |
-| [ofdmanager](https://github.com/feuvan/ofdmanager)                                        |     MIT      |  ✅  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [rs_ofd](https://github.com/geniusnut/rs_ofd)                                             |     MIT      |  ❌  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [ofd-utility](https://github.com/ofd-utility/ofd-utility)                                 |     MIT      |  ❌  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
-| [ofdsdk](https://github.com/KaiserY/ofdsdk)                                               |  Apache-2.0  |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [rofd](https://github.com/linuxdeepin/rofd)                                               |   LGPL-2.1   |  ✅  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
-| [ofd-viewer](https://github.com/shaoyi1998/ofd-viewer)                                    |     MIT      |  ✅  |  ✅  |   ❌   |  ✅   |  ✅   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| 库                                                          |   许可证   | 预览 | 解析 | → 图片 | → PDF | → TXT | → SVG | → Md | PDF → OFD | 生成 | 签章 | 修改 |
+|-------------------------------------------------------------|:----------:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:---------:|:----:|:----:|:----:|
+| [easyofd-rust](https://github.com/easy-4-rust/easyofd-rust) | Apache-2.0 |  ❌  |  ✅  |   ✅   |  ✅   |  ❌   |  ❌   |  ✅  |    ⚠️     |  ✅  |  ✅  |  ✅  |
+| [ofdmanager](https://github.com/feuvan/ofdmanager)          |    MIT     |  ✅  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [rs_ofd](https://github.com/geniusnut/rs_ofd)               |    MIT     |  ❌  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofd-utility](https://github.com/ofd-utility/ofd-utility)   |    MIT     |  ❌  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ✅  |  ❌  |
+| [ofdsdk](https://github.com/KaiserY/ofdsdk)                 | Apache-2.0 |  ❌  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [rofd](https://github.com/linuxdeepin/rofd)                 |  LGPL-2.1  |  ✅  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [ofd-viewer](https://github.com/shaoyi1998/ofd-viewer)      |    MIT     |  ✅  |  ✅  |   ❌   |  ✅   |  ✅   |  ❌   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
+| [invoice-engine](https://github.com/erma0/fapiao-print)     |    MIT     |  ✅  |  ✅  |   ⚠️   |  ❌   |  ❌   |  ✅   |  ❌  |    ❌     |  ❌  |  ❌  |  ❌  |
 
 ## Python
 
