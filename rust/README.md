@@ -5,7 +5,11 @@
 ```
 rust/
 ├── README.md              # 本文件
-└── ofd2pdf/               # 独立 Rust 项目
+├── ofd2pdf/               # OFD → PDF 转换器（独立 Rust 项目）
+│   ├── Cargo.toml
+│   └── src/
+│       └── main.rs
+└── pdf2ofd/               # PDF → OFD 转换器（独立 Rust 项目）
     ├── Cargo.toml
     └── src/
         └── main.rs
@@ -14,9 +18,15 @@ rust/
 ## 方式1：使用独立 Rust 项目（推荐）
 
 ```bash
+# OFD → PDF
 cd rust/ofd2pdf
 cargo build --release
 ./target/release/ofd2pdf input.ofd output.pdf
+
+# PDF → OFD
+cd rust/pdf2ofd
+cargo build --release
+./target/release/pdf2ofd input.pdf output.ofd
 ```
 
 ## 方式2：编译 easyofd-tool
