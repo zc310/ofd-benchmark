@@ -4,10 +4,10 @@
 
 本项目对比多种开源 OFD 库的转换能力，覆盖两个方向：
 
-| 方向 | 文档 | 对比内容 |
-|------|------|----------|
+| 方向      | 文档                                     | 对比内容                                                                                     |
+|-----------|------------------------------------------|----------------------------------------------------------------------------------------------|
 | OFD → PDF | [docs/ofd-to-pdf.md](docs/ofd-to-pdf.md) | 8 种转换器（Go×2 / Rust / Python×3 / Java / Node）的速度、文件大小、文本提取与数科版式还原度 |
-| PDF → OFD | [docs/pdf-to-ofd.md](docs/pdf-to-ofd.md) | 5 种转换器（zc310 / ofdgo / easyofd-rust / ofdrw / pdf2ofd）的速度、文件大小与回环还原度 |
+| PDF → OFD | [docs/pdf-to-ofd.md](docs/pdf-to-ofd.md) | 5 种转换器（zc310 / ofdgo / easyofd-rust / ofdrw / pdf2ofd）的速度、文件大小与回环还原度     |
 
 基准参考输出来自**数科版式阅读器**（`test/testdata/*.pdf`），保证同一组文档双向可测。
 
