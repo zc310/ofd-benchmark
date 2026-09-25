@@ -7,7 +7,7 @@
 | 方向 | 文档 | 对比内容 |
 |------|------|----------|
 | OFD → PDF | [docs/ofd-to-pdf.md](docs/ofd-to-pdf.md) | 8 种转换器（Go×2 / Rust / Python×3 / Java / Node）的速度、文件大小、文本提取与数科版式还原度 |
-| PDF → OFD | [docs/pdf-to-ofd.md](docs/pdf-to-ofd.md) | 4 种转换器（zc310 / easyofd-rust / ofdrw / pdf2ofd）的速度、文件大小与回环还原度 |
+| PDF → OFD | [docs/pdf-to-ofd.md](docs/pdf-to-ofd.md) | 5 种转换器（zc310 / ofdgo / easyofd-rust / ofdrw / pdf2ofd）的速度、文件大小与回环还原度 |
 
 基准参考输出来自**数科版式阅读器**（`test/testdata/*.pdf`），保证同一组文档双向可测。
 
@@ -32,7 +32,8 @@ cd ../ofd-benchmark && go build -o bin/pdf2ofd-benchmark ./cmd/pdf2ofd-benchmark
 ofd-benchmark/
 ├── bin/
 │   ├── ofd-benchmark       # OFD→PDF 基准测试主程序
-│   ├── ofdgo-convert       # Go xiaoqidun/ofdgo 转换器
+│   ├── ofdgo-convert       # Go xiaoqidun/ofdgo OFD→PDF 转换器
+│   ├── ofdgo-pdf2ofd       # Go xiaoqidun/ofdgo PDF→OFD 转换器
 │   ├── zc310-convert       # Go zc310/ofd OFD→PDF 转换器
 │   ├── ofd-converter       # Go zc310/ofd 通用转换器（PDF→OFD、OFD→PDF/TXT）
 │   ├── pdf2ofd-benchmark   # PDF→OFD 基准测试主程序
@@ -41,6 +42,7 @@ ofd-benchmark/
 │   └── output_ofd/         # PDF→OFD 转换结果（含回环 PDF / 提取文本）
 ├── cmd/
 │   ├── ofdgo-convert/
+│   ├── ofdgo-pdf2ofd/
 │   ├── zc310-convert/
 │   └── pdf2ofd-benchmark/  # PDF→OFD 基准驱动
 ├── python/

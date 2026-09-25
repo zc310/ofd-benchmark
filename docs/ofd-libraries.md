@@ -5,12 +5,14 @@
 > **发票**：库是否支持电子发票类 OFD 处理（发票解析/信息提取、验签验章、发票渲染等）。⚠️ 为可兼容发票文档的通用 OFD 库，但无发票专项功能。
 > 
 > **→ HTML**：库是否支持 OFD → HTML（网页/浏览器渲染）输出。⚠️ 为在浏览器中基于 Canvas 渲染显示但不直接生成 HTML DOM/SVG 结构的库。
+> 
+> **PDF → OFD**：库是否支持 PDF 转 OFD 导入。⚠️ 为部分支持（仅文本/图片、或对非嵌入字体等常见 PDF 直接失败）。
 
 ## Go
 
 | 库                                                      |   许可证   | 预览 | 解析 | 发票 | → 图片 | → PDF | → TXT | → SVG | → Md | → HTML | PDF → OFD | 生成 | 签章 | 修改 |
 |---------------------------------------------------------|:----------:|:----:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:------:|:---------:|:----:|:----:|:----:|
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)          | Apache-2.0 |  ✅  |  ✅  |  ❌  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |   ❌   |    ❌     |  ✅  |  ❌  |  ✅  |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)          | Apache-2.0 |  ✅  |  ✅  |  ❌  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |   ❌   |    ⚠️     |  ✅  |  ❌  |  ✅  |
 | [go-zc310](https://github.com/zc310/ofd)                | Apache-2.0 |  ✅  |  ✅  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ✅  |   ✅   |    ✅     |  ✅  |  ✅  |  ✅  |
 | [ofd-go](https://github.com/itlabers/ofd-go)            | Apache-2.0 |  ❌  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ✅  |  ❌  |
 | [go-ofd](https://github.com/ppxz2014/go-ofd)            | Apache-2.0 |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ✅  |  ❌  |
@@ -26,7 +28,7 @@
 | [rs_ofd](https://github.com/geniusnut/rs_ofd)               |    MIT     |  ❌  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |
 | [ofd-utility](https://github.com/ofd-utility/ofd-utility)   |    MIT     |  ❌  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ✅  |  ❌  |
 | [ofdsdk](https://github.com/KaiserY/ofdsdk)                 | Apache-2.0 |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |
-| [rofd](https://github.com/linuxdeepin/rofd)                 |  LGPL-2.1  |  ✅  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |
+| [rofd](https://github.com/office-rs/rofd)                  | Apache-2.0 |  ✅  |  ✅  |  ❌  |   ⚠️   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ✅  |
 | [ofd-viewer](https://github.com/shaoyi1998/ofd-viewer)      |    MIT     |  ✅  |  ✅  |  ❌  |   ❌   |  ✅   |  ✅   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |
 | [invoice-engine](https://github.com/erma0/fapiao-print)     |    MIT     |  ✅  |  ✅  |  ✅  |   ⚠️   |  ❌   |  ❌   |  ✅   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |
 

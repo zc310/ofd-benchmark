@@ -81,7 +81,7 @@ def main():
         dpi = int(args[0])
         args = args[1:]
 
-    files = args or ['hello', 'ano', '999', '1000-pages', 'intro', 'zsbk']
+    files = args or ['hello', 'ano', '999', '1000-pages', 'intro', 'zsbk', 'GBT_33190-2016']
     base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     odir = os.path.join(base, 'bin', 'output_ofd')
 

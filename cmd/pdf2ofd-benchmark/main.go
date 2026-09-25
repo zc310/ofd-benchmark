@@ -79,6 +79,11 @@ func main() {
 			Command:    []string{filepath.Join(binDir, "easyofd-pdf2ofd"), inputFile, filepath.Join(binDir, "output_rust.ofd")},
 			OutputFile: filepath.Join(binDir, "output_rust.ofd"),
 		},
+		"ofdgo": {
+			Name:       "pdf2ofd-ofdgo",
+			Command:    []string{filepath.Join(binDir, "ofdgo-pdf2ofd"), inputFile, filepath.Join(binDir, "output_ofdgo.ofd")},
+			OutputFile: filepath.Join(binDir, "output_ofdgo.ofd"),
+		},
 		"java": {
 			Name:       "pdf2ofd-ofdrw",
 			Command:    []string{filepath.Join(binDir, "..", "java", "pdf2ofd_java.sh"), inputFile, filepath.Join(binDir, "output_java.ofd")},
@@ -93,7 +98,7 @@ func main() {
 
 	selectedConverters := os.Args[2:]
 	if len(selectedConverters) == 0 {
-		selectedConverters = []string{"zc310", "rust", "java", "pdf2ofd"}
+		selectedConverters = []string{"zc310", "ofdgo", "rust", "java", "pdf2ofd"}
 	}
 
 	fmt.Printf("Input file: %s\n\n", inputFile)
