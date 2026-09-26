@@ -94,11 +94,16 @@ func main() {
 			Command:    []string{"python3", filepath.Join(binDir, "..", "python", "pdf2ofd_convert.py"), inputFile, filepath.Join(binDir, "output_pdf2ofd.ofd")},
 			OutputFile: filepath.Join(binDir, "output_pdf2ofd.ofd"),
 		},
+		"jsofd": {
+			Name:       "node-jsofd",
+			Command:    []string{"node", filepath.Join(binDir, "..", "node", "pdf2ofd_jsofd.mjs"), inputFile, filepath.Join(binDir, "output_jsofd.ofd")},
+			OutputFile: filepath.Join(binDir, "output_jsofd.ofd"),
+		},
 	}
 
 	selectedConverters := os.Args[2:]
 	if len(selectedConverters) == 0 {
-		selectedConverters = []string{"zc310", "ofdgo", "rust", "java", "pdf2ofd"}
+		selectedConverters = []string{"zc310", "ofdgo", "rust", "java", "pdf2ofd", "jsofd"}
 	}
 
 	fmt.Printf("Input file: %s\n\n", inputFile)

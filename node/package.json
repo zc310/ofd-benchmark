@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@miconvert/ofd-to-pdf": "^0.2.3"
+    "@hufe921/jsofd": "^1.0.1",
+    "@miconvert/ofd-to-pdf": "^0.2.3",
+    "pdfjs-dist": "^6.3.289"
   }
 }

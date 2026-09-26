@@ -4,7 +4,7 @@
 >
 > [OFD → PDF 对比测试](ofd-to-pdf.md)：反方向 OFD→PDF 转换对比
 
-能把 PDF 转回 OFD 的开源库很少。本测试对比 5 个转换器（Go zc310、Go ofdgo、Rust easyofd、Java ofdrw、Python pdf2ofd）在 7 个参考 PDF 上的转换速度、输出 OFD 文件大小与还原质量。
+能把 PDF 转回 OFD 的开源库很少。本测试对比 6 个转换器（Go zc310、Go ofdgo、Rust easyofd、Java ofdrw、Python pdf2ofd、JS jsOFD）在 7 个参考 PDF 上的转换速度、输出 OFD 文件大小与还原质量。
 
 ## 测试库
 
@@ -15,8 +15,11 @@
 | rust-easyofd   | Rust   | [easyofd-rust](https://github.com/easy-4-rust/easyofd-rust)（easyofd-convert PdfImporter） | 0.1.3                  | 基于 lopdf 提取文本/图片；不转换矢量路径                                                                     |
 | java-ofdrw     | Java   | [ofdrw](https://github.com/ofdrw/ofdrw)（ofdrw-converter PDFConverter）                    | 2.4.0                  | 文本转为矢量轮廓，保留原始外观                                                                               |
 | python-pdf2ofd | Python | [pdf2ofd](https://github.com/wanglrebe/pdf2ofd)                                            | 0.1.0                  | 基于 PyMuPDF 渲染，文本栅格化                                                                                |
+| node-jsofd     | JS     | [Hufe921/jsOFD](https://github.com/Hufe921/jsOFD)（pdfToOfd + pdfjs-dist）                | 1.0.1                  | 基于 pdfjs 重放绘制指令流（路径/文本/图片），不转换注解/渐变/图案/Type3/剪裁 |
 
 > `python-pdf2ofd` 安装：`pip install pdf2ofd`（PEP 668 环境需 `--user --break-system-packages` 或使用 venv）
+>
+> `node-jsofd` 安装：`npm install @hufe921/jsofd pdfjs-dist`（Node <22 需补 `process.getBuiltinModule`，见 `node/pdf2ofd_jsofd.mjs`）
 
 ## 测试文件
 
@@ -47,6 +50,7 @@
 | rust-easyofd   | **2.3ms** | **3.4ms** | **3.2ms** | **106ms** | **22ms** |      **276ms** |           **79ms** |        7 |
 | java-ofdrw     |     472ms |     1.27s |     1.02s |     4.37s |    2.90s |         25.90s |             12.78s |        0 |
 | python-pdf2ofd |      99ms |     800ms |     513ms |     2.39s |    928ms |         34.24s |             18.47s |        0 |
+| node-jsofd     |     416ms |     712ms |     3.50s |    10.01s |     5.25s |          4.77s |              9.02s |        0 |
 
 > rust-easyofd 的「最快」源于几乎未提取内容（hello/ano 输出空页），速度优势无实际意义
 
@@ -59,6 +63,7 @@
 | rust-easyofd   |  **1.2K** | **1.8K** | **3.6K** |  **5.4M** | **919K** |       **432K** |           **2.0M** |        7 |
 | java-ofdrw     |      5.2K |     905K |     818K |     34.4M |    19.4M |          57.4M |              30.5M |        0 |
 | python-pdf2ofd |      4.3K |     1.3M |     734K |      9.1M |     1.7M |          44.8M |              37.7M |        0 |
+| node-jsofd     |      7.4K |     2.2M |   591.6K |     35.6M |    13.2M |          63.4M |              35.1M |        0 |
 
 > rust-easyofd「体积最小」同样是内容丢失的结果（hello 1.2K/ano 1.8K 实为空页），不具可比性
 
@@ -73,8 +78,9 @@
 | rust-easyofd   |  **0.33** | **0.00** | **0.04** |  **0.78** | **0.57** |       **0.20** |           **0.41** |
 | java-ofdrw     |      1.48 |     1.00 |    10.24 |      5.01 |    12.07 |          26.48 |               6.17 |
 | python-pdf2ofd |      1.22 |     1.43 |     9.18 |      1.33 |     1.04 |          20.63 |               7.62 |
+| node-jsofd     |      2.08 |     2.47 |     7.40 |      5.18 |     8.18 |          29.25 |               7.09 |
 
-> 两种文本转图形的方案输出普遍膨胀：ofdrw 在 999、zsbk、1000-pages 上是源 PDF 的 10～26 倍，pdf2ofd 在 999、1000-pages 上是 9～21 倍（zc310 全部 ≤1.5x）；rust-easyofd 的 0.00～0.78 是内容丢失而非压缩
+> 两种文本转图形的方案输出普遍膨胀：ofdrw 在 999、zsbk、1000-pages 上是源 PDF 的 10～26 倍，pdf2ofd 在 999、1000-pages 上是 9～21 倍（zc310 全部 ≤1.5x）；jsOFD 全面膨胀（2.1～29 倍，1000-pages 达 29 倍）；rust-easyofd 的 0.00～0.78 是内容丢失而非压缩
 
 ## 还原度对比
 
@@ -89,6 +95,7 @@
 | rust-easyofd  |  99.84% |  98.56% |  95.77% |  43.84% |  95.62% |  73.67% |  96.28% | 0 |
 | java-ofdrw     | **99.98%** |     98.37% |     98.73% | 96.90% |     32.97% |     **99.62%** | 91.85% |        2 |
 | python-pdf2ofd |     99.94% |     98.34% | **98.94%** |     99.35% |     97.37% |         99.31% |             99.12% |        1 |
+| node-jsofd     |     99.89% |     89.95% |     98.13% |     98.94% |     98.54% |         99.59% |             99.26% |        0 |
 
 **文本提取能力**（从转换后 OFD 提取字符数，参考 PDF 提取字符数见括号）：
 
@@ -99,6 +106,7 @@
 | rust-easyofd   | 0             | 0             | 242*          | 0               | 10*            | 10996*                 | 0                          |
 | java-ofdrw     | 0             | 0             | 0             | 0               | 0              | 0                      | 0                          |
 | python-pdf2ofd | 0             | 0             | 0             | 0               | 0              | 0                      | 0                          |
+| node-jsofd     | 41            | 11882         | 10039         | 10478           | 2899           | 510996                 | 225836                     |
 
 **文本相似度**（4-gram Jaccard，100% 为与源 PDF 提取文本完全一致）：
 
@@ -109,11 +117,13 @@
 | rust-easyofd   |     0.00% |   0.00% |   0.00% |     0.00% |    0.00% |          0.00% |              0.00% |
 | java-ofdrw     |     0.00% |   0.00% |   0.00% |     0.00% |    0.00% |          0.00% |              0.00% |
 | python-pdf2ofd |     0.00% |   0.00% |   0.00% |     0.00% |    0.00% |          0.00% |              0.00% |
+| node-jsofd     |   10.00% |  19.08% |  11.27% |   13.58% |    4.50% |          5.49% |              1.08% |
 
 > - ofdrw / pdf2ofd 的输出 OFD 不含可提取文本（Content.xml 无 TextObject）——ofdrw 转成矢量轮廓、pdf2ofd 栅格成位图，故相似度为 0
 > - go-zc310 保留文本对象（全部 6 个文件均可提取），文本顺序正确（如「欢迎使用」顺序无误），但字形间插入空格（如 `H e l l o`）使 4-gram 相似度偏低，内容本身完整
 > - rust-easyofd 实测质量最差：hello/ano 输出空页（Layer 为空）；999、1000-pages 提取的文本为 CID 字体乱码（标 \* 的 242/10996/10 字符）且版面固定在 (10,20)；像素高分（hello 99.84%、ano 98.56%、GBT 96.28%）是因为空白/仅图表占主导，不代表还原正确（GBT 文本 0 字符）
-> - go-ofdgo 像素 2 胜（intro 99.81%、GBT 99.95%）；文本提取量普遍多于 zc310（hello 41、1000-pages 534998、GBT 234779 字符）但 4-gram 相似度明显偏低（顺序/字距差异，GBT 仅 1.08%）
+> - go-ofdgo 像素 2 胜（intro 99.80%、GBT 99.95%）；文本提取量普遍多于 zc310（hello 41、1000-pages 534998、GBT 234779 字符）但 4-gram 相似度明显偏低（顺序/字距差异，GBT 仅 1.08%）
+> - node-jsofd 逐条重放绘制指令流（路径/文本/图片），不转换注解/渐变/图案/Type3/剪裁：ano 因 Stamp 丢失像素仅 89.95%；其余像素普遍高（98.13～99.89%）但逐字间隔重、相似度低（≤19.08%），输出体积全场最大（1000-pages 63.4M）
 > - 回环像素随 zc310 渲染版本波动：渐变渲染修复后 GBT 各家普遍提升（zc310 94.71%→99.69%），但 ofdrw 的 zsbk/GBT 大幅下降（32.97%、91.85%）
 > - 像素相似度基于整页平均色差，对内容稀疏的页面（白底小字）区分度有限，需结合文本提取与人工核对判断
 > - intro 的像素对比跳过 14～19 页（数科参考 PDF 这几页背景图丢失，不计入对比）
@@ -126,6 +136,7 @@
 - **rust-easyofd**：速度与体积数值均第一（各 7 胜）但为虚假优势——hello/ano 输出空页、999/1000-pages 文本为 CID 乱码、intro 像素仅 43.84%，GBT 像素 96.28% 亦仅因图表保留（文本 0 字符），实际质量最差
 - **java-ofdrw**：像素还原 2 胜（hello、1000-pages），文本转为轮廓不可提取；输出体积大（1000-pages 57MB、GBT 30.5MB）、多页转换慢（GBT 12.78s），zsbk/GBT 回环像素受新版渐变渲染影响大幅下降（32.97%、91.85%）
 - **python-pdf2ofd**：简单易用，单页/小文件还原不错（999 像素最高），但纯位图渲染不可提取文本、大文件最慢（1000-pages 34.2s、GBT 18.5s）
+- **node-jsofd**：像素普遍接近源 PDF（6 文件 ≥98.1%），但体积最大（1000-pages 63.4M、GBT 35.1M）且大文件偏慢；文本相似度低（≤19.08%），ano 因 Stamp 未转换像素仅 89.95%
 
 ## 复现
 
