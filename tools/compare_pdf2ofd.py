@@ -25,13 +25,21 @@ def render(doc, page_idx, dpi):
     pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), alpha=False)
     return np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.width, pix.n)
 
+# intro.pdf（数科导出的参考 PDF）第 14–19 页背景图丢失，像素对比跳过这些页
+EXCLUDE_PAGES = {'intro': {14, 15, 16, 17, 18, 19}}
+
 
 def pixel_similarity(ref_path, src_path, dpi):
     ref_doc = fitz.open(ref_path)
     src_doc = fitz.open(src_path)
+    name = os.path.splitext(os.path.basename(ref_path))[0]
+    skip = EXCLUDE_PAGES.get(name, set())
     n = min(ref_doc.page_count, src_doc.page_count)
     total = 0.0
+    count = 0
     for i in range(n):
+        if i + 1 in skip:
+            continue
         r = render(ref_doc, i, dpi)
         s = render(src_doc, i, dpi)
         if r.shape != s.shape:
@@ -41,9 +49,10 @@ def pixel_similarity(ref_path, src_path, dpi):
             s = s[:h, :w]
         diff = np.abs(r.astype(np.int16) - s.astype(np.int16)).sum(axis=2) / (3 * 255.0)
         total += diff.mean()
+        count += 1
     ref_doc.close()
     src_doc.close()
-    return (1 - total / max(n, 1)) * 100
+    return (1 - total / max(count, 1)) * 100
 
 
 def normalize(s):

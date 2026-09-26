@@ -19,6 +19,9 @@ def render(doc, page_idx, dpi):
     img = np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.width, pix.n)
     return img
 
+# intro.pdf（数科导出的参考 PDF）第 14–19 页背景图丢失，像素对比跳过这些页
+EXCLUDE_PAGES = {'intro': {14, 15, 16, 17, 18, 19}}
+
 def resize_to(img, h, w):
     from PIL import Image
     im = Image.fromarray(img).resize((w, h), Image.LANCZOS)
@@ -40,21 +43,28 @@ def compare(ref_path, src_path, dpi):
     ref_doc = fitz.open(ref_path)
     src_doc = fitz.open(src_path)
 
+    name = os.path.splitext(os.path.basename(ref_path))[0]
+    skip = EXCLUDE_PAGES.get(name, set())
+
     n = min(ref_doc.page_count, src_doc.page_count)
     total_diff = 0.0
     total_ident = 0.0
+    count = 0
     for i in range(n):
+        if i + 1 in skip:
+            continue
         ref_img = render(ref_doc, i, dpi)
         src_img = render(src_doc, i, dpi)
         md, ident = similarity(ref_img, src_img)
         total_diff += md
         total_ident += ident
+        count += 1
 
     ref_doc.close(); src_doc.close()
 
-    mean_diff = total_diff / max(n, 1)
+    mean_diff = total_diff / max(count, 1)
     pct = (1 - mean_diff) * 100
-    ident = total_ident / max(n, 1) * 100
+    ident = total_ident / max(count, 1) * 100
     return pct, mean_diff, ident
 
 def main():

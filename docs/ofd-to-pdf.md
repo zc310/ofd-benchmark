@@ -115,13 +115,13 @@
 
 | 转换器                                                                       |  hello.ofd |    ano.ofd |  intro.ofd | 1000-pages.ofd |    999.ofd |   zsbk.ofd | 胜出次数 |
 |------------------------------------------------------------------------------|-----------:|-----------:|-----------:|---------------:|-----------:|-----------:|---------:|
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                               |     99.40% |     99.35% |     96.03% |         98.37% | **98.50%** | **99.30%** |        2 |
-| [go-zc310](https://github.com/zc310/ofd)                                     |     99.54% | **99.69%** | **96.17%** |         98.00% |     98.45% |     98.79% |        2 |
-| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)                  |     99.79% |     97.83% |     46.37% |         73.66% |     96.34% |     94.02% |        0 |
-| [easyofd](https://pypi.org/project/easyofd/)                                 |     FAILED |     93.82% |     40.96% |         FAILED |     92.41% |     94.41% |        0 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                               |     99.40% |     99.35% |     99.62% |         98.37% | **98.50%** | **99.30%** |        2 |
+| [go-zc310](https://github.com/zc310/ofd)                                     |     99.54% | **99.69%** | **99.76%** |         98.00% |     98.45% |     98.79% |        2 |
+| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)                  |     99.79% |     97.83% |     44.99% |         73.66% |     96.34% |     94.02% |        0 |
+| [easyofd](https://pypi.org/project/easyofd/)                                 |     FAILED |     93.82% |     37.74% |         FAILED |     92.41% |     94.41% |        0 |
 | [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                                | **99.95%** |     FAILED |     FAILED |     **99.32%** |     97.74% |     94.33% |        2 |
-| [ofdrw](https://github.com/ofdrw/ofdrw)                                      |     99.88% |     98.86% |     95.32% |         98.93% |     97.73% |     98.45% |        0 |
-| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |     99.47% |     97.74% |     83.16% |         98.21% |     95.80% |     94.40% |        0 |
+| [ofdrw](https://github.com/ofdrw/ofdrw)                                      |     99.88% |     98.86% |     98.94% |         98.93% |     97.73% |     98.45% |        0 |
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |     99.47% |     97.74% |     96.29% |         98.21% |     95.80% |     94.40% |        0 |
 
 **文件大小对比**（转换后 PDF 大小 / 数科参考 PDF 大小，越小表示压缩率越高，`1.00` 表示与数科输出一致；**加粗**为最接近 `1.00` 的转换器）：
 
@@ -137,6 +137,7 @@
 | [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |      0.38 | **0.22** |      0.16 |           3.40 | **1.04** |     0.35 |
 
 > - 像素相似度越高表示输出越贴近数科版式阅读器；仿色/抗锯齿等平滑差异会小幅降低相似度
+> - intro 的像素对比跳过 14～19 页（数科导出的参考 PDF 这几页背景图丢失，不计入对比）
 > - `python-easyofd` 在 hello、1000-pages 转换失败；`python-ofd2pdf` 在 ano、intro 转换失败
 > - rust-easyofd 在 intro、1000-pages 相似度明显偏低（46%、74%），说明对含复杂图形/签章文件的还原能力弱
 > - 复现命令：`python3 tools/compare_pdf.py 96 <file>`
