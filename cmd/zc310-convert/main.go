@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"os"
 
@@ -24,7 +25,7 @@ func main() {
 	}
 	defer pdfFile.Close()
 
-	if err := converter.PDF(inputFile, pdfFile); err != nil {
+	if err := converter.PDF(context.Background(), inputFile, pdfFile); err != nil {
 		log.Fatal(err)
 	}
 }

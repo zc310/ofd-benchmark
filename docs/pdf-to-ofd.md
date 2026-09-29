@@ -11,7 +11,7 @@
 | 转换器         | 语言   | 库                                                                                         | 版本                   | 说明                                                                                                         |
 |----------------|--------|--------------------------------------------------------------------------------------------|------------------------|--------------------------------------------------------------------------------------------------------------|
 | go-zc310       | Go     | [zc310/ofd](https://github.com/zc310/ofd)                                                  | v0.1.3 起（pdfimport） | 基于 pdfcpu 的 PDF→OFD 导入器（路径/文本/图片/注解/渐变/图案/网格/大纲/元数据），文本保留为可提取 TextObject |
-| go-ofdgo       | Go     | [xiaoqidun/ofdgo](https://github.com/xiaoqidun/ofdgo)（ConvertPDF + pdfgo）                | 2026-09-28 版          | 基于 pdfgo 的 PDF→OFD 导入器（路径/文本/图片/注解）                                                          |
+| go-ofdgo       | Go     | [xiaoqidun/ofdgo](https://github.com/xiaoqidun/ofdgo)（ConvertPDF + pdfgo）                | 2026-09-29 版          | 基于 pdfgo 的 PDF→OFD 导入器（路径/文本/图片/注解）                                                          |
 | rust-easyofd   | Rust   | [easyofd-rust](https://github.com/easy-4-rust/easyofd-rust)（easyofd-convert PdfImporter） | 0.1.4                  | 基于 lopdf 提取文本/图片；不转换矢量路径                                                                     |
 | java-ofdrw     | Java   | [ofdrw](https://github.com/ofdrw/ofdrw)（ofdrw-converter PDFConverter）                    | 2.4.0                  | 文本转为矢量轮廓，保留原始外观                                                                               |
 | python-pdf2ofd | Python | [pdf2ofd](https://github.com/wanglrebe/pdf2ofd)                                            | 0.1.0                  | 基于 PyMuPDF 渲染，文本栅格化                                                                                |
@@ -45,8 +45,8 @@
 
 | 转换器         | hello.pdf |   ano.pdf |   999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
 |----------------|----------:|----------:|----------:|----------:|---------:|---------------:|-------------------:|---------:|
-| go-zc310       |      45ms |      94ms |      64ms |     523ms |    301ms |          917ms |              2.87s |        0 |
-| go-ofdgo       |      21ms |     363ms |     414ms |     1.17s |    6.12s |          3.97s |             12.91s |        0 |
+| go-zc310       |      48ms |      97ms |      65ms |    514ms |    303ms |          920ms |              2.82s |        0 |
+| go-ofdgo       |      21ms |     364ms |     428ms |     1.20s |    6.49s |          3.96s |             13.17s |        0 |
 | rust-easyofd   | **4.9ms** | **4.1ms** | **7.2ms** | **105ms** | **24ms** |      **274ms** |           **76ms** |        7 |
 | java-ofdrw     |     472ms |     1.27s |     1.02s |     4.37s |    2.90s |         25.90s |             12.78s |        0 |
 | python-pdf2ofd |      99ms |     800ms |     513ms |     2.39s |    928ms |         34.24s |             18.47s |        0 |
@@ -130,7 +130,7 @@
 
 ## 结论
 
-- **go-zc310**：唯一保留可复制文本（顺序正确）且可用的转换器，像素还原 2 胜（ano、GBT 99.98%），在可用转换器中速度/体积最优（45ms～2.87s、1.6K～6.6M）
+- **go-zc310**：唯一保留可复制文本（顺序正确）且可用的转换器，像素还原 2 胜（ano、GBT 99.98%），在可用转换器中速度/体积最优（48ms～2.82s、1.6K～6.6M）
 - **go-ofdgo**：像素 2 胜（intro 99.80%、zsbk 99.37%）、hello 速度反超 zc310（21ms）；文本提取量最大（1000-pages 534998、GBT 234779 字符）但相似度偏低（≤29.63%）
 - **rust-easyofd**：速度与体积数值均第一（各 7 胜）但为虚假优势——hello/ano 输出空页、999/1000-pages 文本为 CID 乱码、intro 像素仅 43.84%，GBT 像素 96.28% 亦仅因图表保留（文本 0 字符），实际质量最差
 - **java-ofdrw**：像素还原 2 胜（hello、1000-pages），文本转为轮廓不可提取；输出体积大（1000-pages 57MB、GBT 30.5MB）、多页转换慢（GBT 12.78s）
