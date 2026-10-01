@@ -39,6 +39,7 @@
 | 库                                                                               |   许可证   | 预览 | 解析 | 发票 | → 图片 | → PDF | → TXT | → SVG | → Md | → HTML | PDF → OFD | 生成 | 签章 | 修改 | 编辑器 |
 |----------------------------------------------------------------------------------|:----------:|:----:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:------:|:---------:|:----:|:----:|:----:|:------:|
 | [easyofd](https://pypi.org/project/easyofd/)                                     | Apache-2.0 |  ✅  |  ✅  |  ✅  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ✅  |  ❌  |  ❌  |   ❌   |
+| [fapiao-ofd2pdf](https://github.com/seawander/fapiao-ofd2pdf)                    |    MIT     |  ❌  |  ✅  |  ⚠️  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [ofd2img](https://pypi.org/project/ofd2img/)                                     | Apache-2.0 |  ❌  |  ✅  |  ⚠️  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                                    |     无     |  ❌  |  ✅  |  ❌  |   ✅   |  ⚠️   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [OFDtoPDF](https://github.com/njuzzy1979/OFDtoPDF)                               |     无     |  ❌  |  ✅  |  ❌  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ⚠️  |  ❌  |   ❌   |
@@ -108,6 +109,7 @@
 | [webofd](https://github.com/zsc347/webofd)                                    |     无     |  ✅  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [ofd_editor_frontend](https://github.com/LamplightShadow/ofd_editor_frontend) |     无     |  ✅  |  ✅  |  ❌  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ✅  |  ✅  |  ✅  |   ✅   |
 | [ofdjs-viewer](https://github.com/Atw-Lee/ofdjs-viewer)                       |    MIT     |  ✅  |  ✅  |  ❌  |   ✅   |  ❌   |  ✅   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
+| [piaopinpin](https://github.com/qq87636108/piaopinpin)                        |    MIT     |  ✅  |  ✅  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [jsOFD](https://github.com/Hufe921/jsOFD)                                     |    MIT     |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ✅  |  ❌  |  ❌  |   ❌   |
 
 ## Pascal
