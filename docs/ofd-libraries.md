@@ -32,7 +32,7 @@
 | [ofdsdk](https://github.com/KaiserY/ofdsdk)                 | Apache-2.0 |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [rofd](https://github.com/office-rs/rofd)                   | Apache-2.0 |  ✅  |  ✅  |  ❌  |   ⚠️   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ✅  |   ❌   |
 | [ofd-viewer](https://github.com/shaoyi1998/ofd-viewer)      |    MIT     |  ✅  |  ✅  |  ❌  |   ❌   |  ✅   |  ✅   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
-| [invoice-engine](https://github.com/erma0/fapiao-print)     |    MIT     |  ✅  |  ✅  |  ✅  |   ⚠️   |  ❌   |  ❌   |  ✅   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
+| [fapiao-print](https://github.com/erma0/fapiao-print)       |    MIT     |  ✅  |  ✅  |  ✅  |   ⚠️   |  ✅   |  ❌   |  ✅   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 
 ## Python
 
@@ -68,7 +68,7 @@
 
 | 库                                                         |    许可证    | 预览 | 解析 | 发票 | → 图片 | → PDF | → TXT | → SVG | → Md | → HTML | PDF → OFD | 生成 | 签章 | 修改 | 编辑器 |
 |------------------------------------------------------------|:------------:|:----:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:------:|:---------:|:----:|:----:|:----:|:------:|
-| [ofdpdfsigner](https://github.com/fanzizheng/ofdpdfsigner) |   BSL-1.1    |  ❌  |  ✅  |  ❌  |   ✅   |  ✅   |  ❌   |  ✅   |  ❌  |   ❌   |    ✅     |  ❌  |  ✅  |  ❌  |   ❌   |
+| [ofdpdfsigner](https://github.com/fanzizheng/ofdpdfsigner) |   BSL-1.1    |  ✅  |  ✅  |  ❌  |   ✅   |  ✅   |  ❌   |  ✅   |  ❌  |   ❌   |    ✅     |  ❌  |  ✅  |  ❌  |   ❌   |
 | [ofdReader](https://github.com/Micats/ofdReader)           |      无      |  ✅  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ⚠️  |  ❌  |   ❌   |
 | [XilouReader](https://github.com/Chingliu/XilouReader)     | BSD-3-Clause |  ✅  |  ✅  |  ✅  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ✅  |  ✅  |  ✅  |   ❌   |
 | [xilou_core](https://github.com/Chingliu/xilou_core)       | BSD-3-Clause |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
@@ -110,6 +110,7 @@
 | [ofd_editor_frontend](https://github.com/LamplightShadow/ofd_editor_frontend) |     无     |  ✅  |  ✅  |  ❌  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ✅  |  ✅  |  ✅  |   ✅   |
 | [ofdjs-viewer](https://github.com/Atw-Lee/ofdjs-viewer)                       |    MIT     |  ✅  |  ✅  |  ❌  |   ✅   |  ❌   |  ✅   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [piaopinpin](https://github.com/qq87636108/piaopinpin)                        |    MIT     |  ✅  |  ✅  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
+| [jit-viewer-sdk](https://github.com/Drexr9558/jit-viewer-sdk)                 | Apache-2.0 |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ✅   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ⚠️  |  ❌  |   ❌   |
 | [jsOFD](https://github.com/Hufe921/jsOFD)                                     |    MIT     |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ✅  |  ❌  |  ❌  |   ❌   |
 
 ## Pascal
