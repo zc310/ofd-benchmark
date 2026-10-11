@@ -33,7 +33,10 @@
 | [rofd](https://github.com/office-rs/rofd)                   | Apache-2.0 |  ✅  |  ✅  |  ❌  |   ⚠️   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ✅  |   ❌   |
 | [ofd-viewer](https://github.com/shaoyi1998/ofd-viewer)      |    MIT     |  ✅  |  ✅  |  ❌  |   ❌   |  ✅   |  ✅   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [fapiao-print](https://github.com/erma0/fapiao-print)       |    MIT     |  ✅  |  ✅  |  ✅  |   ⚠️   |  ✅   |  ❌   |  ✅   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
-| [jian-yue](https://github.com/lapin2024/jian-yue)           |    MIT     |  ✅  |  ✅  |  ⚠️  |   ✅   |  ⚠️   |  ✅   |  ❌   |  ❌  |   ❌   |    ⚠️     |  ❌  |  ⚠️  |  ⚠️  |   ✅   |
+| [jian-yue](https://github.com/lapin2024/jian-yue)          |    MIT     |  ✅  |  ✅  |  ⚠️  |   ✅   |  ⚠️   |  ✅   |  ❌   |  ❌  |   ❌   |    ⚠️     |  ❌  |  ⚠️  |  ⚠️  |   ✅   |
+| [linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)    |   LGPL-2.1  |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
+| [easy_print](https://github.com/qzue/easy_print)           |    MIT     |  ✅  |  ✅  |  ✅  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
+| [ofd-rs](https://github.com/YeaLooooo/ofd-rs)              | Apache-2.0 |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ✅  |  ❌  |  ❌  |   ❌   |
 
 ## Python
 
