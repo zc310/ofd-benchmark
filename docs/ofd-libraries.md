@@ -33,6 +33,7 @@
 | [rofd](https://github.com/office-rs/rofd)                   | Apache-2.0 |  ✅  |  ✅  |  ❌  |   ⚠️   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ✅  |   ❌   |
 | [ofd-viewer](https://github.com/shaoyi1998/ofd-viewer)      |    MIT     |  ✅  |  ✅  |  ❌  |   ❌   |  ✅   |  ✅   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [fapiao-print](https://github.com/erma0/fapiao-print)       |    MIT     |  ✅  |  ✅  |  ✅  |   ⚠️   |  ✅   |  ❌   |  ✅   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
+| [jian-yue](https://github.com/lapin2024/jian-yue)           |    MIT     |  ✅  |  ✅  |  ⚠️  |   ✅   |  ⚠️   |  ✅   |  ❌   |  ❌  |   ❌   |    ⚠️     |  ❌  |  ⚠️  |  ⚠️  |   ✅   |
 
 ## Python
 
@@ -63,6 +64,7 @@
 | [kkfileviewxg](https://github.com/gaoxingzaq/kkfileviewxg)                  |     无     |  ✅  |  ✅  |  ❌  |   ✅   |  ✅   |  ❌   |  ✅   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ❌  |  ⚠️  |   ❌   |
 | [ofd-server](https://github.com/maczh/ofd-server)                           |     无     |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ✅  |  ✅  |  ✅  |   ❌   |
 | [ofd-parser-tika](https://github.com/ryecrow/ofd-parser)                    | Apache-2.0 |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ✅   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
+| [fuyue-convert](https://github.com/wmforever/fuyue-convert)                 | Apache-2.0 |  ❌  |  ✅  |  ⚠️  |   ✅   |  ✅   |  ✅   |  ❌   |  ❌  |   ❌   |    ⚠️     |  ❌  |  ⚠️  |  ❌  |   ❌   |
 
 ## C++
 
@@ -111,6 +113,7 @@
 | [ofdjs-viewer](https://github.com/Atw-Lee/ofdjs-viewer)                       |    MIT     |  ✅  |  ✅  |  ❌  |   ✅   |  ❌   |  ✅   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [piaopinpin](https://github.com/qq87636108/piaopinpin)                        |    MIT     |  ✅  |  ✅  |  ✅  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [jit-viewer-sdk](https://github.com/Drexr9558/jit-viewer-sdk)                 | Apache-2.0 |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ✅   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ⚠️  |  ❌  |   ❌   |
+| [ofd-reader](https://github.com/Maple-pro/ofd-reader)                         |     无     |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [jsOFD](https://github.com/Hufe921/jsOFD)                                     |    MIT     |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ✅  |  ❌  |  ❌  |   ❌   |
 
 ## Pascal
