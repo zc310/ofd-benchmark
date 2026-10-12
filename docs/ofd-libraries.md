@@ -119,6 +119,8 @@
 | [jit-viewer-sdk](https://github.com/Drexr9558/jit-viewer-sdk)                 | Apache-2.0 |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ✅   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ⚠️  |  ❌  |   ❌   |
 | [ofd-reader](https://github.com/Maple-pro/ofd-reader)                         |     无     |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [jsOFD](https://github.com/Hufe921/jsOFD)                                     |    MIT     |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ✅  |  ❌  |  ❌  |   ❌   |
+| [ofd-lzy](https://github.com/Yusuf-dz/ofd-lzy)                               |  BUSL-1.1  |  ✅  |  ✅  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ✅  |  ❌  |   ✅   |
+| [local-doc-viewer](https://github.com/LocalDoc-Viewer/local-doc-viewer)      |  AGPL-3.0  |  ✅  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 
 ## Pascal
 
