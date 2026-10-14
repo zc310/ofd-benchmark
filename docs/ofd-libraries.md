@@ -86,6 +86,7 @@
 | [OfdiumEx](https://github.com/roy19831015/OfdiumEx)        |  Apache-2.0  |  ✅  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [ofdEditor](https://github.com/mcoder2014/ofdEditor)       |     MIT      |  ✅  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ✅  |  ❌  |  ✅  |   ✅   |
 | [ZipViewer](https://github.com/CryFeiFei/ZipViewer)        |     MIT      |  ✅  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
+| [papers-ofd](https://github.com/YangtseSu/papers-ofd)     |   GPL-2.0    |  ✅  |  ✅  |  ⚠️  |   ✅   |  ✅   |  ✅   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 
 ## .NET
 
