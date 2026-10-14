@@ -20,6 +20,7 @@
 | [go-ofd](https://github.com/ppxz2014/go-ofd)            | Apache-2.0 |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ✅  |  ❌  |   ❌   |
 | [leijacob-ofd](https://gitee.com/leijacob/ofd)          |     无     |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ✅  |  ✅  |  ✅  |   ❌   |
 | [signer-tools](https://gitee.com/leijacob/signer-tools) |     无     |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ✅  |  ❌  |   ❌   |
+| [pdf-to-ofd](https://github.com/huanxiang666/pdf-to-ofd)|    MIT     |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ⚠️     |  ❌  |  ❌  |  ❌  |   ❌   |
 
 ## Rust
 
@@ -37,6 +38,7 @@
 | [linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)    |   LGPL-2.1  |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [easy_print](https://github.com/qzue/easy_print)           |    MIT     |  ✅  |  ✅  |  ✅  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [ofd-rs](https://github.com/YeaLooooo/ofd-rs)              | Apache-2.0 |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ✅  |  ❌  |  ❌  |   ❌   |
+| [SteleOFD](https://github.com/emfox/SteleOFD)              | Apache-2.0 |  ❌  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ✅  |  ✅  |   ❌   |
 
 ## Python
 
