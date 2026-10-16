@@ -54,6 +54,7 @@
 | [ofd-parser](https://github.com/jyh2012/ofd-parser)                              |     无     |  ✅  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [OfficeMaster](https://github.com/Chingliu/OfficeMaster_document_convert_system) |    MIT     |  ❌  |  ✅  |  ❌  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ✅  |  ❌  |  ❌  |   ❌   |
 | [swingmonkey-ofd2pdf](https://github.com/swingmonkey/ofd2pdf)                   |    MIT     |  ❌  |  ✅  |  ⚠️  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
+| [win-doc-converter](https://github.com/yefd/win-doc-converter)                  |     无      |  ❌  |  ✅  |  ⚠️  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 
 ## Java
 
@@ -124,6 +125,7 @@
 | [jsOFD](https://github.com/Hufe921/jsOFD)                                     |    MIT     |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ✅  |  ❌  |  ❌  |   ❌   |
 | [ofd-lzy](https://github.com/Yusuf-dz/ofd-lzy)                               |  BUSL-1.1  |  ✅  |  ✅  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ✅  |  ❌  |   ✅   |
 | [local-doc-viewer](https://github.com/LocalDoc-Viewer/local-doc-viewer)      |  AGPL-3.0  |  ✅  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
+| [ofd.js-js-nuxt](https://github.com/astonmario/ofd.js-js-nuxt)               | Apache-2.0 |  ✅  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ✅   |    ❌     |  ❌  |  ⚠️  |  ❌  |   ❌   |
 
 ## Pascal
 
