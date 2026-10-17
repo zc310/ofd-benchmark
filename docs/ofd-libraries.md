@@ -14,8 +14,8 @@
 
 | 库                                                      |   许可证   | 预览 | 解析 | 发票 | → 图片 | → PDF | → TXT | → SVG | → Md | → HTML | PDF → OFD | 生成 | 签章 | 修改 | 编辑器 |
 |---------------------------------------------------------|:----------:|:----:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:------:|:---------:|:----:|:----:|:----:|:------:|
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)          | Apache-2.0 |  ✅  |  ✅  |  ❌  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |   ❌   |    ✅     |  ✅  |  ✅  |  ✅  |   ✅   |
 | [go-zc310](https://github.com/zc310/ofd)                | Apache-2.0 |  ✅  |  ✅  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ✅  |   ✅   |    ✅     |  ✅  |  ✅  |  ✅  |   ❌   |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)          | Apache-2.0 |  ✅  |  ✅  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |   ❌   |    ✅     |  ✅  |  ✅  |  ✅  |   ✅   |
 | [ofd-go](https://github.com/itlabers/ofd-go)            | Apache-2.0 |  ❌  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ✅  |  ❌  |   ❌   |
 | [go-ofd](https://github.com/ppxz2014/go-ofd)            | Apache-2.0 |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ✅  |  ❌  |   ❌   |
 | [leijacob-ofd](https://gitee.com/leijacob/ofd)          |     无     |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ✅  |  ✅  |  ✅  |   ❌   |
@@ -126,6 +126,7 @@
 | [ofd-lzy](https://github.com/Yusuf-dz/ofd-lzy)                               |  BUSL-1.1  |  ✅  |  ✅  |  ✅  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ✅  |  ❌  |   ✅   |
 | [local-doc-viewer](https://github.com/LocalDoc-Viewer/local-doc-viewer)      |  AGPL-3.0  |  ✅  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [ofd.js-js-nuxt](https://github.com/astonmario/ofd.js-js-nuxt)               | Apache-2.0 |  ✅  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ✅   |    ❌     |  ❌  |  ⚠️  |  ❌  |   ❌   |
+| [ofdview](https://github.com/moxudocs/ofdview)                               | Apache-2.0 |  ✅  |  ✅  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ✅  |  ❌  |   ❌   |
 
 ## Pascal
 
