@@ -95,7 +95,7 @@
 |-------------------------------------------------------------------------------------------|:----------:|:----:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:------:|:---------:|:----:|:----:|:----:|:------:|
 | [XiaoFeng.Ofd](https://github.com/zhuovi/XiaoFeng.Ofd)                                    |    MIT     |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ✅  |  ✅  |  ❌  |   ❌   |
 | [OfdViewer](https://github.com/LvYueMing/OfdViewer)                                       |    MIT     |  ✅  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ✅  |  ⚠️  |  ❌  |   ❌   |
-| [ofdrw.net](https://github.com/whynpc9/ofdrw.net)                                         |    MIT     |  ❌  |  ✅  |  ❌  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |   ❌   |    ✅     |  ✅  |  ⚠️  |  ✅  |   ❌   |
+| [ofdrw.net](https://github.com/whynpc9/ofdrw.net)                                         |    MIT     |  ❌  |  ✅  |  ❌  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |   ✅   |    ✅     |  ✅  |  ⚠️  |  ✅  |   ❌   |
 | [ofdrw-net](https://github.com/lllooollpp/ofdrw-net)                                      |     无     |  ❌  |  ✅  |  ❌  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ✅  |  ✅  |  ❌  |   ❌   |
 | [OFDConverter](https://github.com/wukonggo/OFDConverter)                                  | Apache-2.0 |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [ofdparser](https://github.com/wangyi160/ofdparser)                                       |     无     |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
@@ -127,6 +127,7 @@
 | [local-doc-viewer](https://github.com/LocalDoc-Viewer/local-doc-viewer)      |  AGPL-3.0  |  ✅  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [ofd.js-js-nuxt](https://github.com/astonmario/ofd.js-js-nuxt)               | Apache-2.0 |  ✅  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ✅   |    ❌     |  ❌  |  ⚠️  |  ❌  |   ❌   |
 | [ofdview](https://github.com/moxudocs/ofdview)                               | Apache-2.0 |  ✅  |  ✅  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ✅  |  ❌  |   ❌   |
+| [file-viewer](https://github.com/flyfish-dev/file-viewer)                    | Apache-2.0 |  ✅  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ✅   |    ❌     |  ❌  |  ⚠️  |  ❌  |   ❌   |
 
 ## Pascal
 
