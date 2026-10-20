@@ -101,7 +101,7 @@
 
 ### 与数科版式输出对比
 
-以数科版式阅读器导出的 `test/testdata/*.pdf` 为基准，对比转换效果。
+以数科版式阅读器导出的 `http://github.com/zc310/ofd-fixtures/tree/main/testdata/suwell` 为基准，对比转换效果。
 
 **像素相似度**（96 DPI，1 - 平均归一化色差，100% 为完全相同）：
 

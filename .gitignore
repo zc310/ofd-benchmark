@@ -34,3 +34,4 @@ target
 bin/
 *.lock
 *.sum
+testdata/

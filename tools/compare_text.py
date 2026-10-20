@@ -51,7 +51,7 @@ def main():
     print(f"{'file':<12} {'convert':<16} {'ref_chars':>10} {'pdf_chars':>10} {'ratio':>6} {'similarity':>10}")
     print("-" * 76)
     for name in files:
-        ref = os.path.join(base, 'test', 'testdata', f'{name}.pdf')
+        ref = os.path.join(base, 'testdata', 'suwell', f'{name}.pdf')
         rlen, _, _, _ = compare(ref, ref)
         for pdf in sorted(os.listdir(odir)):
             if not pdf.startswith(name + '_'):

@@ -81,7 +81,7 @@ def main():
     print(f"{'file':<12} {'convert':<16} {'ref_size':>10} {'pdf_size':>10} {'ratio':>6} {'similarity':>10} {'identical':>9}")
     print("-" * 88)
     for name in files:
-        ref = os.path.join(base, 'test', 'testdata', f'{name}.pdf')
+        ref = os.path.join(base, 'testdata', 'suwell', f'{name}.pdf')
         ref_size = os.path.getsize(ref)
         for pdf in sorted(os.listdir(odir)):
             if not pdf.startswith(name + '_'):

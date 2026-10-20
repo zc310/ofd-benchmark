@@ -146,11 +146,11 @@ GOWORK=off go build -o bin/pdf2ofd-benchmark ./cmd/pdf2ofd-benchmark
 GOWORK=off go build -o bin/ofdgo-pdf2ofd ./cmd/ofdgo-pdf2ofd
 
 # 运行全部转换器（单个文件）
-./bin/pdf2ofd-benchmark test/testdata/hello.pdf
+./bin/pdf2ofd-benchmark testdata/suwell/hello.pdf
 
 # 批量运行所有测试文件
-for f in hello ano 999 intro zsbk 1000-pages GBT_33190-2016; do
-  ./bin/pdf2ofd-benchmark "test/testdata/${f}.pdf"
+for f in testdata/suwell/*.pdf testdata/standards/*.pdf; do
+  ./bin/pdf2ofd-benchmark "$f"
 done
 
 # 还原度/文本对比（输出位于 bin/output_ofd/）

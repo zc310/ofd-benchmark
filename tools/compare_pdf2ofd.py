@@ -97,7 +97,11 @@ def main():
     print(f"{'file':<12} {'convert':<16} {'pdf_ref':>9} {'ofd_size':>10} {'size_rat':>7} {'pixel':>9} {'ref_ch':>9} {'ofd_ch':>9} {'txt_sim':>9}")
     print("-" * 96)
     for name in files:
-        ref_pdf = os.path.join(base, 'test', 'testdata', f'{name}.pdf')
+        ref_pdf = next(
+            (p for sub in ('suwell', 'standards')
+             if os.path.exists(p := os.path.join(base, 'testdata', sub, f'{name}.pdf'))),
+            os.path.join(base, 'testdata', 'suwell', f'{name}.pdf'),
+        )
         ref_size = os.path.getsize(ref_pdf)
         for ofd in sorted(os.listdir(odir)):
             if not ofd.endswith('.ofd'):

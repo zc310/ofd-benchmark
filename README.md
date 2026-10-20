@@ -9,19 +9,19 @@
 | OFD → PDF | [docs/ofd-to-pdf.md](docs/ofd-to-pdf.md) | 7 种转换器（Go×2 / Python×3 / Java / Node）的速度、文件大小、文本提取与数科版式还原度 |
 | PDF → OFD | [docs/pdf-to-ofd.md](docs/pdf-to-ofd.md) | 5 种转换器（zc310 / ofdgo / ofdrw / pdf2ofd / jsOFD）的速度、文件大小与回环还原度 |
 
-基准参考输出来自**数科版式阅读器**（`test/testdata/*.pdf`），保证同一组文档双向可测。
+基准参考输出来自**数科版式阅读器**（`testdata`），保证同一组文档双向可测。测试用的 PDF/OFD 可在 [zc310/ofd-fixtures](https://github.com/zc310/ofd-fixtures) 下载。
 
 ## 快速开始
 
 ```bash
 # OFD → PDF 基准（详见 docs/ofd-to-pdf.md）
 go build -o bin/ofd-benchmark .
-./bin/ofd-benchmark test/testdata/hello.ofd
+./bin/ofd-benchmark testdata/ofd-creator/hello.ofd
 
 # PDF → OFD 基准（详见 docs/pdf-to-ofd.md）
 cd /home/go/workspace/ofd && go build -o ../ofd-benchmark/bin/ofd-converter ./cmd/ofd-converter
 cd ../ofd-benchmark && go build -o bin/pdf2ofd-benchmark ./cmd/pdf2ofd-benchmark
-./bin/pdf2ofd-benchmark test/testdata/hello.pdf
+./bin/pdf2ofd-benchmark testdata/suwell/hello.pdf
 ```
 
 转换结果分别保存在 `bin/output/`（OFD→PDF）与 `bin/output_ofd/`（PDF→OFD）。
@@ -65,7 +65,7 @@ ofd-benchmark/
 │   ├── ofd-libraries.md    # OFD 库能力 / 许可证对比表
 │   ├── ofd-to-pdf.md       # OFD→PDF 基准测试详细结果
 │   └── pdf-to-ofd.md       # PDF→OFD 基准测试详细结果
-├── test/testdata/          # OFD/PDF 测试文件
+├── testdata/               # OFD/PDF 测试文件（ofd-creator/ ofdrw/ standards/ suwell/）
 ├── main.go                 # OFD→PDF 基准主程序（单文件输入）
 └── go.mod                  # 含 replace 到本地 zc310/ofd 与 zc310/canvas
 ```
