@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"os"
 
@@ -18,7 +19,14 @@ func main() {
 		outputFile = os.Args[2]
 	}
 
-	reader, err := ofdgo.Open(inputFile)
+	ctx := context.Background()
+	input, err := ofdgo.OpenFile(ctx, inputFile, ofdgo.InputOptions{})
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer input.Close()
+
+	reader, err := ofdgo.NewReader(input)
 	if err != nil {
 		log.Fatal(err)
 	}

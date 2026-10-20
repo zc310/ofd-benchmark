@@ -3,8 +3,8 @@ module ofd-benchmark
 go 1.26.4
 
 require (
-	github.com/xiaoqidun/ofdgo v0.0.0-20261017123659-c386acedab22
-	github.com/zc310/ofd v0.1.5-0.20261017111837-686edaefebd9
+	github.com/xiaoqidun/ofdgo v0.0.0-20261020104500-3227134bfc90
+	github.com/zc310/ofd v0.1.5-0.20261020082750-a7ace6211063
 )
 
 require (
@@ -28,20 +28,20 @@ require (
 	github.com/klauspost/compress v1.20.3 // indirect
 	github.com/kovidgoyal/go-parallel v1.1.1 // indirect
 	github.com/kovidgoyal/go-shm v1.0.0 // indirect
-	github.com/kovidgoyal/imaging v1.8.24-0.20261007033220-40391a359a37 // indirect
+	github.com/kovidgoyal/imaging v1.9.0 // indirect
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd // indirect
 	github.com/srwiley/rasterx v0.0.0-20220730225603-2ab79fcdd4ef // indirect
 	github.com/srwiley/scanx v0.0.0-20190309010443-e94503791388 // indirect
 	github.com/tdewolff/canvas v0.0.0-20260923214215-09804640d00c // indirect
 	github.com/tdewolff/font v0.0.0-20261010204837-88a7f6b56918 // indirect
-	github.com/tdewolff/minify/v2 v2.24.21 // indirect
-	github.com/tdewolff/parse/v2 v2.8.18 // indirect
+	github.com/tdewolff/minify/v2 v2.24.22 // indirect
+	github.com/tdewolff/parse/v2 v2.8.19 // indirect
 	github.com/woozymasta/png v1.2.0 // indirect
 	github.com/xiaoqidun/j2kgo v1.0.2 // indirect
 	github.com/xiaoqidun/jbig2 v1.1.8 // indirect
-	github.com/xiaoqidun/pdfgo v0.0.0-20261016003351-18348c283ac1 // indirect
+	github.com/xiaoqidun/pdfgo v0.0.0-20261018110224-069b0fe96ea8 // indirect
 	github.com/yuin/goldmark v1.8.6 // indirect
-	github.com/zc310/canvas v0.0.0-20261016023101-3d1af32f0be3 // indirect
+	github.com/zc310/canvas v0.0.0-20261019082420-928b491d9262 // indirect
 	github.com/zc310/font v0.0.0-20261015234500-7f44c41494e0 // indirect
 	golang.org/x/crypto v0.58.0 // indirect
 	golang.org/x/image v0.47.0 // indirect
