@@ -38,7 +38,7 @@
 | [linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)    |   LGPL-2.1  |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [easy_print](https://github.com/qzue/easy_print)           |    MIT     |  ✅  |  ✅  |  ✅  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [ofd-rs](https://github.com/YeaLooooo/ofd-rs)              | Apache-2.0 |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ✅  |  ❌  |  ❌  |   ❌   |
-| [SteleOFD](https://github.com/emfox/SteleOFD)              | Apache-2.0 |  ❌  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ✅  |  ✅  |   ❌   |
+| [SteleOFD](https://github.com/emfox/SteleOFD)              | Apache-2.0 |  ✅  |  ✅  |  ⚠️  |   ✅   |  ✅   |  ❌   |  ✅   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ✅  |  ✅  |   ❌   |
 
 ## Python
 
