@@ -30,6 +30,7 @@
 | [ofdmanager](https://github.com/feuvan/ofdmanager)          |    MIT     |  ✅  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [rs_ofd](https://github.com/geniusnut/rs_ofd)               |    MIT     |  ❌  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [ofd-utility](https://github.com/ofd-utility/ofd-utility)   |    MIT     |  ❌  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ✅  |  ❌  |   ❌   |
+| [ofdbox-rust](https://github.com/ofdbox/ofdbox)             | Apache-2.0 |  ❌  |  ✅  |  ❌  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ⚠️     |  ❌  |  ✅  |  ✅  |   ❌   |
 | [ofdsdk](https://github.com/KaiserY/ofdsdk)                 | Apache-2.0 |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
 | [rofd](https://github.com/office-rs/rofd)                   | Apache-2.0 |  ✅  |  ✅  |  ❌  |   ⚠️   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ✅  |   ❌   |
 | [ofd-viewer](https://github.com/shaoyi1998/ofd-viewer)      |    MIT     |  ✅  |  ✅  |  ❌  |   ❌   |  ✅   |  ✅   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |  ❌  |   ❌   |
