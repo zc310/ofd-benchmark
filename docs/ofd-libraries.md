@@ -140,6 +140,9 @@
 |        [ofd.js-js-nuxt](https://github.com/astonmario/ofd.js-js-nuxt)         | Apache-2.0 |  ✅  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ✅   |    ❌     |  ❌  |  ⚠️  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
 |                [ofdview](https://github.com/moxudocs/ofdview)                 | Apache-2.0 |  ✅  |  ✅  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ✅  |    ❌    |  ❌  |  ✅  |  ✅  |  ❌  |  ❌  |   ❌   |
 |           [file-viewer](https://github.com/flyfish-dev/file-viewer)           | Apache-2.0 |  ✅  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ✅   |    ❌     |  ❌  |  ⚠️  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
+|                   [ofdh5](https://github.com/iwlking/ofdh5)                   |    MIT     |  ✅  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
+|            [ofd.js (LaanChae)](https://github.com/LaanChae/ofd.js)            |     无     |  ✅  |  ✅  |  ❌  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ⚠️   |    ✅     |  ❌  |  ✅  |    ✅    |  ✅  |  ✅  |  ✅  |  ❌  |  ✅  |   ⚠️   |
+|                [OFDee](https://github.com/gityongzhong/OFDee)                 |    MIT     |  ✅  |  ✅  |  ❌  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
 
 ## Pascal
 
