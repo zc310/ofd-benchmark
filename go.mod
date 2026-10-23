@@ -5,6 +5,7 @@ go 1.26.4
 require (
 	github.com/xiaoqidun/ofdgo v0.0.0-20261020104500-3227134bfc90
 	github.com/zc310/ofd v0.1.5-0.20261020082750-a7ace6211063
+	go.yaml.in/yaml/v3 v3.0.5
 )
 
 require (

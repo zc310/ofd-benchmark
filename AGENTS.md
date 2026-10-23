@@ -129,9 +129,11 @@ ofd-benchmark/
 ├── tools/
 │   ├── compare_pdf.py         # 与数科参考 PDF 的像素级对比脚本
 │   ├── compare_text.py        # 与数科参考 PDF 的文本相似度对比脚本
-│   └── compare_pdf2ofd.py     # PDF→OFD 回环还原度/文本对比脚本
+│   ├── compare_pdf2ofd.py     # PDF→OFD 回环还原度/文本对比脚本
+│   └── gen-libraries/         # 库汇总表生成器（Go，读 yaml 生成 md）
 ├── docs/
-│   ├── ofd-libraries.md       # OFD 库汇总对比表
+│   ├── libraries.yaml         # OFD 库汇总数据源（列定义+图例+库条目）
+│   ├── ofd-libraries.md       # OFD 库汇总对比表（由 gen-libraries 生成，勿手改）
 │   ├── ofd-to-pdf.md          # OFD→PDF 基准测试结果
 │   └── pdf-to-ofd.md          # PDF→OFD 基准测试结果
 └── README.md                  # 项目索引
@@ -184,6 +186,19 @@ python3 tools/compare_text.py
 2. 在 `main.go` 的 `converters` map 中添加条目
 3. 在 `bin/` 下放置可执行脚本（或二进制）
 4. 运行测试验证
+
+## 库汇总表维护
+
+`docs/ofd-libraries.md` 为生成物，**勿直接编辑**。数据源是 `docs/libraries.yaml`（列定义+图例+库条目，值仅限 ✅/⚠️/❌）：
+
+```bash
+GOWORK=off go run ./tools/gen-libraries          # 改完 yaml 重新生成 md
+GOWORK=off go run ./tools/gen-libraries -check   # 校验 md 与数据源一致（CI 可用）
+```
+
+- 加库/改能力值：只改 `libraries.yaml` 对应条目后重新生成
+- 加新列：`columns` 里插入新条目（建议带 `legend` 图例文案），并为**每个**库补齐 `caps` 中同名键，否则校验报错
+- 新增列在表中的位置 = `columns` 里的顺序（name/license 为固定结构列）
 
 ## 注意事项
 
