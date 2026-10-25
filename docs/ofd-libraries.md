@@ -67,6 +67,7 @@
 |          [swingmonkey-ofd2pdf](https://github.com/swingmonkey/ofd2pdf)           |    MIT     |  ❌  |  ✅  |  ⚠️  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
 |          [win-doc-converter](https://github.com/yefd/win-doc-converter)          |     无     |  ❌  |  ✅  |  ⚠️  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
 |    [ce-conversion-engine](https://github.com/ThePandaQ/ce-conversion-engine)     |  AGPL-3.0  |  ❌  |  ✅  |  ⚠️  |   ✅   |  ⚠️   |  ✅   |  ❌   |  ❌  |   ❌   |    ✅     |  ✅  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
+|                  [ofdkit](https://github.com/Edgar-311/ofdkit)                   | Apache-2.0 |  ❌  |  ✅  |  ✅  |   ❌   |  ❌   |  ✅   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
 
 ## Java
 
