@@ -85,6 +85,7 @@
 |              [ofd-server](https://github.com/maczh/ofd-server)              |     无     |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ✅  |  ✅  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ✅  |   ❌   |
 |          [ofd-parser-tika](https://github.com/ryecrow/ofd-parser)           | Apache-2.0 |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ✅   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
 |         [fuyue-convert](https://github.com/wmforever/fuyue-convert)         | Apache-2.0 |  ❌  |  ✅  |  ⚠️  |   ✅   |  ✅   |  ✅   |  ❌   |  ❌  |   ❌   |    ⚠️     |  ❌  |  ⚠️  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
+|          [DocPaw-OFDH](https://github.com/bushizhuan/DocPaw-OFDH)           | Apache-2.0 |  ❌  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ⚠️     |  ✅  |  ✅  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ✅  |   ❌   |
 
 ## C++
 
@@ -146,6 +147,7 @@
 |                [OFDee](https://github.com/gityongzhong/OFDee)                 |    MIT     |  ✅  |  ✅  |  ❌  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
 |     [ofd-to-pdf (campfire)](https://github.com/campfire-code/ofd-to-pdf)      |    MIT     |  ❌  |  ✅  |  ⚠️  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
 |             [ofdrw-viewer](https://github.com/ofdrw/ofdrw-viewer)             |    MIT     |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ✅   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ✅  |    ✅    |  ✅  |  ✅  |  ❌  |  ❌  |  ❌  |   ❌   |
+|         [DocPaw-Reader](https://github.com/bushizhuan/DocPaw-Reader)          | Apache-2.0 |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ✅   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ⚠️  |    ❌    |  ✅  |  ✅  |  ❌  |  ❌  |  ❌  |   ❌   |
 
 ## Pascal
 
