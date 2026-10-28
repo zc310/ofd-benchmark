@@ -50,6 +50,7 @@
 |      [easy_print](https://github.com/qzue/easy_print)       |    MIT     |  ✅  |  ✅  |  ✅  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ✅  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
 |        [ofd-rs](https://github.com/YeaLooooo/ofd-rs)        | Apache-2.0 |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ✅  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
 |        [SteleOFD](https://github.com/emfox/SteleOFD)        | Apache-2.0 |  ✅  |  ✅  |  ⚠️  |   ✅   |  ✅   |  ❌   |  ✅   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ✅  |    ❌    |  ✅  |  ✅  |  ✅  |  ✅  |  ✅  |   ❌   |
+|    [ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)    | Apache-2.0 |  ❌  |  ✅  |  ⚠️  |   ❌   |  ✅   |  ✅   |  ✅   |  ❌  |   ❌   |    ⚠️     |  ✅  |  ✅  |    ✅    |  ❌  |  ✅  |  ✅  |  ✅  |  ✅  |   ❌   |
 
 ## Python
 
@@ -148,6 +149,7 @@
 |     [ofd-to-pdf (campfire)](https://github.com/campfire-code/ofd-to-pdf)      |    MIT     |  ❌  |  ✅  |  ⚠️  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
 |             [ofdrw-viewer](https://github.com/ofdrw/ofdrw-viewer)             |    MIT     |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ✅   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ✅  |    ✅    |  ✅  |  ✅  |  ❌  |  ❌  |  ❌  |   ❌   |
 |         [DocPaw-Reader](https://github.com/bushizhuan/DocPaw-Reader)          | Apache-2.0 |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ✅   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ⚠️  |    ❌    |  ✅  |  ✅  |  ❌  |  ❌  |  ❌  |   ❌   |
+|               [ofd-core](https://github.com/LaoJia803/ofd-core)               | Apache-2.0 |  ✅  |  ✅  |  ⚠️  |   ❌   |  ✅   |  ❌   |  ✅   |  ❌  |   ✅   |    ⚠️     |  ❌  |  ✅  |    ❌    |  ❌  |  ✅  |  ❌  |  ❌  |  ❌  |   ❌   |
 
 ## Pascal
 
