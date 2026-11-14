@@ -219,5 +219,5 @@ jobs:
           fi
           git commit -m "docs: update benchmark reports"
           git fetch origin "refs/heads/${GITHUB_REF_NAME}:refs/remotes/origin/${GITHUB_REF_NAME}"
-          git rebase "origin/${GITHUB_REF_NAME}"
+          git rebase --autostash "origin/${GITHUB_REF_NAME}"
           git push origin "HEAD:${GITHUB_REF_NAME}"
