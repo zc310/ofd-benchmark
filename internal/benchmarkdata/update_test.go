@@ -3,6 +3,7 @@ package benchmarkdata
 import (
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 	"testing"
 
@@ -11,6 +12,8 @@ import (
 
 func TestUpdateCell(t *testing.T) {
 	path := copyBenchmarkYAML(t)
+	want := readResultValues(t, path, "pdf-to-ofd", "pdf-speed", "go-zc310")
+	want[0] = "42ms"
 	updates := []CellUpdate{{
 		Report: "pdf-to-ofd", Table: "pdf-speed", Input: "hello.pdf",
 		Converter: "go-zc310", Value: "42ms",
@@ -18,17 +21,16 @@ func TestUpdateCell(t *testing.T) {
 	if err := Update(path, updates, false); err != nil {
 		t.Fatal(err)
 	}
-	raw, err := os.ReadFile(path)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if !strings.Contains(string(raw), "values: [42ms, 111ms, 281ms") {
-		t.Fatalf("updated value not found in YAML")
+	got := readResultValues(t, path, "pdf-to-ofd", "pdf-speed", "go-zc310")
+	if !slices.Equal(got, want) {
+		t.Fatalf("updated values = %v, want %v", got, want)
 	}
 }
 
 func TestUpdateColumnWithReferenceCountInHeader(t *testing.T) {
 	path := copyBenchmarkYAML(t)
+	want := readResultValues(t, path, "pdf-to-ofd", "pdf-text-extraction", "go-zc310")
+	want[0] = "31"
 	updates := []CellUpdate{{
 		Report: "pdf-to-ofd", Table: "pdf-text-extraction", Input: "hello.pdf",
 		Converter: "go-zc310", Value: "31",
@@ -36,13 +38,50 @@ func TestUpdateColumnWithReferenceCountInHeader(t *testing.T) {
 	if err := Update(path, updates, false); err != nil {
 		t.Fatal(err)
 	}
+	got := readResultValues(t, path, "pdf-to-ofd", "pdf-text-extraction", "go-zc310")
+	if !slices.Equal(got, want) {
+		t.Fatalf("updated values for header with reference count = %v, want %v", got, want)
+	}
+}
+
+func readResultValues(t *testing.T, path, reportID, tableID, label string) []string {
+	t.Helper()
 	raw, err := os.ReadFile(path)
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !strings.Contains(string(raw), `values: ["31", 10188, 9833`) {
-		t.Fatal("updated header with reference count was not found")
+	var doc struct {
+		Reports []struct {
+			ID     string `yaml:"id"`
+			Tables []struct {
+				ID   string `yaml:"id"`
+				Rows []struct {
+					Label  string   `yaml:"label"`
+					Values []string `yaml:"values"`
+				} `yaml:"rows"`
+			} `yaml:"tables"`
+		} `yaml:"reports"`
 	}
+	if err := yaml.Unmarshal(raw, &doc); err != nil {
+		t.Fatal(err)
+	}
+	for _, report := range doc.Reports {
+		if report.ID != reportID {
+			continue
+		}
+		for _, table := range report.Tables {
+			if table.ID != tableID {
+				continue
+			}
+			for _, row := range table.Rows {
+				if row.Label == label && len(row.Values) > 0 {
+					return row.Values
+				}
+			}
+		}
+	}
+	t.Fatalf("missing result row %s/%s/%s", reportID, tableID, label)
+	return nil
 }
 
 func TestResetKeepsReferenceBaseline(t *testing.T) {
