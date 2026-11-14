@@ -43,7 +43,8 @@ jobs:
           changed="$(GOWORK=off go run ./tools/benchmark-versions -yaml docs/benchmark-results.yaml -zc310 "$zc310" -ofdgo "$ofdgo" -ofdrw "$ofdrw" -check)"
           zc310_ref="$zc310"
           if [[ "$zc310" =~ -[0-9]{14}-([0-9a-f]{12})$ ]]; then
-            zc310_ref="${BASH_REMATCH[1]}"
+            short_sha="${BASH_REMATCH[1]}"
+            zc310_ref="$(curl -fsSL "https://api.github.com/repos/zc310/ofd/commits/$short_sha" | python3 -c 'import json, sys; print(json.load(sys.stdin)["sha"])')"
           fi
           echo "zc310=$zc310" >> "$GITHUB_OUTPUT"
           echo "zc310_ref=$zc310_ref" >> "$GITHUB_OUTPUT"
