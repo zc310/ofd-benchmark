@@ -13,6 +13,7 @@ import sys
 import os
 import re
 import fitz
+from benchmark_results import OFD_CONVERTER_ROWS, append, write_updates
 
 def extract(path):
     doc = fitz.open(path)
@@ -50,6 +51,7 @@ def main():
 
     print(f"{'file':<12} {'convert':<16} {'ref_chars':>10} {'pdf_chars':>10} {'ratio':>6} {'similarity':>10}")
     print("-" * 76)
+    updates = []
     for name in files:
         ref = os.path.join(base, 'testdata', 'suwell', f'{name}.pdf')
         rlen, _, _, _ = compare(ref, ref)
@@ -65,7 +67,13 @@ def main():
                 print(f"{name:<12} {conv:<16} ERROR: {e}")
                 continue
             print(f"{name:<12} {conv:<16} {rlen:>10} {slen:>10} {ratio:>6.2f} {sim:>9.2f}%")
+            row = OFD_CONVERTER_ROWS.get(conv)
+            if row and conv != 'python-ofdreader':
+                append(updates, 'ofd-to-pdf', 'ofd-text-similarity', f'{name}.ofd', row, f'{sim:.2f}%')
+                if name != '1000-pages':
+                    append(updates, 'ofd-to-pdf', 'ofd-text-extraction', f'{name}.ofd', row, str(slen))
         print()
+    write_updates(base, updates)
 
 if __name__ == '__main__':
     main()

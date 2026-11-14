@@ -1,0 +1,216 @@
+name: Update benchmark reports
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 4 * * 1"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: benchmark-report-update
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    outputs:
+      changed: ${{ steps.versions.outputs.changed }}
+      zc310: ${{ steps.versions.outputs.zc310 }}
+      zc310_ref: ${{ steps.versions.outputs.zc310_ref }}
+      ofdgo: ${{ steps.versions.outputs.ofdgo }}
+      ofdrw: ${{ steps.versions.outputs.ofdrw }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+          cache-dependency-path: go.mod
+
+      - name: Check latest library commits
+        id: versions
+        shell: bash
+        run: |
+          zc310="$(GOWORK=off go list -m -f '{{.Version}}' github.com/zc310/ofd@main)"
+          ofdgo="$(GOWORK=off go list -m -f '{{.Version}}' github.com/xiaoqidun/ofdgo@main)"
+          ofdrw="$(curl -fsSL https://repo.maven.apache.org/maven2/org/ofdrw/ofdrw-converter/maven-metadata.xml | python3 -c 'import sys, xml.etree.ElementTree as ET; root=ET.parse(sys.stdin).getroot(); print(root.findtext("versioning/release") or root.findtext("versioning/latest"))')"
+          changed="$(GOWORK=off go run ./tools/benchmark-versions -yaml docs/benchmark-results.yaml -zc310 "$zc310" -ofdgo "$ofdgo" -ofdrw "$ofdrw" -check)"
+          zc310_ref="$zc310"
+          if [[ "$zc310" =~ -[0-9]{14}-([0-9a-f]{12})$ ]]; then
+            zc310_ref="${BASH_REMATCH[1]}"
+          fi
+          echo "zc310=$zc310" >> "$GITHUB_OUTPUT"
+          echo "zc310_ref=$zc310_ref" >> "$GITHUB_OUTPUT"
+          echo "ofdgo=$ofdgo" >> "$GITHUB_OUTPUT"
+          echo "ofdrw=$ofdrw" >> "$GITHUB_OUTPUT"
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+          echo "zc310=$zc310 ofdgo=$ofdgo ofdrw=$ofdrw changed=$changed"
+
+  update:
+    needs: check
+    if: needs.check.outputs.changed == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checkout OFD fixtures
+        uses: actions/checkout@v4
+        with:
+          repository: zc310/ofd-fixtures
+          path: fixtures
+
+      - name: Checkout zc310/ofd converter
+        uses: actions/checkout@v4
+        with:
+          repository: zc310/ofd
+          path: zc-ofd
+          ref: ${{ needs.check.outputs.zc310_ref }}
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+          cache-dependency-path: go.mod
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install system fonts and Maven
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-wqy-zenhei fonts-noto-cjk maven
+
+      - name: Install benchmark dependencies
+        run: |
+          python -m pip install --break-system-packages --upgrade pip
+          python -m pip install --break-system-packages easyofd ofd2img ofd2pdf pdf2ofd pymupdf numpy pillow
+          npm --prefix node install
+          mkdir -p java/lib
+          mvn -B -f java/pom.xml -Dofdrw.version="${{ needs.check.outputs.ofdrw }}" dependency:copy-dependencies -DoutputDirectory="$GITHUB_WORKSPACE/java/lib"
+          javac -cp "$(find java/lib -name '*.jar' -printf '%p:')" java/Ofd2Pdf.java java/Pdf2Ofd.java
+
+      - name: Prepare fixtures
+        run: |
+          mkdir -p testdata
+          cp -a fixtures/testdata/. testdata/
+          mkdir -p bin
+
+      - name: Resolve latest Go converter libraries
+        env:
+          ZC310_VERSION: ${{ needs.check.outputs.zc310 }}
+          OFDGO_VERSION: ${{ needs.check.outputs.ofdgo }}
+        run: |
+          export GOWORK=off
+          go get "github.com/zc310/ofd@$ZC310_VERSION" "github.com/xiaoqidun/ofdgo@$OFDGO_VERSION"
+          go list -m github.com/zc310/ofd github.com/xiaoqidun/ofdgo
+
+      - name: Build benchmark tools and converters
+        run: |
+          export GOWORK=off
+          go test ./internal/benchmarkdata ./tools/benchmark-versions ./tools/gen-benchmarks ./tools/update-benchmark-results
+          go build -o bin/ofd-benchmark .
+          go build -o bin/ofdgo-convert ./cmd/ofdgo-convert
+          go build -o bin/zc310-convert ./cmd/zc310-convert
+          go build -o bin/ofdgo-pdf2ofd ./cmd/ofdgo-pdf2ofd
+          go build -o bin/pdf2ofd-benchmark ./cmd/pdf2ofd-benchmark
+          go build -o bin/gen-benchmarks ./tools/gen-benchmarks
+          go build -o bin/update-benchmark-results ./tools/update-benchmark-results
+          go build -o bin/benchmark-versions ./tools/benchmark-versions
+          (cd zc-ofd && GOWORK=off go build -o "$GITHUB_WORKSPACE/bin/ofd-converter" ./cmd/ofd-converter)
+
+      - name: Reset this run's measurements
+        run: bin/update-benchmark-results -yaml docs/benchmark-results.yaml -reset
+
+      - name: Run OFD to PDF benchmarks
+        run: |
+          for name in hello ano intro 1000-pages 999 zsbk; do
+            if [[ "$name" == "hello" || "$name" == "1000-pages" ]]; then
+              input="testdata/ofd-creator/$name.ofd"
+            else
+              input="testdata/ofdrw/$name.ofd"
+            fi
+            test -n "$input" || { echo "Missing OFD fixture: $name"; exit 1; }
+            test -f "$input" || { echo "Missing OFD fixture: $input"; exit 1; }
+            bin/ofd-benchmark "$input"
+          done
+
+      - name: Run PDF to OFD benchmarks
+        run: |
+          for name in hello ano 999 intro zsbk 1000-pages GBT_33190-2016; do
+            if [[ "$name" == "GBT_33190-2016" ]]; then
+              input="testdata/standards/$name.pdf"
+            else
+              input="testdata/suwell/$name.pdf"
+            fi
+            test -f "$input" || { echo "Missing PDF fixture: $input"; exit 1; }
+            bin/pdf2ofd-benchmark "$input"
+          done
+
+      - name: Create PDF to OFD round-trip artifacts
+        run: |
+          shopt -s nullglob
+          for ofd in bin/output_ofd/*.ofd; do
+            stem="${ofd%.ofd}"
+            if ! bin/ofd-converter --format pdf -o "$stem.pdf" "$ofd"; then
+              rm -f "$stem.pdf"
+              echo "Round-trip PDF failed: $ofd"
+            fi
+            if ! bin/ofd-converter --format txt -o "$stem.txt" "$ofd"; then
+              rm -f "$stem.txt"
+              echo "Text extraction failed: $ofd"
+            fi
+          done
+
+      - name: Measure OFD to PDF quality
+        env:
+          BENCHMARK_RESULTS_WRITER: ${{ github.workspace }}/bin/update-benchmark-results
+        run: |
+          python tools/compare_pdf.py 96 hello ano intro 1000-pages 999 zsbk
+          python tools/compare_text.py hello ano intro 1000-pages 999 zsbk
+
+      - name: Measure PDF to OFD round-trip quality
+        env:
+          BENCHMARK_RESULTS_WRITER: ${{ github.workspace }}/bin/update-benchmark-results
+        run: python tools/compare_pdf2ofd.py 96 hello ano 999 intro zsbk 1000-pages GBT_33190-2016
+
+      - name: Record benchmarked library versions
+        env:
+          ZC310_VERSION: ${{ needs.check.outputs.zc310 }}
+          OFDGO_VERSION: ${{ needs.check.outputs.ofdgo }}
+          OFDRW_VERSION: ${{ needs.check.outputs.ofdrw }}
+        shell: bash
+        run: |
+          os_name="$(. /etc/os-release; printf '%s (%s)' "$PRETTY_NAME" "$(uname -m)")"
+          cpu_model="$(lscpu | sed -n 's/^Model name:[[:space:]]*//p' | head -n 1)"
+          cores="$(nproc)"
+          memory="$(awk '/MemTotal/ {printf "%.1f GiB", $2/1024/1024}' /proc/meminfo)"
+          bin/benchmark-versions -yaml docs/benchmark-results.yaml -zc310 "$ZC310_VERSION" -ofdgo "$OFDGO_VERSION" -ofdrw "$OFDRW_VERSION" -os "$os_name" -cpu "$cpu_model" -cores "$cores" -memory "$memory" -write
+
+      - name: Generate Markdown reports
+        run: bin/gen-benchmarks
+
+      - name: Commit updated benchmark data and reports
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/benchmark-results.yaml docs/ofd-to-pdf.md docs/pdf-to-ofd.md
+          if git diff --cached --quiet; then
+            echo "Benchmark reports are unchanged."
+            exit 0
+          fi
+          git commit -m "docs: update benchmark reports"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

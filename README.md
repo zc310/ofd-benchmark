@@ -26,6 +26,19 @@ cd ../ofd-benchmark && go build -o bin/pdf2ofd-benchmark ./cmd/pdf2ofd-benchmark
 
 转换结果分别保存在 `bin/output/`（OFD→PDF）与 `bin/output_ofd/`（PDF→OFD）。
 
+## 基准结果数据维护
+
+`docs/benchmark-results.yaml` 是两份基准报告中量化结果表的数据源。修改 YAML 后运行以下命令重新生成表格；最优值加粗和胜出次数由生成器计算：
+
+```bash
+GOWORK=off go run ./tools/gen-benchmarks
+GOWORK=off go run ./tools/gen-benchmarks -check  # 校验文档是否最新
+```
+
+报告中的说明文字不由生成器管理；带 `benchmark-table` 标记的表格由 YAML 生成，勿直接编辑。
+
+基准驱动会将转换耗时、输出大小和大小比写回 YAML；三个对比脚本会补充像素相似度、文本提取和文本相似度。GitHub Actions 每周检查 `zc310/ofd`、`xiaoqidun/ofdgo` 的最新提交及 Maven Central 上 `org.ofdrw:ofdrw-converter` 的最新发布版，只有版本变化时才运行完整基准并提交更新；也可在 Actions 页面手动触发（手动运行不要求有更新）。本轮测试的库版本和 runner 的 OS、CPU 型号/逻辑核心数、内存均记入 YAML 并显示在报告中；Go 模块升级只在 workflow runner 临时生效，不会提交 `go.mod` 变更。完整运行会拉取 `zc310/ofd-fixtures` 样例，并在开始时使用 `-reset` 将待测单元重置为 `FAILED`，避免失败或缺失结果沿用旧数据。
+
 ## 项目结构
 
 ```
@@ -53,6 +66,7 @@ ofd-benchmark/
 │   ├── Pdf2Ofd.java        # Java ofdrw PDF→OFD 转换器（PDFConverter）
 │   ├── ofd2pdf_java.sh
 │   ├── pdf2ofd_java.sh
+│   ├── pom.xml             # ofdrw converter + zip4j 依赖
 │   └── lib/                # JAR 依赖
 ├── node/
 │   ├── ofd2pdf.mjs         # Node.js 转换器（@miconvert/ofd-to-pdf）
@@ -60,8 +74,13 @@ ofd-benchmark/
 ├── tools/
 │   ├── compare_pdf.py      # OFD→PDF 与数科参考 PDF 像素对比
 │   ├── compare_text.py     # OFD→PDF 文本相似度对比
-│   └── compare_pdf2ofd.py  # PDF→OFD 回环还原度/文本对比
+│   ├── compare_pdf2ofd.py  # PDF→OFD 回环还原度/文本对比
+│   ├── benchmark_results.py # 对比脚本写入结果 YAML 的桥接
+│   ├── gen-benchmarks/     # 基准 Markdown 表格生成器
+│   ├── benchmark-versions/ # 检查/记录 Go 库版本
+│   └── update-benchmark-results/ # YAML 原子更新命令
 ├── docs/
+│   ├── benchmark-results.yaml # OFD↔PDF 基准结果数据源
 │   ├── ofd-libraries.md    # OFD 库能力 / 许可证对比表
 │   ├── ofd-to-pdf.md       # OFD→PDF 基准测试详细结果
 │   └── pdf-to-ofd.md       # PDF→OFD 基准测试详细结果

@@ -17,6 +17,7 @@ import re
 
 import numpy as np
 import fitz
+from benchmark_results import PDF_CONVERTER_ROWS, append, write_updates
 
 
 def render(doc, page_idx, dpi):
@@ -96,6 +97,7 @@ def main():
 
     print(f"{'file':<12} {'convert':<16} {'pdf_ref':>9} {'ofd_size':>10} {'size_rat':>7} {'pixel':>9} {'ref_ch':>9} {'ofd_ch':>9} {'txt_sim':>9}")
     print("-" * 96)
+    updates = []
     for name in files:
         ref_pdf = next(
             (p for sub in ('suwell', 'standards')
@@ -118,7 +120,16 @@ def main():
             pixel = pixel_similarity(ref_pdf, rt_pdf, dpi) if os.path.exists(rt_pdf) else float('nan')
             rch, sch, sim = text_similarity(ref_pdf, txt) if os.path.exists(txt) else (0, 0, 0.0)
             print(f"{name:<12} {conv:<16} {ref_size:>9} {ofd_size:>10} {ratio:>6.2f} {pixel:>8.2f}% {rch:>9} {sch:>9} {sim:>8.2f}%")
+            row = PDF_CONVERTER_ROWS.get(conv)
+            if row:
+                append(updates, 'pdf-to-ofd', 'pdf-size-ratio', f'{name}.pdf', row, f'{ratio:.2f}')
+                if os.path.exists(rt_pdf):
+                    append(updates, 'pdf-to-ofd', 'pdf-pixel-similarity', f'{name}.pdf', row, f'{pixel:.2f}%')
+                if os.path.exists(txt):
+                    append(updates, 'pdf-to-ofd', 'pdf-text-extraction', f'{name}.pdf', row, str(sch))
+                    append(updates, 'pdf-to-ofd', 'pdf-text-similarity', f'{name}.pdf', row, f'{sim:.2f}%')
         print()
+    write_updates(base, updates)
 
 
 if __name__ == '__main__':

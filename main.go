@@ -7,6 +7,8 @@ import (
 	"os/exec"
 	"path/filepath"
 	"time"
+
+	"ofd-benchmark/internal/benchmarkdata"
 )
 
 type Converter struct {
@@ -152,5 +154,54 @@ func main() {
 				}
 			}
 		}
+	}
+
+	projectDir := filepath.Dir(binDir)
+	refPDF := filepath.Join(projectDir, "testdata", "suwell", inputName+".pdf")
+	var refSize int64
+	if info, err := os.Stat(refPDF); err == nil {
+		refSize = info.Size()
+	}
+	var updates []benchmarkdata.CellUpdate
+	for _, name := range selectedConverters {
+		c, exists := converters[name]
+		if !exists {
+			continue
+		}
+		r, exists := results[c.Name]
+		if !exists {
+			continue
+		}
+		rowName, hasRow := map[string]string{
+			"ofdgo": "go-ofdgo", "zc310": "go-zc310", "python": "easyofd",
+			"ofd2pdf": "ofd2pdf", "ofdreader-python": "python-ofdreader",
+			"java": "ofdrw", "node": "@miconvert/ofd-to-pdf",
+		}[name]
+		if !hasRow {
+			continue
+		}
+		elapsed, size, ratio := "FAILED", "FAILED", "FAILED"
+		if r.ok {
+			elapsed = benchmarkdata.FormatDuration(r.duration)
+			size = benchmarkdata.FormatPDFSize(r.size)
+			ratio = benchmarkdata.FormatRatio(r.size, refSize)
+		}
+		tables := map[string]string{"ofd-pdf-size": size}
+		if name != "ofdreader-python" {
+			tables["ofd-speed"] = elapsed
+			tables["ofd-size-ratio"] = ratio
+		}
+		for table, value := range tables {
+			updates = append(updates, benchmarkdata.CellUpdate{
+				Report: "ofd-to-pdf", Table: table, Input: inputBase,
+				Converter: rowName, Value: value,
+			})
+		}
+	}
+	if len(updates) > 0 {
+		if err := benchmarkdata.Update(filepath.Join(projectDir, "docs", "benchmark-results.yaml"), updates, false); err != nil {
+			log.Fatalf("update benchmark YAML: %v", err)
+		}
+		fmt.Println("Updated docs/benchmark-results.yaml")
 	}
 }

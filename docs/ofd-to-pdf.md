@@ -10,8 +10,8 @@
 
 | 库                                                    | 版本                                  | OFD→PDF |  更新时间  | 备注                                    |
 |-------------------------------------------------------|---------------------------------------|:-------:|:----------:|-----------------------------------------|
-| [zc310-ofd](https://github.com/zc310/ofd)             | v0.1.10-0.20261114075103（9a2f2be36ac9） |   ✅    | 2026-11-14 | 已测试                                  |
-| [xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | 2026-11-11（3edf35199ec7）            |   ✅    | 2026-11-14 | 已测试                                  |
+| [zc310-ofd](https://github.com/zc310/ofd)             | v0.1.10-0.20261114075103-9a2f2be36ac9 |   ✅    | 2026-11-14 | 已测试                                  |
+| [xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | v0.0.0-20261111160922-3edf35199ec7 |   ✅    | 2026-11-14 | 已测试                                  |
 
 
 ### Python 库
@@ -36,7 +36,12 @@
 
 ## 测试环境
 
-- 系统：Ubuntu 26.04.1 LTS (64-bit)
+<!-- benchmark-environment:start -->
+
+- 系统：Ubuntu 26.04 LTS (x86_64)
+- CPU：AMD Ryzen 9 5950X 16-Core Processor（32 逻辑核心）
+- 内存：125.7 GiB
+<!-- benchmark-environment:end -->
 - 字体目录：`~/.local/share/fonts`（已安装各种中文字体）
 - 系统已安装 `apt-get install fonts-wqy-zenhei fonts-noto-cjk`
 
@@ -59,14 +64,17 @@
 
 ### 转换速度
 
-| 转换器                                                                       | hello.ofd |  ano.ofd | intro.ofd | 1000-pages.ofd |   999.ofd | zsbk.ofd | 胜出次数 |
-|------------------------------------------------------------------------------|----------:|---------:|----------:|---------------:|----------:|---------:|---------:|
-| [go-zc310](https://github.com/zc310/ofd)                                     | **113ms** | **185ms** | **1.00s** |      **790ms** | **250ms** | **641ms** |        6 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                               |     205ms |    1.18s |     2.64s |      32.42s |     577ms |    1.63s |        0 |
-| [easyofd](https://pypi.org/project/easyofd/)                                 |    FAILED |    1.09s |     8.43s |         FAILED |     1.01s |    5.18s |        0 |
-| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                                |     153ms |   FAILED |    FAILED |         43.82s |     409ms | **201ms** |        1 |
-| [ofdrw](https://github.com/ofdrw/ofdrw)                                      |     355ms |    756ms |     1.92s |          2.28s |    1.27s |    1.21s |        1 |
-| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |     299ms |     507ms |     1.44s |         10.56s |     489ms |    879ms |        0 |
+<!-- benchmark-table:ofd-speed:start -->
+
+| 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| [go-zc310](https://github.com/zc310/ofd) | **113ms** | **185ms** | **1.00s** | **790ms** | **250ms** | 641ms | 5 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 205ms | 1.18s | 2.64s | 32.42s | 577ms | 1.63s | 0 |
+| [easyofd](https://pypi.org/project/easyofd/) | FAILED | 1.09s | 8.43s | FAILED | 1.01s | 5.18s | 0 |
+| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf) | 153ms | FAILED | FAILED | 43.82s | 409ms | **201ms** | 1 |
+| [ofdrw](https://github.com/ofdrw/ofdrw) | 355ms | 756ms | 1.92s | 2.28s | 1.27s | 1.21s | 0 |
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 299ms | 507ms | 1.44s | 10.56s | 489ms | 879ms | 0 |
+<!-- benchmark-table:ofd-speed:end -->
 
 > - `python-easyofd`: `pip install easyofd ofd2img`，自动切换库，部分文件失败
 > - `python-ofd2pdf`: `pip install ofd2pdf`，基于图片渲染，部分文件失败
@@ -75,26 +83,32 @@
 
 ### PDF 文件大小
 
-| 转换器                                                                       | hello.ofd |    ano.ofd | intro.ofd | 1000-pages.ofd |    999.ofd |   zsbk.ofd | 胜出次数 |
-|------------------------------------------------------------------------------|----------:|-----------:|----------:|---------------:|-----------:|-----------:|---------:|
-| [go-zc310](https://github.com/zc310/ofd)                                     |     9.9KB |     85.5KB |     7.5MB |      **687.1KB** |    77.5KB |    1.4MB |        5 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                               |    15.5KB |    859.4KB |     9.6MB |         59.6MB |    132.2KB |    2.2MB |        0 |
-| [easyofd](https://pypi.org/project/easyofd/)                                 |    FAILED | **36.1KB** |    38.2MB |         FAILED |     73.1KB |     13.6MB |        1 |
-| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                                |    45.5KB |     FAILED |    FAILED |        114.9MB |      752KB | **129KB** |        1 |
-| [python-ofdreader](https://pypi.org/project/ofdreader/)                      |    FAILED |     FAILED |    FAILED |         FAILED |     FAILED |     FAILED |        0 |
-| [ofdrw](https://github.com/ofdrw/ofdrw)                                      |     0.8KB |     1.6MB |     8.6MB |          2.0MB |   380.8KB |    3.5MB |        1 |
-| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |    54.0KB |     199.5KB |     1.1MB |          7.8MB |    140.1KB |     559.3KB |        1 |
+<!-- benchmark-table:ofd-pdf-size:start -->
+
+| 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| [go-zc310](https://github.com/zc310/ofd) | 9.9KB | 85.5KB | 7.5MB | **687.1KB** | 77.5KB | 1.4MB | 1 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 15.5KB | 859.4KB | 9.6MB | 59.6MB | 132.2KB | 2.2MB | 0 |
+| [easyofd](https://pypi.org/project/easyofd/) | FAILED | **36.1KB** | 38.2MB | FAILED | **73.1KB** | 13.6MB | 2 |
+| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf) | 45.5KB | FAILED | FAILED | 114.9MB | 752KB | **129KB** | 1 |
+| [python-ofdreader](https://pypi.org/project/ofdreader/) | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
+| [ofdrw](https://github.com/ofdrw/ofdrw) | **0.8KB** | 1.6MB | 8.6MB | 2.0MB | 380.8KB | 3.5MB | 1 |
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 54.0KB | 199.5KB | **1.1MB** | 7.8MB | 140.1KB | 559.3KB | 1 |
+<!-- benchmark-table:ofd-pdf-size:end -->
 
 ### 文本提取能力
 
-| 转换器                                                                       | hello.ofd |  ano.ofd | intro.ofd |  999.ofd | zsbk.ofd | 胜出次数 |
-|------------------------------------------------------------------------------|----------:|---------:|----------:|---------:|---------:|---------:|
-| [go-zc310](https://github.com/zc310/ofd)                                     |        22 | **7232** |      5544 |  **3975** |     1162 |        2 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                               |         8 |      567 |       506 |     3967 |      527 |        0 |
-| [easyofd](https://pypi.org/project/easyofd/)                                 |    FAILED |     1208 | **10194** |     3933 |     1508 |        1 |
-| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                                |         0 |   FAILED |    FAILED |        0 |        0 |        0 |
-| [ofdrw](https://github.com/ofdrw/ofdrw)                                      |         0 |     6725 |      2573 |      162 |      729 |        0 |
-| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |    **26** |     6488 |      9614 |     3333 | **1938** |        2 |
+<!-- benchmark-table:ofd-text-extraction:start -->
+
+| 转换器 | hello.ofd | ano.ofd | intro.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
+|---|---:|---:|---:|---:|---:|---:|
+| [go-zc310](https://github.com/zc310/ofd) | 22 | **7232** | 5544 | **3975** | 1162 | 2 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 8 | 567 | 506 | 3967 | 527 | 0 |
+| [easyofd](https://pypi.org/project/easyofd/) | FAILED | 1208 | **10194** | 3933 | 1508 | 1 |
+| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf) | 0 | FAILED | FAILED | 0 | 0 | 0 |
+| [ofdrw](https://github.com/ofdrw/ofdrw) | 0 | 6725 | 2573 | 162 | 729 | 0 |
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | **26** | 6488 | 9614 | 3333 | **1938** | 2 |
+<!-- benchmark-table:ofd-text-extraction:end -->
 
 > - `python-ofd2pdf` 基于图片渲染，无法提取文本
 > - 单位为字符数（chars）
@@ -106,26 +120,32 @@
 
 **像素相似度**（96 DPI，1 - 平均归一化色差，100% 为完全相同）：
 
-| 转换器                                                                       |  hello.ofd |    ano.ofd |  intro.ofd | 1000-pages.ofd |    999.ofd |   zsbk.ofd | 胜出次数 |
-|------------------------------------------------------------------------------|-----------:|-----------:|-----------:|---------------:|-----------:|-----------:|---------:|
-| [go-zc310](https://github.com/zc310/ofd)                                     |     99.64% | **99.73%** | **99.86%** |       99.47% |     98.81% |    **99.60%** |        3 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                               |  **99.64%** |     99.44% |     99.75% |          99.46% | **98.83%** |     98.99% |        2 |
-| [easyofd](https://pypi.org/project/easyofd/)                                 |    FAILED |     93.82% |     37.74% |         FAILED |     92.41% |     94.41% |        0 |
-| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                                |     99.61% |     FAILED |     FAILED |         97.94% |     97.74% |     94.33% |        0 |
-| [ofdrw](https://github.com/ofdrw/ofdrw)                                      |     99.37% |     99.68% |     99.31% |       **99.76%** |     98.04% |     99.28% |        1 |
-| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |     98.92% |     97.62% |     96.30% |         97.64% |     96.35% |     94.52% |        0 |
+<!-- benchmark-table:ofd-pixel-similarity:start -->
+
+| 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| [go-zc310](https://github.com/zc310/ofd) | **99.64%** | **99.73%** | **99.86%** | 99.47% | 98.81% | **99.60%** | 3 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | **99.64%** | 99.44% | 99.75% | 99.46% | **98.83%** | 98.99% | 2 |
+| [easyofd](https://pypi.org/project/easyofd/) | FAILED | 93.82% | 37.74% | FAILED | 92.41% | 94.41% | 0 |
+| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf) | 99.61% | FAILED | FAILED | 97.94% | 97.74% | 94.33% | 0 |
+| [ofdrw](https://github.com/ofdrw/ofdrw) | 99.37% | 99.68% | 99.31% | **99.76%** | 98.04% | 99.28% | 1 |
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 98.92% | 97.62% | 96.30% | 97.64% | 96.35% | 94.52% | 0 |
+<!-- benchmark-table:ofd-pixel-similarity:end -->
 
 **文件大小对比**（转换后 PDF 大小 / 数科参考 PDF 大小）：
 
-| 转换器                                                                       | hello.ofd |  ano.ofd | intro.ofd | 1000-pages.ofd |  999.ofd | zsbk.ofd |
-|------------------------------------------------------------------------------|----------:|---------:|----------:|---------------:|---------:|---------:|
-| 数科版式阅读器                                                               |      1.00 |     1.00 |      1.00 |           1.00 |     1.00 |     1.00 |
-| [go-zc310](https://github.com/zc310/ofd)                                     |      2.82 |     0.09 |  **1.11** |          0.35 |     0.97 | **0.89** |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                               |      4.40 |     0.93 |      1.40 |         31.37 |     1.62 |     1.39 |
-| [easyofd](https://pypi.org/project/easyofd/)                                 |    FAILED |     0.04 |      5.70 |         FAILED |     0.92 |     8.62 |
-| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                                |     12.93 |   FAILED |    FAILED |          47.71 |     9.40 |     0.08 |
-| [ofdrw](https://github.com/ofdrw/ofdrw)                                      |  **0.23** |     1.85 |      1.29 |     **1.05** | **4.76** |     2.22 |
-| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |     15.33 |     0.22 |      0.16 |           3.23 |     1.75 |     0.35 |
+<!-- benchmark-table:ofd-size-ratio:start -->
+
+| 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd |
+|---|---:|---:|---:|---:|---:|---:|
+| 数科版式阅读器 | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 | 1.00 |
+| [go-zc310](https://github.com/zc310/ofd) | 2.82 | 0.09 | 1.11 | **0.35** | 0.97 | 0.89 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 4.40 | 0.93 | 1.40 | 31.37 | 1.62 | 1.39 |
+| [easyofd](https://pypi.org/project/easyofd/) | FAILED | **0.04** | 5.70 | FAILED | **0.92** | 8.62 |
+| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf) | 12.93 | FAILED | FAILED | 47.71 | 9.40 | **0.08** |
+| [ofdrw](https://github.com/ofdrw/ofdrw) | **0.23** | 1.85 | 1.29 | 1.05 | 4.76 | 2.22 |
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 15.33 | 0.22 | **0.16** | 3.23 | 1.75 | 0.35 |
+<!-- benchmark-table:ofd-size-ratio:end -->
 
 > - 像素相似度越高表示输出越贴近数科版式阅读器；仿色/抗锯齿等平滑差异会小幅降低相似度
 > - intro 的像素对比跳过 14～19 页（数科导出的参考 PDF 这几页背景图丢失，不计入对比）
@@ -136,14 +156,17 @@
 
 参考文本长度（fitz 1.26.7 口径）：`hello=22` · `ano=7091` · `intro=5543` · `1000-pages=263999` · `999=3934` · `zsbk=1150`
 
-| 转换器                                                                       |  hello.ofd |    ano.ofd |  intro.ofd | 1000-pages.ofd |    999.ofd |   zsbk.ofd | 胜出次数 |
-|------------------------------------------------------------------------------|-----------:|-----------:|-----------:|---------------:|-----------:|-----------:|---------:|
-| [go-zc310](https://github.com/zc310/ofd)                                     | **100.00%** |     99.06% | **99.71%** |     **100.00%** |     93.07% | **98.85%** |        4 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                               |     26.32% |      5.28% |      8.57% |           3.99% | **95.01%** |     26.58% |        1 |
-| [easyofd](https://pypi.org/project/easyofd/)                                 |    FAILED |     12.62% |      0.08% |         FAILED |     80.54% |     11.20% |        0 |
-| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf)                                |      0.00% |     FAILED |    FAILED |          0.00% |      0.00% |      0.00% |        0 |
-| [ofdrw](https://github.com/ofdrw/ofdrw)                                      |      0.00% |     70.77% |     37.84% |        100.00% |     16.26% |     64.09% |        1 |
-| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |     41.38% | **96.54%** |      5.86% |         96.24% |     75.51% |      4.86% |        1 |
+<!-- benchmark-table:ofd-text-similarity:start -->
+
+| 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| [go-zc310](https://github.com/zc310/ofd) | **100.00%** | **99.06%** | **99.71%** | **100.00%** | 93.07% | **98.85%** | 4 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 26.32% | 5.28% | 8.57% | 3.99% | **95.01%** | 26.58% | 1 |
+| [easyofd](https://pypi.org/project/easyofd/) | FAILED | 12.62% | 0.08% | FAILED | 80.54% | 11.20% | 0 |
+| [ofd2pdf](https://github.com/jsyzdej/ofd2pdf) | 0.00% | FAILED | FAILED | 0.00% | 0.00% | 0.00% | 0 |
+| [ofdrw](https://github.com/ofdrw/ofdrw) | 0.00% | 70.77% | 37.84% | **100.00%** | 16.26% | 64.09% | 1 |
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 41.38% | 96.54% | 5.86% | 96.24% | 75.51% | 4.86% | 0 |
+<!-- benchmark-table:ofd-text-similarity:end -->
 
 > - 复现命令：`python3 tools/compare_text.py <file>`
 

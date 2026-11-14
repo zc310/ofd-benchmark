@@ -11,6 +11,7 @@ import os
 import io
 import numpy as np
 import fitz
+from benchmark_results import OFD_CONVERTER_ROWS, append, write_updates
 
 def render(doc, page_idx, dpi):
     page = doc[page_idx]
@@ -80,6 +81,7 @@ def main():
 
     print(f"{'file':<12} {'convert':<16} {'ref_size':>10} {'pdf_size':>10} {'ratio':>6} {'similarity':>10} {'identical':>9}")
     print("-" * 88)
+    updates = []
     for name in files:
         ref = os.path.join(base, 'testdata', 'suwell', f'{name}.pdf')
         ref_size = os.path.getsize(ref)
@@ -92,7 +94,12 @@ def main():
             sim, md, ident = compare(ref, src, dpi)
             ratio = src_size / ref_size if ref_size else 0
             print(f"{name:<12} {conv:<16} {ref_size:>10} {src_size:>10} {ratio:>6.2f} {sim:>9.2f}% {ident:>8.2f}%")
+            row = OFD_CONVERTER_ROWS.get(conv)
+            if row and conv != 'python-ofdreader':
+                append(updates, 'ofd-to-pdf', 'ofd-size-ratio', f'{name}.ofd', row, f'{ratio:.2f}')
+                append(updates, 'ofd-to-pdf', 'ofd-pixel-similarity', f'{name}.ofd', row, f'{sim:.2f}%')
         print()
+    write_updates(base, updates)
 
 if __name__ == '__main__':
     main()
