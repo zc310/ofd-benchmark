@@ -15,16 +15,11 @@
 从 Maven Central 下载：
 
 ```bash
-# ofdrw 核心模块
-curl -sL "https://repo1.maven.org/maven2/org/ofdrw/ofdrw-converter/2.4.0/ofdrw-converter-2.4.0.jar" -o lib/ofdrw-converter.jar
-curl -sL "https://repo1.maven.org/maven2/org/ofdrw/ofdrw-reader/2.4.0/ofdrw-reader-2.4.0.jar" -o lib/ofdrw-reader.jar
-curl -sL "https://repo1.maven.org/maven2/org/ofdrw/ofdrw-core/2.4.0/ofdrw-core-2.4.0.jar" -o lib/ofdrw-core.jar
-curl -sL "https://repo1.maven.org/maven2/org/ofdrw/ofdrw-gv/2.4.0/ofdrw-gv-2.4.0.jar" -o lib/ofdrw-gv.jar
-curl -sL "https://repo1.maven.org/maven2/org/ofdrw/ofdrw-layout/2.4.0/ofdrw-layout-2.4.0.jar" -o lib/ofdrw-layout.jar
-curl -sL "https://repo1.maven.org/maven2/org/ofdrw/ofdrw-graphics2d/2.4.0/ofdrw-graphics2d-2.4.0.jar" -o lib/ofdrw-graphics2d.jar
-curl -sL "https://repo1.maven.org/maven2/org/ofdrw/ofdrw-pkg/2.4.0/ofdrw-pkg-2.4.0.jar" -o lib/ofdrw-pkg.jar
-curl -sL "https://repo1.maven.org/maven2/org/ofdrw/ofdrw-font/2.4.0/ofdrw-font-2.4.0.jar" -o lib/ofdrw-font.jar
-curl -sL "https://repo1.maven.org/maven2/org/ofdrw/ofdrw-gm/2.4.0/ofdrw-gm-2.4.0.jar" -o lib/ofdrw-gm.jar
+# ofdrw 2.5.1 核心模块
+for module in converter reader core gv layout graphics2d pkg font gm; do
+  curl -fsSL "https://repo.maven.apache.org/maven2/org/ofdrw/ofdrw-${module}/2.5.1/ofdrw-${module}-2.5.1.jar" \
+    -o "lib/ofdrw-${module}.jar"
+done
 ```
 
 ### 第三方依赖
@@ -37,10 +32,11 @@ curl -sL "https://repo1.maven.org/maven2/com/itextpdf/kernel/7.2.6/kernel-7.2.6.
 curl -sL "https://repo1.maven.org/maven2/com/itextpdf/layout/7.2.6/layout-7.2.6.jar" -o lib/itext-layout.jar
 curl -sL "https://repo1.maven.org/maven2/com/itextpdf/font-asian/7.2.6/font-asian-7.2.6.jar" -o lib/itext-font-asian.jar
 
-# Apache PDFBox
-curl -sL "https://repo1.maven.org/maven2/org/apache/pdfbox/pdfbox/2.0.27/pdfbox-2.0.27.jar" -o lib/pdfbox.jar
-curl -sL "https://repo1.maven.org/maven2/org/apache/pdfbox/fontbox/2.0.27/fontbox-2.0.27.jar" -o lib/fontbox.jar
-curl -sL "https://repo1.maven.org/maven2/org/apache/pdfbox/jbig2-imageio/3.0.0/jbig2-imageio-3.0.0.jar" -o lib/jbig2.jar
+# Apache PDFBox 3.0.8 (ofdrw 2.5.1 dependency)
+for module in pdfbox fontbox pdfbox-io pdfbox-tools; do
+  curl -fsSL "https://repo.maven.apache.org/maven2/org/apache/pdfbox/${module}/3.0.8/${module}-3.0.8.jar" \
+    -o "lib/${module}.jar"
+done
 
 # BouncyCastle 加密库
 curl -sL "https://repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk18on/1.84/bcprov-jdk18on-1.84.jar" -o lib/bcprov.jar
