@@ -42,7 +42,6 @@
 - CPU：AMD Ryzen 9 5950X 16-Core Processor（32 逻辑核心）
 - 内存：125.7 GiB
 <!-- benchmark-environment:end -->
-- 字体目录：`~/.local/share/fonts`（已安装各种中文字体）
 - 系统已安装 `apt-get install fonts-wqy-zenhei fonts-noto-cjk`
 
 ## 转换速度
