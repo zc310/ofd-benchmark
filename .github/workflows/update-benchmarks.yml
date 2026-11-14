@@ -34,6 +34,9 @@ jobs:
         id: versions
         shell: bash
         run: |
+          # go.sum is intentionally ignored in this repository; allow Go to create it in the runner.
+          export GOWORK=off
+          export GOFLAGS=-mod=mod
           zc310="$(GOWORK=off go list -m -f '{{.Version}}' github.com/zc310/ofd@main)"
           ofdgo="$(GOWORK=off go list -m -f '{{.Version}}' github.com/xiaoqidun/ofdgo@main)"
           ofdrw="$(curl -fsSL https://repo.maven.apache.org/maven2/org/ofdrw/ofdrw-converter/maven-metadata.xml | python3 -c 'import sys, xml.etree.ElementTree as ET; root=ET.parse(sys.stdin).getroot(); print(root.findtext("versioning/release") or root.findtext("versioning/latest"))')"
@@ -121,6 +124,7 @@ jobs:
       - name: Build benchmark tools and converters
         run: |
           export GOWORK=off
+          export GOFLAGS=-mod=mod
           go test ./internal/benchmarkdata ./tools/benchmark-versions ./tools/gen-benchmarks ./tools/update-benchmark-results
           go build -o bin/ofd-benchmark .
           go build -o bin/ofdgo-convert ./cmd/ofdgo-convert
