@@ -32,7 +32,6 @@ reports:
           - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [15.5KB, 859.4KB, 9.6MB, 59.6MB, 132.2KB, 2.2MB]}
           - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: [FAILED, 36.1KB, 38.2MB, FAILED, 73.1KB, 13.6MB]}
           - {label: '[ofd2pdf](https://github.com/jsyzdej/ofd2pdf)', values: [45.5KB, FAILED, FAILED, 114.9MB, 752KB, 129KB]}
-          - {label: '[python-ofdreader](https://pypi.org/project/ofdreader/)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
           - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: [0.8KB, 1.6MB, 8.6MB, 2.0MB, 380.8KB, 3.5MB]}
           - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: [54.0KB, 199.5KB, 1.1MB, 7.8MB, 140.1KB, 559.3KB]}
       - id: ofd-text-extraction

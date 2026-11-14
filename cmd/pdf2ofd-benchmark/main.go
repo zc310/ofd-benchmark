@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"time"
 
 	"ofd-benchmark/internal/benchmarkdata"
+	"ofd-benchmark/internal/converter"
 )
 
 type Converter struct {
@@ -17,38 +17,13 @@ type Converter struct {
 	OutputFile string
 }
 
-func runConverter(name string, args []string, outputFile string) (time.Duration, int64, bool) {
-	fmt.Printf("=== %s ===\n", name)
-	start := time.Now()
-
-	cmd := exec.Command(args[0], args[1:]...)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	cmd.Dir = os.TempDir()
-
-	err := cmd.Run()
-	duration := time.Since(start)
-
-	if err != nil {
-		fmt.Printf("FAILED: %v\n", err)
-		return duration, 0, false
-	}
-
-	var size int64
-	if info, err := os.Stat(outputFile); err == nil {
-		size = info.Size()
-	} else {
-		fmt.Printf("FAILED: output file not created\n")
-		return duration, 0, false
-	}
-
-	fmt.Printf("Time: %v\n", duration)
-	return duration, size, true
-}
-
 func main() {
 	if len(os.Args) < 2 {
 		log.Fatal("Usage: pdf2ofd-benchmark <file.pdf> [converter1] [converter2] ...")
+	}
+	timeout, err := converter.Timeout()
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	inputFile, err := filepath.Abs(os.Args[1])
@@ -114,7 +89,7 @@ func main() {
 
 	for _, name := range selectedConverters {
 		if c, ok := converters[name]; ok {
-			duration, size, ok := runConverter(c.Name, c.Command, c.OutputFile)
+			duration, size, ok := converter.Run(c.Name, c.Command, c.OutputFile, timeout)
 			results[c.Name] = result{duration, size, ok}
 
 			if ok {

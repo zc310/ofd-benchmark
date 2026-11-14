@@ -75,10 +75,12 @@
 | [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 299ms | 507ms | 1.44s | 10.56s | 489ms | 879ms | 0 |
 <!-- benchmark-table:ofd-speed:end -->
 
-> - `python-easyofd`: `pip install easyofd ofd2img`，自动切换库，部分文件失败
-> - `python-ofd2pdf`: `pip install ofd2pdf`，基于图片渲染，部分文件失败
-> - `java-ofdrw`: `org.ofdrw:ofdrw-converter:2.5.1`，全部成功
-> - `node-ofd2pdf`: `npm install @miconvert/ofd-to-pdf`，全部成功；2026-10-20 起经 CJS 入口加载（绕过 ESM 打包的 fontkit require bug），hello/ano/999/1000-pages 内嵌思源黑体（CJK 文本可见可提取），intro/zsbk 因 OFD 内嵌字体触发 fontkit CFF 缺陷自动回退 ESM 旧路径
+> - `python-easyofd`: `pip install easyofd ofd2img`，依次尝试 easyofd、ofd2img
+> - `python-ofd2pdf`: `pip install ofd2pdf`（Python ≥3.12），基于图片渲染
+> - `java-ofdrw`: `org.ofdrw:ofdrw-converter:2.5.1`
+> - `node-ofd2pdf`: `npm install @miconvert/ofd-to-pdf`，优先使用 CJS 入口，失败后回退 ESM 入口
+>
+> 各转换器的成功或失败情况以本轮结果表为准。
 
 ### PDF 文件大小
 
@@ -90,7 +92,6 @@
 | [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 15.5KB | 859.4KB | 9.6MB | 59.6MB | 132.2KB | 2.2MB | 0 |
 | [easyofd](https://pypi.org/project/easyofd/) | FAILED | **36.1KB** | 38.2MB | FAILED | **73.1KB** | 13.6MB | 2 |
 | [ofd2pdf](https://github.com/jsyzdej/ofd2pdf) | 45.5KB | FAILED | FAILED | 114.9MB | 752KB | **129KB** | 1 |
-| [python-ofdreader](https://pypi.org/project/ofdreader/) | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
 | [ofdrw](https://github.com/ofdrw/ofdrw) | **0.8KB** | 1.6MB | 8.6MB | 2.0MB | 380.8KB | 3.5MB | 1 |
 | [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 54.0KB | 199.5KB | **1.1MB** | 7.8MB | 140.1KB | 559.3KB | 1 |
 <!-- benchmark-table:ofd-pdf-size:end -->
@@ -178,7 +179,7 @@ go build -o bin/ofdgo-convert ./cmd/ofdgo-convert
 go build -o bin/zc310-convert ./cmd/zc310-convert
 
 # 安装 Python 依赖
-pip install easyofd ofd2img
+pip install easyofd ofd2img ofd2pdf
 
 # 编译 Java 转换器（需要先下载依赖，见 java/README.md）
 cd java && javac -cp "$(ls lib/*.jar | tr '\n' ':')" Ofd2Pdf.java && cd ..
@@ -193,6 +194,7 @@ cd node && npm install && cd ..
 ./bin/ofd-benchmark <file.ofd> ofdgo
 ./bin/ofd-benchmark <file.ofd> zc310
 ./bin/ofd-benchmark <file.ofd> python
+./bin/ofd-benchmark <file.ofd> ofd2pdf
 ./bin/ofd-benchmark <file.ofd> java
 ./bin/ofd-benchmark <file.ofd> node
 ```
@@ -204,7 +206,7 @@ cd node && npm install && cd ..
 - `go-ofdgo`
 - `go-zc310`
 - `python-easyofd`
-- `python-ofdreader`
+- `python-ofd2pdf`
 - `java-ofdrw`
 - `node-ofd2pdf`
 
@@ -219,7 +221,7 @@ ofd-benchmark/
 │   └── output/             # 转换后的 PDF 文件
 ├── python/
 │   ├── ofd2pdf.py          # Python 转换器（easyofd + ofd2img）
-│   └── ofd2pdf_ofdreader.py
+│   └── ofd2pdf_ofd2pdf.py
 ├── java/
 │   ├── Ofd2Pdf.java        # Java 转换器（ofdrw）
 │   ├── ofd2pdf_java.sh     # Java 启动脚本

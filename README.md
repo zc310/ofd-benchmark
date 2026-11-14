@@ -6,7 +6,7 @@
 
 | 方向      | 文档                                     | 对比内容                                                                                     |
 |-----------|------------------------------------------|----------------------------------------------------------------------------------------------|
-| OFD → PDF | [docs/ofd-to-pdf.md](docs/ofd-to-pdf.md) | 7 种转换器（Go×2 / Python×3 / Java / Node）的速度、文件大小、文本提取与数科版式还原度 |
+| OFD → PDF | [docs/ofd-to-pdf.md](docs/ofd-to-pdf.md) | 6 种转换器（Go×2 / Python×2 / Java / Node）的速度、文件大小、文本提取与数科版式还原度 |
 | PDF → OFD | [docs/pdf-to-ofd.md](docs/pdf-to-ofd.md) | 5 种转换器（zc310 / ofdgo / ofdrw / pdf2ofd / jsOFD）的速度、文件大小与回环还原度 |
 
 基准参考输出来自**数科版式阅读器**（`testdata`），保证同一组文档双向可测。测试用的 PDF/OFD 可在 [zc310/ofd-fixtures](https://github.com/zc310/ofd-fixtures) 下载。
@@ -25,6 +25,8 @@ cd ../ofd-benchmark && go build -o bin/pdf2ofd-benchmark ./cmd/pdf2ofd-benchmark
 ```
 
 转换结果分别保存在 `bin/output/`（OFD→PDF）与 `bin/output_ofd/`（PDF→OFD）。
+
+两个基准驱动的单次转换默认限时 15 分钟，可通过 `BENCHMARK_CONVERTER_TIMEOUT=30m` 调整。超时会终止转换器及其子进程，将结果记为 `FAILED`，并继续测试其他转换器。像素比较遇到损坏 PDF、页数不一致或无可比较页时，同样将该项记为 `FAILED`，不会中断其他输出的比较。
 
 ## 基准结果数据维护
 
@@ -59,7 +61,7 @@ ofd-benchmark/
 │   └── pdf2ofd-benchmark/  # PDF→OFD 基准驱动
 ├── python/
 │   ├── ofd2pdf.py          # Python 转换器（easyofd + ofd2img）
-│   ├── ofd2pdf_ofdreader.py
+│   ├── ofd2pdf_ofd2pdf.py
 │   └── pdf2ofd_convert.py  # Python pdf2ofd 转换器
 ├── java/
 │   ├── Ofd2Pdf.java        # Java ofdrw OFD→PDF 转换器

@@ -10,7 +10,6 @@ OFD_CONVERTER_ROWS = {
     "go-ofdgo": "go-ofdgo",
     "python-easyofd": "easyofd",
     "python-ofd2pdf": "ofd2pdf",
-    "python-ofdreader": "python-ofdreader",
     "java-ofdrw": "ofdrw",
     "node-ofd2pdf": "@miconvert/ofd-to-pdf",
 }

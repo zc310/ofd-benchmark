@@ -68,7 +68,7 @@ def main():
                 continue
             print(f"{name:<12} {conv:<16} {rlen:>10} {slen:>10} {ratio:>6.2f} {sim:>9.2f}%")
             row = OFD_CONVERTER_ROWS.get(conv)
-            if row and conv != 'python-ofdreader':
+            if row:
                 append(updates, 'ofd-to-pdf', 'ofd-text-similarity', f'{name}.ofd', row, f'{sim:.2f}%')
                 if name != '1000-pages':
                     append(updates, 'ofd-to-pdf', 'ofd-text-extraction', f'{name}.ofd', row, str(slen))

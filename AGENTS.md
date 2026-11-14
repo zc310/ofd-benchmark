@@ -202,7 +202,7 @@ GOWORK=off go run ./tools/gen-libraries -check   # 校验 md 与数据源一致�
 
 ## 注意事项
 
-- `python-ofdreader` 模块未安装，该转换器始终 FAILED
+- `python-ofdreader` 已移出基准配置与结果表，也不再作为 easyofd 的回退；旧独立脚本仅保留供参考
 - `python-easyofd` 对部分文件（hello、1000-pages）会 crash（list index out of range）
 - `python-ofd2pdf` 基于图片渲染，无法提取文本
 - PDF→OFD：`python-pdf2ofd` 需 `pip install pdf2ofd`（PEP 668 环境加 `--user --break-system-packages`）

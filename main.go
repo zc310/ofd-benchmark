@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"time"
 
 	"ofd-benchmark/internal/benchmarkdata"
+	"ofd-benchmark/internal/converter"
 )
 
 type Converter struct {
@@ -17,38 +17,13 @@ type Converter struct {
 	OutputFile string
 }
 
-func runConverter(name string, args []string, outputFile string) (time.Duration, int64, bool) {
-	fmt.Printf("=== %s ===\n", name)
-	start := time.Now()
-
-	cmd := exec.Command(args[0], args[1:]...)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
-	cmd.Dir = os.TempDir()
-
-	err := cmd.Run()
-	duration := time.Since(start)
-
-	if err != nil {
-		fmt.Printf("FAILED: %v\n", err)
-		return duration, 0, false
-	}
-
-	var size int64
-	if info, err := os.Stat(outputFile); err == nil {
-		size = info.Size()
-	} else {
-		fmt.Printf("FAILED: output file not created\n")
-		return duration, 0, false
-	}
-
-	fmt.Printf("Time: %v\n", duration)
-	return duration, size, true
-}
-
 func main() {
 	if len(os.Args) < 2 {
 		log.Fatal("Usage: ofd-benchmark <file.ofd> [converter1] [converter2] ...")
+	}
+	timeout, err := converter.Timeout()
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	inputFile, err := filepath.Abs(os.Args[1])
@@ -91,11 +66,6 @@ func main() {
 			Command:    []string{"python3", filepath.Join(binDir, "..", "python", "ofd2pdf_ofd2pdf.py"), inputFile, filepath.Join(binDir, "output_ofd2pdf.pdf")},
 			OutputFile: filepath.Join(binDir, "output_ofd2pdf.pdf"),
 		},
-		"ofdreader-python": {
-			Name:       "python-ofdreader",
-			Command:    []string{"python3", filepath.Join(binDir, "..", "python", "ofd2pdf_ofdreader.py"), inputFile, filepath.Join(binDir, "output_ofdreader-python.pdf")},
-			OutputFile: filepath.Join(binDir, "output_ofdreader-python.pdf"),
-		},
 		"java": {
 			Name:       "java-ofdrw",
 			Command:    []string{filepath.Join(binDir, "..", "java", "ofd2pdf_java.sh"), inputFile, filepath.Join(binDir, "output_java.pdf")},
@@ -110,7 +80,7 @@ func main() {
 
 	selectedConverters := os.Args[2:]
 	if len(selectedConverters) == 0 {
-		selectedConverters = []string{"ofdgo", "zc310", "python", "ofd2pdf", "ofdreader-python", "java", "node"}
+		selectedConverters = []string{"ofdgo", "zc310", "python", "ofd2pdf", "java", "node"}
 	}
 
 	fmt.Printf("Input file: %s\n\n", inputFile)
@@ -124,7 +94,7 @@ func main() {
 
 	for _, name := range selectedConverters {
 		if c, ok := converters[name]; ok {
-			duration, size, ok := runConverter(c.Name, c.Command, c.OutputFile)
+			duration, size, ok := converter.Run(c.Name, c.Command, c.OutputFile, timeout)
 			results[c.Name] = result{duration, size, ok}
 
 			if ok {
@@ -174,8 +144,8 @@ func main() {
 		}
 		rowName, hasRow := map[string]string{
 			"ofdgo": "go-ofdgo", "zc310": "go-zc310", "python": "easyofd",
-			"ofd2pdf": "ofd2pdf", "ofdreader-python": "python-ofdreader",
-			"java": "ofdrw", "node": "@miconvert/ofd-to-pdf",
+			"ofd2pdf": "ofd2pdf",
+			"java":    "ofdrw", "node": "@miconvert/ofd-to-pdf",
 		}[name]
 		if !hasRow {
 			continue
@@ -186,10 +156,10 @@ func main() {
 			size = benchmarkdata.FormatPDFSize(r.size)
 			ratio = benchmarkdata.FormatRatio(r.size, refSize)
 		}
-		tables := map[string]string{"ofd-pdf-size": size}
-		if name != "ofdreader-python" {
-			tables["ofd-speed"] = elapsed
-			tables["ofd-size-ratio"] = ratio
+		tables := map[string]string{
+			"ofd-pdf-size":   size,
+			"ofd-speed":      elapsed,
+			"ofd-size-ratio": ratio,
 		}
 		for table, value := range tables {
 			updates = append(updates, benchmarkdata.CellUpdate{

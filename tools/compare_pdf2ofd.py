@@ -15,45 +15,13 @@ import sys
 import os
 import re
 
-import numpy as np
 import fitz
+from compare_pdf import compare
 from benchmark_results import PDF_CONVERTER_ROWS, append, write_updates
 
 
-def render(doc, page_idx, dpi):
-    page = doc[page_idx]
-    zoom = dpi / 72.0
-    pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), alpha=False)
-    return np.frombuffer(pix.samples, dtype=np.uint8).reshape(pix.height, pix.width, pix.n)
-
-# intro.pdf（数科导出的参考 PDF）第 14–19 页背景图丢失，像素对比跳过这些页
-EXCLUDE_PAGES = {'intro': {14, 15, 16, 17, 18, 19}}
-
-
 def pixel_similarity(ref_path, src_path, dpi):
-    ref_doc = fitz.open(ref_path)
-    src_doc = fitz.open(src_path)
-    name = os.path.splitext(os.path.basename(ref_path))[0]
-    skip = EXCLUDE_PAGES.get(name, set())
-    n = min(ref_doc.page_count, src_doc.page_count)
-    total = 0.0
-    count = 0
-    for i in range(n):
-        if i + 1 in skip:
-            continue
-        r = render(ref_doc, i, dpi)
-        s = render(src_doc, i, dpi)
-        if r.shape != s.shape:
-            h = min(r.shape[0], s.shape[0])
-            w = min(r.shape[1], s.shape[1])
-            r = r[:h, :w]
-            s = s[:h, :w]
-        diff = np.abs(r.astype(np.int16) - s.astype(np.int16)).sum(axis=2) / (3 * 255.0)
-        total += diff.mean()
-        count += 1
-    ref_doc.close()
-    src_doc.close()
-    return (1 - total / max(count, 1)) * 100
+    return compare(ref_path, src_path, dpi)[0]
 
 
 def normalize(s):
@@ -65,9 +33,8 @@ def ngrams(s, n=4):
 
 
 def text_similarity(ref_path, ofd_txt_path):
-    ref = fitz.open(ref_path)
-    ref_text = ''.join(p.get_text() for p in ref)
-    ref.close()
+    with fitz.open(ref_path) as ref:
+        ref_text = ''.join(p.get_text() for p in ref)
     with open(ofd_txt_path, encoding='utf-8', errors='replace') as fh:
         src_text = fh.read()
     ref_n = normalize(ref_text)
@@ -117,17 +84,26 @@ def main():
             ratio = ofd_size / ref_size if ref_size else 0.0
             rt_pdf = os.path.join(odir, stem + '.pdf')
             txt = os.path.join(odir, stem + '.txt')
-            pixel = pixel_similarity(ref_pdf, rt_pdf, dpi) if os.path.exists(rt_pdf) else float('nan')
-            rch, sch, sim = text_similarity(ref_pdf, txt) if os.path.exists(txt) else (0, 0, 0.0)
-            print(f"{name:<12} {conv:<16} {ref_size:>9} {ofd_size:>10} {ratio:>6.2f} {pixel:>8.2f}% {rch:>9} {sch:>9} {sim:>8.2f}%")
+            pixel = 'FAILED'
+            rch, sch, sim = 'FAILED', 'FAILED', 'FAILED'
+            if os.path.exists(rt_pdf):
+                try:
+                    pixel = f'{pixel_similarity(ref_pdf, rt_pdf, dpi):.2f}%'
+                except Exception as e:
+                    print(f"{name:<12} {conv:<16} pixel FAILED: {e}")
+            if os.path.exists(txt):
+                try:
+                    rch, sch, text_sim = text_similarity(ref_pdf, txt)
+                    sim = f'{text_sim:.2f}%'
+                except Exception as e:
+                    print(f"{name:<12} {conv:<16} text FAILED: {e}")
+            print(f"{name:<12} {conv:<16} {ref_size:>9} {ofd_size:>10} {ratio:>6.2f} {pixel:>9} {rch:>9} {sch:>9} {sim:>9}")
             row = PDF_CONVERTER_ROWS.get(conv)
             if row:
                 append(updates, 'pdf-to-ofd', 'pdf-size-ratio', f'{name}.pdf', row, f'{ratio:.2f}')
-                if os.path.exists(rt_pdf):
-                    append(updates, 'pdf-to-ofd', 'pdf-pixel-similarity', f'{name}.pdf', row, f'{pixel:.2f}%')
-                if os.path.exists(txt):
-                    append(updates, 'pdf-to-ofd', 'pdf-text-extraction', f'{name}.pdf', row, str(sch))
-                    append(updates, 'pdf-to-ofd', 'pdf-text-similarity', f'{name}.pdf', row, f'{sim:.2f}%')
+                append(updates, 'pdf-to-ofd', 'pdf-pixel-similarity', f'{name}.pdf', row, pixel)
+                append(updates, 'pdf-to-ofd', 'pdf-text-extraction', f'{name}.pdf', row, str(sch))
+                append(updates, 'pdf-to-ofd', 'pdf-text-similarity', f'{name}.pdf', row, sim)
         print()
     write_updates(base, updates)
 

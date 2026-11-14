@@ -27,14 +27,9 @@ def try_ofd2img(ofd_path, pdf_path):
     with open(pdf_path, 'wb') as f:
         f.write(pdf_bytes)
 
-def try_ofdreader(ofd_path, pdf_path):
-    from ofdreader import ofd_to_pdf
-    ofd_to_pdf(ofd_path, pdf_path)
-
 LIBRARIES = [
     ("easyofd", try_easyofd),
     ("ofd2img", try_ofd2img),
-    ("ofdreader", try_ofdreader),
 ]
 
 def convert(ofd_path, pdf_path):
