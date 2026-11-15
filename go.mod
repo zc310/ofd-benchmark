@@ -3,6 +3,7 @@ module ofd-benchmark
 go 1.26.4
 
 require (
+	github.com/lihongjie0209/ofdrw-rs/bindings/go v0.5.0
 	github.com/xiaoqidun/ofdgo v0.0.0-20261111160922-3edf35199ec7
 	github.com/zc310/ofd v0.1.10-0.20261114075103-9a2f2be36ac9
 	go.yaml.in/yaml/v4 v4.0.0
@@ -20,6 +21,7 @@ require (
 	github.com/benoitkugler/textprocessing v0.0.6 // indirect
 	github.com/clipperhouse/uax29/v2 v2.7.0 // indirect
 	github.com/dkrisman/gobig2 v0.0.0-20260513123937-51e39052fde6 // indirect
+	github.com/ebitengine/purego v0.11.3 // indirect
 	github.com/emmansun/gmsm v0.45.3 // indirect
 	github.com/go-fonts/latin-modern v0.3.3 // indirect
 	github.com/go-text/typesetting v0.3.5 // indirect

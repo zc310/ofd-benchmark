@@ -116,6 +116,13 @@ jobs:
           cp -a fixtures/testdata/. testdata/
           mkdir -p bin
 
+      - name: Install ofdrw-rs native library
+        run: |
+          curl -fL -o /tmp/ofdrw-native.zip https://github.com/lihongjie0209/ofdrw-rs/releases/download/v0.5.0/ofdrw-native-linux-x64-v0.5.0.zip
+          unzip -q /tmp/ofdrw-native.zip -d /tmp/ofdrw-native
+          mkdir -p bin/ofdrw-rs
+          install -m 0644 /tmp/ofdrw-native/ofdrw-native-linux-x64-v0.5.0/libofdrw_ffi.so bin/ofdrw-rs/libofdrw_ffi.so
+
       - name: Resolve latest Go converter libraries
         env:
           ZC310_VERSION: ${{ needs.check.outputs.zc310 }}
@@ -133,6 +140,7 @@ jobs:
           python -m unittest discover -s tools -p 'test_*.py'
           go build -o bin/ofd-benchmark .
           go build -o bin/ofdgo-convert ./cmd/ofdgo-convert
+          go build -o bin/ofdrw-rs-convert ./cmd/ofdrw-rs-convert
           go build -o bin/zc310-convert ./cmd/zc310-convert
           go build -o bin/ofdgo-pdf2ofd ./cmd/ofdgo-pdf2ofd
           go build -o bin/pdf2ofd-benchmark ./cmd/pdf2ofd-benchmark

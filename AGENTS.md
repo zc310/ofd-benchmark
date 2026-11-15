@@ -12,6 +12,7 @@ cd /home/go/workspace/ofd-benchmark
 export GOWORK=off  # 上级存在 go.work 时需关闭 workspace，否则报 not one of the workspace modules
 go build -o bin/ofd-benchmark .
 go build -o bin/ofdgo-convert ./cmd/ofdgo-convert
+go build -o bin/ofdrw-rs-convert ./cmd/ofdrw-rs-convert
 go build -o bin/zc310-convert ./cmd/zc310-convert
 go build -o bin/ofdgo-pdf2ofd ./cmd/ofdgo-pdf2ofd
 go build -o bin/pdf2ofd-benchmark ./cmd/pdf2ofd-benchmark
@@ -19,6 +20,12 @@ go build -o bin/pdf2ofd-benchmark ./cmd/pdf2ofd-benchmark
 # 编译 zc310 通用转换器（PDF→OFD / OFD→PDF / OFD→TXT），来自本地 zc310/ofd 仓库
 cd /home/go/workspace/ofd
 go build -o ../ofd-benchmark/bin/ofd-converter ./cmd/ofd-converter
+
+# ofdrw-rs Go bindings 运行还需匹配版本的 Linux x64 原生库
+curl -fL -o /tmp/ofdrw-native.zip https://github.com/lihongjie0209/ofdrw-rs/releases/download/v0.5.0/ofdrw-native-linux-x64-v0.5.0.zip
+unzip -o /tmp/ofdrw-native.zip -d /tmp/ofdrw-native
+mkdir -p bin/ofdrw-rs
+cp /tmp/ofdrw-native/ofdrw-native-linux-x64-v0.5.0/libofdrw_ffi.so bin/ofdrw-rs/
 
 # Java Pdf2Ofd（ofdrw PDF→OFD）——需排除损坏的占位 jar 才能通过 javac
 cd /home/go/workspace/ofd-benchmark/java

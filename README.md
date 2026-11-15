@@ -28,6 +28,7 @@ bash tools/install-fonts.sh
 
 ```bash
 # OFD → PDF 基准（详见 docs/ofd-to-pdf.md）
+GOWORK=off go build -o bin/ofdrw-rs-convert ./cmd/ofdrw-rs-convert
 go build -o bin/ofd-benchmark .
 ./bin/ofd-benchmark testdata/ofd-creator/hello.ofd
 
@@ -38,6 +39,17 @@ cd ../ofd-benchmark && go build -o bin/pdf2ofd-benchmark ./cmd/pdf2ofd-benchmark
 ```
 
 转换结果分别保存在 `bin/output/`（OFD→PDF）与 `bin/output_ofd/`（PDF→OFD）。
+
+`ofdrw-rs` 使用 Go bindings v0.5.0 和同版本 Linux x64 原生库。首次运行前下载原生库：
+
+```bash
+curl -fL -o /tmp/ofdrw-native.zip https://github.com/lihongjie0209/ofdrw-rs/releases/download/v0.5.0/ofdrw-native-linux-x64-v0.5.0.zip
+unzip -o /tmp/ofdrw-native.zip -d /tmp/ofdrw-native
+mkdir -p bin/ofdrw-rs
+cp /tmp/ofdrw-native/ofdrw-native-linux-x64-v0.5.0/libofdrw_ffi.so bin/ofdrw-rs/
+```
+
+也可通过 `OFDRW_LIB_PATH` 指定原生库路径。基准会将该转换器标记为 `go-ofdrw-rs`。
 
 两个基准驱动的单次转换默认限时 15 分钟，可通过 `BENCHMARK_CONVERTER_TIMEOUT=30m` 调整。超时会终止转换器及其子进程，将结果记为 `FAILED`，并继续测试其他转换器。像素比较遇到损坏 PDF、页数不一致或无可比较页时，同样将该项记为 `FAILED`，不会中断其他输出的比较。
 
@@ -52,7 +64,7 @@ GOWORK=off go run ./tools/gen-benchmarks -check  # 校验文档是否最新
 
 报告中的说明文字不由生成器管理；带 `benchmark-table` 标记的表格由 YAML 生成，勿直接编辑。
 
-基准驱动会将转换耗时、输出大小和大小比写回 YAML；三个对比脚本会补充像素相似度、文本提取和文本相似度。GitHub Actions 每周检查 `zc310/ofd`、`xiaoqidun/ofdgo` 的最新提交及 Maven Central 上 `org.ofdrw:ofdrw-converter` 的最新发布版，只有版本变化时才运行完整基准并提交更新；也可在 Actions 页面手动触发（手动运行不要求有更新）。本轮测试的库版本和 runner 的 OS、CPU 型号/逻辑核心数、内存均记入 YAML 并显示在报告中；Go 模块升级只在 workflow runner 临时生效，不会提交 `go.mod` 变更。完整运行会拉取 `zc310/ofd-fixtures` 样例，并在开始时使用 `-reset` 将待测单元重置为 `FAILED`，避免失败或缺失结果沿用旧数据。
+基准驱动会将转换耗时、输出大小和大小比写回 YAML；三个对比脚本会补充像素相似度、文本提取和文本相似度。GitHub Actions 每周检查 `zc310/ofd`、`xiaoqidun/ofdgo` 的最新提交及 Maven Central 上 `org.ofdrw:ofdrw-converter` 的最新发布版，`ofdrw-rs` 当前固定使用 v0.5.0；只有受跟踪版本变化时才运行完整基准并提交更新，也可在 Actions 页面手动触发（手动运行不要求有更新）。Workflow 会下载匹配的 Linux x64 原生库。本轮测试的库版本和 runner 的 OS、CPU 型号/逻辑核心数、内存均记入 YAML 并显示在报告中；Go 模块升级只在 workflow runner 临时生效，不会提交 `go.mod` 变更。完整运行会拉取 `zc310/ofd-fixtures` 样例，并在开始时使用 `-reset` 将待测单元重置为 `FAILED`，避免失败或缺失结果沿用旧数据。
 
 ## 项目结构
 
@@ -61,6 +73,7 @@ ofd-benchmark/
 ├── bin/
 │   ├── ofd-benchmark       # OFD→PDF 基准测试主程序
 │   ├── ofdgo-convert       # Go xiaoqidun/ofdgo OFD→PDF 转换器
+│   ├── ofdrw-rs-convert    # ofdrw-rs Go binding OFD→PDF 转换器
 │   ├── ofdgo-pdf2ofd       # Go xiaoqidun/ofdgo PDF→OFD 转换器
 │   ├── zc310-convert       # Go zc310/ofd OFD→PDF 转换器
 │   ├── ofd-converter       # Go zc310/ofd 通用转换器（PDF→OFD、OFD→PDF/TXT）
@@ -69,6 +82,7 @@ ofd-benchmark/
 │   └── output_ofd/         # PDF→OFD 转换结果（含回环 PDF / 提取文本）
 ├── cmd/
 │   ├── ofdgo-convert/
+│   ├── ofdrw-rs-convert/
 │   ├── ofdgo-pdf2ofd/
 │   ├── zc310-convert/
 │   └── pdf2ofd-benchmark/  # PDF→OFD 基准驱动

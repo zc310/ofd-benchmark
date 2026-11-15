@@ -51,6 +51,11 @@ func main() {
 			Command:    []string{filepath.Join(binDir, "ofdgo-convert"), inputFile, filepath.Join(binDir, "output_ofdgo.pdf")},
 			OutputFile: filepath.Join(binDir, "output_ofdgo.pdf"),
 		},
+		"ofdrw-rs": {
+			Name:       "go-ofdrw-rs",
+			Command:    []string{filepath.Join(binDir, "ofdrw-rs-convert"), inputFile, filepath.Join(binDir, "output_ofdrw_rs.pdf")},
+			OutputFile: filepath.Join(binDir, "output_ofdrw_rs.pdf"),
+		},
 		"zc310": {
 			Name:       "go-zc310",
 			Command:    []string{filepath.Join(binDir, "zc310-convert"), inputFile, filepath.Join(binDir, "output_zc310.pdf")},
@@ -80,7 +85,7 @@ func main() {
 
 	selectedConverters := os.Args[2:]
 	if len(selectedConverters) == 0 {
-		selectedConverters = []string{"ofdgo", "zc310", "python", "ofd2pdf", "java", "node"}
+		selectedConverters = []string{"ofdgo", "ofdrw-rs", "zc310", "python", "ofd2pdf", "java", "node"}
 	}
 
 	fmt.Printf("Input file: %s\n\n", inputFile)
@@ -144,6 +149,7 @@ func main() {
 		}
 		rowName, hasRow := map[string]string{
 			"ofdgo": "go-ofdgo", "zc310": "go-zc310", "python": "easyofd",
+			"ofdrw-rs": "go-ofdrw-rs",
 			"ofd2pdf": "ofd2pdf",
 			"java":    "ofdrw", "node": "@miconvert/ofd-to-pdf",
 		}[name]

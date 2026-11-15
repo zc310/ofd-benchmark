@@ -87,7 +87,7 @@ func validate(source Source) error {
 	if len(source.Reports) == 0 {
 		return errors.New("reports 为空")
 	}
-	for _, key := range []string{"github.com/zc310/ofd", "github.com/xiaoqidun/ofdgo", "org.ofdrw:ofdrw-converter"} {
+	for _, key := range []string{"github.com/zc310/ofd", "github.com/xiaoqidun/ofdgo", "github.com/lihongjie0209/ofdrw-rs/bindings/go", "org.ofdrw:ofdrw-converter"} {
 		if source.BenchmarkVersions[key] == "" {
 			return fmt.Errorf("benchmark_versions 缺少 %s", key)
 		}
@@ -177,6 +177,7 @@ func updateDocument(doc string, report Report, versions, environment map[string]
 func updateLibraryVersions(doc *string, reportID string, versions map[string]string) error {
 	zc310 := versions["github.com/zc310/ofd"]
 	ofdgo := versions["github.com/xiaoqidun/ofdgo"]
+	ofdrwRS := versions["github.com/lihongjie0209/ofdrw-rs/bindings/go"]
 	ofdrw := versions["org.ofdrw:ofdrw-converter"]
 	if reportID == "ofd-to-pdf" {
 		for _, update := range []struct {
@@ -186,6 +187,7 @@ func updateLibraryVersions(doc *string, reportID string, versions map[string]str
 		}{
 			{"| [zc310-ofd]", "", 2, zc310},
 			{"| [xiaoqidun-ofdgo]", "", 2, ofdgo},
+			{"| [ofdrw-rs Go binding]", "✅", 2, ofdrwRS},
 			{"| [ofdrw](https://github.com/ofdrw/ofdrw)", "✅", 2, ofdrw},
 		} {
 			if err := replaceMarkdownRowCell(doc, update.prefix, update.marker, update.column, update.version); err != nil {
