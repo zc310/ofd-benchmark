@@ -13,6 +13,19 @@
 
 ## 快速开始
 
+测试前先准备字体环境（Linux，需 `curl`、`unzip`、`fontconfig`）：
+
+```bash
+sudo apt-get install -y fonts-wqy-zenhei fonts-noto-cjk fontconfig curl unzip
+bash tools/install-fonts.sh
+```
+
+脚本从 [zispace/hanzi-fonts v1.0](https://github.com/zispace/hanzi-fonts/releases/tag/v1.0) 下载以下字体包，解压到用户目录 `~/.local/share/fonts/hanzi-fonts/`，并执行 `fc-cache` 刷新字体缓存；字体安装本身无需 sudo。GitHub Actions 也会在运行测试前执行此脚本。
+
+- [doc-foundertype.zip](https://github.com/zispace/hanzi-fonts/releases/download/v1.0/doc-foundertype.zip)
+- [doc-zhongyi-etc.zip](https://github.com/zispace/hanzi-fonts/releases/download/v1.0/doc-zhongyi-etc.zip)
+- [latin-fonts.zip](https://github.com/zispace/hanzi-fonts/releases/download/v1.0/latin-fonts.zip)
+
 ```bash
 # OFD → PDF 基准（详见 docs/ofd-to-pdf.md）
 go build -o bin/ofd-benchmark .
@@ -74,6 +87,7 @@ ofd-benchmark/
 │   ├── ofd2pdf.mjs         # Node.js 转换器（@miconvert/ofd-to-pdf）
 │   └── ofd2pdf_node.sh
 ├── tools/
+│   ├── install-fonts.sh    # 测试前下载字体并安装到用户目录
 │   ├── compare_pdf.py      # OFD→PDF 与数科参考 PDF 像素对比
 │   ├── compare_text.py     # OFD→PDF 文本相似度对比
 │   ├── compare_pdf2ofd.py  # PDF→OFD 回环还原度/文本对比
