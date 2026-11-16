@@ -1,4 +1,4 @@
-module ofd-benchmark
+module github.com/zc310/ofd-benchmark
 
 go 1.26.4
 

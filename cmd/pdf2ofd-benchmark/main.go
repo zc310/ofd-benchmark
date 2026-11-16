@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"time"
 
-	"ofd-benchmark/internal/benchmarkdata"
-	"ofd-benchmark/internal/converter"
+	"github.com/zc310/ofd-benchmark/internal/benchmarkdata"
+	"github.com/zc310/ofd-benchmark/internal/converter"
 )
 
 type Converter struct {

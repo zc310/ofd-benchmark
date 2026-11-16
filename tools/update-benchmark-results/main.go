@@ -7,7 +7,7 @@ import (
 	"io"
 	"os"
 
-	"ofd-benchmark/internal/benchmarkdata"
+	"github.com/zc310/ofd-benchmark/internal/benchmarkdata"
 )
 
 func main() {
