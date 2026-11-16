@@ -10,7 +10,7 @@
 
 | 转换器         | 语言   | 库                                                                          | 版本                    | 说明                                                                                                         |
 |----------------|--------|-----------------------------------------------------------------------------|-------------------------|--------------------------------------------------------------------------------------------------------------|
-| go-zc310       | Go     | [zc310/ofd](https://github.com/zc310/ofd)                                   | v0.1.10-0.20261115025254-44bea96b8629 | 基于 pdfcpu 的 PDF→OFD 导入器（路径/文本/图片/注解/渐变/图案/网格/大纲/元数据），文本保留为可提取 TextObject |
+| go-zc310       | Go     | [zc310/ofd](https://github.com/zc310/ofd)                                   | v0.1.10-0.20261114154015-087ae6006559 | 基于 pdfcpu 的 PDF→OFD 导入器（路径/文本/图片/注解/渐变/图案/网格/大纲/元数据），文本保留为可提取 TextObject |
 | go-ofdgo       | Go     | [xiaoqidun/ofdgo](https://github.com/xiaoqidun/ofdgo)（ConvertPDF + pdfgo） | v0.0.0-20261111160922-3edf35199ec7 | 基于 pdfgo 的 PDF→OFD 导入器（路径/文本/图片/注解）                                                          |
 | java-ofdrw     | Java   | [ofdrw](https://github.com/ofdrw/ofdrw)（ofdrw-converter PDFConverter）     | 2.5.1 | 文本转为矢量轮廓，保留原始外观                                                                               |
 | python-pdf2ofd | Python | [pdf2ofd](https://github.com/wanglrebe/pdf2ofd)                             | 0.1.0                   | 基于 PyMuPDF 渲染，文本栅格化                                                                                |
@@ -39,7 +39,7 @@
 <!-- benchmark-environment:start -->
 
 - 系统：Ubuntu 24.04.5 LTS (x86_64)
-- CPU：INTEL(R) XEON(R) PLATINUM 8573C（4 逻辑核心）
+- CPU：AMD EPYC 9V74 80-Core Processor（4 逻辑核心）
 - 内存：15.6 GiB
 <!-- benchmark-environment:end -->
 - 系统已安装 `apt-get install fonts-wqy-zenhei fonts-noto-cjk`
@@ -51,11 +51,11 @@
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310 | **38ms** | **119ms** | **349ms** | **535ms** | 1.47s | **1.16s** | **2.00s** | 6 |
-| go-ofdgo | 72ms | 441ms | 592ms | 1.18s | 1.99s | 19.50s | 5.69s | 0 |
-| java-ofdrw | 1.17s | 1.89s | 2.34s | 10.18s | 5.74s | 6.13s | 106.69s | 0 |
-| python-pdf2ofd | 145ms | 1.12s | 721ms | 3.38s | **1.29s** | 72.97s | 25.46s | 1 |
-| node-jsofd | 296ms | 569ms | 3.35s | 10.77s | 5.61s | 3.26s | 9.27s | 0 |
+| go-zc310 | **30ms** | **93ms** | **300ms** | **440ms** | 1.23s | **1.01s** | **1.57s** | 6 |
+| go-ofdgo | 53ms | 356ms | 479ms | 978ms | 1.71s | 16.57s | 4.83s | 0 |
+| java-ofdrw | 1.06s | 1.86s | 1.95s | 8.23s | 4.97s | 4.69s | 71.25s | 0 |
+| python-pdf2ofd | 120ms | 965ms | 621ms | 2.85s | **1.12s** | 61.18s | 21.59s | 1 |
+| node-jsofd | 241ms | 452ms | 3.30s | 9.74s | 5.17s | 2.65s | 7.92s | 0 |
 <!-- benchmark-table:pdf-speed:end -->
 
 ## OFD 文件大小
