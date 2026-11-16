@@ -140,13 +140,13 @@
 | [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | **99.63%** | 99.39% | 99.74% | 99.45% | 98.53% | 98.98% | 1 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 99.62% | 99.42% | 99.58% | 98.19% | **98.83%** | 99.47% | 1 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | **99.63%** | 98.97% | 99.46% | 99.52% | 98.77% | 97.57% | 0 |
-| [rust-sofd](https://github.com/emfox/sOFD) | 99.37% | FAILED | 96.91% | 99.45% | 98.63% | 97.88% | 0 |
+| [rust-sofd](https://github.com/emfox/sOFD) | 99.37% | FAILED | FAILED | 99.45% | 98.63% | 97.88% | 0 |
 | [easyofd](https://pypi.org/project/easyofd/) | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
 | [ofdrw](https://github.com/ofdrw/ofdrw) | 99.30% | 99.53% | 99.27% | **99.75%** | 97.33% | 99.07% | 1 |
 | [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 99.01% | 97.55% | 96.29% | 97.56% | 95.80% | 94.40% | 0 |
 <!-- benchmark-table:ofd-pixel-similarity:end -->
 
-**内容区域像素相似度**（96 DPI）：只统计参考图或输出图中至少一方有内容的区域，并向外扩 1 像素；漏画和多画都会计入差异，避免大面积共同白底虚高。
+**内容区域像素相似度**（96 DPI）：RGB 任一通道低于 250 视为非白内容。参考内容处的颜色误差与参考内容外的额外输出误差相加，仅除以参考非白像素数；分数为 `max(0, 1 - 归一化误差) × 100%`。不扩边、不裁剪，不允许输出扩大掩码分母稀释误差。双方空白页不参与内容分数平均，全空白文档无内容分数（记 `FAILED`）。此指标有方向性，始终以数科输出为参考；与旧并集扩边分数不可混用。
 
 <!-- benchmark-table:ofd-content-similarity:start -->
 
@@ -154,13 +154,33 @@
 |---|---:|---:|---:|---:|---:|---:|---:|
 | [go-zc310](https://github.com/zc310/ofd) | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
 | [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 76.39% | **96.38%** | **99.24%** | 97.96% | **91.62%** | **99.37%** | 4 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | **76.84%** | 93.51% | 98.66% | **99.45%** | 91.26% | 97.11% | 2 |
-| [rust-sofd](https://github.com/emfox/sOFD) | 67.10% | FAILED | 94.35% | 99.38% | 90.69% | 97.49% | 0 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 65.67% | **91.09%** | **99.09%** | 97.93% | **83.64%** | **99.37%** | 4 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | **66.59%** | 83.34% | 97.86% | **99.45%** | 82.91% | 97.09% | 2 |
+| [rust-sofd](https://github.com/emfox/sOFD) | 43.61% | FAILED | FAILED | 99.37% | 81.39% | 97.47% | 0 |
 | [easyofd](https://pypi.org/project/easyofd/) | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
 | [ofdrw](https://github.com/ofdrw/ofdrw) | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
 | [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
 <!-- benchmark-table:ofd-content-similarity:end -->
+
+**前景覆盖 F1**：独立衡量形状覆盖，允许约 0.265 mm 的邻域距离（96 DPI 时为 1 像素），兼顾漏画召回率与多画精确率，不替代颜色误差。双方空白页不参与平均。
+
+<!-- benchmark-table:ofd-foreground-f1:start -->
+
+| 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| [go-zc310](https://github.com/zc310/ofd) | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 82.33% | **99.36%** | 99.50% | 99.62% | 98.42% | **100.00%** | 2 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | **82.62%** | 95.02% | **99.90%** | **100.00%** | 97.83% | 65.34% | 3 |
+| [rust-sofd](https://github.com/emfox/sOFD) | 66.61% | FAILED | FAILED | **100.00%** | **99.19%** | 99.98% | 1 |
+| [easyofd](https://pypi.org/project/easyofd/) | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
+| [ofdrw](https://github.com/ofdrw/ofdrw) | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
+<!-- benchmark-table:ofd-foreground-f1:end -->
+
+> 页面显示尺寸相差超过 0.5 pt 时判失败；像素尺寸仅允许 1 像素舍入差异，差异部分用白色补齐。MuPDF 渲染警告或错误判为 `FAILED`，不对不完整渲染给分。
+>
+> `1000-pages` 因内容重复，全页像素相似度、内容区域像素相似度及前景 F1 仅比较前 3 页，仍校验总页数一致。转换、输出大小及文本比较仍针对完整文档。
 
 **文件大小对比**（转换后 PDF 大小 / 数科参考 PDF 大小）：
 

@@ -4,7 +4,8 @@
 For each input PDF, each converter's OFD output is evaluated three ways:
   * OFD size ratio vs the original PDF size
   * round-trip fidelity: OFD -> PDF (via go-zc310), then pixel similarity
-    against the original PDF (same metric as compare_pdf.py)
+    against the original PDF (same metric as compare_pdf.py; 1000-pages samples
+    the first three pages while still validating the total page count)
   * text fidelity: characters extracted from the OFD (go-zc310 ofd-converter)
     vs the text extracted from the original PDF (4-gram Jaccard)
 
