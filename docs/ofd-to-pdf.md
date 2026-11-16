@@ -11,7 +11,7 @@
 | 库                                                    | 版本                                  | OFD→PDF |  更新时间  | 备注                                    |
 |-------------------------------------------------------|---------------------------------------|:-------:|:----------:|-----------------------------------------|
 | [zc310-ofd](https://github.com/zc310/ofd)             | v0.1.10-0.20261115081953-72f2d3bed048 |   ✅    | 2026-11-14 | 已测试                                  |
-| [xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | v0.0.0-20261111160922-3edf35199ec7 |   ✅    | 2026-11-14 | 已测试                                  |
+| [xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | v0.0.0-20261116024329-dde19a581445 |   ✅    | 2026-11-14 | 已测试                                  |
 | [ofdrw-rs Go binding](https://github.com/lihongjie0209/ofdrw-rs) | v0.5.0 | ✅ | 2026-11-15 | Go bindings + Linux 原生库，已测试 |
 
 ### Rust 库
@@ -76,15 +76,15 @@
 
 | 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | 61ms | 135ms | 825ms | **586ms** | 164ms | 566ms | 1 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 177ms | 1.02s | 2.30s | 27.51s | 565ms | 1.51s | 0 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | **19ms** | 708ms | 2.59s | 223.77s | 501ms | 563ms | 1 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 90ms | 117ms | **367ms** | 4.51s | 310ms | 246ms | 1 |
-| [rust-sofd](https://github.com/emfox/sOFD) | 36ms | 275ms | 2.18s | 18.67s | 269ms | 2.54s | 0 |
-| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust) | 42ms | **69ms** | 1.85s | 985ms | **163ms** | **74ms** | 3 |
-| [easyofd](https://pypi.org/project/easyofd/) | 1.06s | 865ms | 7.63s | 1.41s | 884ms | 4.86s | 0 |
-| [ofdrw](https://github.com/ofdrw/ofdrw) | 835ms | 1.01s | 2.95s | 2.82s | 2.03s | 1.66s | 0 |
-| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 194ms | 480ms | 1.18s | 7.31s | 383ms | 798ms | 0 |
+| [go-zc310](https://github.com/zc310/ofd) | 66ms | 141ms | 902ms | **556ms** | 145ms | 552ms | 1 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 961ms | 1.03s | 2.44s | 29.74s | 537ms | 1.44s | 0 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 100ms | 692ms | 2.69s | 224.67s | 499ms | 533ms | 0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 102ms | 119ms | **389ms** | 4.31s | 277ms | 247ms | 1 |
+| [rust-sofd](https://github.com/emfox/sOFD) | **39ms** | 283ms | 2.26s | 17.81s | 247ms | 2.43s | 1 |
+| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust) | 40ms | **60ms** | 1.80s | 617ms | **110ms** | **62ms** | 3 |
+| [easyofd](https://pypi.org/project/easyofd/) | 1.73s | 1.02s | 8.10s | 1.44s | 895ms | 4.71s | 0 |
+| [ofdrw](https://github.com/ofdrw/ofdrw) | 1.12s | 1.17s | 3.07s | 2.87s | 1.95s | 1.65s | 0 |
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 208ms | 596ms | 1.30s | 7.42s | 377ms | 809ms | 0 |
 <!-- benchmark-table:ofd-speed:end -->
 
 > - `python-easyofd`: `pip install easyofd`，仅使用 easyofd，不再回退到 ofd2img
