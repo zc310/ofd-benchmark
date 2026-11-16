@@ -232,19 +232,19 @@
 go build -o bin/ofd-benchmark .
 go build -o bin/ofdgo-convert ./cmd/ofdgo-convert
 go build -o bin/zc310-convert ./cmd/zc310-convert
-cargo build --release --manifest-path rust/ofdbox-folio-convert/Cargo.toml --target-dir rust/target
+cargo build --release --locked --manifest-path rust/ofdbox-folio-convert/Cargo.toml --target-dir rust/target
 cp rust/target/release/ofdbox-folio-convert bin/ofdbox-folio-convert
-cargo install --git https://github.com/emfox/sOFD --rev 65cff468ecc2af676180f540899fdf74da849c3a --locked --bin sofd --root /tmp/sofd-install
+cargo install sofd-cli --git https://github.com/emfox/sOFD --rev 65cff468ecc2af676180f540899fdf74da849c3a --locked --bin sofd --root /tmp/sofd-install
 cp /tmp/sofd-install/bin/sofd bin/sofd-cli
 
 # 安装 Python 依赖
-pip install easyofd
+python -m pip install --only-binary=:all: --require-hashes -r python/requirements.txt
 
 # 编译 Java 转换器（需要先下载依赖，见 java/README.md）
 cd java && javac -cp "$(ls lib/*.jar | tr '\n' ':')" Ofd2Pdf.java && cd ..
 
 # 安装 Node.js 依赖
-cd node && npm install && cd ..
+cd node && npm ci && cd ..
 
 # 运行测试（默认测试所有转换器）
 ./bin/ofd-benchmark <file.ofd>

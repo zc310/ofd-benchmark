@@ -30,6 +30,8 @@ go.work.sum
 # Editor/IDE
 .idea/
 .vscode/
+.venv-benchmark/
+.venv-pdf2ofd/
 target
 bin/
 *.lock

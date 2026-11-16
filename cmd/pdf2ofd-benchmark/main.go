@@ -17,6 +17,13 @@ type Converter struct {
 	OutputFile string
 }
 
+func pdf2ofdPython() string {
+	if path := os.Getenv("PDF2OFD_PYTHON"); path != "" {
+		return path
+	}
+	return "python3"
+}
+
 func main() {
 	if len(os.Args) < 2 {
 		log.Fatal("Usage: pdf2ofd-benchmark <file.pdf> [converter1] [converter2] ...")
@@ -63,7 +70,7 @@ func main() {
 		},
 		"pdf2ofd": {
 			Name:       "python-pdf2ofd",
-			Command:    []string{"python3", filepath.Join(binDir, "..", "python", "pdf2ofd_convert.py"), inputFile, filepath.Join(binDir, "output_pdf2ofd.ofd")},
+			Command:    []string{pdf2ofdPython(), filepath.Join(binDir, "..", "python", "pdf2ofd_convert.py"), inputFile, filepath.Join(binDir, "output_pdf2ofd.ofd")},
 			OutputFile: filepath.Join(binDir, "output_pdf2ofd.ofd"),
 		},
 		"jsofd": {

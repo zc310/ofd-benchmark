@@ -39,10 +39,10 @@ curl -fsSL -o lib/zip4j.jar https://repo1.maven.org/maven2/net/lingala/zip4j/zip
 
 Java 依赖位于 `java/lib/`，无需额外构建。
 
-Node 依赖位于 `node/node_modules/`，如需更新：
+Node 依赖位于 `node/node_modules/`，按锁文件安装：
 
 ```bash
-cd node && npm install
+cd node && npm ci
 ```
 
 ## 运行基准测试
@@ -212,7 +212,8 @@ GOWORK=off go run ./tools/gen-libraries -check   # 校验 md 与数据源一致�
 - `python-ofdreader` 已移出基准配置与结果表，也不再作为 easyofd 的回退；旧独立脚本仅保留供参考
 - `python-easyofd` 对部分文件（hello、1000-pages）会 crash（list index out of range）
 - `ofd2img` 与 `python-ofd2pdf` 已移出评测配置、依赖安装及结果表；easyofd 不再回退到 ofd2img。旧独立 ofd2pdf 脚本仅供参考
-- PDF→OFD：`python-pdf2ofd` 需 `pip install pdf2ofd`（PEP 668 环境加 `--user --break-system-packages`）
+- Python 依赖按 `python/requirements.txt` 安装（含间接依赖的版本与哈希）；`python-pdf2ofd` 按 `python/requirements-pdf2ofd.txt` 装入独立 venv，并用 `PDF2OFD_PYTHON` 指定解释器，避免其旧版 PyMuPDF 降级评测渲染器
+- CI 回环 PDF/TXT 生成由 `tools/roundtrip-pdf2ofd.sh` 执行，每个格式默认限时 15 分钟；`BENCHMARK_ROUNDTRIP_TIMEOUT` 可按 GNU timeout 格式调整（如 `30m`，不接受 `1m30s`）
 - `java/lib/` 中有 3 个损坏占位 jar（jaxen/pdfbox-sandbox/sqlite，554 字节）：`javac` 需排除，运行时 `java` 会自动忽略
 - ofdrw PDF→OFD（Pdf2Ofd.java）运行需要 `zip4j.jar`（已下载到 java/lib 与 bin/java/lib）
 - ofdrw / pdf2ofd 的 PDF→OFD 输出不含可提取文本（转矢量轮廓 / 位图），仅 go-zc310 保留 TextObject

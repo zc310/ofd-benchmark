@@ -29,9 +29,9 @@ bash tools/install-fonts.sh
 ```bash
 # OFD → PDF 基准（详见 docs/ofd-to-pdf.md）
 GOWORK=off go build -o bin/ofdrw-rs-convert ./cmd/ofdrw-rs-convert
-GOWORK=off cargo build --release --manifest-path rust/ofdbox-folio-convert/Cargo.toml --target-dir rust/target
+GOWORK=off cargo build --release --locked --manifest-path rust/ofdbox-folio-convert/Cargo.toml --target-dir rust/target
 cp rust/target/release/ofdbox-folio-convert bin/ofdbox-folio-convert
-cargo install --git https://github.com/emfox/sOFD --rev 65cff468ecc2af676180f540899fdf74da849c3a --locked --bin sofd --root /tmp/sofd-install
+cargo install sofd-cli --git https://github.com/emfox/sOFD --rev 65cff468ecc2af676180f540899fdf74da849c3a --locked --bin sofd --root /tmp/sofd-install
 cp /tmp/sofd-install/bin/sofd bin/sofd-cli
 go build -o bin/ofd-benchmark .
 ./bin/ofd-benchmark testdata/ofd-creator/hello.ofd
@@ -56,6 +56,22 @@ cp /tmp/ofdrw-native/ofdrw-native-linux-x64-v0.5.0/libofdrw_ffi.so bin/ofdrw-rs/
 也可通过 `OFDRW_LIB_PATH` 指定原生库路径。基准会将该转换器标记为 `go-ofdrw-rs`。
 
 两个基准驱动的单次转换默认限时 15 分钟，可通过 `BENCHMARK_CONVERTER_TIMEOUT=30m` 调整。超时会终止转换器及其子进程，将结果记为 `FAILED`，并继续测试其他转换器。像素比较遇到损坏 PDF、页数不一致或无可比较页时，同样将该项记为 `FAILED`，不会中断其他输出的比较。
+
+回环 PDF/TXT 生成使用 `bash tools/roundtrip-pdf2ofd.sh bin/ofd-converter bin/output_ofd`，每个格式单独限时 15 分钟；可通过 `BENCHMARK_ROUNDTRIP_TIMEOUT=30m` 调整（GNU timeout 时长格式）。失败或超时会删除该格式的部分输出并继续。
+
+CI 的 Python 依赖（含间接依赖）由 `python/requirements.txt` 锁定版本及哈希，Node 由 `node/package-lock.json` 锁定并用 `npm ci` 安装。pdf2ofd 依赖旧版 PyMuPDF，须安装到独立环境，避免将像素评测渲染器降级：
+
+```bash
+python3.12 -m venv .venv-benchmark
+.venv-benchmark/bin/python -m pip install --only-binary=:all: --require-hashes -r python/requirements.txt
+python3.12 -m venv .venv-pdf2ofd
+.venv-pdf2ofd/bin/python -m pip install --only-binary=:all: --require-hashes -r python/requirements-pdf2ofd.txt
+export PDF2OFD_PYTHON="$PWD/.venv-pdf2ofd/bin/python"
+export PATH="$PWD/.venv-benchmark/bin:$PATH"
+npm --prefix node ci
+```
+
+更新 Python 依赖时修改对应 `.in` 文件，再按 `.txt` 文件头记录的 `uv pip compile` 命令重新生成锁文件。CI 在生成报告后及 rebase 后检查报告与 YAML 一致，检查失败不推送。
 
 ## 基准结果数据维护
 
