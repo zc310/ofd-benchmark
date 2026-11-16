@@ -148,6 +148,8 @@ jobs:
           go build -o bin/ofd-benchmark .
           cargo build --release --locked --manifest-path rust/ofdbox-folio-convert/Cargo.toml --target-dir rust/target
           cp rust/target/release/ofdbox-folio-convert bin/ofdbox-folio-convert
+          cargo build --release --locked --manifest-path rust/easyofd-convert/Cargo.toml --target-dir rust/target
+          cp rust/target/release/easyofd-ofd2pdf rust/target/release/easyofd-pdf2ofd bin/
           cargo install sofd-cli --git https://github.com/emfox/sOFD --rev 65cff468ecc2af676180f540899fdf74da849c3a --locked --bin sofd --root "$RUNNER_TEMP/sofd-install"
           cp "$RUNNER_TEMP/sofd-install/bin/sofd" bin/sofd-cli
           go build -o bin/ofdgo-convert ./cmd/ofdgo-convert

@@ -6,6 +6,7 @@ benchmark_versions:
     github.com/lihongjie0209/ofdrw-rs/bindings/go: v0.5.0
     github.com/ofdbox/ofdbox-folio: 36e6877bf5d0b989cd824c3c74241533ae1f90ea
     github.com/emfox/sOFD: 65cff468ecc2af676180f540899fdf74da849c3a
+    github.com/easy-4-rust/easyofd-rust: 0.1.4
     org.ofdrw:ofdrw-converter: 2.5.1
 benchmark_environment:
     os: Ubuntu 24.04.5 LTS (x86_64)
@@ -25,6 +26,7 @@ reports:
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [26ms, 903ms, 2.90s, 280.74s, 870ms, 635ms]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [104ms, 140ms, 415ms, 4.89s, 309ms, 267ms]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [50ms, 301ms, 2.27s, 18.29s, 256ms, 2.39s]}
+            - {label: '[rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)', values: [42ms, 69ms, 1.85s, 985ms, 163ms, 74ms]}
             - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
             - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: [1.56s, 1.35s, 3.51s, 3.59s, 2.76s, 2.10s]}
             - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: [262ms, 652ms, 1.66s, 9.93s, 494ms, 1.07s]}
@@ -38,6 +40,7 @@ reports:
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [5.4KB, 687.6KB, 9.5MB, 25.8MB, 208.9KB, 2.7MB]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [81.6KB, 270.8KB, 9.0MB, 32.8MB, 603.7KB, 1.9MB]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [4.4KB, 971.2KB, 31.4MB, 88.4MB, 834.7KB, 15.9MB]}
+            - {label: '[rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)', values: [37.3KB, 77.1KB, 28.9MB, 614.5KB, 83.3KB, 77.8KB]}
             - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
             - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: [767.3KB, 2.4MB, 10.9MB, 2.0MB, 1.9MB, 5.0MB]}
             - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: [1.6KB, 196.5KB, 1.1MB, 9.2MB, 82.9KB, 559.3KB]}
@@ -51,6 +54,7 @@ reports:
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: ["22", "7093", "5494", "3934", "1150"]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: ["8", "6497", "1959", "773", "717"]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: ["0", "0", "0", "0", "0"]}
+            - {label: '[rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)', values: ["22", "6523", "5622", "3308", "332"]}
             - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: [FAILED, FAILED, FAILED, FAILED, FAILED]}
             - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: ["26", "7282", "5550", "4162", "1169"]}
             - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: ["31", "6534", "9614", "4249", "1938"]}
@@ -66,6 +70,7 @@ reports:
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [99.62%, 99.42%, 99.58%, 98.19%, 98.83%, 99.47%]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [99.63%, 98.97%, 99.46%, 99.52%, 98.77%, 97.57%]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [99.37%, FAILED, FAILED, 99.45%, 98.63%, 97.88%]}
+            - {label: '[rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
             - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
             - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: [99.30%, 99.53%, 99.27%, 99.75%, 97.33%, 99.07%]}
             - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: [99.01%, 97.55%, 96.29%, 97.56%, 95.80%, 94.40%]}
@@ -79,6 +84,7 @@ reports:
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [65.67%, 91.09%, 99.09%, 97.93%, 83.64%, 99.37%]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [66.59%, 83.34%, 97.86%, 99.45%, 82.91%, 97.09%]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [43.61%, FAILED, FAILED, 99.37%, 81.39%, 97.47%]}
+            - {label: '[rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
             - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
             - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
             - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
@@ -92,6 +98,7 @@ reports:
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [82.33%, 99.36%, 99.50%, 99.62%, 98.42%, 100.00%]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [82.62%, 95.02%, 99.90%, 100.00%, 97.83%, 65.34%]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [66.61%, FAILED, FAILED, 100.00%, 99.19%, 99.98%]}
+            - {label: '[rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
             - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
             - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
             - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
@@ -105,6 +112,7 @@ reports:
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: ["1.54", "0.76", "1.42", "13.59", "2.61", "1.69"]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: ["23.19", "0.30", "1.35", "17.26", "7.55", "1.21"]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: ["1.26", "1.07", "4.69", "46.54", "10.44", "10.12"]}
+            - {label: '[rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)', values: ["10.60", "0.09", "4.30", "0.32", "1.04", "0.05"]}
             - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
             - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: ["217.96", "2.71", "1.62", "1.05", "23.71", "3.17"]}
             - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: ["0.47", "0.22", "0.16", "4.83", "1.04", "0.35"]}
@@ -120,6 +128,7 @@ reports:
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [100.00%, 99.73%, 94.88%, 100.00%, 100.00%, 100.00%]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [26.32%, 18.04%, 3.67%, 3.99%, 39.65%, 0.00%]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [0.00%, 0.00%, 0.00%, 0.00%, 0.00%, 0.00%]}
+            - {label: '[rust-easyofd](https://github.com/easy-4-rust/easyofd-rust)', values: [65.22%, 26.83%, 46.67%, 82.83%, 63.67%, 21.17%]}
             - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
             - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: [17.14%, 97.24%, 38.30%, 100.00%, 56.78%, 64.72%]}
             - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: [10.81%, 70.77%, 5.88%, 83.31%, 41.24%, 4.86%]}
@@ -132,6 +141,7 @@ reports:
           rows:
             - {label: go-zc310, values: [30ms, 93ms, 300ms, 440ms, 1.23s, 1.01s, 1.57s]}
             - {label: go-ofdgo, values: [53ms, 356ms, 479ms, 978ms, 1.71s, 16.57s, 4.83s]}
+            - {label: rust-easyofd, values: [2ms, 4ms, 3ms, 105ms, 22ms, 250ms, 75ms]}
             - {label: java-ofdrw, values: [1.06s, 1.86s, 1.95s, 8.23s, 4.97s, 4.69s, 71.25s]}
             - {label: python-pdf2ofd, values: [120ms, 965ms, 621ms, 2.85s, 1.12s, 61.18s, 21.59s]}
             - {label: node-jsofd, values: [241ms, 452ms, 3.30s, 9.74s, 5.17s, 2.65s, 7.92s]}
@@ -142,6 +152,7 @@ reports:
           rows:
             - {label: go-zc310, values: [1.7K, 405.4K, 62.3K, 7.3M, 1.6M, 4.8M, 7.1M]}
             - {label: go-ofdgo, values: [6.2K, 709.5K, 117.5K, 9.2M, 3.0M, 60.7M, 17.1M]}
+            - {label: rust-easyofd, values: [1.2K, 1.8K, 3.6K, 5.2M, 918.8K, 304.6K, 2.0M]}
             - {label: java-ofdrw, values: [5.6K, 601.3K, 817.6K, 34.2M, 20.4M, 3.5M, 30.5M]}
             - {label: python-pdf2ofd, values: [4.6K, 1.3M, 733.7K, 8.9M, 1.6M, 86.5M, 36.8M]}
             - {label: node-jsofd, values: [3.0K, 2.2M, 590.6K, 34.8M, 12.9M, 31.8M, 34.3M]}
@@ -151,6 +162,7 @@ reports:
           rows:
             - {label: go-zc310, values: ["0.48", "0.45", "0.78", "1.09", "1.02", "2.54", "1.46"]}
             - {label: go-ofdgo, values: ["1.76", "0.78", "1.47", "1.38", "1.91", "31.98", "3.53"]}
+            - {label: rust-easyofd, values: ["0.33", "0.00", "0.04", "0.78", "0.57", "0.16", "0.41"]}
             - {label: java-ofdrw, values: ["1.58", "0.67", "10.23", "5.10", "13.00", "1.83", "6.32"]}
             - {label: python-pdf2ofd, values: ["1.32", "1.43", "9.18", "1.33", "1.04", "45.55", "7.62"]}
             - {label: node-jsofd, values: ["0.84", "2.47", "7.39", "5.18", "8.18", "16.72", "7.10"]}
@@ -163,6 +175,7 @@ reports:
           rows:
             - {label: go-zc310, values: [99.63%, 99.77%, 98.43%, 99.91%, 99.56%, 99.84%, 99.98%]}
             - {label: go-ofdgo, values: [99.63%, 99.38%, 98.34%, 98.01%, 99.18%, 99.63%, 99.82%]}
+            - {label: rust-easyofd, values: [FAILED, FAILED, 96.26%, FAILED, 95.85%, FAILED, FAILED]}
             - {label: java-ofdrw, values: [99.85%, 98.72%, 98.75%, 99.49%, 99.07%, 97.99%, 99.66%]}
             - {label: python-pdf2ofd, values: [99.72%, 98.34%, 98.94%, 99.33%, 97.62%, 98.39%, 99.12%]}
             - {label: node-jsofd, values: [99.37%, 96.77%, 98.14%, 98.88%, 98.82%, 99.50%, 99.94%]}
@@ -172,6 +185,7 @@ reports:
           rows:
             - {label: go-zc310, values: ["22", "9222", "9737", "9314", "2740", "326022", "170697"]}
             - {label: go-ofdgo, values: ["8", "14127", "10009", "10920", "3373", "179998", "234709"]}
+            - {label: rust-easyofd, values: ["0", "0", "242", "0", "10", "0", "0"]}
             - {label: java-ofdrw, values: ["0", "7049", "0", "1598", "3", "321998", "167"]}
             - {label: python-pdf2ofd, values: ["0", "0", "0", "0", "0", "0", "0"]}
             - {label: node-jsofd, values: ["25", "10812", "9941", "10222", "2796", "326448", "225807"]}
@@ -181,6 +195,7 @@ reports:
           rows:
             - {label: go-zc310, values: [100.00%, 39.16%, 64.41%, 15.47%, 10.43%, 98.54%, 41.99%]}
             - {label: go-ofdgo, values: [26.32%, 23.16%, 44.56%, 13.71%, 4.63%, 2.63%, 1.08%]}
+            - {label: rust-easyofd, values: [0.00%, 0.00%, 0.00%, 0.00%, 0.00%, 0.00%, 0.00%]}
             - {label: java-ofdrw, values: [0.00%, 89.55%, 0.00%, 4.60%, 0.00%, 98.86%, 0.00%]}
             - {label: python-pdf2ofd, values: [0.00%, 0.00%, 0.00%, 0.00%, 0.00%, 0.00%, 0.00%]}
             - {label: node-jsofd, values: [100.00%, 42.55%, 18.27%, 15.19%, 6.94%, 30.25%, 1.08%]}

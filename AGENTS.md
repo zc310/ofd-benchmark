@@ -209,6 +209,7 @@ GOWORK=off go run ./tools/gen-libraries -check   # 校验 md 与数据源一致�
 
 ## 注意事项
 
+- `easyofd-rust` 已恢复双向评测：选择键 `easyofd-rust`，OFD→PDF 名称 `rust-easyofd`，PDF→OFD 名称 `pdf2ofd-easyofd-rust`；构建 `cargo build --release --locked --manifest-path rust/easyofd-convert/Cargo.toml --target-dir rust/target`，复制两个 `easyofd-*` 二进制到 `bin/`。固定 crates.io `0.1.4` 与 Cargo.lock，按当前质量算法重测，不沿用移除前分数。
 - `python-ofdreader` 已移出基准配置与结果表，也不再作为 easyofd 的回退；旧独立脚本仅保留供参考
 - `python-easyofd` 对部分文件（hello、1000-pages）会 crash（list index out of range）
 - `ofd2img` 与 `python-ofd2pdf` 已移出评测配置、依赖安装及结果表；easyofd 不再回退到 ofd2img。旧独立 ofd2pdf 脚本仅供参考

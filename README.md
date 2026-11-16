@@ -6,8 +6,8 @@
 
 | 方向      | 文档                                     | 对比内容                                                                                     |
 |-----------|------------------------------------------|----------------------------------------------------------------------------------------------|
-| OFD → PDF | [docs/ofd-to-pdf.md](docs/ofd-to-pdf.md) | 8 种转换器（Go×3 / Rust×2 / Python / Java / Node）的速度、文件大小、文本提取与数科版式还原度 |
-| PDF → OFD | [docs/pdf-to-ofd.md](docs/pdf-to-ofd.md) | 5 种转换器（zc310 / ofdgo / ofdrw / pdf2ofd / jsOFD）的速度、文件大小与回环还原度 |
+| OFD → PDF | [docs/ofd-to-pdf.md](docs/ofd-to-pdf.md) | 9 种转换器（Go×3 / Rust×3 / Python / Java / Node）的速度、文件大小、文本提取与数科版式还原度 |
+| PDF → OFD | [docs/pdf-to-ofd.md](docs/pdf-to-ofd.md) | 6 种转换器（zc310 / ofdgo / easyofd-rust / ofdrw / pdf2ofd / jsOFD）的速度、文件大小与回环还原度 |
 
 基准参考输出来自**数科版式阅读器**（`testdata`），保证同一组文档双向可测。测试用的 PDF/OFD 可在 [zc310/ofd-fixtures](https://github.com/zc310/ofd-fixtures) 下载。
 
@@ -31,6 +31,8 @@ bash tools/install-fonts.sh
 GOWORK=off go build -o bin/ofdrw-rs-convert ./cmd/ofdrw-rs-convert
 GOWORK=off cargo build --release --locked --manifest-path rust/ofdbox-folio-convert/Cargo.toml --target-dir rust/target
 cp rust/target/release/ofdbox-folio-convert bin/ofdbox-folio-convert
+cargo build --release --locked --manifest-path rust/easyofd-convert/Cargo.toml --target-dir rust/target
+cp rust/target/release/easyofd-ofd2pdf rust/target/release/easyofd-pdf2ofd bin/
 cargo install sofd-cli --git https://github.com/emfox/sOFD --rev 65cff468ecc2af676180f540899fdf74da849c3a --locked --bin sofd --root /tmp/sofd-install
 cp /tmp/sofd-install/bin/sofd bin/sofd-cli
 go build -o bin/ofd-benchmark .
@@ -43,6 +45,8 @@ cd ../ofd-benchmark && go build -o bin/pdf2ofd-benchmark ./cmd/pdf2ofd-benchmark
 ```
 
 转换结果分别保存在 `bin/output/`（OFD→PDF）与 `bin/output_ofd/`（PDF→OFD）。
+
+`easyofd-rust` 固定 crates.io 发布版 `0.1.4`（与 Python easyofd 无关），两个方向均可在命令末尾加 `easyofd-rust` 单独测试，接入默认测试及 CI。构建依赖由 `rust/easyofd-convert/Cargo.lock` 锁定，质量指标按当前算法重新测量，不复用移除前的分数。
 
 `ofdrw-rs` 使用 Go bindings v0.5.0 和同版本 Linux x64 原生库。首次运行前下载原生库：
 
@@ -107,6 +111,7 @@ ofd-benchmark/
 │   ├── zc310-convert/
 │   └── pdf2ofd-benchmark/  # PDF→OFD 基准驱动
 ├── rust/
+│   ├── easyofd-convert/      # easyofd-rust 双向转换器（0.1.4）
 │   ├── ofdbox-folio-convert/ # Rust ofdbox-folio OFD→PDF 转换器
 │   └── sofd-convert.sh       # sOFD CLI 结果适配器
 ├── python/

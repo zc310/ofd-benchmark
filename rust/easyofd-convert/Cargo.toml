@@ -1,0 +1,16 @@
+[package]
+name = "easyofd-benchmark-convert"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+easyofd = "=0.1.4"
+
+[[bin]]
+name = "easyofd-ofd2pdf"
+path = "src/ofd2pdf.rs"
+
+[[bin]]
+name = "easyofd-pdf2ofd"
+path = "src/pdf2ofd.rs"
