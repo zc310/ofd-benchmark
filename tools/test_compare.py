@@ -61,6 +61,18 @@ class PixelComparisonTests(unittest.TestCase):
                 doc.save(src)
             with self.assertRaisesRegex(ValueError, 'nearly blank'):
                 compare_pdf.compare(ref, src, 72)
+            with fitz.open(ref) as ref_doc, fitz.open(src) as src_doc:
+                ref_img = compare_pdf.render(ref_doc, 0, 72)
+                src_img = compare_pdf.render(src_doc, 0, 72)
+                self.assertLess(compare_pdf.content_similarity(ref_img, src_img), 90.0)
+
+    def test_content_similarity_matches_identical_pages(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            ref = Path(tmp) / 'ref.pdf'
+            make_pdf(ref, 1)
+            with fitz.open(ref) as doc:
+                image = compare_pdf.render(doc, 0, 72)
+            self.assertAlmostEqual(compare_pdf.content_similarity(image, image), 100.0)
 
 
 class ComparisonScriptTests(unittest.TestCase):

@@ -98,7 +98,7 @@ jobs:
       - name: Install system fonts and Maven
         run: |
           sudo apt-get update
-          sudo apt-get install -y fonts-wqy-zenhei fonts-noto-cjk fontconfig curl unzip maven
+          sudo apt-get install -y fonts-wqy-zenhei fonts-noto-cjk fontconfig libfontconfig1-dev pkg-config curl unzip maven
 
       - name: Install document fonts in user directory
         run: bash tools/install-fonts.sh
@@ -143,6 +143,8 @@ jobs:
           go build -o bin/ofd-benchmark .
           cargo build --release --manifest-path rust/ofdbox-folio-convert/Cargo.toml --target-dir rust/target
           cp rust/target/release/ofdbox-folio-convert bin/ofdbox-folio-convert
+          cargo install --git https://github.com/emfox/sOFD --rev 65cff468ecc2af676180f540899fdf74da849c3a --locked --bin sofd --root /tmp/sofd-install
+          cp /tmp/sofd-install/bin/sofd bin/sofd-cli
           go build -o bin/ofdgo-convert ./cmd/ofdgo-convert
           go build -o bin/ofdrw-rs-convert ./cmd/ofdrw-rs-convert
           go build -o bin/zc310-convert ./cmd/zc310-convert

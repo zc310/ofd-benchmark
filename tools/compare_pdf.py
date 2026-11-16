@@ -39,11 +39,34 @@ def similarity(ref, src):
     identical = (diff < 0.01).mean()
     return mean_diff, identical
 
+def content_similarity(ref, src):
+    """Compare pixels around content found in either image, not shared white space."""
+    if ref.shape != src.shape:
+        h = min(ref.shape[0], src.shape[0])
+        w = min(ref.shape[1], src.shape[1])
+        ref = ref[:h, :w]
+        src = src[:h, :w]
+
+    # Union both masks so missing output content and extra output content are
+    # both scored. Dilate by one pixel to tolerate antialiasing and tiny shifts.
+    mask = np.any(ref < 250, axis=2) | np.any(src < 250, axis=2)
+    if not mask.any():
+        return 100.0
+    padded = np.pad(mask, 1)
+    expanded = np.zeros_like(mask)
+    for dy in range(3):
+        for dx in range(3):
+            expanded |= padded[dy:dy + mask.shape[0], dx:dx + mask.shape[1]]
+
+    diff = np.abs(ref.astype(np.int16) - src.astype(np.int16)).sum(axis=2) / (3 * 255.0)
+    return (1 - diff[expanded].mean()) * 100
+
 def compare(ref_path, src_path, dpi):
     name = os.path.splitext(os.path.basename(ref_path))[0]
     skip = EXCLUDE_PAGES.get(name, set())
     total_diff = 0.0
     total_ident = 0.0
+    total_content = 0.0
     count = 0
     with fitz.open(ref_path) as ref_doc, fitz.open(src_path) as src_doc:
         if ref_doc.page_count != src_doc.page_count:
@@ -61,6 +84,7 @@ def compare(ref_path, src_path, dpi):
             if ref_ink >= 16 and src_ink < max(4, ref_ink * 0.01):
                 raise ValueError(f'output page {i + 1} is nearly blank compared with reference')
             md, ident = similarity(ref_img, src_img)
+            total_content += content_similarity(ref_img, src_img)
             total_diff += md
             total_ident += ident
             count += 1
@@ -70,7 +94,7 @@ def compare(ref_path, src_path, dpi):
     mean_diff = total_diff / count
     pct = (1 - mean_diff) * 100
     ident = total_ident / count * 100
-    return pct, mean_diff, ident
+    return pct, mean_diff, ident, total_content / count
 
 def main():
     dpi = 96
@@ -83,8 +107,8 @@ def main():
     base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     odir = os.path.join(base, 'bin', 'output')
 
-    print(f"{'file':<12} {'convert':<16} {'ref_size':>10} {'pdf_size':>10} {'ratio':>6} {'similarity':>10} {'identical':>9}")
-    print("-" * 88)
+    print(f"{'file':<12} {'convert':<16} {'ref_size':>10} {'pdf_size':>10} {'ratio':>6} {'full-page':>10} {'content':>10} {'identical':>9}")
+    print("-" * 104)
     updates = []
     for name in files:
         ref = os.path.join(base, 'testdata', 'suwell', f'{name}.pdf')
@@ -97,16 +121,19 @@ def main():
             src_size = os.path.getsize(src)
             ratio = src_size / ref_size if ref_size else 0
             pixel = 'FAILED'
+            content_pixel = 'FAILED'
             try:
-                sim, md, ident = compare(ref, src, dpi)
+                sim, md, ident, content = compare(ref, src, dpi)
                 pixel = f'{sim:.2f}%'
-                print(f"{name:<12} {conv:<16} {ref_size:>10} {src_size:>10} {ratio:>6.2f} {sim:>9.2f}% {ident:>8.2f}%")
+                content_pixel = f'{content:.2f}%'
+                print(f"{name:<12} {conv:<16} {ref_size:>10} {src_size:>10} {ratio:>6.2f} {sim:>9.2f}% {content:>9.2f}% {ident:>8.2f}%")
             except Exception as e:
                 print(f"{name:<12} {conv:<16} FAILED: {e}")
             row = OFD_CONVERTER_ROWS.get(conv)
             if row:
                 append(updates, 'ofd-to-pdf', 'ofd-size-ratio', f'{name}.ofd', row, f'{ratio:.2f}')
                 append(updates, 'ofd-to-pdf', 'ofd-pixel-similarity', f'{name}.ofd', row, pixel)
+                append(updates, 'ofd-to-pdf', 'ofd-content-similarity', f'{name}.ofd', row, content_pixel)
         print()
     write_updates(base, updates)
 

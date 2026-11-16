@@ -6,7 +6,7 @@
 
 | 方向      | 文档                                     | 对比内容                                                                                     |
 |-----------|------------------------------------------|----------------------------------------------------------------------------------------------|
-| OFD → PDF | [docs/ofd-to-pdf.md](docs/ofd-to-pdf.md) | 8 种转换器（Go×3 / Rust / Python×2 / Java / Node）的速度、文件大小、文本提取与数科版式还原度 |
+| OFD → PDF | [docs/ofd-to-pdf.md](docs/ofd-to-pdf.md) | 9 种转换器（Go×3 / Rust×2 / Python×2 / Java / Node）的速度、文件大小、文本提取与数科版式还原度 |
 | PDF → OFD | [docs/pdf-to-ofd.md](docs/pdf-to-ofd.md) | 5 种转换器（zc310 / ofdgo / ofdrw / pdf2ofd / jsOFD）的速度、文件大小与回环还原度 |
 
 基准参考输出来自**数科版式阅读器**（`testdata`），保证同一组文档双向可测。测试用的 PDF/OFD 可在 [zc310/ofd-fixtures](https://github.com/zc310/ofd-fixtures) 下载。
@@ -16,7 +16,7 @@
 测试前先准备字体环境（Linux，需 `curl`、`unzip`、`fontconfig`）：
 
 ```bash
-sudo apt-get install -y fonts-wqy-zenhei fonts-noto-cjk fontconfig curl unzip
+sudo apt-get install -y fonts-wqy-zenhei fonts-noto-cjk fontconfig libfontconfig1-dev pkg-config curl unzip
 bash tools/install-fonts.sh
 ```
 
@@ -31,6 +31,8 @@ bash tools/install-fonts.sh
 GOWORK=off go build -o bin/ofdrw-rs-convert ./cmd/ofdrw-rs-convert
 GOWORK=off cargo build --release --manifest-path rust/ofdbox-folio-convert/Cargo.toml --target-dir rust/target
 cp rust/target/release/ofdbox-folio-convert bin/ofdbox-folio-convert
+cargo install --git https://github.com/emfox/sOFD --rev 65cff468ecc2af676180f540899fdf74da849c3a --locked --bin sofd --root /tmp/sofd-install
+cp /tmp/sofd-install/bin/sofd bin/sofd-cli
 go build -o bin/ofd-benchmark .
 ./bin/ofd-benchmark testdata/ofd-creator/hello.ofd
 
@@ -89,7 +91,8 @@ ofd-benchmark/
 │   ├── zc310-convert/
 │   └── pdf2ofd-benchmark/  # PDF→OFD 基准驱动
 ├── rust/
-│   └── ofdbox-folio-convert/ # Rust ofdbox-folio OFD→PDF 转换器
+│   ├── ofdbox-folio-convert/ # Rust ofdbox-folio OFD→PDF 转换器
+│   └── sofd-convert.sh       # sOFD CLI 结果适配器
 ├── python/
 │   ├── ofd2pdf.py          # Python 转换器（easyofd + ofd2img）
 │   ├── ofd2pdf_ofd2pdf.py
