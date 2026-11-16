@@ -51,7 +51,7 @@
 - 系统已安装 `apt-get install fonts-wqy-zenhei fonts-noto-cjk`
 - 测试前运行 `bash tools/install-fonts.sh`，下载 `doc-foundertype.zip`、`doc-zhongyi-etc.zip`、`latin-fonts.zip` 并安装到用户目录 `~/.local/share/fonts/hanzi-fonts/`，随后刷新字体缓存。字体下载链接与依赖安装命令见 [README：快速开始](../README.md#快速开始)；GitHub Actions 已加入此准备步骤。
 
-> `rust-easyofd` 为 2026-11-16 本地补测（Ubuntu 26.04 LTS、AMD Ryzen 9 5950X，PyMuPDF 1.26.7 / NumPy 2.3.5）；其他行保留原结果。其耗时与上述 CI 环境不是同机数据，速度排名及胜出次数暂不作为性能结论；下次完整 CI 将统一重测。像素、内容区域及前景 F1 均使用当前算法重新计算。
+> 包括 `rust-easyofd` 在内的所有转换器均由 GitHub Actions 在上述环境统一评测。像素、内容区域及前景 F1 均使用当前算法计算；速度排名及胜出次数应结合输出质量解读，成功生成文件不代表通过质量检查。
 
 ## 测试文件
 

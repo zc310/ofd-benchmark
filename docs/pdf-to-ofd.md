@@ -46,7 +46,7 @@
 - 系统已安装 `apt-get install fonts-wqy-zenhei fonts-noto-cjk`
 - 测试前运行 `bash tools/install-fonts.sh`，下载 `doc-foundertype.zip`、`doc-zhongyi-etc.zip`、`latin-fonts.zip` 并安装到用户目录 `~/.local/share/fonts/hanzi-fonts/`，随后刷新字体缓存。字体下载链接与依赖安装命令见 [README：快速开始](../README.md#快速开始)；GitHub Actions 已加入此准备步骤。
 
-> `rust-easyofd` 为 2026-11-16 本地补测（Ubuntu 26.04 LTS、AMD Ryzen 9 5950X，PyMuPDF 1.26.7 / NumPy 2.3.5）；其他行保留原结果。其耗时与上述 CI 环境不是同机数据，速度排名及胜出次数暂不作为性能结论；下次完整 CI 将统一重测。回环统一使用 go-zc310，不改用 easyofd 自身回环。
+> 包括 `rust-easyofd` 在内的所有转换器均由 GitHub Actions 在上述环境统一评测。回环统一使用 go-zc310，不改用各库自身回环；速度排名及胜出次数应结合回环外观与文本质量解读，成功生成文件不代表通过质量检查。
 
 ## 转换速度
 
@@ -96,9 +96,9 @@
 
 将每个转换器输出的 OFD 再经 go-zc310 转回 PDF（回环），与源 PDF 做像素对比（96 DPI）与文本对比。
 
-像素脚本对 `1000-pages` 仅取前 3 页（仍校验总页数一致）；文本比较仍处理完整文档。CI 结果已按当前采样规则更新，`rust-easyofd` 保留本地补测结果。
+像素脚本对 `1000-pages` 仅取前 3 页（仍校验总页数一致）；文本比较仍处理完整文档。所有转换器均使用相同的采样与评测规则。
 
-`rust-easyofd 0.1.4` 本次 7/7 成功生成 OFD，但 hello、ano、intro、1000-pages、GBT_33190-2016 回环触发近乎空白页检查，像素记 `FAILED`；999、zsbk 分别为 96.26%、95.85%，不代表内容完整。7 个样本的文本相似度均为 0.00%。回环日志还出现非数字 StID（如 `t_0_0`、`SimSun`）解析及部分 BMP 图像解码错误；这些是当前输出/回环链路的限制，未通过修补输出规避。
+`rust-easyofd 0.1.4` 成功生成 OFD 不代表回环内容完整；像素与文本结果以下方表格为准。回环质量检查未通过的样本记为 `FAILED`，不沿用旧分数，也不通过修补输出规避检查。
 
 **像素相似度**（100% 为完全相同）：
 
