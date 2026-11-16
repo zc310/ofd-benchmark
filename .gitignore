@@ -33,5 +33,6 @@ go.work.sum
 target
 bin/
 *.lock
+!rust/ofdbox-folio-convert/Cargo.lock
 *.sum
 testdata/

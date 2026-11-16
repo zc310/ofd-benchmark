@@ -1,0 +1,8 @@
+[package]
+name = "ofdbox-folio-convert"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+ofdbox-folio = { git = "https://github.com/ofdbox/ofdbox-folio", rev = "36e6877bf5d0b989cd824c3c74241533ae1f90ea", default-features = false, features = ["ofd", "pdf"] }

@@ -53,6 +53,13 @@ def compare(ref_path, src_path, dpi):
                 continue
             ref_img = render(ref_doc, i, dpi)
             src_img = render(src_doc, i, dpi)
+            # A nearly empty PDF can score deceptively well because most pages are white.
+            # Fail pages that lost virtually all foreground content instead of reporting a
+            # misleadingly high whole-page similarity.
+            ref_ink = np.count_nonzero(np.any(ref_img < 245, axis=2))
+            src_ink = np.count_nonzero(np.any(src_img < 245, axis=2))
+            if ref_ink >= 16 and src_ink < max(4, ref_ink * 0.01):
+                raise ValueError(f'output page {i + 1} is nearly blank compared with reference')
             md, ident = similarity(ref_img, src_img)
             total_diff += md
             total_ident += ident

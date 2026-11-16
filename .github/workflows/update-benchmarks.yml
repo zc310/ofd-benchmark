@@ -61,6 +61,8 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
+      - uses: dtolnay/rust-toolchain@stable
+
       - name: Checkout OFD fixtures
         uses: actions/checkout@v5
         with:
@@ -139,6 +141,8 @@ jobs:
           go test ./internal/benchmarkdata ./internal/converter ./tools/benchmark-versions ./tools/gen-benchmarks ./tools/update-benchmark-results
           python -m unittest discover -s tools -p 'test_*.py'
           go build -o bin/ofd-benchmark .
+          cargo build --release --manifest-path rust/ofdbox-folio-convert/Cargo.toml --target-dir rust/target
+          cp rust/target/release/ofdbox-folio-convert bin/ofdbox-folio-convert
           go build -o bin/ofdgo-convert ./cmd/ofdgo-convert
           go build -o bin/ofdrw-rs-convert ./cmd/ofdrw-rs-convert
           go build -o bin/zc310-convert ./cmd/zc310-convert

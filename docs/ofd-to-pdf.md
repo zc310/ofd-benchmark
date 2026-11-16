@@ -14,6 +14,11 @@
 | [xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | v0.0.0-20261111160922-3edf35199ec7 |   ✅    | 2026-11-14 | 已测试                                  |
 | [ofdrw-rs Go binding](https://github.com/lihongjie0209/ofdrw-rs) | v0.5.0 | ✅ | 2026-11-15 | Go bindings + Linux 原生库，已测试 |
 
+### Rust 库
+
+| 库 | 版本 | OFD→PDF | 更新时间 | 备注 |
+|---|---|:---:|:---:|---|
+| [ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | `36e6877` | ✅ | 2026-11-16 | 通过 fontconfig 动态定位字体，已接入测试 |
 
 ### Python 库
 
@@ -69,9 +74,10 @@
 
 | 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | 132ms | **234ms** | **1.17s** | **860ms** | **244ms** | 775ms | 4 |
+| [go-zc310](https://github.com/zc310/ofd) | 132ms | 234ms | 1.17s | **860ms** | **244ms** | 775ms | 2 |
 | [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 243ms | 1.37s | 3.12s | 37.40s | 657ms | 1.90s | 0 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | **26ms** | 903ms | 2.90s | 280.74s | 870ms | 635ms | 1 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 104ms | **140ms** | **415ms** | 4.89s | 309ms | 267ms | 2 |
 | [easyofd](https://pypi.org/project/easyofd/) | 1.16s | 1.16s | 10.84s | 1.83s | 1.09s | 6.43s | 0 |
 | [ofd2pdf](https://github.com/jsyzdej/ofd2pdf) | 166ms | FAILED | FAILED | 55.41s | 484ms | **241ms** | 1 |
 | [ofdrw](https://github.com/ofdrw/ofdrw) | 1.56s | 1.35s | 3.51s | 3.59s | 2.76s | 2.10s | 0 |
@@ -82,6 +88,7 @@
 > - `python-ofd2pdf`: `pip install ofd2pdf`（Python ≥3.12），基于图片渲染
 > - `java-ofdrw`: `org.ofdrw:ofdrw-converter:2.5.1`
 > - `node-ofd2pdf`: `npm install @miconvert/ofd-to-pdf`，优先使用 CJS 入口，失败后回退 ESM 入口
+> - `rust-ofdbox-folio`: 固定 Git revision `36e6877`；字体由 `fc-match` 按系统 fontconfig 配置解析，不依赖特定用户目录
 >
 > 各转换器的成功或失败情况以本轮结果表为准。
 
@@ -94,6 +101,7 @@
 | [go-zc310](https://github.com/zc310/ofd) | 9.9KB | 88.0KB | 7.5MB | **687.1KB** | 78.4KB | 1.4MB | 1 |
 | [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 15.5KB | 859.4KB | 9.6MB | 59.6MB | 130.4KB | 2.2MB | 0 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 5.4KB | 687.6KB | 9.5MB | 25.8MB | 208.9KB | 2.7MB | 0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 81.6KB | 270.8KB | 9.0MB | 32.8MB | 603.7KB | 1.9MB | 0 |
 | [easyofd](https://pypi.org/project/easyofd/) | 23.6KB | **36.1KB** | 38.2MB | 714.1KB | **73.1KB** | 13.6MB | 2 |
 | [ofd2pdf](https://github.com/jsyzdej/ofd2pdf) | 45.5KB | FAILED | FAILED | 94.2MB | 751.7KB | **128.9KB** | 1 |
 | [ofdrw](https://github.com/ofdrw/ofdrw) | 767.3KB | 2.4MB | 10.9MB | 2.0MB | 1.9MB | 5.0MB | 0 |
@@ -109,6 +117,7 @@
 | [go-zc310](https://github.com/zc310/ofd) | 22 | 7280 | 5550 | 3971 | 1162 | 0 |
 | [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 8 | 567 | 506 | 3967 | 527 | 0 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 22 | 7093 | 5494 | 3934 | 1150 | 0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 8 | 6497 | 1959 | 773 | 717 | 0 |
 | [easyofd](https://pypi.org/project/easyofd/) | 22 | 1208 | **10194** | 3933 | 1508 | 1 |
 | [ofd2pdf](https://github.com/jsyzdej/ofd2pdf) | 0 | FAILED | FAILED | 0 | 0 | 0 |
 | [ofdrw](https://github.com/ofdrw/ofdrw) | 26 | **7282** | 5550 | 4162 | 1169 | 1 |
@@ -132,6 +141,7 @@
 | [go-zc310](https://github.com/zc310/ofd) | **99.63%** | **99.70%** | **99.86%** | 99.46% | 98.55% | **99.51%** | 3 |
 | [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | **99.63%** | 99.39% | 99.74% | 99.45% | 98.53% | 98.98% | 1 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 99.62% | 99.42% | 99.58% | FAILED | **98.83%** | 99.47% | 1 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | **99.63%** | 98.97% | 99.46% | 99.52% | 98.77% | 97.57% | 0 |
 | [easyofd](https://pypi.org/project/easyofd/) | 99.35% | 93.82% | 37.74% | 74.44% | 92.41% | 94.41% | 0 |
 | [ofd2pdf](https://github.com/jsyzdej/ofd2pdf) | 99.61% | FAILED | FAILED | 99.34% | 97.74% | 94.33% | 0 |
 | [ofdrw](https://github.com/ofdrw/ofdrw) | 99.30% | 99.53% | 99.27% | **99.75%** | 97.33% | 99.07% | 1 |
@@ -148,6 +158,7 @@
 | [go-zc310](https://github.com/zc310/ofd) | 2.82 | 0.10 | 1.11 | **0.35** | 0.98 | 0.89 |
 | [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 4.40 | 0.95 | 1.43 | 31.37 | 1.63 | 1.43 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 1.54 | 0.76 | 1.42 | 13.59 | 2.61 | 1.69 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 23.19 | 0.30 | 1.35 | 17.26 | 7.55 | 1.21 |
 | [easyofd](https://pypi.org/project/easyofd/) | 6.70 | **0.04** | 5.70 | 0.37 | **0.92** | 8.62 |
 | [ofd2pdf](https://github.com/jsyzdej/ofd2pdf) | 12.93 | FAILED | FAILED | 49.62 | 9.40 | **0.08** |
 | [ofdrw](https://github.com/ofdrw/ofdrw) | 217.96 | 2.71 | 1.62 | 1.05 | 23.71 | 3.17 |
@@ -155,6 +166,7 @@
 <!-- benchmark-table:ofd-size-ratio:end -->
 
 > - 像素相似度越高表示输出越贴近数科版式阅读器；仿色/抗锯齿等平滑差异会小幅降低相似度
+> - 若参考页有可见内容而输出页几乎全白，像素对比会标记为 `FAILED`，避免大面积白底虚高
 > - intro 的像素对比跳过 14～19 页（数科导出的参考 PDF 这几页背景图丢失，不计入对比）
 > - `python-easyofd` 在 hello、1000-pages 转换失败；`python-ofd2pdf` 在 ano、intro 转换失败
 > - 复现命令：`python3 tools/compare_pdf.py 96 <file>`
@@ -170,6 +182,7 @@
 | [go-zc310](https://github.com/zc310/ofd) | **100.00%** | 99.07% | **100.00%** | **100.00%** | 95.85% | 98.85% | 2 |
 | [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 26.32% | 6.19% | 8.57% | 3.99% | 95.01% | 26.58% | 0 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | **100.00%** | **99.73%** | 94.88% | **100.00%** | **100.00%** | **100.00%** | 3 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 26.32% | 18.04% | 3.67% | 3.99% | 39.65% | 0.00% | 0 |
 | [easyofd](https://pypi.org/project/easyofd/) | **100.00%** | 12.62% | 0.08% | 98.38% | 80.54% | 11.20% | 0 |
 | [ofd2pdf](https://github.com/jsyzdej/ofd2pdf) | 0.00% | FAILED | FAILED | 0.00% | 0.00% | 0.00% | 0 |
 | [ofdrw](https://github.com/ofdrw/ofdrw) | 17.14% | 97.24% | 38.30% | **100.00%** | 56.78% | 64.72% | 1 |
@@ -185,6 +198,8 @@
 go build -o bin/ofd-benchmark .
 go build -o bin/ofdgo-convert ./cmd/ofdgo-convert
 go build -o bin/zc310-convert ./cmd/zc310-convert
+cargo build --release --manifest-path rust/ofdbox-folio-convert/Cargo.toml --target-dir rust/target
+cp rust/target/release/ofdbox-folio-convert bin/ofdbox-folio-convert
 
 # 安装 Python 依赖
 pip install easyofd ofd2img ofd2pdf
@@ -203,6 +218,7 @@ cd node && npm install && cd ..
 ./bin/ofd-benchmark <file.ofd> zc310
 ./bin/ofd-benchmark <file.ofd> python
 ./bin/ofd-benchmark <file.ofd> ofd2pdf
+./bin/ofd-benchmark <file.ofd> ofdbox-folio
 ./bin/ofd-benchmark <file.ofd> java
 ./bin/ofd-benchmark <file.ofd> node
 ```
@@ -213,6 +229,7 @@ cd node && npm install && cd ..
 
 - `go-ofdgo`
 - `go-zc310`
+- `rust-ofdbox-folio`
 - `python-easyofd`
 - `python-ofd2pdf`
 - `java-ofdrw`

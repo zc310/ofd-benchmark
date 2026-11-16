@@ -52,6 +52,16 @@ class PixelComparisonTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'no comparable pages'):
                     compare_pdf.compare(ref, src, 72)
 
+    def test_blank_output_does_not_receive_high_pixel_similarity(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            ref, src = Path(tmp) / 'ref.pdf', Path(tmp) / 'blank.pdf'
+            make_pdf(ref, 1)
+            with fitz.open() as doc:
+                doc.new_page(width=72, height=72)
+                doc.save(src)
+            with self.assertRaisesRegex(ValueError, 'nearly blank'):
+                compare_pdf.compare(ref, src, 72)
+
 
 class ComparisonScriptTests(unittest.TestCase):
     def run_script(self, module, base):

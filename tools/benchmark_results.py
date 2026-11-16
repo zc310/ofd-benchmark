@@ -9,6 +9,7 @@ OFD_CONVERTER_ROWS = {
     "go-zc310": "go-zc310",
     "go-ofdgo": "go-ofdgo",
     "go-ofdrw-rs": "go-ofdrw-rs",
+    "rust-ofdbox-folio": "rust-ofdbox-folio",
     "python-easyofd": "easyofd",
     "python-ofd2pdf": "ofd2pdf",
     "java-ofdrw": "ofdrw",
