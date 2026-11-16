@@ -25,6 +25,19 @@ LIBRARIES = {
     'pdf2ofd-python': (None, 'python-pdf2ofd'),
     'jsofd': (None, 'node-jsofd'),
 }
+LIBRARY_URLS = {
+    'zc310': 'https://github.com/zc310/ofd',
+    'ofdgo': 'https://github.com/xiaoqidun/ofdgo',
+    'ofdrw-java': 'https://github.com/ofdrw/ofdrw',
+    'ofdrw-rs': 'https://github.com/lihongjie0209/ofdrw-rs',
+    'ofdbox-folio': 'https://github.com/ofdbox/ofdbox-folio',
+    'sofd': 'https://github.com/emfox/sOFD',
+    'easyofd-rust': 'https://github.com/easy-4-rust/easyofd-rust',
+    'easyofd-python': 'https://pypi.org/project/easyofd/',
+    'ofd-to-pdf-node': 'https://www.npmjs.com/package/@miconvert/ofd-to-pdf',
+    'pdf2ofd-python': 'https://github.com/wanglrebe/pdf2ofd',
+    'jsofd': 'https://github.com/Hufe921/jsOFD',
+}
 OFD_SAMPLES = ('hello', 'ano', 'intro', '1000-pages', '999', 'zsbk')
 PDF_SAMPLES = (*OFD_SAMPLES, 'GBT_33190-2016')
 REPORTS = ('benchmark-results.yaml', 'ofd-to-pdf.md', 'pdf-to-ofd.md')
@@ -131,7 +144,7 @@ def package(root, output, tag, commit='', run_url=''):
         '|---|---:|---:|---|',
     ])
     for library, record in records.items():
-        notes.append(f'| {library} | {len(record["files"])} | '
+        notes.append(f'| [{library}]({LIBRARY_URLS[library]}) | {len(record["files"])} | '
                      f'{len(record["missing"])} | {record["archive"] or "—"} |')
     (output / 'RELEASE_NOTES.md').write_text('\n'.join(notes) + '\n', encoding='utf-8')
     checksums = [f'{sha256(path)}  {path.name}\n' for path in sorted(output.iterdir())]

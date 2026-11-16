@@ -69,6 +69,30 @@ class ReleaseTests(unittest.TestCase):
             digest, name = line.split('  ', 1)
             self.assertEqual(digest, hashlib.sha256((self.output / name).read_bytes()).hexdigest())
 
+    def test_release_notes_link_all_libraries_including_failed_ones(self):
+        self.document('hello_go-zc310.pdf')
+        manifest = self.bundle()
+        notes = (self.output / 'RELEASE_NOTES.md').read_text()
+        urls = {
+            'zc310': 'https://github.com/zc310/ofd',
+            'ofdgo': 'https://github.com/xiaoqidun/ofdgo',
+            'ofdrw-java': 'https://github.com/ofdrw/ofdrw',
+            'ofdrw-rs': 'https://github.com/lihongjie0209/ofdrw-rs',
+            'ofdbox-folio': 'https://github.com/ofdbox/ofdbox-folio',
+            'sofd': 'https://github.com/emfox/sOFD',
+            'easyofd-rust': 'https://github.com/easy-4-rust/easyofd-rust',
+            'easyofd-python': 'https://pypi.org/project/easyofd/',
+            'ofd-to-pdf-node': 'https://www.npmjs.com/package/@miconvert/ofd-to-pdf',
+            'pdf2ofd-python': 'https://github.com/wanglrebe/pdf2ofd',
+            'jsofd': 'https://github.com/Hufe921/jsOFD',
+        }
+        self.assertEqual(set(urls), set(LIBRARIES))
+        for library, url in urls.items():
+            record = manifest['libraries'][library]
+            self.assertIn(
+                f'| [{library}]({url}) | {len(record["files"])} | '
+                f'{len(record["missing"])} | {record["archive"] or "—"} |', notes)
+
     def test_failed_and_empty_outputs_are_listed_without_empty_archives(self):
         self.document('hello_go-zc310.pdf')
         self.document('ano_go-zc310.pdf', b'')
