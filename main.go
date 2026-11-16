@@ -76,11 +76,6 @@ func main() {
 			Command:    []string{"python3", filepath.Join(binDir, "..", "python", "ofd2pdf.py"), inputFile, filepath.Join(binDir, "output_python.pdf")},
 			OutputFile: filepath.Join(binDir, "output_python.pdf"),
 		},
-		"ofd2pdf": {
-			Name:       "python-ofd2pdf",
-			Command:    []string{"python3", filepath.Join(binDir, "..", "python", "ofd2pdf_ofd2pdf.py"), inputFile, filepath.Join(binDir, "output_ofd2pdf.pdf")},
-			OutputFile: filepath.Join(binDir, "output_ofd2pdf.pdf"),
-		},
 		"java": {
 			Name:       "java-ofdrw",
 			Command:    []string{filepath.Join(binDir, "..", "java", "ofd2pdf_java.sh"), inputFile, filepath.Join(binDir, "output_java.pdf")},
@@ -95,7 +90,7 @@ func main() {
 
 	selectedConverters := os.Args[2:]
 	if len(selectedConverters) == 0 {
-		selectedConverters = []string{"ofdgo", "ofdrw-rs", "ofdbox-folio", "sofd", "zc310", "python", "ofd2pdf", "java", "node"}
+		selectedConverters = []string{"ofdgo", "ofdrw-rs", "ofdbox-folio", "sofd", "zc310", "python", "java", "node"}
 	}
 
 	fmt.Printf("Input file: %s\n\n", inputFile)
@@ -162,7 +157,6 @@ func main() {
 			"ofdrw-rs":     "go-ofdrw-rs",
 			"ofdbox-folio": "rust-ofdbox-folio",
 			"sofd":         "rust-sofd",
-			"ofd2pdf":      "ofd2pdf",
 			"java":         "ofdrw", "node": "@miconvert/ofd-to-pdf",
 		}[name]
 		if !hasRow {

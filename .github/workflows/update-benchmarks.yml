@@ -106,7 +106,7 @@ jobs:
       - name: Install benchmark dependencies
         run: |
           python -m pip install --break-system-packages --upgrade pip
-          python -m pip install --break-system-packages easyofd ofd2img ofd2pdf pdf2ofd pymupdf numpy pillow
+          python -m pip install --break-system-packages easyofd pdf2ofd pymupdf numpy pillow
           npm --prefix node install
           mkdir -p java/lib
           mvn -B -f java/pom.xml -Dofdrw.version="${{ needs.check.outputs.ofdrw }}" dependency:copy-dependencies -DoutputDirectory="$GITHUB_WORKSPACE/java/lib"

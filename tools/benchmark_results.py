@@ -12,7 +12,6 @@ OFD_CONVERTER_ROWS = {
     "rust-ofdbox-folio": "rust-ofdbox-folio",
     "rust-sofd": "rust-sofd",
     "python-easyofd": "easyofd",
-    "python-ofd2pdf": "ofd2pdf",
     "java-ofdrw": "ofdrw",
     "node-ofd2pdf": "@miconvert/ofd-to-pdf",
 }

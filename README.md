@@ -6,7 +6,7 @@
 
 | 方向      | 文档                                     | 对比内容                                                                                     |
 |-----------|------------------------------------------|----------------------------------------------------------------------------------------------|
-| OFD → PDF | [docs/ofd-to-pdf.md](docs/ofd-to-pdf.md) | 9 种转换器（Go×3 / Rust×2 / Python×2 / Java / Node）的速度、文件大小、文本提取与数科版式还原度 |
+| OFD → PDF | [docs/ofd-to-pdf.md](docs/ofd-to-pdf.md) | 8 种转换器（Go×3 / Rust×2 / Python / Java / Node）的速度、文件大小、文本提取与数科版式还原度 |
 | PDF → OFD | [docs/pdf-to-ofd.md](docs/pdf-to-ofd.md) | 5 种转换器（zc310 / ofdgo / ofdrw / pdf2ofd / jsOFD）的速度、文件大小与回环还原度 |
 
 基准参考输出来自**数科版式阅读器**（`testdata`），保证同一组文档双向可测。测试用的 PDF/OFD 可在 [zc310/ofd-fixtures](https://github.com/zc310/ofd-fixtures) 下载。
@@ -94,8 +94,8 @@ ofd-benchmark/
 │   ├── ofdbox-folio-convert/ # Rust ofdbox-folio OFD→PDF 转换器
 │   └── sofd-convert.sh       # sOFD CLI 结果适配器
 ├── python/
-│   ├── ofd2pdf.py          # Python 转换器（easyofd + ofd2img）
-│   ├── ofd2pdf_ofd2pdf.py
+│   ├── ofd2pdf.py          # Python 转换器（仅 easyofd）
+│   ├── ofd2pdf_ofd2pdf.py  # 旧独立脚本，仅供参考，不参与评测
 │   └── pdf2ofd_convert.py  # Python pdf2ofd 转换器
 ├── java/
 │   ├── Ofd2Pdf.java        # Java ofdrw OFD→PDF 转换器

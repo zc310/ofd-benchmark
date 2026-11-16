@@ -2,7 +2,6 @@
 import sys
 import base64
 import warnings
-import traceback
 warnings.filterwarnings("ignore")
 
 def try_easyofd(ofd_path, pdf_path):
@@ -16,20 +15,8 @@ def try_easyofd(ofd_path, pdf_path):
     with open(pdf_path, 'wb') as f:
         f.write(pdf_bytes)
 
-def try_ofd2img(ofd_path, pdf_path):
-    from ofd2img import OFD
-    with open(ofd_path, 'rb') as f:
-        ofdb64 = str(base64.b64encode(f.read()), 'utf-8')
-    ofd = OFD()
-    ofd.read(ofdb64)
-    pdf_bytes = ofd.to_pdf()
-    ofd.del_data()
-    with open(pdf_path, 'wb') as f:
-        f.write(pdf_bytes)
-
 LIBRARIES = [
     ("easyofd", try_easyofd),
-    ("ofd2img", try_ofd2img),
 ]
 
 def convert(ofd_path, pdf_path):

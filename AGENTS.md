@@ -211,7 +211,7 @@ GOWORK=off go run ./tools/gen-libraries -check   # 校验 md 与数据源一致�
 
 - `python-ofdreader` 已移出基准配置与结果表，也不再作为 easyofd 的回退；旧独立脚本仅保留供参考
 - `python-easyofd` 对部分文件（hello、1000-pages）会 crash（list index out of range）
-- `python-ofd2pdf` 基于图片渲染，无法提取文本
+- `ofd2img` 与 `python-ofd2pdf` 已移出评测配置、依赖安装及结果表；easyofd 不再回退到 ofd2img。旧独立 ofd2pdf 脚本仅供参考
 - PDF→OFD：`python-pdf2ofd` 需 `pip install pdf2ofd`（PEP 668 环境加 `--user --break-system-packages`）
 - `java/lib/` 中有 3 个损坏占位 jar（jaxen/pdfbox-sandbox/sqlite，554 字节）：`javac` 需排除，运行时 `java` 会自动忽略
 - ofdrw PDF→OFD（Pdf2Ofd.java）运行需要 `zip4j.jar`（已下载到 java/lib 与 bin/java/lib）
