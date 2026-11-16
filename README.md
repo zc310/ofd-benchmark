@@ -90,6 +90,26 @@ GOWORK=off go run ./tools/gen-benchmarks -check  # 校验文档是否最新
 
 基准驱动会将转换耗时、输出大小和大小比写回 YAML；三个对比脚本会补充像素相似度、文本提取和文本相似度。GitHub Actions 每周检查 `zc310/ofd`、`xiaoqidun/ofdgo` 的最新提交及 Maven Central 上 `org.ofdrw:ofdrw-converter` 的最新发布版，`ofdrw-rs` 当前固定使用 v0.5.0；只有受跟踪版本变化时才运行完整基准并提交更新，也可在 Actions 页面手动触发（手动运行不要求有更新）。Workflow 会下载匹配的 Linux x64 原生库。本轮测试的库版本和 runner 的 OS、CPU 型号/逻辑核心数、内存均记入 YAML 并显示在报告中；Go 模块升级只在 workflow runner 临时生效，不会提交 `go.mod` 变更。完整运行会拉取 `zc310/ofd-fixtures` 样例，并在开始时使用 `-reset` 将待测单元重置为 `FAILED`，避免失败或缺失结果沿用旧数据。
 
+## 标签发布评测产物
+
+推送 `v*` 标签会强制运行完整基准，成功后自动创建同名 GitHub Release：
+
+```bash
+git tag v2026.11.16
+git push origin v2026.11.16
+```
+
+- 每个库一个 ZIP（如 `zc310-v2026.11.16.zip`），包含 `ofd-to-pdf/`、`pdf-to-ofd/` 和 `roundtrip/` 下的 PDF/OFD；回环 PDF 统一由 zc310 渲染。不同语言实现分别打包，仅支持单向转换的库只包含对应产物。
+- 附件还包含本次两份 Markdown 报告、`benchmark-results.yaml`、`manifest.json`、发布说明和 `SHA256SUMS`。清单记录文件及缺失样例；失败或空输出不打包，全部失败的库不生成空 ZIP。构建或评测流程失败则不发布正式版本。
+- 标签运行不提交报告、不移动标签。依赖仍按现有逻辑在运行时解析，实际受跟踪版本及运行环境见附件报告；标签本身不保证所有外部依赖和样例可复现。
+- 先创建草稿并上传全部附件，再正式发布；已有 Release（含草稿）不会覆盖。上传失败留下的草稿需手动删除后重试；已发布结果需要重测时请打新标签。Actions 中间附件保留 7 天，Release 附件不受此期限影响。
+
+本地打包已有评测输出（目标目录必须为空或不存在）：
+
+```bash
+python3 tools/package_benchmark_release.py --tag v2026.11.16 --output /tmp/benchmark-release
+```
+
 ## 项目结构
 
 ```
