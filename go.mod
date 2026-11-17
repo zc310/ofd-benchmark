@@ -4,8 +4,8 @@ go 1.26.4
 
 require (
 	github.com/lihongjie0209/ofdrw-rs/bindings/go v0.5.0
-	github.com/xiaoqidun/ofdgo v0.0.0-20261111160922-3edf35199ec7
-	github.com/zc310/ofd v0.1.10-0.20261114075103-9a2f2be36ac9
+	github.com/xiaoqidun/ofdgo v0.0.0-20261117013150-3649a7b865d8
+	github.com/zc310/ofd v0.1.9
 	go.yaml.in/yaml/v4 v4.0.0
 )
 
@@ -46,7 +46,7 @@ require (
 	github.com/xdg-go/stringprep v1.0.4 // indirect
 	github.com/xiaoqidun/j2kgo v1.0.2 // indirect
 	github.com/xiaoqidun/jbig2 v1.1.9 // indirect
-	github.com/xiaoqidun/pdfgo v0.0.0-20261110055331-115316fc9b10 // indirect
+	github.com/xiaoqidun/pdfgo v0.0.0-20261116130616-d9c8a1b813d7 // indirect
 	github.com/yuin/goldmark v1.8.7 // indirect
 	go.yaml.in/yaml/v3 v3.0.6 // indirect
 	golang.org/x/crypto v0.59.0 // indirect
