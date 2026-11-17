@@ -155,6 +155,7 @@
 |             [ofdrw-viewer](https://github.com/ofdrw/ofdrw-viewer)             |    MIT     |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ✅   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ✅  |    ✅    |  ✅  |  ✅  |  ❌  |  ❌  |  ❌  |   ❌   |
 |         [DocPaw-Reader](https://github.com/bushizhuan/DocPaw-Reader)          | Apache-2.0 |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ✅   |  ❌   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ⚠️  |    ❌    |  ✅  |  ✅  |  ❌  |  ❌  |  ❌  |   ❌   |
 |               [ofd-core](https://github.com/LaoJia803/ofd-core)               | Apache-2.0 |  ✅  |  ✅  |  ⚠️  |   ❌   |  ✅   |  ❌   |  ✅   |  ❌  |   ✅   |    ⚠️     |  ❌  |  ✅  |    ❌    |  ❌  |  ✅  |  ❌  |  ❌  |  ❌  |   ❌   |
+|         [chatOFD（发布预告）](https://github.com/kami-bridge/chatofd)         |    MIT     |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
 
 ## Pascal
 
