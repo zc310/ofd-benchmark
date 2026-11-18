@@ -1,11 +1,11 @@
 module github.com/zc310/ofd-benchmark
 
-go 1.26.4
+go 1.27.0
 
 require (
 	github.com/lihongjie0209/ofdrw-rs/bindings/go v0.5.0
-	github.com/xiaoqidun/ofdgo v0.0.0-20261117013150-3649a7b865d8
-	github.com/zc310/ofd v0.1.9
+	github.com/xiaoqidun/ofdgo v0.0.0-20261118174012-133e0b6cbf8d
+	github.com/zc310/ofd v0.2.1
 	go.yaml.in/yaml/v4 v4.0.0
 )
 
@@ -38,7 +38,7 @@ require (
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd // indirect
 	github.com/srwiley/rasterx v0.0.0-20220730225603-2ab79fcdd4ef // indirect
 	github.com/srwiley/scanx v0.0.0-20190309010443-e94503791388 // indirect
-	github.com/tdewolff/canvas v0.0.0-20260923214215-09804640d00c // indirect
+	github.com/tdewolff/canvas v0.0.0-20261116172151-988951479a61 // indirect
 	github.com/tdewolff/font v0.0.0-20261010204837-88a7f6b56918 // indirect
 	github.com/tdewolff/minify/v2 v2.24.25 // indirect
 	github.com/tdewolff/parse/v2 v2.8.20 // indirect
