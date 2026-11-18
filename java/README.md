@@ -1,102 +1,42 @@
 # Java OFD 转换器
 
-基于 [ofdrw](https://github.com/ofdrw/ofdrw) 的 OFD 转 PDF 工具。
+基于 [ofdrw](https://github.com/ofdrw/ofdrw) 的 OFD→PDF 和 PDF→OFD 转换工具。
 
 ## 环境要求
 
-- Java 1.8+
+- JDK（提供 `java` 和 `javac`）
+- Maven 3
 
-## 依赖下载
+以下命令均在 `java/` 目录下执行。
 
-在 `lib/` 目录下放置以下 JAR 文件：
+## 下载依赖并编译
 
-### ofdrw 核心库
-
-从 Maven Central 下载：
-
-```bash
-# ofdrw 2.5.1 核心模块
-for module in converter reader core gv layout graphics2d pkg font gm; do
-  curl -fsSL "https://repo.maven.apache.org/maven2/org/ofdrw/ofdrw-${module}/2.5.1/ofdrw-${module}-2.5.1.jar" \
-    -o "lib/ofdrw-${module}.jar"
-done
-```
-
-### 第三方依赖
+`pom.xml` 管理 ofdrw、zip4j 及其传递依赖。使用 Maven 将依赖复制到脚本使用的 `lib/` 目录，再编译两个转换器：
 
 ```bash
-# iText PDF
-curl -sL "https://repo1.maven.org/maven2/com/itextpdf/commons/7.2.6/commons-7.2.6.jar" -o lib/itext-commons.jar
-curl -sL "https://repo1.maven.org/maven2/com/itextpdf/io/7.2.6/io-7.2.6.jar" -o lib/itext-io.jar
-curl -sL "https://repo1.maven.org/maven2/com/itextpdf/kernel/7.2.6/kernel-7.2.6.jar" -o lib/itext-kernel.jar
-curl -sL "https://repo1.maven.org/maven2/com/itextpdf/layout/7.2.6/layout-7.2.6.jar" -o lib/itext-layout.jar
-curl -sL "https://repo1.maven.org/maven2/com/itextpdf/font-asian/7.2.6/font-asian-7.2.6.jar" -o lib/itext-font-asian.jar
-
-# Apache PDFBox 3.0.8 (ofdrw 2.5.1 dependency)
-for module in pdfbox fontbox pdfbox-io pdfbox-tools; do
-  curl -fsSL "https://repo.maven.apache.org/maven2/org/apache/pdfbox/${module}/3.0.8/${module}-3.0.8.jar" \
-    -o "lib/${module}.jar"
-done
-
-# BouncyCastle 加密库
-curl -sL "https://repo1.maven.org/maven2/org/bouncycastle/bcprov-jdk18on/1.84/bcprov-jdk18on-1.84.jar" -o lib/bcprov.jar
-curl -sL "https://repo1.maven.org/maven2/org/bouncycastle/bcpkix-jdk18on/1.84/bcpkix-jdk18on-1.84.jar" -o lib/bcpkix.jar
-
-# Apache XML Graphics (Batik)
-curl -sL "https://repo1.maven.org/maven2/org/apache/xmlgraphics/batik-all/1.19/batik-all-1.19.jar" -o lib/batik.jar
-
-# UJMP 矩阵库
-curl -sL "https://repo1.maven.org/maven2/org/ujmp/ujmp-core/0.3.0/ujmp-core-0.3.0.jar" -o lib/ujmp.jar
-
-# XML 解析
-curl -sL "https://repo1.maven.org/maven2/org/dom4j/dom4j/2.1.4/dom4j-2.1.4.jar" -o lib/dom4j.jar
-
-# Apache Commons
-curl -sL "https://repo1.maven.org/maven2/org/apache/commons/commons-compress/1.26.1/commons-compress-1.26.1.jar" -o lib/compress.jar
-curl -sL "https://repo1.maven.org/maven2/commons-io/commons-io/2.16.1/commons-io-2.16.1.jar" -o lib/commons-io.jar
-curl -sL "https://repo1.maven.org/maven2/commons-logging/commons-logging/1.3.1/commons-logging-1.3.1.jar" -o lib/logging.jar
-
-# SLF4J 日志
-curl -sL "https://repo1.maven.org/maven2/org/slf4j/slf4j-api/2.0.9/slf4j-api-2.0.9.jar" -o lib/slf4j.jar
-curl -sL "https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-slf4j-impl/2.16.0/log4j-slf4j-impl-2.16.0.jar" -o lib/log4j.jar
-curl -sL "https://repo1.maven.org/maven2/org/apache/logging/log4j/log4j-core/2.16.0/log4j-core-2.16.0.jar" -o lib/log4j-core.jar
+mvn -B dependency:copy-dependencies -DoutputDirectory="$PWD/lib"
+javac -cp 'lib/*' Ofd2Pdf.java Pdf2Ofd.java
 ```
 
-## 编译
+建议使用干净的 `lib/` 目录：Maven 不会自动清理旧版本或手动下载的 JAR，残留文件可能导致编译或运行出错。已有文件请在确认后另行移走。
 
-```bash
-# 编译 .java 文件
-CP=$(ls lib/*.jar | tr '\n' ':')
-javac -cp "$CP" Ofd2Pdf.java
-```
-
-## 打包 JAR（可选）
-
-将编译后的 .class 文件打包成可执行 JAR：
-
-```bash
-# 创建 MANIFEST.MF
-mkdir -p META-INF
-echo "Main-Class: Ofd2Pdf" > META-INF/MANIFEST.MF
-echo "Class-Path: $(ls lib/*.jar | xargs -I {} echo {} | tr '\n' ' ')" >> META-INF/MANIFEST.MF
-
-# 打包 JAR
-jar cfm ofd2pdf.jar META-INF/MANIFEST.MF Ofd2Pdf.class
-
-# 运行 JAR
-java -jar ofd2pdf.jar <input.ofd> <output.pdf>
-```
+默认 ofdrw 版本由 `pom.xml` 中的 `ofdrw.version` 指定；需要测试其他版本时可通过 `-Dofdrw.version=版本号` 覆盖。
 
 ## 使用
 
 ```bash
-# 方式一：通过 shell 脚本
+# OFD → PDF
 ./ofd2pdf_java.sh <input.ofd> <output.pdf>
 
-# 方式二：直接运行（需要指定 classpath）
-CP=$(ls lib/*.jar | tr '\n' ':')
-java -cp "$CP:." Ofd2Pdf <input.ofd> <output.pdf>
-
-# 方式三：运行打包后的 JAR
-java -jar ofd2pdf.jar <input.ofd> <output.pdf>
+# PDF → OFD
+./pdf2ofd_java.sh <input.pdf> <output.ofd>
 ```
+
+也可以直接运行（Linux/macOS）：
+
+```bash
+java -cp '.:lib/*' Ofd2Pdf <input.ofd> <output.pdf>
+java -cp '.:lib/*' Pdf2Ofd <input.pdf> <output.ofd>
+```
+
+脚本从自身所在目录读取 `.class` 文件和 `lib/` 下的依赖。若用于基准测试，请将编译后的 `.class`、脚本和 `lib/` 部署到 `bin/java/`。
