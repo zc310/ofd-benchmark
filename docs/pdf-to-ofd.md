@@ -10,8 +10,8 @@
 
 | 转换器         | 语言   | 库                                                                          | 版本                    | 说明                                                                                                         |
 |----------------|--------|-----------------------------------------------------------------------------|-------------------------|--------------------------------------------------------------------------------------------------------------|
-| go-zc310       | Go     | [zc310/ofd](https://github.com/zc310/ofd)                                   | v0.1.10-0.20261116124555-06a6fa2d7155 | 基于 pdfcpu 的 PDF→OFD 导入器（路径/文本/图片/注解/渐变/图案/网格/大纲/元数据），文本保留为可提取 TextObject |
-| go-ofdgo       | Go     | [xiaoqidun/ofdgo](https://github.com/xiaoqidun/ofdgo)（ConvertPDF + pdfgo） | v0.0.0-20261116082953-3597c0d22661 | 基于 pdfgo 的 PDF→OFD 导入器（路径/文本/图片/注解）                                                          |
+| go-zc310       | Go     | [zc310/ofd](https://github.com/zc310/ofd)                                   | v0.2.1 | 基于 pdfcpu 的 PDF→OFD 导入器（路径/文本/图片/注解/渐变/图案/网格/大纲/元数据），文本保留为可提取 TextObject |
+| go-ofdgo       | Go     | [xiaoqidun/ofdgo](https://github.com/xiaoqidun/ofdgo)（ConvertPDF + pdfgo） | v0.0.0-20261118174012-133e0b6cbf8d | 基于 pdfgo 的 PDF→OFD 导入器（路径/文本/图片/注解）                                                          |
 | rust-easyofd | Rust | [easyofd-rust](https://github.com/easy-4-rust/easyofd-rust) | 0.1.4 | 默认 PDF→OFD 转换选项；成功生成文件不代表回环外观或文本通过，见下方实测 |
 | java-ofdrw     | Java   | [ofdrw](https://github.com/ofdrw/ofdrw)（ofdrw-converter PDFConverter）     | 2.5.1 | 文本转为矢量轮廓，保留原始外观                                                                               |
 | python-pdf2ofd | Python | [pdf2ofd](https://github.com/wanglrebe/pdf2ofd)                             | 0.1.0                   | 基于 PyMuPDF 渲染，文本栅格化                                                                                |
@@ -54,12 +54,12 @@
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310 | 33ms | 112ms | 291ms | 531ms | 1.41s | 1.14s | 2.02s | 0 |
-| go-ofdgo | 59ms | 441ms | 615ms | 1.17s | 1.99s | 19.45s | 5.64s | 0 |
-| rust-easyofd | **3ms** | **5ms** | **3ms** | **157ms** | **34ms** | **285ms** | **108ms** | 7 |
-| java-ofdrw | 1.21s | 2.05s | 2.48s | 10.13s | 6.03s | 5.96s | 107.14s | 0 |
-| python-pdf2ofd | 153ms | 1.13s | 723ms | 3.36s | 1.29s | 72.60s | 25.39s | 0 |
-| node-jsofd | 309ms | 592ms | 3.39s | 10.79s | 5.62s | 3.30s | 9.22s | 0 |
+| go-zc310 | 34ms | 96ms | 239ms | 461ms | 1.25s | 1.03s | 1.69s | 0 |
+| go-ofdgo | 51ms | 354ms | 294ms | 893ms | 1.59s | 16.85s | 5.11s | 0 |
+| rust-easyofd | **2ms** | **5ms** | **3ms** | **132ms** | **29ms** | **245ms** | **99ms** | 7 |
+| java-ofdrw | 909ms | 1.77s | 2.00s | 8.98s | 5.29s | 5.13s | 92.86s | 0 |
+| python-pdf2ofd | 124ms | 1.01s | 611ms | 2.91s | 1.12s | 62.14s | 21.78s | 0 |
+| node-jsofd | 248ms | 495ms | 3.32s | 10.11s | 5.25s | 2.82s | 8.43s | 0 |
 <!-- benchmark-table:pdf-speed:end -->
 
 ## OFD 文件大小
