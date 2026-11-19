@@ -11,7 +11,6 @@ OFD_CONVERTER_ROWS = {
     "go-ofdrw-rs": "go-ofdrw-rs",
     "rust-ofdbox-folio": "rust-ofdbox-folio",
     "rust-sofd": "rust-sofd",
-    "rust-easyofd": "rust-easyofd",
     "python-easyofd": "easyofd",
     "java-ofdrw": "ofdrw",
     "node-ofd2pdf": "@miconvert/ofd-to-pdf",
@@ -20,7 +19,6 @@ OFD_CONVERTER_ROWS = {
 PDF_CONVERTER_ROWS = {
     "pdf2ofd-zc310": "go-zc310",
     "pdf2ofd-ofdgo": "go-ofdgo",
-    "pdf2ofd-easyofd-rust": "rust-easyofd",
     "pdf2ofd-ofdrw": "java-ofdrw",
     "python-pdf2ofd": "python-pdf2ofd",
     "node-jsofd": "node-jsofd",

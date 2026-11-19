@@ -80,7 +80,6 @@ class ReleaseTests(unittest.TestCase):
             'ofdrw-rs': 'https://github.com/lihongjie0209/ofdrw-rs',
             'ofdbox-folio': 'https://github.com/ofdbox/ofdbox-folio',
             'sofd': 'https://github.com/emfox/sOFD',
-            'easyofd-rust': 'https://github.com/easy-4-rust/easyofd-rust',
             'easyofd-python': 'https://pypi.org/project/easyofd/',
             'ofd-to-pdf-node': 'https://www.npmjs.com/package/@miconvert/ofd-to-pdf',
             'pdf2ofd-python': 'https://github.com/wanglrebe/pdf2ofd',

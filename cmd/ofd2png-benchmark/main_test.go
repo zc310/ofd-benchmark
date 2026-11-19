@@ -73,12 +73,12 @@ func TestRegistryMatchesReportGroups(t *testing.T) {
 			}
 		}
 	}
-	if native != 9 || rows != len(registry)*6 {
+	if native != 8 || rows != len(registry)*6 {
 		t.Fatalf("native=%d report rows=%d", native, rows)
 	}
-	for _, excluded := range []string{"ofd2img", "python", "node"} {
+	for _, excluded := range []string{"ofd2img", "python", "node", "easyofd-rust"} {
 		if _, exists := registry[excluded]; exists {
-			t.Fatalf("non-native PNG converter %s must not participate", excluded)
+			t.Fatalf("excluded PNG converter %s must not participate", excluded)
 		}
 	}
 }

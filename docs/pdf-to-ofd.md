@@ -12,7 +12,6 @@
 |----------------|--------|-----------------------------------------------------------------------------|-------------------------|--------------------------------------------------------------------------------------------------------------|
 | go-zc310       | Go     | [zc310/ofd](https://github.com/zc310/ofd)                                   | v0.2.1 | 基于 pdfcpu 的 PDF→OFD 导入器（路径/文本/图片/注解/渐变/图案/网格/大纲/元数据），文本保留为可提取 TextObject |
 | go-ofdgo       | Go     | [xiaoqidun/ofdgo](https://github.com/xiaoqidun/ofdgo)（ConvertPDF + pdfgo） | v0.0.0-20261118174012-133e0b6cbf8d | 基于 pdfgo 的 PDF→OFD 导入器（路径/文本/图片/注解）                                                          |
-| rust-easyofd | Rust | [easyofd-rust](https://github.com/easy-4-rust/easyofd-rust) | 0.1.4 | 默认 PDF→OFD 转换选项；成功生成文件不代表回环外观或文本通过，见下方实测 |
 | java-ofdrw     | Java   | [ofdrw](https://github.com/ofdrw/ofdrw)（ofdrw-converter PDFConverter）     | 2.5.1 | 文本转为矢量轮廓，保留原始外观                                                                               |
 | python-pdf2ofd | Python | [pdf2ofd](https://github.com/wanglrebe/pdf2ofd)                             | 0.1.0                   | 基于 PyMuPDF 渲染，文本栅格化                                                                                |
 | node-jsofd     | JS     | [Hufe921/jsOFD](https://github.com/Hufe921/jsOFD)（pdfToOfd + pdfjs-dist）  | 1.0.1                   | 基于 pdfjs 重放绘制指令流（路径/文本/图片），不转换注解/渐变/图案/Type3/剪裁                                 |
@@ -46,7 +45,7 @@
 - 系统已安装 `apt-get install fonts-wqy-zenhei fonts-noto-cjk`
 - 测试前运行 `bash tools/install-fonts.sh`，下载 `doc-foundertype.zip`、`doc-zhongyi-etc.zip`、`latin-fonts.zip` 并安装到用户目录 `~/.local/share/fonts/hanzi-fonts/`，随后刷新字体缓存。字体下载链接与依赖安装命令见 [README：快速开始](../README.md#快速开始)；GitHub Actions 已加入此准备步骤。
 
-> 包括 `rust-easyofd` 在内的所有转换器均由 GitHub Actions 在上述环境统一评测。回环统一使用 go-zc310，不改用各库自身回环；速度排名及胜出次数应结合回环外观与文本质量解读，成功生成文件不代表通过质量检查。
+> 所有转换器均由 GitHub Actions 在上述环境统一评测。回环统一使用 go-zc310，不改用各库自身回环；速度排名及胜出次数应结合回环外观与文本质量解读，成功生成文件不代表通过质量检查。
 
 ## 转换速度
 
@@ -54,11 +53,10 @@
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310 | 34ms | 96ms | 239ms | 461ms | 1.25s | 1.03s | 1.69s | 0 |
+| go-zc310 | **34ms** | **96ms** | **239ms** | **461ms** | 1.25s | **1.03s** | **1.69s** | 6 |
 | go-ofdgo | 51ms | 354ms | 294ms | 893ms | 1.59s | 16.85s | 5.11s | 0 |
-| rust-easyofd | **2ms** | **5ms** | **3ms** | **132ms** | **29ms** | **245ms** | **99ms** | 7 |
 | java-ofdrw | 909ms | 1.77s | 2.00s | 8.98s | 5.29s | 5.13s | 92.86s | 0 |
-| python-pdf2ofd | 124ms | 1.01s | 611ms | 2.91s | 1.12s | 62.14s | 21.78s | 0 |
+| python-pdf2ofd | 124ms | 1.01s | 611ms | 2.91s | **1.12s** | 62.14s | 21.78s | 1 |
 | node-jsofd | 248ms | 495ms | 3.32s | 10.11s | 5.25s | 2.82s | 8.43s | 0 |
 <!-- benchmark-table:pdf-speed:end -->
 
@@ -68,11 +66,10 @@
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310 | 1.7K | 405.4K | 62.3K | 7.3M | 1.6M | 4.8M | 7.1M | 0 |
+| go-zc310 | **1.7K** | **405.4K** | **62.3K** | **7.3M** | **1.6M** | 4.8M | **7.1M** | 6 |
 | go-ofdgo | 6.2K | 709.5K | 117.5K | 9.2M | 3.0M | 60.7M | 17.1M | 0 |
-| rust-easyofd | **1.2K** | **1.8K** | **3.6K** | **5.2M** | **918.8K** | **304.6K** | **2.0M** | 7 |
-| java-ofdrw | 5.6K | 601.3K | 817.6K | 34.2M | 20.4M | 3.5M | 30.5M | 0 |
-| python-pdf2ofd | 4.6K | 1.3M | 733.7K | 8.9M | 1.6M | 86.5M | 36.8M | 0 |
+| java-ofdrw | 5.6K | 601.3K | 817.6K | 34.2M | 20.4M | **3.5M** | 30.5M | 1 |
+| python-pdf2ofd | 4.6K | 1.3M | 733.7K | 8.9M | **1.6M** | 86.5M | 36.8M | 0 |
 | node-jsofd | 3.0K | 2.2M | 590.2K | 34.8M | 12.9M | 31.8M | 34.3M | 0 |
 <!-- benchmark-table:pdf-ofd-size:end -->
 
@@ -84,10 +81,9 @@
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310 | 0.48 | 0.45 | 0.78 | 1.09 | 1.02 | 2.54 | 1.46 |
+| go-zc310 | **0.48** | **0.45** | **0.78** | **1.09** | **1.02** | 2.54 | **1.46** |
 | go-ofdgo | 1.76 | 0.78 | 1.47 | 1.38 | 1.91 | 31.98 | 3.53 |
-| rust-easyofd | **0.33** | **0.00** | **0.04** | **0.78** | **0.57** | **0.16** | **0.41** |
-| java-ofdrw | 1.58 | 0.67 | 10.23 | 5.10 | 13.00 | 1.83 | 6.32 |
+| java-ofdrw | 1.58 | 0.67 | 10.23 | 5.10 | 13.00 | **1.83** | 6.32 |
 | python-pdf2ofd | 1.32 | 1.43 | 9.18 | 1.33 | 1.04 | 45.55 | 7.62 |
 | node-jsofd | 0.84 | 2.47 | 7.38 | 5.18 | 8.18 | 16.72 | 7.10 |
 <!-- benchmark-table:pdf-size-ratio:end -->
@@ -98,8 +94,6 @@
 
 像素脚本对 `1000-pages` 仅取前 3 页（仍校验总页数一致）；文本比较仍处理完整文档。所有转换器均使用相同的采样与评测规则。
 
-`rust-easyofd 0.1.4` 成功生成 OFD 不代表回环内容完整；像素与文本结果以下方表格为准。回环质量检查未通过的样本记为 `FAILED`，不沿用旧分数，也不通过修补输出规避检查。
-
 **像素相似度**（100% 为完全相同）：
 
 <!-- benchmark-table:pdf-pixel-similarity:start -->
@@ -108,7 +102,6 @@
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | go-zc310 | 99.63% | **99.77%** | 98.43% | **99.93%** | **99.56%** | **99.84%** | **99.98%** | 5 |
 | go-ofdgo | 99.63% | 99.39% | 98.34% | 98.02% | 99.17% | 99.64% | 99.82% | 0 |
-| rust-easyofd | FAILED | FAILED | FAILED | FAILED | 95.73% | FAILED | FAILED | 0 |
 | java-ofdrw | **99.85%** | 98.72% | 98.75% | 99.49% | 99.06% | 97.99% | 99.66% | 1 |
 | python-pdf2ofd | 99.72% | 98.35% | **98.94%** | 99.34% | 97.70% | 98.40% | FAILED | 1 |
 | node-jsofd | 99.37% | 96.77% | 98.14% | FAILED | 98.82% | 99.50% | 99.94% | 0 |
@@ -122,7 +115,6 @@
 |---|---:|---:|---:|---:|---:|---:|---:|
 | go-zc310 | 22 | 9222 | 9737 | 9314 | 2740 | 326022 | 170697 |
 | go-ofdgo | 8 | 14127 | 10009 | 10920 | 3373 | 179998 | 234709 |
-| rust-easyofd | 0 | 0 | 242 | 0 | 10 | 0 | 0 |
 | java-ofdrw | 0 | 7049 | 0 | 1598 | 3 | 321998 | 167 |
 | python-pdf2ofd | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | node-jsofd | 25 | 10812 | 9941 | 10222 | 2796 | 326448 | 225807 |
@@ -136,7 +128,6 @@
 |---|---:|---:|---:|---:|---:|---:|---:|
 | go-zc310 | 100.00% | 33.33% | 64.41% | 15.41% | 10.43% | 98.54% | 41.99% |
 | go-ofdgo | 26.32% | 19.19% | 44.56% | 13.67% | 4.63% | 2.63% | 1.08% |
-| rust-easyofd | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% |
 | java-ofdrw | 0.00% | 64.59% | 0.00% | 4.58% | 0.00% | 98.86% | 0.00% |
 | python-pdf2ofd | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% |
 | node-jsofd | 100.00% | 36.08% | 18.27% | 15.12% | 6.94% | 30.25% | 1.08% |
@@ -157,15 +148,8 @@ GOWORK=off go build -o bin/pdf2ofd-benchmark ./cmd/pdf2ofd-benchmark
 # 编译 ofdgo PDF→OFD 转换器
 GOWORK=off go build -o bin/ofdgo-pdf2ofd ./cmd/ofdgo-pdf2ofd
 
-# 编译 easyofd-rust 双向转换器（固定 0.1.4）
-cargo build --release --locked --manifest-path rust/easyofd-convert/Cargo.toml --target-dir rust/target
-cp rust/target/release/easyofd-ofd2pdf rust/target/release/easyofd-pdf2ofd bin/
-
 # 运行全部转换器（单个文件）
 ./bin/pdf2ofd-benchmark testdata/suwell/hello.pdf
-
-# 单独测试 easyofd-rust
-./bin/pdf2ofd-benchmark testdata/suwell/hello.pdf easyofd-rust
 
 # 批量运行所有测试文件
 for f in testdata/suwell/*.pdf testdata/standards/*.pdf; do

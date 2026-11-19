@@ -14,11 +14,10 @@
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | v0.5.0 | 原生 `PagePNG(index, 200)`（200 DPI） |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 36e6877bf5d0b989cd824c3c74241533ae1f90ea | 原生 CPU 渲染，200 DPI |
 | [rust-sofd](https://github.com/emfox/sOFD) | 65cff468ecc2af676180f540899fdf74da849c3a | 原生 CLI `convert --format png --dpi 200` |
-| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust) | 0.1.4 | 原生 `AWTMaker.with_dpi(200)` |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | 2.5.1 | 原生 AWT `ImageMaker(reader, 200.0 / 25.4)`（200 DPI） |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | a9b1d29ef90141a369ad47cc32fd6c62dd8b8450 | 原生 CLI `render --dpi 200 --page n`（200 DPI） |
 
-选择键为 `zc310`、`ofdgo`、`ofd-utility`、`ofdrw-rs`、`ofdbox-folio`、`sofd`、`easyofd-rust`、`java`、`ofdmanager`，不指定时全部运行。
+选择键为 `zc310`、`ofdgo`、`ofd-utility`、`ofdrw-rs`、`ofdbox-folio`、`sofd`、`java`、`ofdmanager`，不指定时全部运行。
 
 `ofd-utility` 的 Python 适配器仅传递固定参数并统一页码/文件名，不解码或重绘图片。`ofdmanager` 上游 CLI 一次只渲染一页，适配器按 OFD 中的页数循环调用，重复解析/字体加载计入耗时；多文档 OFD 会明确拒绝，不静默只测第一个文档。原生 Java `ImageMaker` 的构造参数是**像素/毫米，不是 DPI**。
 
@@ -36,7 +35,7 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 - **全页相似度**：`1 − 平均归一化 RGB 色差`。各页等权平均；全白页不抬高内容/F1 得分。丢失几乎全部前景、损坏 PNG、缺页或尺寸不符均记为 `FAILED`。
 - 单次转换默认限时 15 分钟，可通过 `BENCHMARK_CONVERTER_TIMEOUT=30m` 调整；超时终止整个进程组并清理部分输出。重跑时清除该转换器旧输出，质量得分重置，避免沿用旧结果。
 
-## 原生 PNG 结果（9 个转换器）
+## 原生 PNG 结果（8 个转换器）
 
 表格由 `docs/benchmark-results.yaml` 生成，勿直接编辑。`FAILED` 表示尚无本轮有效测量或转换/比较失败；首次正式结果由 CI 统一环境测量，本地验证不覆盖已有 PDF 报告的运行环境。
 
@@ -52,7 +51,6 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | FAILED | FAILED | FAILED | 0 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | FAILED | FAILED | FAILED | 0 |
 | [rust-sofd](https://github.com/emfox/sOFD) | FAILED | FAILED | FAILED | 0 |
-| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust) | FAILED | FAILED | FAILED | 0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | FAILED | FAILED | FAILED | 0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | FAILED | FAILED | FAILED | 0 |
 <!-- benchmark-table:png-speed:end -->
@@ -69,7 +67,6 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | FAILED | FAILED | FAILED | 0 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | FAILED | FAILED | FAILED | 0 |
 | [rust-sofd](https://github.com/emfox/sOFD) | FAILED | FAILED | FAILED | 0 |
-| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust) | FAILED | FAILED | FAILED | 0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | FAILED | FAILED | FAILED | 0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | FAILED | FAILED | FAILED | 0 |
 <!-- benchmark-table:png-ms-per-page:end -->
@@ -86,7 +83,6 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | FAILED | FAILED | FAILED | 0 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | FAILED | FAILED | FAILED | 0 |
 | [rust-sofd](https://github.com/emfox/sOFD) | FAILED | FAILED | FAILED | 0 |
-| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust) | FAILED | FAILED | FAILED | 0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | FAILED | FAILED | FAILED | 0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | FAILED | FAILED | FAILED | 0 |
 <!-- benchmark-table:png-size:end -->
@@ -103,7 +99,6 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | FAILED | FAILED | FAILED | 0 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | FAILED | FAILED | FAILED | 0 |
 | [rust-sofd](https://github.com/emfox/sOFD) | FAILED | FAILED | FAILED | 0 |
-| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust) | FAILED | FAILED | FAILED | 0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | FAILED | FAILED | FAILED | 0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | FAILED | FAILED | FAILED | 0 |
 <!-- benchmark-table:png-content-similarity:end -->
@@ -120,7 +115,6 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | FAILED | FAILED | FAILED | 0 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | FAILED | FAILED | FAILED | 0 |
 | [rust-sofd](https://github.com/emfox/sOFD) | FAILED | FAILED | FAILED | 0 |
-| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust) | FAILED | FAILED | FAILED | 0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | FAILED | FAILED | FAILED | 0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | FAILED | FAILED | FAILED | 0 |
 <!-- benchmark-table:png-foreground-f1:end -->
@@ -137,7 +131,6 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | FAILED | FAILED | FAILED | 0 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | FAILED | FAILED | FAILED | 0 |
 | [rust-sofd](https://github.com/emfox/sOFD) | FAILED | FAILED | FAILED | 0 |
-| [rust-easyofd](https://github.com/easy-4-rust/easyofd-rust) | FAILED | FAILED | FAILED | 0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | FAILED | FAILED | FAILED | 0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | FAILED | FAILED | FAILED | 0 |
 <!-- benchmark-table:png-pixel-similarity:end -->
@@ -153,8 +146,6 @@ GOWORK=off go build -o bin/ofdgo-png ./cmd/ofdgo-png
 GOWORK=off go build -o bin/ofdrw-rs-png ./cmd/ofdrw-rs-png
 cargo build --release --locked --manifest-path rust/ofdbox-folio-convert/Cargo.toml --target-dir rust/target
 cp rust/target/release/ofdbox-folio-convert bin/
-cargo build --release --locked --manifest-path rust/easyofd-convert/Cargo.toml --target-dir rust/target
-cp rust/target/release/easyofd-ofd2png bin/
 # Java 依赖按 java/pom.xml 安装。排除本地历史损坏占位 JAR。
 CP=$(find java/lib -name '*.jar' ! -name 'jaxen.jar' ! -name 'pdfbox-sandbox.jar' ! -name 'sqlite.jar' -printf '%p:')
 javac -cp "$CP" java/Ofd2Png.java
@@ -170,7 +161,7 @@ cargo install --git https://github.com/feuvan/ofdmanager \
 cp /tmp/opencode/ofdmanager-install/bin/ofd-cli bin/ofdmanager-cli
 # sOFD CLI、ofdrw-rs 原生库按 README 的现有构建说明准备。
 
-# 全部 9 个原生转换器，固定 200 DPI。
+# 全部 8 个原生转换器，固定 200 DPI。
 for name in 999 intro zsbk; do
   ./bin/ofd2png-benchmark "testdata/ofdrw/$name.ofd"
 done

@@ -53,11 +53,6 @@ func main() {
 	inputName := inputBase[:len(inputBase)-len(filepath.Ext(inputBase))]
 
 	converters := map[string]Converter{
-		"easyofd-rust": {
-			Name:       "pdf2ofd-easyofd-rust",
-			Command:    []string{filepath.Join(binDir, "easyofd-pdf2ofd"), inputFile, filepath.Join(binDir, "output_easyofd_rust.ofd")},
-			OutputFile: filepath.Join(binDir, "output_easyofd_rust.ofd"),
-		},
 		"zc310": {
 			Name:       "pdf2ofd-zc310",
 			Command:    []string{filepath.Join(binDir, "ofd-converter"), "--from", "pdf", "-o", filepath.Join(binDir, "output_zc310.ofd"), inputFile},
@@ -87,7 +82,7 @@ func main() {
 
 	selectedConverters := os.Args[2:]
 	if len(selectedConverters) == 0 {
-		selectedConverters = []string{"zc310", "ofdgo", "easyofd-rust", "java", "pdf2ofd", "jsofd"}
+		selectedConverters = []string{"zc310", "ofdgo", "java", "pdf2ofd", "jsofd"}
 	}
 
 	fmt.Printf("Input file: %s\n\n", inputFile)
@@ -139,12 +134,11 @@ func main() {
 		refSize = info.Size()
 	}
 	rowNames := map[string]string{
-		"zc310":        "go-zc310",
-		"ofdgo":        "go-ofdgo",
-		"java":         "java-ofdrw",
-		"pdf2ofd":      "python-pdf2ofd",
-		"jsofd":        "node-jsofd",
-		"easyofd-rust": "rust-easyofd",
+		"zc310":   "go-zc310",
+		"ofdgo":   "go-ofdgo",
+		"java":    "java-ofdrw",
+		"pdf2ofd": "python-pdf2ofd",
+		"jsofd":   "node-jsofd",
 	}
 	var updates []benchmarkdata.CellUpdate
 	for _, name := range selectedConverters {

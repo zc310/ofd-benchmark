@@ -59,7 +59,7 @@ func run(args []string) error {
 	selected := args[1:]
 	if len(selected) == 0 {
 		selected = []string{"zc310", "ofdgo", "ofdrw-rs", "ofdbox-folio", "sofd",
-			"easyofd-rust", "java", "ofdmanager", "ofd-utility"}
+			"java", "ofdmanager", "ofd-utility"}
 	}
 	for _, key := range selected {
 		if _, ok := converters[key]; !ok {
@@ -130,7 +130,6 @@ func pngConverters(bin, base string) map[string]pngConverter {
 		"ofdrw-rs":     {"go-ofdrw-rs", []string{filepath.Join(bin, "ofdrw-rs-png")}, "png"},
 		"ofdbox-folio": {"rust-ofdbox-folio", []string{filepath.Join(bin, "ofdbox-folio-convert"), "--png"}, "png"},
 		"sofd":         {"rust-sofd", []string{"python3", filepath.Join(base, "tools", "native_cli_png.py"), "sofd"}, "png"},
-		"easyofd-rust": {"rust-easyofd", []string{filepath.Join(bin, "easyofd-ofd2png")}, "png"},
 		"java":         {"java-ofdrw", []string{"bash", filepath.Join(base, "java", "ofd2png_java.sh")}, "png"},
 		"ofdmanager":   {"rust-ofdmanager", []string{"python3", filepath.Join(base, "tools", "native_cli_png.py"), "ofdmanager"}, "png"},
 	}

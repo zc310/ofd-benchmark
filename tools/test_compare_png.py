@@ -96,7 +96,7 @@ class PNGComparisonTests(unittest.TestCase):
         updates = write.call_args.args[1]
         self.assertEqual(len(updates), len(compare_png.CONVERTERS) * 3)
         self.assertTrue(all(update['value'] == 'FAILED' for update in updates))
-        for excluded in ('python-ofd2img', 'python-easyofd', 'node-ofd2pdf'):
+        for excluded in ('python-ofd2img', 'python-easyofd', 'node-ofd2pdf', 'rust-easyofd'):
             self.assertNotIn(excluded, compare_png.CONVERTERS)
 
     def test_no_write_does_not_change_yaml(self):

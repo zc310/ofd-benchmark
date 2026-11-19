@@ -204,20 +204,22 @@ class ComparisonScriptTests(unittest.TestCase):
             output.mkdir(parents=True)
             (output / 'hello_go-ofdgo.pdf').write_bytes(b'invalid PDF')
             make_pdf(output / 'hello_go-zc310.pdf')
-            make_pdf(output / 'hello_rust-easyofd.pdf')
+            make_pdf(output / 'hello_rust-sofd.pdf')
+            make_pdf(output / 'hello_rust-easyofd.pdf')  # Ignore retired converter output.
             make_pdf(output / 'hello_node-ofd2pdf.pdf', 1)
             updates = self.run_script(compare_pdf, base)
+            self.assertNotIn('rust-easyofd', {converter for converter, _ in updates})
             table = 'ofd-pixel-similarity'
             self.assertEqual(updates['go-ofdgo', table], 'FAILED')
             self.assertEqual(updates['go-zc310', table], '100.00%')
-            self.assertEqual(updates['rust-easyofd', table], '100.00%')
+            self.assertEqual(updates['rust-sofd', table], '100.00%')
             self.assertEqual(updates['@miconvert/ofd-to-pdf', table], 'FAILED')
             for table in ('ofd-content-similarity', 'ofd-foreground-f1'):
                 self.assertEqual(updates['go-ofdgo', table], 'FAILED')
                 self.assertEqual(updates['go-zc310', table], '100.00%')
-                self.assertEqual(updates['rust-easyofd', table], '100.00%')
+                self.assertEqual(updates['rust-sofd', table], '100.00%')
 
-    def test_easyofd_text_results_are_written(self):
+    def test_sofd_text_results_are_written(self):
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)
             ref = base / 'testdata' / 'suwell' / 'hello.pdf'
@@ -225,14 +227,17 @@ class ComparisonScriptTests(unittest.TestCase):
             make_pdf(ref)
             output = base / 'bin' / 'output'
             output.mkdir(parents=True)
-            make_pdf(output / 'hello_rust-easyofd.pdf')
+            make_pdf(output / 'hello_rust-sofd.pdf')
+            make_pdf(output / 'hello_rust-easyofd.pdf')  # Ignore retired converter output.
             with patch.object(compare_text, '__file__', str(base / 'tools' / 'script.py')), \
                  patch.object(sys, 'argv', ['script.py', 'hello']), \
                  patch.object(compare_text, 'write_updates') as writer, \
                  contextlib.redirect_stdout(io.StringIO()):
                 compare_text.main()
             cells = {cell['table']: cell for cell in writer.call_args.args[1]}
-            self.assertEqual(cells['ofd-text-similarity']['converter'], 'rust-easyofd')
+            self.assertNotIn('rust-easyofd',
+                             {cell['converter'] for cell in writer.call_args.args[1]})
+            self.assertEqual(cells['ofd-text-similarity']['converter'], 'rust-sofd')
             self.assertEqual(cells['ofd-text-similarity']['value'], '100.00%')
             self.assertEqual(cells['ofd-text-extraction']['value'], '19')
 
@@ -244,7 +249,8 @@ class ComparisonScriptTests(unittest.TestCase):
             make_pdf(ref)
             output = base / 'bin' / 'output_ofd'
             output.mkdir(parents=True)
-            for converter in ('pdf2ofd-ofdrw', 'pdf2ofd-zc310', 'node-jsofd', 'python-pdf2ofd', 'pdf2ofd-easyofd-rust'):
+            for converter in ('pdf2ofd-ofdrw', 'pdf2ofd-zc310', 'node-jsofd', 'python-pdf2ofd',
+                              'pdf2ofd-ofdgo', 'pdf2ofd-easyofd-rust'):
                 stem = output / f'hello_{converter}'
                 stem.with_suffix('.ofd').write_bytes(b'placeholder OFD')
                 stem.with_suffix('.txt').write_text('Test textTest text', encoding='utf-8')
@@ -253,13 +259,14 @@ class ComparisonScriptTests(unittest.TestCase):
                 elif converter != 'python-pdf2ofd':
                     make_pdf(stem.with_suffix('.pdf'), 1 if converter == 'node-jsofd' else 2)
             updates = self.run_script(compare_pdf2ofd, base)
+            self.assertNotIn('rust-easyofd', {converter for converter, _ in updates})
             table = 'pdf-pixel-similarity'
             self.assertEqual(updates['java-ofdrw', table], 'FAILED')
             self.assertEqual(updates['go-zc310', table], '100.00%')
-            self.assertEqual(updates['rust-easyofd', table], '100.00%')
+            self.assertEqual(updates['go-ofdgo', table], '100.00%')
             self.assertEqual(updates['node-jsofd', table], 'FAILED')
             self.assertEqual(updates['python-pdf2ofd', table], 'FAILED')
-            for converter in ('java-ofdrw', 'go-zc310', 'node-jsofd', 'python-pdf2ofd', 'rust-easyofd'):
+            for converter in ('java-ofdrw', 'go-zc310', 'node-jsofd', 'python-pdf2ofd', 'go-ofdgo'):
                 self.assertEqual(updates[converter, 'pdf-text-extraction'], '18')
 
 

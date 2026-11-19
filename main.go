@@ -46,11 +46,6 @@ func main() {
 	inputName := inputBase[:len(inputBase)-len(filepath.Ext(inputBase))]
 
 	converters := map[string]Converter{
-		"easyofd-rust": {
-			Name:       "rust-easyofd",
-			Command:    []string{filepath.Join(binDir, "easyofd-ofd2pdf"), inputFile, filepath.Join(binDir, "output_easyofd_rust.pdf")},
-			OutputFile: filepath.Join(binDir, "output_easyofd_rust.pdf"),
-		},
 		"ofdgo": {
 			Name:       "go-ofdgo",
 			Command:    []string{filepath.Join(binDir, "ofdgo-convert"), inputFile, filepath.Join(binDir, "output_ofdgo.pdf")},
@@ -95,7 +90,7 @@ func main() {
 
 	selectedConverters := os.Args[2:]
 	if len(selectedConverters) == 0 {
-		selectedConverters = []string{"ofdgo", "ofdrw-rs", "ofdbox-folio", "sofd", "easyofd-rust", "zc310", "python", "java", "node"}
+		selectedConverters = []string{"ofdgo", "ofdrw-rs", "ofdbox-folio", "sofd", "zc310", "python", "java", "node"}
 	}
 
 	fmt.Printf("Input file: %s\n\n", inputFile)
@@ -162,7 +157,6 @@ func main() {
 			"ofdrw-rs":     "go-ofdrw-rs",
 			"ofdbox-folio": "rust-ofdbox-folio",
 			"sofd":         "rust-sofd",
-			"easyofd-rust": "rust-easyofd",
 			"java":         "ofdrw", "node": "@miconvert/ofd-to-pdf",
 		}[name]
 		if !hasRow {

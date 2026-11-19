@@ -83,7 +83,7 @@ python3 tools/compare_pdf2ofd.py 96
 
 ## 运行 OFD→PNG 基准测试
 
-图片评测固定 **200 DPI**，默认运行 9 个原生转换器（zc310 / ofdgo / ofdrw-rs / ofdbox-folio / sOFD / easyofd-rust / Java ofdrw / ofdmanager / ofd-utility）。Python ofd2img / easyofd 图片接口固定 144 DPI 且经过 PDF，Node ofd2pdf 仅提供 PDF 输出，均不参加 PNG 评测；不接受 PDF 中转或放大低 DPI 图片。完整构建及固定 Rust revision 见 `docs/ofd-to-png.md`；ofdmanager CLI 每页调用一次，重复解析计入耗时。
+图片评测固定 **200 DPI**，默认运行 8 个原生转换器（zc310 / ofdgo / ofdrw-rs / ofdbox-folio / sOFD / Java ofdrw / ofdmanager / ofd-utility）。Python ofd2img / easyofd 图片接口固定 144 DPI 且经过 PDF，Node ofd2pdf 仅提供 PDF 输出，均不参加 PNG 评测；不接受 PDF 中转或放大低 DPI 图片。完整构建及固定 Rust revision 见 `docs/ofd-to-png.md`；ofdmanager CLI 每页调用一次，重复解析计入耗时。
 
 ```bash
 GOWORK=off go build -o bin/ofd2png-benchmark ./cmd/ofd2png-benchmark
@@ -226,7 +226,7 @@ GOWORK=off go run ./tools/gen-libraries -check   # 校验 md 与数据源一致�
 
 ## 注意事项
 
-- `easyofd-rust` 已恢复双向评测：选择键 `easyofd-rust`，OFD→PDF 名称 `rust-easyofd`，PDF→OFD 名称 `pdf2ofd-easyofd-rust`；构建 `cargo build --release --locked --manifest-path rust/easyofd-convert/Cargo.toml --target-dir rust/target`，复制两个 `easyofd-*` 二进制到 `bin/`。固定 crates.io `0.1.4` 与 Cargo.lock，按当前质量算法重测，不沿用移除前分数。
+- `easyofd-rust` 已移出全部评测、CI 构建及结果表；仅在库汇总表保留介绍，与仍参与 OFD→PDF 评测的 Python easyofd 无关。
 - `python-ofdreader` 已移出基准配置与结果表，也不再作为 easyofd 的回退；旧独立脚本仅保留供参考
 - `python-easyofd` 对部分文件（hello、1000-pages）会 crash（list index out of range）
 - `ofd2img` 与 `python-ofd2pdf` 已移出评测配置、依赖安装及结果表；easyofd 不再回退到 ofd2img。ofd2img / Python easyofd 的图片接口固定 144 DPI 且经 PDF，故不加入原生 200 DPI PNG 比较（Python easyofd 仍参与现有 PDF 评测）。旧独立 ofd2pdf 脚本仅供参考
