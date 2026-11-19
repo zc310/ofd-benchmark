@@ -4,6 +4,7 @@ use ofdbox_folio::{
     ir::{DocumentSource, FixedDocument, FontError, FontProvider, FontRequest},
     ofd::{OfdDocument, OfdReadOptions},
     pdf::{PdfOptions, write_fixed},
+    render::{CpuRenderer, RasterTarget},
 };
 
 /// Resolves font families through fontconfig, respecting the runner's configured font dirs.
@@ -86,15 +87,42 @@ fn convert(input: &Path, output: &Path) -> Result<usize, Box<dyn std::error::Err
 
 fn main() {
     let args: Vec<_> = env::args_os().collect();
-    if args.len() != 3 {
-        eprintln!("Usage: ofdbox-folio-convert <input.ofd> <output.pdf>");
+    let result = if args.len() == 4 && args[1] == "--png" {
+        convert_png(Path::new(&args[2]), Path::new(&args[3]))
+    } else if args.len() == 3 {
+        convert(Path::new(&args[1]), Path::new(&args[2]))
+    } else {
+        eprintln!("Usage: ofdbox-folio-convert [--png] <input.ofd> <output.pdf|directory>");
         std::process::exit(2);
-    }
-    match convert(Path::new(&args[1]), Path::new(&args[2])) {
+    };
+    match result {
         Ok(pages) => eprintln!("ofdbox-folio: converted {pages} pages"),
         Err(error) => {
             eprintln!("ofdbox-folio: {error}");
             std::process::exit(1);
         }
     }
+}
+
+fn convert_png(input: &Path, output: &Path) -> Result<usize, Box<dyn std::error::Error>> {
+    let mut source = OfdDocument::open_path_with_fonts(
+        input,
+        OfdReadOptions::default(),
+        Some(Box::new(FontconfigFonts::new()?)),
+    )?;
+    fs::create_dir_all(output)?;
+    let count = source.info().page_count;
+    let mut renderer = CpuRenderer::with_defaults();
+    for index in 0..count {
+        let page = source.load_page(index)?;
+        let mut target = RasterTarget::from_size(page.display_size(), 200.0)?;
+        renderer.render_page(&page, &mut target)?;
+        let file = fs::File::create(output.join(format!("page_{}.png", index + 1)))?;
+        let mut encoder =
+            png::Encoder::new(file, u32::from(target.width()), u32::from(target.height()));
+        encoder.set_color(png::ColorType::Rgba);
+        encoder.set_depth(png::BitDepth::Eight);
+        encoder.write_header()?.write_image_data(target.data())?;
+    }
+    Ok(count)
 }

@@ -6,6 +6,7 @@ publish = false
 
 [dependencies]
 easyofd = "=0.1.4"
+easyofd-convert = "=0.1.4"
 
 [[bin]]
 name = "easyofd-ofd2pdf"
@@ -14,3 +15,7 @@ path = "src/ofd2pdf.rs"
 [[bin]]
 name = "easyofd-pdf2ofd"
 path = "src/pdf2ofd.rs"
+
+[[bin]]
+name = "easyofd-ofd2png"
+path = "src/ofd2png.rs"

@@ -1,13 +1,14 @@
-# OFD <-> PDF 转换对比测试
+# OFD 转换与渲染对比测试
 
 > [OFD 库汇总](docs/ofd-libraries.md) —— 各 OFD 库能力 / 许可证对比表（预览、解析、发票、→ 图片/PDF/TXT/SVG/Md/HTML、PDF→OFD、生成、签章、修改）
 
-本项目对比多种开源 OFD 库的转换能力，覆盖两个方向：
+本项目对比多种开源 OFD 库的转换与渲染能力：
 
 | 方向      | 文档                                     | 对比内容                                                                                     |
 |-----------|------------------------------------------|----------------------------------------------------------------------------------------------|
 | OFD → PDF | [docs/ofd-to-pdf.md](docs/ofd-to-pdf.md) | 9 种转换器（Go×3 / Rust×3 / Python / Java / Node）的速度、文件大小、文本提取与数科版式还原度 |
 | PDF → OFD | [docs/pdf-to-ofd.md](docs/pdf-to-ofd.md) | 6 种转换器（zc310 / ofdgo / easyofd-rust / ofdrw / pdf2ofd / jsOFD）的速度、文件大小与回环还原度 |
+| OFD → PNG | [docs/ofd-to-png.md](docs/ofd-to-png.md) | 9 个原生 200 DPI 转换器的速度、体积与数科直接导出 PNG 的还原度，不使用 PDF 中转 |
 
 基准参考输出来自**数科版式阅读器**（`testdata`），保证同一组文档双向可测。测试用的 PDF/OFD 可在 [zc310/ofd-fixtures](https://github.com/zc310/ofd-fixtures) 下载。
 
@@ -46,6 +47,8 @@ cd ../ofd-benchmark && go build -o bin/pdf2ofd-benchmark ./cmd/pdf2ofd-benchmark
 
 转换结果分别保存在 `bin/output/`（OFD→PDF）与 `bin/output_ofd/`（PDF→OFD）。
 
+OFD→PNG 独立评测见 [运行说明](docs/ofd-to-png.md#运行)，输出到 `bin/output_png/`。当前参考图为 `testdata/suwell/{999,intro,zsbk}/` 下数科直接导出的 200 DPI PNG，逐页比较，`intro` 第 14～19 页正常参与；参考图通过 `ofd-fixtures` 同步，不提交到本仓库。
+
 `easyofd-rust` 固定 crates.io 发布版 `0.1.4`（与 Python easyofd 无关），两个方向均可在命令末尾加 `easyofd-rust` 单独测试，接入默认测试及 CI。构建依赖由 `rust/easyofd-convert/Cargo.lock` 锁定，质量指标按当前算法重新测量，不复用移除前的分数。
 
 `ofdrw-rs` 使用 Go bindings v0.5.0 和同版本 Linux x64 原生库。首次运行前下载原生库：
@@ -59,7 +62,7 @@ cp /tmp/ofdrw-native/ofdrw-native-linux-x64-v0.5.0/libofdrw_ffi.so bin/ofdrw-rs/
 
 也可通过 `OFDRW_LIB_PATH` 指定原生库路径。基准会将该转换器标记为 `go-ofdrw-rs`。
 
-两个基准驱动的单次转换默认限时 15 分钟，可通过 `BENCHMARK_CONVERTER_TIMEOUT=30m` 调整。超时会终止转换器及其子进程，将结果记为 `FAILED`，并继续测试其他转换器。像素比较遇到损坏 PDF、页数不一致或无可比较页时，同样将该项记为 `FAILED`，不会中断其他输出的比较。
+三个基准驱动的单次转换默认限时 15 分钟，可通过 `BENCHMARK_CONVERTER_TIMEOUT=30m` 调整。超时会终止转换器及其子进程，将结果记为 `FAILED`，并继续测试其他转换器。像素比较遇到损坏文件、页数不一致或无可比较页时，同样将该项记为 `FAILED`，不会中断其他输出的比较。
 
 回环 PDF/TXT 生成使用 `bash tools/roundtrip-pdf2ofd.sh bin/ofd-converter bin/output_ofd`，每个格式单独限时 15 分钟；可通过 `BENCHMARK_ROUNDTRIP_TIMEOUT=30m` 调整（GNU timeout 时长格式）。失败或超时会删除该格式的部分输出并继续。
 
@@ -79,7 +82,7 @@ npm --prefix node ci
 
 ## 基准结果数据维护
 
-`docs/benchmark-results.yaml` 是两份基准报告中量化结果表的数据源。修改 YAML 后运行以下命令重新生成表格；最优值加粗和胜出次数由生成器计算：
+`docs/benchmark-results.yaml` 是三份基准报告中量化结果表的数据源。修改 YAML 后运行以下命令重新生成表格；最优值加粗和胜出次数由生成器计算：
 
 ```bash
 GOWORK=off go run ./tools/gen-benchmarks
@@ -88,7 +91,7 @@ GOWORK=off go run ./tools/gen-benchmarks -check  # 校验文档是否最新
 
 报告中的说明文字不由生成器管理；带 `benchmark-table` 标记的表格由 YAML 生成，勿直接编辑。
 
-基准驱动会将转换耗时、输出大小和大小比写回 YAML；三个对比脚本会补充像素相似度、文本提取和文本相似度。GitHub Actions 每周检查 `zc310/ofd`、`xiaoqidun/ofdgo` 的最新提交及 Maven Central 上 `org.ofdrw:ofdrw-converter` 的最新发布版，`ofdrw-rs` 当前固定使用 v0.5.0；只有受跟踪版本变化时才运行完整基准并提交更新，也可在 Actions 页面手动触发（手动运行不要求有更新）。Workflow 会下载匹配的 Linux x64 原生库。本轮测试的库版本和 runner 的 OS、CPU 型号/逻辑核心数、内存均记入 YAML 并显示在报告中；Go 模块升级只在 workflow runner 临时生效，不会提交 `go.mod` 变更。完整运行会拉取 `zc310/ofd-fixtures` 样例，并在开始时使用 `-reset` 将待测单元重置为 `FAILED`，避免失败或缺失结果沿用旧数据。
+基准驱动会将转换耗时、输出大小和大小比写回 YAML；对比脚本会补充像素相似度、文本提取和文本相似度。GitHub Actions 每周检查 `zc310/ofd`、`xiaoqidun/ofdgo` 的最新提交及 Maven Central 上 `org.ofdrw:ofdrw-converter` 的最新发布版，`ofdrw-rs` 当前固定使用 v0.5.0；只有受跟踪版本变化时才运行完整基准并提交更新，也可在 Actions 页面手动触发（手动运行不要求有更新）。Workflow 会下载匹配的 Linux x64 原生库。本轮测试的库版本和 runner 的 OS、CPU 型号/逻辑核心数、内存均记入 YAML 并显示在报告中；Go 模块升级只在 workflow runner 临时生效，不会提交 `go.mod` 变更。完整运行会拉取 `zc310/ofd-fixtures` 样例，并在开始时使用 `-reset` 将待测单元重置为 `FAILED`，避免失败或缺失结果沿用旧数据。
 
 ## 标签发布评测产物
 
@@ -100,7 +103,7 @@ git push origin v2026.11.16
 ```
 
 - 每个库一个 ZIP（如 `zc310-v2026.11.16.zip`），包含 `ofd-to-pdf/`、`pdf-to-ofd/` 和 `roundtrip/` 下的 PDF/OFD；回环 PDF 统一由 zc310 渲染。不同语言实现分别打包，仅支持单向转换的库只包含对应产物。
-- 附件还包含本次两份 Markdown 报告、`benchmark-results.yaml`、`manifest.json`、发布说明和 `SHA256SUMS`。清单记录文件及缺失样例；失败或空输出不打包，全部失败的库不生成空 ZIP。构建或评测流程失败则不发布正式版本。
+- 附件还包含本次三份 Markdown 报告、`benchmark-results.yaml`、`manifest.json`、发布说明和 `SHA256SUMS`。清单记录文件及缺失样例；失败或空输出不打包，全部失败的库不生成空 ZIP。构建或评测流程失败则不发布正式版本。PNG 页面暂通过 Actions 的 `ofd-to-png-200dpi` 附件保存 7 天，不加入按库的 PDF/OFD Release ZIP。
 - 标签运行不提交报告、不移动标签。依赖仍按现有逻辑在运行时解析，实际受跟踪版本及运行环境见附件报告；标签本身不保证所有外部依赖和样例可复现。
 - 先创建草稿并上传全部附件，再正式发布；已有 Release（含草稿）不会覆盖。上传失败留下的草稿需手动删除后重试；已发布结果需要重测时请打新标签。Actions 中间附件保留 7 天，Release 附件不受此期限影响。
 
@@ -122,12 +125,20 @@ ofd-benchmark/
 │   ├── zc310-convert       # Go zc310/ofd OFD→PDF 转换器
 │   ├── ofd-converter       # Go zc310/ofd 通用转换器（PDF→OFD、OFD→PDF/TXT）
 │   ├── pdf2ofd-benchmark   # PDF→OFD 基准测试主程序
+│   ├── ofd2png-benchmark   # OFD→PNG 原生 200 DPI 基准驱动
+│   ├── zc310-png          # zc310 原生 PNG 适配器
+│   ├── ofdgo-png          # ofdgo 原生 PNG 适配器
+│   ├── ofd-utility-cli    # 固定 revision 的 Rust ofd-cli
+│   ├── output_png/        # OFD→PNG 按样本/转换器分目录输出
 │   ├── output/             # OFD→PDF 转换结果
 │   └── output_ofd/         # PDF→OFD 转换结果（含回环 PDF / 提取文本）
 ├── cmd/
 │   ├── ofdgo-convert/
 │   ├── ofdrw-rs-convert/
 │   ├── ofdgo-pdf2ofd/
+│   ├── ofd2png-benchmark/
+│   ├── zc310-png/
+│   ├── ofdgo-png/
 │   ├── zc310-convert/
 │   └── pdf2ofd-benchmark/  # PDF→OFD 基准驱动
 ├── rust/
@@ -151,6 +162,8 @@ ofd-benchmark/
 ├── tools/
 │   ├── install-fonts.sh    # 测试前下载字体并安装到用户目录
 │   ├── compare_pdf.py      # OFD→PDF 与数科参考 PDF 像素对比
+│   ├── compare_png.py      # 原生 200 DPI PNG 与数科直接导出的 PNG 比较
+│   ├── ofd_utility_png.py  # ofd-utility CLI 页码/文件名适配
 │   ├── compare_text.py     # OFD→PDF 文本相似度对比
 │   ├── compare_pdf2ofd.py  # PDF→OFD 回环还原度/文本对比
 │   ├── benchmark_results.py # 对比脚本写入结果 YAML 的桥接
@@ -161,6 +174,7 @@ ofd-benchmark/
 │   ├── benchmark-results.yaml # OFD↔PDF 基准结果数据源
 │   ├── ofd-libraries.md    # OFD 库能力 / 许可证对比表
 │   ├── ofd-to-pdf.md       # OFD→PDF 基准测试详细结果
+│   ├── ofd-to-png.md       # 原生 OFD→PNG 基准测试（200 DPI）
 │   └── pdf-to-ofd.md       # PDF→OFD 基准测试详细结果
 ├── testdata/               # OFD/PDF 测试文件（ofd-creator/ ofdrw/ standards/ suwell/）
 ├── main.go                 # OFD→PDF 基准主程序（单文件输入）

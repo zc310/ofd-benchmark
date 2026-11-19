@@ -117,7 +117,7 @@ jobs:
           npm --prefix node ci
           mkdir -p java/lib
           mvn -B -f java/pom.xml -Dofdrw.version="${{ needs.check.outputs.ofdrw }}" dependency:copy-dependencies -DoutputDirectory="$GITHUB_WORKSPACE/java/lib"
-          javac -cp "$(find java/lib -name '*.jar' -printf '%p:')" java/Ofd2Pdf.java java/Pdf2Ofd.java
+          javac -cp "$(find java/lib -name '*.jar' -printf '%p:')" java/Ofd2Pdf.java java/Pdf2Ofd.java java/Ofd2Png.java
 
       - name: Prepare fixtures
         run: |
@@ -147,14 +147,23 @@ jobs:
           export GOFLAGS=-mod=mod
           go test ./internal/benchmarkdata ./internal/converter ./tools/benchmark-versions ./tools/gen-benchmarks ./tools/update-benchmark-results
           go test ./cmd/pdf2ofd-benchmark
+          go test ./cmd/ofd2png-benchmark
           python -m unittest discover -s tools -p 'test_*.py'
           go build -o bin/ofd-benchmark .
+          go build -o bin/ofd2png-benchmark ./cmd/ofd2png-benchmark
+          go build -o bin/zc310-png ./cmd/zc310-png
+          go build -o bin/ofdgo-png ./cmd/ofdgo-png
+          go build -o bin/ofdrw-rs-png ./cmd/ofdrw-rs-png
           cargo build --release --locked --manifest-path rust/ofdbox-folio-convert/Cargo.toml --target-dir rust/target
           cp rust/target/release/ofdbox-folio-convert bin/ofdbox-folio-convert
           cargo build --release --locked --manifest-path rust/easyofd-convert/Cargo.toml --target-dir rust/target
-          cp rust/target/release/easyofd-ofd2pdf rust/target/release/easyofd-pdf2ofd bin/
+          cp rust/target/release/easyofd-ofd2pdf rust/target/release/easyofd-pdf2ofd rust/target/release/easyofd-ofd2png bin/
           cargo install sofd-cli --git https://github.com/emfox/sOFD --rev 65cff468ecc2af676180f540899fdf74da849c3a --locked --bin sofd --root "$RUNNER_TEMP/sofd-install"
           cp "$RUNNER_TEMP/sofd-install/bin/sofd" bin/sofd-cli
+          cargo install --git https://github.com/ofd-utility/ofd-utility --rev d603791e933a81936b23c91dcab90fdc4c2c0edf --locked --bin ofd-cli --root "$RUNNER_TEMP/ofd-utility-install" ofd-cli
+          cp "$RUNNER_TEMP/ofd-utility-install/bin/ofd-cli" bin/ofd-utility-cli
+          cargo install --git https://github.com/feuvan/ofdmanager --rev a9b1d29ef90141a369ad47cc32fd6c62dd8b8450 --locked --bin ofd-cli --root "$RUNNER_TEMP/ofdmanager-install" ofd-cli
+          cp "$RUNNER_TEMP/ofdmanager-install/bin/ofd-cli" bin/ofdmanager-cli
           go build -o bin/ofdgo-convert ./cmd/ofdgo-convert
           go build -o bin/ofdrw-rs-convert ./cmd/ofdrw-rs-convert
           go build -o bin/zc310-convert ./cmd/zc310-convert
@@ -192,6 +201,26 @@ jobs:
             test -f "$input" || { echo "Missing PDF fixture: $input"; exit 1; }
             bin/pdf2ofd-benchmark "$input"
           done
+
+      - name: Run native OFD to PNG benchmarks (200 DPI)
+        run: |
+          for name in 999 intro zsbk; do
+            test -d "testdata/suwell/$name" || { echo "Missing 200 DPI Suwell PNG fixtures: $name"; exit 1; }
+            bin/ofd2png-benchmark "testdata/ofdrw/$name.ofd"
+          done
+
+      - name: Measure OFD to PNG quality (all pages)
+        env:
+          BENCHMARK_RESULTS_WRITER: ${{ github.workspace }}/bin/update-benchmark-results
+        run: python tools/compare_png.py
+
+      - name: Upload native PNG benchmark outputs
+        uses: actions/upload-artifact@v6
+        with:
+          name: ofd-to-png-200dpi
+          path: bin/output_png/
+          if-no-files-found: warn
+          retention-days: 7
 
       - name: Create PDF to OFD round-trip artifacts
         run: bash tools/roundtrip-pdf2ofd.sh bin/ofd-converter bin/output_ofd
@@ -232,7 +261,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/benchmark-results.yaml docs/ofd-to-pdf.md docs/pdf-to-ofd.md
+          git add docs/benchmark-results.yaml docs/ofd-to-pdf.md docs/pdf-to-ofd.md docs/ofd-to-png.md
           if git diff --cached --quiet; then
             echo "Benchmark reports are unchanged."
             exit 0

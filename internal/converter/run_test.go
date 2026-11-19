@@ -83,3 +83,27 @@ func TestRunTimeoutKillsChildrenAndContinues(t *testing.T) {
 		t.Fatalf("next converter output = %q, %v", contents, err)
 	}
 }
+
+func TestRunDirectory(t *testing.T) {
+	for _, tc := range []struct {
+		name, script string
+		timeout      time.Duration
+		ok           bool
+	}{
+		{"success", `printf png > "$1/page_1.png"`, time.Second, true},
+		{"failure", `exit 1`, time.Second, false},
+		{"timeout", `(sleep 10) & wait`, 100 * time.Millisecond, false},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			output := filepath.Join(t.TempDir(), "pages")
+			duration, err := RunDirectory(tc.name, []string{"/bin/sh", "-c", tc.script, "converter", output}, output, tc.timeout)
+			if (err == nil) != tc.ok || duration > 3*time.Second {
+				t.Fatalf("duration=%v err=%v", duration, err)
+			}
+			// An existing output directory must never be reused.
+			if _, err := RunDirectory("stale", []string{"/bin/true"}, output, time.Second); err == nil {
+				t.Fatal("existing output accepted")
+			}
+		})
+	}
+}

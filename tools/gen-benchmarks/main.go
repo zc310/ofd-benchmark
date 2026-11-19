@@ -179,6 +179,24 @@ func updateLibraryVersions(doc *string, reportID string, versions map[string]str
 	ofdgo := versions["github.com/xiaoqidun/ofdgo"]
 	ofdrwRS := versions["github.com/lihongjie0209/ofdrw-rs/bindings/go"]
 	ofdrw := versions["org.ofdrw:ofdrw-converter"]
+	if reportID == "ofd-to-png" {
+		for _, update := range []struct{ prefix, version string }{
+			{"| [go-zc310]", zc310},
+			{"| [go-ofdgo]", ofdgo},
+			{"| [rust-ofd-utility]", versions["github.com/ofd-utility/ofd-utility"]},
+			{"| [go-ofdrw-rs]", ofdrwRS},
+			{"| [java-ofdrw]", ofdrw},
+			{"| [rust-ofdmanager]", versions["github.com/feuvan/ofdmanager"]},
+		} {
+			if update.version == "" {
+				return fmt.Errorf("missing PNG converter version for %s", update.prefix)
+			}
+			// Match only the version table, not generated result rows.
+			if err := replaceMarkdownRowCell(doc, update.prefix, "200 DPI", 2, update.version); err != nil {
+				return err
+			}
+		}
+	}
 	if reportID == "ofd-to-pdf" {
 		for _, update := range []struct {
 			prefix, marker string

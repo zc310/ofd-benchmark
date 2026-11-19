@@ -40,7 +40,7 @@ LIBRARY_URLS = {
 }
 OFD_SAMPLES = ('hello', 'ano', 'intro', '1000-pages', '999', 'zsbk')
 PDF_SAMPLES = (*OFD_SAMPLES, 'GBT_33190-2016')
-REPORTS = ('benchmark-results.yaml', 'ofd-to-pdf.md', 'pdf-to-ofd.md')
+REPORTS = ('benchmark-results.yaml', 'ofd-to-pdf.md', 'pdf-to-ofd.md', 'ofd-to-png.md')
 
 
 def sha256(path):

@@ -540,6 +540,7 @@ name = "easyofd-benchmark-convert"
 version = "0.1.0"
 dependencies = [
  "easyofd",
+ "easyofd-convert",
 ]
 
 [[package]]

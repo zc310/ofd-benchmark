@@ -13,7 +13,7 @@ import (
 
 const DefaultTimeout = 15 * time.Minute
 
-// Timeout reads the shared limit used by both benchmark drivers.
+// Timeout reads the shared limit used by the benchmark drivers.
 func Timeout() (time.Duration, error) {
 	value := os.Getenv("BENCHMARK_CONVERTER_TIMEOUT")
 	if value == "" {
@@ -36,6 +36,35 @@ func Run(name string, args []string, outputFile string, timeout time.Duration) (
 		return time.Since(start), 0, false
 	}
 
+	duration, err := runProcess(args, timeout)
+	if err != nil {
+		fmt.Printf("FAILED: %v\n", err)
+		if err := os.Remove(outputFile); err != nil && !os.IsNotExist(err) {
+			fmt.Printf("Failed to remove partial output: %v\n", err)
+		}
+		return duration, 0, false
+	}
+	info, err := os.Stat(outputFile)
+	if err != nil {
+		fmt.Printf("FAILED: output file not created\n")
+		return duration, 0, false
+	}
+	fmt.Printf("Time: %v\n", duration)
+	return duration, info.Size(), true
+}
+
+// RunDirectory runs a converter writing multiple pages into a fresh directory.
+// The caller owns the directory and validates the page set after execution.
+func RunDirectory(name string, args []string, outputDir string, timeout time.Duration) (time.Duration, error) {
+	fmt.Printf("=== %s ===\n", name)
+	if err := os.Mkdir(outputDir, 0o755); err != nil {
+		return 0, err
+	}
+	return runProcess(args, timeout)
+}
+
+func runProcess(args []string, timeout time.Duration) (time.Duration, error) {
+	start := time.Now()
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
 	cmd := exec.CommandContext(ctx, args[0], args[1:]...)
@@ -54,23 +83,8 @@ func Run(name string, args []string, outputFile string, timeout time.Duration) (
 	}
 	cmd.WaitDelay = time.Second
 	err := cmd.Run()
-	duration := time.Since(start)
-	if err != nil || ctx.Err() != nil {
-		if ctx.Err() != nil {
-			fmt.Printf("FAILED: timed out after %s\n", timeout)
-		} else {
-			fmt.Printf("FAILED: %v\n", err)
-		}
-		if err := os.Remove(outputFile); err != nil && !os.IsNotExist(err) {
-			fmt.Printf("Failed to remove partial output: %v\n", err)
-		}
-		return duration, 0, false
+	if ctx.Err() != nil {
+		return time.Since(start), fmt.Errorf("timed out after %s", timeout)
 	}
-	info, err := os.Stat(outputFile)
-	if err != nil {
-		fmt.Printf("FAILED: output file not created\n")
-		return duration, 0, false
-	}
-	fmt.Printf("Time: %v\n", duration)
-	return duration, info.Size(), true
+	return time.Since(start), err
 }
