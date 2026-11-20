@@ -73,6 +73,7 @@
 |                  [ofdkit](https://github.com/Edgar-311/ofdkit)                   | Apache-2.0 |  ❌  |  ✅  |  ✅  |   ❌   |  ❌   |  ✅   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
 |              [xiaohuangOFD](https://github.com/MrY551/xiaohuangOFD)              |    专有    |  ✅  |  ✅  |  ⚠️  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ❌  |    ❌    |  ✅  |  ❌  |  ✅  |  ❌  |  ✅  |   ✅   |
 |            [invoice_cn_ce](https://github.com/giwu-lab/invoice_cn_ce)            | Apache-2.0 |  ❌  |  ✅  |  ✅  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
+|              [ofd-reader](https://github.com/liumiaozhi/ofd-reader)              |    MIT     |  ✅  |  ✅  |  ⚠️  |   ⚠️   |  ⚠️   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ⚠️  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
 
 ## Java
 
