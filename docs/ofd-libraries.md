@@ -53,6 +53,7 @@
 |    [ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)    |   Apache-2.0   |  ❌  |  ✅  |  ⚠️  |   ❌   |  ✅   |  ✅   |  ✅   |  ❌  |   ❌   |    ⚠️     |  ✅  |  ✅  |    ✅    |  ❌  |  ✅  |  ✅  |  ✅  |  ✅  |   ❌   |
 |   [ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)    | MIT/Apache-2.0 |  ❌  |  ✅  |  ⚠️  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ⚠️     |  ✅  |  ❌  |    ❌    |  ❌  |  ✅  |  ❌  |  ❌  |  ❌  |   ❌   |
 |    [vofdreader](https://github.com/btstream/vofdreader)     |    GPL-3.0     |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ✅   |  ✅   |  ❌  |   ❌   |    ❌     |  ❌  |  ⚠️  |    ❌    |  ❌  |  ✅  |  ✅  |  ❌  |  ❌  |   ❌   |
+|    [ibis-office](https://github.com/ibisjp/ibis-office)     | AGPL-3.0/商业  |  ✅  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ⚠️  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
 
 ## Python
 
