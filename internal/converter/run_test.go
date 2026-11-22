@@ -7,6 +7,28 @@ import (
 	"time"
 )
 
+func TestRunProcessCPUIncludesWaitedChild(t *testing.T) {
+	// The shell waits for a CPU-bound child, just like the page-by-page wrappers.
+	_, cpu, _, err := runProcess([]string{"/bin/sh", "-c", "/bin/sh -c 'i=0; while [ $i -lt 100000 ]; do i=$((i+1)); done'"},
+		10*time.Second)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if cpu < 10*time.Millisecond {
+		t.Fatalf("expected child CPU time, got %s", cpu)
+	}
+}
+
+func TestRunProcessSleepDoesNotConsumeWallTimeAsCPU(t *testing.T) {
+	elapsed, cpu, _, err := runProcess([]string{"/bin/sh", "-c", "sleep 0.2"}, 5*time.Second)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if elapsed < 180*time.Millisecond || cpu >= elapsed/2 {
+		t.Fatalf("elapsed=%s cpu=%s", elapsed, cpu)
+	}
+}
+
 func TestTimeout(t *testing.T) {
 	for _, tc := range []struct {
 		value string
@@ -44,7 +66,7 @@ func TestRun(t *testing.T) {
 			if err := os.WriteFile(output, []byte("stale"), 0o644); err != nil {
 				t.Fatal(err)
 			}
-			_, size, ok := Run(tc.name, []string{"/bin/sh", "-c", tc.script, "converter", output}, output, 5*time.Second)
+			_, _, _, size, ok := Run(tc.name, []string{"/bin/sh", "-c", tc.script, "converter", output}, output, 5*time.Second)
 			if ok != tc.ok {
 				t.Fatalf("Run() success = %v, want %v", ok, tc.ok)
 			}
@@ -66,11 +88,11 @@ func TestRunTimeoutKillsChildrenAndContinues(t *testing.T) {
 	marker := filepath.Join(dir, "child-finished")
 	// The child would recreate the partial output if only the wrapper were killed.
 	script := `printf partial > "$1"; (sleep 1; printf survived > "$1"; printf done > "$2") & wait`
-	duration, _, ok := Run("timeout", []string{"/bin/sh", "-c", script, "converter", output, marker}, output, 250*time.Millisecond)
+	duration, _, _, _, ok := Run("timeout", []string{"/bin/sh", "-c", script, "converter", output, marker}, output, 250*time.Millisecond)
 	if ok || duration > 3*time.Second {
 		t.Fatalf("timed-out converter: success=%v, duration=%s", ok, duration)
 	}
-	_, _, ok = Run("next converter", []string{"/bin/sh", "-c", `printf new > "$1"`, "converter", output}, output, 5*time.Second)
+	_, _, _, _, ok = Run("next converter", []string{"/bin/sh", "-c", `printf new > "$1"`, "converter", output}, output, 5*time.Second)
 	if !ok {
 		t.Fatal("converter after timeout did not succeed")
 	}
@@ -96,12 +118,12 @@ func TestRunDirectory(t *testing.T) {
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			output := filepath.Join(t.TempDir(), "pages")
-			duration, err := RunDirectory(tc.name, []string{"/bin/sh", "-c", tc.script, "converter", output}, output, tc.timeout)
+			duration, _, _, err := RunDirectory(tc.name, []string{"/bin/sh", "-c", tc.script, "converter", output}, output, tc.timeout)
 			if (err == nil) != tc.ok || duration > 3*time.Second {
 				t.Fatalf("duration=%v err=%v", duration, err)
 			}
 			// An existing output directory must never be reused.
-			if _, err := RunDirectory("stale", []string{"/bin/true"}, output, time.Second); err == nil {
+			if _, _, _, err := RunDirectory("stale", []string{"/bin/true"}, output, time.Second); err == nil {
 				t.Fatal("existing output accepted")
 			}
 		})

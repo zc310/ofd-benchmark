@@ -89,6 +89,8 @@ func main() {
 
 	type result struct {
 		duration time.Duration
+		cpu      time.Duration
+		memory   int64
 		size     int64
 		ok       bool
 	}
@@ -96,8 +98,8 @@ func main() {
 
 	for _, name := range selectedConverters {
 		if c, ok := converters[name]; ok {
-			duration, size, ok := converter.Run(c.Name, c.Command, c.OutputFile, timeout)
-			results[c.Name] = result{duration, size, ok}
+			duration, cpu, memory, size, ok := converter.Run(c.Name, c.Command, c.OutputFile, timeout)
+			results[c.Name] = result{duration, cpu, memory, size, ok}
 
 			if ok {
 				// Move to output directory
@@ -120,7 +122,7 @@ func main() {
 			if r, ok := results[c.Name]; ok {
 				if r.ok {
 					sizeStr := fmt.Sprintf("%.1f KB", float64(r.size)/1024)
-					fmt.Printf("%-20s %10v  %s\n", c.Name+":", r.duration, sizeStr)
+					fmt.Printf("%-20s %10v  CPU: %v  peak RSS: %s  %s\n", c.Name+":", r.duration, r.cpu, converter.FormatPeakRSS(r.memory), sizeStr)
 				} else {
 					fmt.Printf("%-20s %10v  FAILED\n", c.Name+":", r.duration)
 				}
@@ -151,14 +153,18 @@ func main() {
 		if !exists || !supported {
 			continue
 		}
-		elapsed, size, ratio := "FAILED", "FAILED", "FAILED"
+		elapsed, cpu, memory, size, ratio := "FAILED", "FAILED", "FAILED", "FAILED", "FAILED"
 		if r.ok {
 			elapsed = benchmarkdata.FormatDuration(r.duration)
+			cpu = benchmarkdata.FormatDuration(r.cpu)
+			memory = converter.FormatPeakRSS(r.memory)
 			size = benchmarkdata.FormatOFDSize(r.size)
 			ratio = benchmarkdata.FormatRatio(r.size, refSize)
 		}
 		for table, value := range map[string]string{
 			"pdf-speed":      elapsed,
+			"pdf-cpu":        cpu,
+			"pdf-memory":     memory,
 			"pdf-ofd-size":   size,
 			"pdf-size-ratio": ratio,
 		} {

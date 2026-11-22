@@ -26,44 +26,44 @@ func Timeout() (time.Duration, error) {
 	return timeout, nil
 }
 
-func Run(name string, args []string, outputFile string, timeout time.Duration) (time.Duration, int64, bool) {
+func Run(name string, args []string, outputFile string, timeout time.Duration) (time.Duration, time.Duration, int64, int64, bool) {
 	fmt.Printf("=== %s ===\n", name)
 	start := time.Now()
 	// A failed or timed-out conversion must not leave a partial output for the
 	// next invocation to mistake for a successfully created file.
 	if err := os.Remove(outputFile); err != nil && !os.IsNotExist(err) {
 		fmt.Printf("FAILED: remove previous output: %v\n", err)
-		return time.Since(start), 0, false
+		return time.Since(start), 0, 0, 0, false
 	}
 
-	duration, err := runProcess(args, timeout)
+	duration, cpu, memory, err := runProcess(args, timeout)
 	if err != nil {
 		fmt.Printf("FAILED: %v\n", err)
 		if err := os.Remove(outputFile); err != nil && !os.IsNotExist(err) {
 			fmt.Printf("Failed to remove partial output: %v\n", err)
 		}
-		return duration, 0, false
+		return duration, cpu, memory, 0, false
 	}
 	info, err := os.Stat(outputFile)
 	if err != nil {
 		fmt.Printf("FAILED: output file not created\n")
-		return duration, 0, false
+		return duration, cpu, memory, 0, false
 	}
-	fmt.Printf("Time: %v\n", duration)
-	return duration, info.Size(), true
+	fmt.Printf("Time: %v, CPU: %v, peak RSS: %d bytes\n", duration, cpu, memory)
+	return duration, cpu, memory, info.Size(), true
 }
 
 // RunDirectory runs a converter writing multiple pages into a fresh directory.
 // The caller owns the directory and validates the page set after execution.
-func RunDirectory(name string, args []string, outputDir string, timeout time.Duration) (time.Duration, error) {
+func RunDirectory(name string, args []string, outputDir string, timeout time.Duration) (time.Duration, time.Duration, int64, error) {
 	fmt.Printf("=== %s ===\n", name)
 	if err := os.Mkdir(outputDir, 0o755); err != nil {
-		return 0, err
+		return 0, 0, 0, err
 	}
 	return runProcess(args, timeout)
 }
 
-func runProcess(args []string, timeout time.Duration) (time.Duration, error) {
+func runProcess(args []string, timeout time.Duration) (time.Duration, time.Duration, int64, error) {
 	start := time.Now()
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
@@ -82,9 +82,22 @@ func runProcess(args []string, timeout time.Duration) (time.Duration, error) {
 		return err
 	}
 	cmd.WaitDelay = time.Second
-	err := cmd.Run()
-	if ctx.Err() != nil {
-		return time.Since(start), fmt.Errorf("timed out after %s", timeout)
+	if err := cmd.Start(); err != nil {
+		return time.Since(start), 0, 0, err
 	}
-	return time.Since(start), err
+	stop := make(chan struct{})
+	peak := make(chan int64, 1)
+	go samplePeakRSS(cmd.Process.Pid, stop, peak)
+	err := cmd.Wait()
+	elapsed := time.Since(start)
+	close(stop)
+	memory := <-peak
+	var cpu time.Duration
+	if cmd.ProcessState != nil {
+		cpu = cmd.ProcessState.UserTime() + cmd.ProcessState.SystemTime()
+	}
+	if ctx.Err() != nil {
+		return elapsed, cpu, memory, fmt.Errorf("timed out after %s", timeout)
+	}
+	return elapsed, cpu, memory, err
 }

@@ -75,7 +75,7 @@ func run(args []string) error {
 		c := converters[key]
 		values := map[string]string{}
 		// Reset quality as well as speed/size; never reuse a previous run's score.
-		for _, metric := range []string{"speed", "ms-per-page", "size",
+		for _, metric := range []string{"speed", "cpu", "memory", "ms-per-page", "size",
 			"pixel-similarity", "content-similarity", "foreground-f1"} {
 			values[c.tables+"-"+metric] = "FAILED"
 		}
@@ -89,7 +89,7 @@ func run(args []string) error {
 		}
 		output := filepath.Join(scratch, "pages")
 		command := append(append([]string{}, c.command...), input, output)
-		duration, runErr := converter.RunDirectory(c.name, command, output, timeout)
+		duration, cpu, memory, runErr := converter.RunDirectory(c.name, command, output, timeout)
 		if runErr == nil {
 			pages, size, err := inspectPages(output, "page")
 			runErr = err
@@ -101,10 +101,12 @@ func run(args []string) error {
 			}
 			if runErr == nil {
 				values[c.tables+"-speed"] = benchmarkdata.FormatDuration(duration)
+				values[c.tables+"-cpu"] = benchmarkdata.FormatDuration(cpu)
+				values[c.tables+"-memory"] = converter.FormatPeakRSS(memory)
 				values[c.tables+"-ms-per-page"] = fmt.Sprintf("%.2fms", float64(duration.Microseconds())/1000/float64(pages))
 				values[c.tables+"-size"] = benchmarkdata.FormatPDFSize(size)
-				fmt.Printf("Path: %s, time: %v, pages: %d, PNG total: %s\nSaved: %s\n",
-					c.tables, duration, pages, values[c.tables+"-size"], destination)
+				fmt.Printf("Path: %s, time: %v, CPU: %v, peak RSS: %s, pages: %d, PNG total: %s\nSaved: %s\n",
+					c.tables, duration, cpu, converter.FormatPeakRSS(memory), pages, values[c.tables+"-size"], destination)
 			}
 		}
 		if err := os.RemoveAll(scratch); err != nil {
