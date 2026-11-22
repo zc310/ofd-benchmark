@@ -149,20 +149,21 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 
 <!-- benchmark-table:ofd-text-extraction:start -->
 
-| 转换器 | hello.ofd | ano.ofd | intro.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
-|---|---:|---:|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | 22 | 7232 | 5544 | 3971 | 1162 | 0 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 22 | 7087 | 4974 | 3971 | 1150 | 0 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 22 | 7093 | 5494 | 3934 | 1150 | 0 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 8 | 6497 | 1959 | 773 | 717 | 0 |
-| [rust-sofd](https://github.com/emfox/sOFD) | 0 | 0 | 0 | 0 | 0 | 0 |
-| [easyofd](https://pypi.org/project/easyofd/) | 22 | 1208 | **10194** | 3933 | 1508 | 1 |
-| [ofdrw](https://github.com/ofdrw/ofdrw) | 26 | **7282** | 5550 | 4162 | 1169 | 1 |
-| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | **31** | 6489 | 9614 | **4249** | **1938** | 3 |
+| 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| [go-zc310](https://github.com/zc310/ofd) | 22 | 7232 | 5544 | FAILED | 3971 | 1162 | 0 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 22 | 7087 | 4974 | FAILED | 3971 | 1150 | 0 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 22 | 7093 | 5494 | FAILED | 3934 | 1150 | 0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 8 | 6497 | 1959 | FAILED | 773 | 717 | 0 |
+| [rust-sofd](https://github.com/emfox/sOFD) | 0 | 0 | 0 | FAILED | 0 | 0 | 0 |
+| [easyofd](https://pypi.org/project/easyofd/) | 22 | 1208 | **10194** | FAILED | 3933 | 1508 | 1 |
+| [ofdrw](https://github.com/ofdrw/ofdrw) | 26 | **7282** | 5550 | FAILED | 4162 | 1169 | 1 |
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | **31** | 6489 | 9614 | FAILED | **4249** | **1938** | 3 |
 <!-- benchmark-table:ofd-text-extraction:end -->
 
 > - 单位为字符数（chars）
 > - 本轮使用 PyMuPDF 1.26.7 与 NumPy 2.3.5；表格数值为本轮测试结果
+> - `FAILED` 表示暂无有效结果；`1000-pages` 的字符数由 CI 对完整文档提取后更新，不使用像素比较的前 3 页采样。
 
 ### 与数科版式输出对比
 

@@ -70,8 +70,7 @@ def main():
             row = OFD_CONVERTER_ROWS.get(conv)
             if row:
                 append(updates, 'ofd-to-pdf', 'ofd-text-similarity', f'{name}.ofd', row, f'{sim:.2f}%')
-                if name != '1000-pages':
-                    append(updates, 'ofd-to-pdf', 'ofd-text-extraction', f'{name}.ofd', row, str(slen))
+                append(updates, 'ofd-to-pdf', 'ofd-text-extraction', f'{name}.ofd', row, str(slen))
         print()
     write_updates(base, updates)
 

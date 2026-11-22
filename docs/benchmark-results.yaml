@@ -176,18 +176,18 @@ reports:
             - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: [767.3KB, 2.4MB, 10.9MB, 2.0MB, 1.9MB, 5.0MB]}
             - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: [1.6KB, 196.5KB, 1.1MB, 9.2MB, 82.9KB, 559.3KB]}
         - id: ofd-text-extraction
-          headers: [转换器, hello.ofd, ano.ofd, intro.ofd, 999.ofd, zsbk.ofd]
+          headers: [转换器, hello.ofd, ano.ofd, intro.ofd, 1000-pages.ofd, 999.ofd, zsbk.ofd]
           winner: max
           wins: true
           rows:
-            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: ["22", "7232", "5544", "3971", "1162"]}
-            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: ["8", "567", "506", "3967", "527"]}
-            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: ["22", "7093", "5494", "3934", "1150"]}
-            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: ["8", "6497", "1959", "773", "717"]}
-            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: ["0", "0", "0", "0", "0"]}
-            - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: ["22", "1208", "10194", "3933", "1508"]}
-            - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: ["26", "7282", "5550", "4162", "1169"]}
-            - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: ["31", "6489", "9614", "4249", "1938"]}
+            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: ["22", "7232", "5544", FAILED, "3971", "1162"]}
+            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: ["8", "567", "506", FAILED, "3967", "527"]}
+            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: ["22", "7093", "5494", FAILED, "3934", "1150"]}
+            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: ["8", "6497", "1959", FAILED, "773", "717"]}
+            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: ["0", "0", "0", FAILED, "0", "0"]}
+            - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: ["22", "1208", "10194", FAILED, "3933", "1508"]}
+            - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: ["26", "7282", "5550", FAILED, "4162", "1169"]}
+            - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: ["31", "6489", "9614", FAILED, "4249", "1938"]}
         - id: ofd-pixel-similarity
           headers: [转换器, hello.ofd, ano.ofd, intro.ofd, 1000-pages.ofd, 999.ofd, zsbk.ofd]
           winner: max

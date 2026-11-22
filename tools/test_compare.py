@@ -241,6 +241,28 @@ class ComparisonScriptTests(unittest.TestCase):
             self.assertEqual(cells['ofd-text-similarity']['value'], '100.00%')
             self.assertEqual(cells['ofd-text-extraction']['value'], '19')
 
+    def test_1000_pages_text_extraction_is_written_for_entire_document(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            ref = base / 'testdata' / 'suwell' / '1000-pages.pdf'
+            ref.parent.mkdir(parents=True)
+            make_pdf(ref, 5)
+            output = base / 'bin' / 'output'
+            output.mkdir(parents=True)
+            make_pdf(output / '1000-pages_go-zc310.pdf', 5)
+            with patch.object(compare_text, '__file__', str(base / 'tools' / 'script.py')), \
+                 patch.object(sys, 'argv', ['script.py', '1000-pages']), \
+                 patch.object(compare_text, 'write_updates') as writer, \
+                 contextlib.redirect_stdout(io.StringIO()):
+                compare_text.main()
+            writer.assert_called_once()
+            cells = {cell['table']: cell for cell in writer.call_args.args[1]}
+            extraction = cells['ofd-text-extraction']
+            self.assertEqual(extraction['input'], '1000-pages.ofd')
+            self.assertEqual(extraction['converter'], 'go-zc310')
+            self.assertEqual(extraction['value'], '49')
+            self.assertEqual(cells['ofd-text-similarity']['value'], '100.00%')
+
     def test_round_trip_pixel_failure_does_not_block_text_or_next_output(self):
         with tempfile.TemporaryDirectory() as tmp:
             base = Path(tmp)
