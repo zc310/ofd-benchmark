@@ -8,13 +8,13 @@
 
 | 转换器 | 版本 | 路径 |
 |---|---|---|
-| [go-zc310](https://github.com/zc310/ofd) | v0.2.2-0.20261119021541-2f1efcb69926 | `converter.Image`，PNG / 200 DPI / 白底 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | v0.0.0-20261119013312-38748f24bfef | `RenderToPNG`，200 DPI / 包含注释 |
+| [go-zc310](https://github.com/zc310/ofd) | v0.2.2 | `converter.Image`，PNG / 200 DPI / 白底 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | v0.0.0-20261122015454-e70fdfb4451c | `RenderToPNG`，200 DPI / 包含注释 |
 | [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | d603791e933a81936b23c91dcab90fdc4c2c0edf | `ofd-cli render --dpi 200 --format png`（200 DPI） |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | v0.5.0 | 原生 `PagePNG(index, 200)`（200 DPI） |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 36e6877bf5d0b989cd824c3c74241533ae1f90ea | 原生 CPU 渲染，200 DPI |
 | [rust-sofd](https://github.com/emfox/sOFD) | 65cff468ecc2af676180f540899fdf74da849c3a | 原生 CLI `convert --format png --dpi 200` |
-| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 2.5.1 | 原生 AWT `ImageMaker(reader, 200.0 / 25.4)`（200 DPI） |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 2.5.2 | 原生 AWT `ImageMaker(reader, 200.0 / 25.4)`（200 DPI） |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | a9b1d29ef90141a369ad47cc32fd6c62dd8b8450 | 原生 CLI `render --dpi 200 --page n`（200 DPI） |
 
 选择键为 `zc310`、`ofdgo`、`ofd-utility`、`ofdrw-rs`、`ofdbox-folio`、`sofd`、`java`、`ofdmanager`，不指定时全部运行。
@@ -45,14 +45,14 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 
 | 转换器 | 999.ofd | intro.ofd | zsbk.ofd | 胜出次数 |
 |---|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | 482ms | 8.24s | 1.85s | 0 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 755ms | 12.87s | 2.51s | 0 |
-| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 258ms | FAILED | **98ms** | 1 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 6.90s | 29.75s | 5.84s | 0 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 344ms | 5.48s | 876ms | 0 |
-| [rust-sofd](https://github.com/emfox/sOFD) | **196ms** | **1.99s** | 453ms | 2 |
-| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 1.51s | 11.99s | 3.96s | 0 |
-| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 684ms | 8.82s | 1.21s | 0 |
+| [go-zc310](https://github.com/zc310/ofd) | 634ms | 10.39s | 2.44s | 0 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 991ms | 16.00s | 3.22s | 0 |
+| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 327ms | FAILED | **127ms** | 1 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 7.24s | 35.18s | 6.65s | 0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 477ms | 7.51s | 1.15s | 0 |
+| [rust-sofd](https://github.com/emfox/sOFD) | **243ms** | **2.76s** | 590ms | 2 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 2.17s | 15.93s | 5.41s | 0 |
+| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 869ms | 11.63s | 1.49s | 0 |
 <!-- benchmark-table:png-speed:end -->
 
 ### 平均每页耗时
@@ -61,14 +61,14 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 
 | 转换器 | 999.ofd | intro.ofd | zsbk.ofd | 胜出次数 |
 |---|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | 96.37ms | 196.11ms | 926.29ms | 0 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 151.07ms | 306.45ms | 1254.57ms | 0 |
-| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 51.62ms | FAILED | **49.07ms** | 1 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 1380.97ms | 708.32ms | 2919.37ms | 0 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 68.70ms | 130.50ms | 438.18ms | 0 |
-| [rust-sofd](https://github.com/emfox/sOFD) | **39.26ms** | **47.39ms** | 226.34ms | 2 |
-| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 302.84ms | 285.39ms | 1982.49ms | 0 |
-| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 136.74ms | 210.05ms | 605.59ms | 0 |
+| [go-zc310](https://github.com/zc310/ofd) | 126.80ms | 247.35ms | 1219.39ms | 0 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 198.13ms | 381.00ms | 1608.53ms | 0 |
+| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 65.48ms | FAILED | **63.53ms** | 1 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 1447.68ms | 837.70ms | 3325.63ms | 0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 95.33ms | 178.74ms | 573.41ms | 0 |
+| [rust-sofd](https://github.com/emfox/sOFD) | **48.63ms** | **65.65ms** | 295.15ms | 2 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 434.67ms | 379.35ms | 2706.48ms | 0 |
+| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 173.84ms | 276.82ms | 746.05ms | 0 |
 <!-- benchmark-table:png-ms-per-page:end -->
 
 ### PNG 总大小
@@ -93,7 +93,7 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 
 | 转换器 | 999.ofd | intro.ofd | zsbk.ofd | 胜出次数 |
 |---|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | 64.65% | 99.06% | 97.97% | 0 |
+| [go-zc310](https://github.com/zc310/ofd) | 66.48% | 99.06% | 97.97% | 0 |
 | [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 67.06% | **99.09%** | **98.01%** | 2 |
 | [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 68.58% | FAILED | FAILED | 0 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 69.65% | 98.36% | 97.74% | 0 |
@@ -125,7 +125,7 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 
 | 转换器 | 999.ofd | intro.ofd | zsbk.ofd | 胜出次数 |
 |---|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | 98.72% | **99.69%** | 98.30% | 1 |
+| [go-zc310](https://github.com/zc310/ofd) | 98.82% | **99.69%** | 98.30% | 1 |
 | [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 98.79% | **99.69%** | **98.33%** | 1 |
 | [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 98.86% | FAILED | FAILED | 0 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 98.92% | 99.36% | 98.10% | 0 |
@@ -183,6 +183,6 @@ python3 tools/compare_png.py 999 --converters rust-ofd-utility
 <!-- benchmark-environment:start -->
 
 - 系统：Ubuntu 24.04.5 LTS (x86_64)
-- CPU：Intel(R) Xeon(R) 6975P-C（4 逻辑核心）
-- 内存：15.3 GiB
+- CPU：INTEL(R) XEON(R) PLATINUM 8573C（4 逻辑核心）
+- 内存：15.6 GiB
 <!-- benchmark-environment:end -->
