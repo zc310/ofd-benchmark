@@ -1,14 +1,14 @@
 # Benchmark result source for OFD -> PDF/PNG and PDF -> OFD reports.
 # Values are strings to preserve display precision/units; FAILED means no result.
 benchmark_versions:
-    github.com/zc310/ofd: v0.2.2-0.20261119021541-2f1efcb69926
-    github.com/xiaoqidun/ofdgo: v0.0.0-20261119013312-38748f24bfef
+    github.com/zc310/ofd: v0.2.3-0.20261122083812-2c7628759b38
+    github.com/xiaoqidun/ofdgo: v0.0.0-20261122015454-e70fdfb4451c
     github.com/lihongjie0209/ofdrw-rs/bindings/go: v0.5.0
     github.com/ofdbox/ofdbox-folio: 36e6877bf5d0b989cd824c3c74241533ae1f90ea
     github.com/emfox/sOFD: 65cff468ecc2af676180f540899fdf74da849c3a
     github.com/ofd-utility/ofd-utility: d603791e933a81936b23c91dcab90fdc4c2c0edf
     github.com/feuvan/ofdmanager: a9b1d29ef90141a369ad47cc32fd6c62dd8b8450
-    org.ofdrw:ofdrw-converter: 2.5.1
+    org.ofdrw:ofdrw-converter: 2.5.2
 benchmark_environment:
     os: Ubuntu 24.04.5 LTS (x86_64)
     cpu_model: Intel(R) Xeon(R) 6975P-C
@@ -22,53 +22,53 @@ reports:
           winner: min
           wins: true
           rows:
-            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [482ms, 8.24s, 1.85s]}
-            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [755ms, 12.87s, 2.51s]}
-            - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [258ms, FAILED, 98ms]}
-            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [6.90s, 29.75s, 5.84s]}
-            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [344ms, 5.48s, 876ms]}
-            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [196ms, 1.99s, 453ms]}
-            - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [1.51s, 11.99s, 3.96s]}
-            - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [684ms, 8.82s, 1.21s]}
+            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [528ms, 8.36s, 1.93s]}
+            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [850ms, 13.05s, 2.58s]}
+            - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [273ms, FAILED, 110ms]}
+            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [6.96s, 30.66s, 6.00s]}
+            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [351ms, 5.56s, 916ms]}
+            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [202ms, 2.10s, 503ms]}
+            - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [1.56s, 12.45s, 4.36s]}
+            - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [725ms, 9.48s, 1.25s]}
         - id: png-cpu
           headers: [转换器, 999.ofd, intro.ofd, zsbk.ofd]
           winner: min
           wins: true
           rows:
-            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [FAILED, FAILED, FAILED]}
-            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [FAILED, FAILED, FAILED]}
-            - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [FAILED, FAILED, FAILED]}
-            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [FAILED, FAILED, FAILED]}
-            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [FAILED, FAILED, FAILED]}
-            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [FAILED, FAILED, FAILED]}
-            - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [FAILED, FAILED, FAILED]}
-            - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [FAILED, FAILED, FAILED]}
+            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [553ms, 8.47s, 2.02s]}
+            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [903ms, 13.69s, 2.66s]}
+            - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [273ms, FAILED, 110ms]}
+            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [6.96s, 30.70s, 6.01s]}
+            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [351ms, 5.60s, 958ms]}
+            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [202ms, 2.10s, 503ms]}
+            - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [4.18s, 17.85s, 7.99s]}
+            - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [724ms, 9.47s, 1.25s]}
         - id: png-memory
           headers: [转换器, 999.ofd, intro.ofd, zsbk.ofd]
           winner: min
           wins: true
           rows:
-            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [FAILED, FAILED, FAILED]}
-            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [FAILED, FAILED, FAILED]}
-            - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [FAILED, FAILED, FAILED]}
-            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [FAILED, FAILED, FAILED]}
-            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [FAILED, FAILED, FAILED]}
-            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [FAILED, FAILED, FAILED]}
-            - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [FAILED, FAILED, FAILED]}
-            - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [FAILED, FAILED, FAILED]}
+            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [227.93MB, 223.00MB, 247.03MB]}
+            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [387.21MB, 246.26MB, 476.74MB]}
+            - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [76.63MB, FAILED, 57.24MB]}
+            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [80.78MB, 215.83MB, 149.61MB]}
+            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [117.07MB, 152.11MB, 218.53MB]}
+            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [97.41MB, 106.32MB, 160.31MB]}
+            - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [399.67MB, 650.21MB, 1112.49MB]}
+            - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [163.43MB, 198.37MB, 300.65MB]}
         - id: png-ms-per-page
           headers: [转换器, 999.ofd, intro.ofd, zsbk.ofd]
           winner: min
           wins: true
           rows:
-            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [96.37ms, 196.11ms, 926.29ms]}
-            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [151.07ms, 306.45ms, 1254.57ms]}
-            - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [51.62ms, FAILED, 49.07ms]}
-            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [1380.97ms, 708.32ms, 2919.37ms]}
-            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [68.70ms, 130.50ms, 438.18ms]}
-            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [39.26ms, 47.39ms, 226.34ms]}
-            - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [302.84ms, 285.39ms, 1982.49ms]}
-            - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [136.74ms, 210.05ms, 605.59ms]}
+            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [105.50ms, 198.95ms, 964.63ms]}
+            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [170.06ms, 310.65ms, 1288.14ms]}
+            - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [54.56ms, FAILED, 54.89ms]}
+            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [1391.83ms, 730.07ms, 3000.59ms]}
+            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [70.26ms, 132.43ms, 458.06ms]}
+            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [40.35ms, 50.02ms, 251.41ms]}
+            - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [312.49ms, 296.48ms, 2181.72ms]}
+            - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [145.00ms, 225.60ms, 623.43ms]}
         - id: png-size
           headers: [转换器, 999.ofd, intro.ofd, zsbk.ofd]
           winner: min
@@ -87,7 +87,7 @@ reports:
           winner: max
           wins: true
           rows:
-            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [98.72%, 99.69%, 98.30%]}
+            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [98.82%, 99.69%, 98.30%]}
             - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [98.79%, 99.69%, 98.33%]}
             - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [98.86%, FAILED, FAILED]}
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [98.92%, 99.36%, 98.10%]}
@@ -100,7 +100,7 @@ reports:
           winner: max
           wins: true
           rows:
-            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [64.65%, 99.06%, 97.97%]}
+            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [66.48%, 99.06%, 97.97%]}
             - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [67.06%, 99.09%, 98.01%]}
             - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [68.58%, FAILED, FAILED]}
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [69.65%, 98.36%, 97.74%]}
@@ -128,47 +128,47 @@ reports:
           winner: min
           wins: true
           rows:
-            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [76ms, 157ms, 833ms, 587ms, 176ms, 589ms]}
-            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [2.06s, 1.23s, 2.52s, 31.33s, 528ms, 1.69s]}
-            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [29ms, 500ms, 2.73s, 261.24s, 443ms, 551ms]}
-            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [111ms, 135ms, 445ms, 5.32s, 331ms, 269ms]}
-            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [35ms, 341ms, 2.66s, 21.83s, 289ms, 2.88s]}
-            - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: [1.92s, 951ms, 9.40s, 1.47s, 926ms, 5.52s]}
-            - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: [1.39s, 1.12s, 2.79s, 3.14s, 1.75s, 1.77s]}
-            - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: [226ms, 574ms, 1.46s, 8.83s, 422ms, 903ms]}
+            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [87ms, 185ms, 568ms, 178ms, 217ms, 513ms]}
+            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [1.37s, 453ms, 394ms, 179ms, 815ms, 641ms]}
+            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [33ms, 517ms, 2.82s, 267.23s, 464ms, 568ms]}
+            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [117ms, 140ms, 464ms, 5.30s, 339ms, 276ms]}
+            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [37ms, 347ms, 2.71s, 22.01s, 295ms, 2.93s]}
+            - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: [1.94s, 1.08s, 9.74s, 1.58s, 990ms, 5.62s]}
+            - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: [971ms, 1.23s, 2.68s, 3.22s, 1.63s, 1.69s]}
+            - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: [227ms, 597ms, 1.55s, 8.96s, 429ms, 937ms]}
         - id: ofd-cpu
           headers: [转换器, hello.ofd, ano.ofd, intro.ofd, 1000-pages.ofd, 999.ofd, zsbk.ofd]
           winner: min
           wins: true
           rows:
-            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
+            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [100ms, 199ms, 653ms, 208ms, 243ms, 578ms]}
+            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [198ms, 571ms, 1.29s, 561ms, 1.90s, 789ms]}
+            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [15ms, 516ms, 2.83s, 266.97s, 462ms, 568ms]}
+            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [116ms, 140ms, 464ms, 5.30s, 339ms, 276ms]}
+            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [37ms, 347ms, 2.71s, 22.01s, 295ms, 2.93s]}
+            - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: [935ms, 1.08s, 9.74s, 1.58s, 990ms, 5.61s]}
+            - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: [1.92s, 3.58s, 7.58s, 9.94s, 4.27s, 5.03s]}
+            - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: [398ms, 1.26s, 2.74s, 14.21s, 878ms, 1.76s]}
         - id: ofd-memory
           headers: [转换器, hello.ofd, ano.ofd, intro.ofd, 1000-pages.ofd, 999.ofd, zsbk.ofd]
           winner: min
           wins: true
           rows:
-            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
+            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [85.07MB, 145.09MB, 198.53MB, 31.44MB, 181.96MB, 168.29MB]}
+            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [133.90MB, 338.69MB, 202.22MB, 50.95MB, 1049.76MB, 328.96MB]}
+            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [38.96MB, 57.46MB, 94.38MB, 188.05MB, 61.92MB, 123.64MB]}
+            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [36.13MB, 32.24MB, 61.02MB, 243.42MB, 73.02MB, 45.57MB]}
+            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [22.18MB, 16.17MB, 118.68MB, 346.17MB, 56.58MB, 143.84MB]}
+            - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: [227.54MB, 217.83MB, 352.17MB, 218.14MB, 210.58MB, 371.85MB]}
+            - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: [162.55MB, 391.73MB, 687.48MB, 521.07MB, 448.59MB, 500.95MB]}
+            - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: [100.09MB, 149.05MB, 269.34MB, 1083.70MB, 131.09MB, 188.99MB]}
         - id: ofd-pdf-size
           headers: [转换器, hello.ofd, ano.ofd, intro.ofd, 1000-pages.ofd, 999.ofd, zsbk.ofd]
           winner: min
           wins: true
           rows:
             - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [10.0KB, 89.2KB, 7.5MB, 686.8KB, 80.3KB, 1.4MB]}
-            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [15.3KB, 830.6KB, 9.9MB, 57.7MB, 123.2KB, 2.2MB]}
+            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [4.9KB, 57.8KB, 7.5MB, 272.1KB, 90.3KB, 1.5MB]}
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [5.4KB, 682.8KB, 9.5MB, 25.8MB, 208.7KB, 2.7MB]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [81.6KB, 258.4KB, 9.0MB, 32.8MB, 602.9KB, 1.9MB]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [4.4KB, 971.2KB, 31.4MB, 88.4MB, 834.7KB, 15.9MB]}
@@ -180,14 +180,14 @@ reports:
           winner: max
           wins: true
           rows:
-            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: ["22", "7232", "5544", FAILED, "3971", "1162"]}
-            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: ["8", "567", "506", FAILED, "3967", "527"]}
-            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: ["22", "7093", "5494", FAILED, "3934", "1150"]}
-            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: ["8", "6497", "1959", FAILED, "773", "717"]}
-            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: ["0", "0", "0", FAILED, "0", "0"]}
-            - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: ["22", "1208", "10194", FAILED, "3933", "1508"]}
-            - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: ["26", "7282", "5550", FAILED, "4162", "1169"]}
-            - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: ["31", "6489", "9614", FAILED, "4249", "1938"]}
+            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: ["22", "7232", "5544", "242999", "3971", "1162"]}
+            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: ["22", "7087", "4974", "242999", "3971", "1150"]}
+            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: ["22", "7093", "5494", "242999", "3934", "1150"]}
+            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: ["8", "6497", "1959", "129999", "773", "717"]}
+            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: ["0", "0", "0", "0", "0", "0"]}
+            - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: ["22", "1208", "10194", "20223", "3933", "1508"]}
+            - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: ["26", "7282", "5550", "242999", "4162", "1169"]}
+            - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: ["31", "6489", "9614", "325999", "4249", "1938"]}
         - id: ofd-pixel-similarity
           headers: [转换器, hello.ofd, ano.ofd, intro.ofd, 1000-pages.ofd, 999.ofd, zsbk.ofd]
           winner: max
@@ -196,7 +196,7 @@ reports:
             hello.ofd: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)'
           rows:
             - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [99.63%, 99.70%, 99.86%, 99.47%, 98.55%, 99.51%]}
-            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [99.63%, 99.39%, 99.75%, 99.46%, 98.56%, 98.90%]}
+            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [99.62%, 99.71%, 99.90%, 99.47%, 97.56%, 98.92%]}
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [99.60%, 99.38%, 99.54%, 98.30%, 98.55%, 99.38%]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [99.61%, 98.89%, 99.46%, 99.52%, 98.48%, 97.46%]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [99.38%, FAILED, FAILED, 99.45%, 98.59%, 97.84%]}
@@ -209,7 +209,7 @@ reports:
           wins: true
           rows:
             - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [67.08%, 96.54%, 99.73%, 99.39%, 80.52%, 99.41%]}
-            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [67.34%, 91.58%, 99.52%, 99.38%, 80.64%, 98.69%]}
+            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [67.02%, 96.70%, 99.82%, 99.40%, 66.04%, 98.71%]}
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [65.19%, 91.20%, 99.05%, 98.05%, 80.58%, 99.26%]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [66.08%, 83.10%, 97.86%, 99.45%, 79.65%, 96.96%]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [45.27%, FAILED, FAILED, 99.37%, 81.51%, 97.42%]}
@@ -222,7 +222,7 @@ reports:
           wins: true
           rows:
             - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [86.46%, 98.30%, 99.96%, 99.98%, 98.09%, 100.00%]}
-            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [86.44%, 98.37%, 100.00%, 99.97%, 98.10%, 100.00%]}
+            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [86.51%, 98.39%, 100.00%, 99.98%, 70.95%, 100.00%]}
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [82.35%, 98.34%, 99.50%, 99.62%, 98.10%, 100.00%]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [82.63%, 92.06%, 99.91%, 100.00%, 97.50%, 65.34%]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [67.14%, FAILED, FAILED, 100.00%, 99.27%, 99.98%]}
@@ -235,7 +235,7 @@ reports:
           rows:
             - {label: 数科版式阅读器, values: [1.00, 1.00, 1.00, 1.00, 1.00, 1.00]}
             - {label: '[go-zc310](https://github.com/zc310/ofd)', values: ["2.84", "0.10", "1.12", "0.35", "1.00", "0.91"]}
-            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: ["4.36", "0.92", "1.48", "30.36", "1.54", "1.43"]}
+            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: ["1.38", "0.06", "1.12", "0.14", "1.13", "0.96"]}
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: ["1.54", "0.76", "1.42", "13.59", "2.61", "1.69"]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: ["23.19", "0.29", "1.35", "17.26", "7.54", "1.21"]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: ["1.26", "1.07", "4.69", "46.54", "10.44", "10.12"]}
@@ -250,7 +250,7 @@ reports:
             1000-pages.ofd: '[ofdrw](https://github.com/ofdrw/ofdrw)'
           rows:
             - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [100.00%, 99.06%, 99.71%, 100.00%, 95.85%, 98.85%]}
-            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [26.32%, 5.28%, 8.57%, 3.99%, 95.01%, 26.58%]}
+            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [100.00%, 99.06%, 90.55%, 100.00%, 95.85%, 100.00%]}
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [100.00%, 99.73%, 94.88%, 100.00%, 100.00%, 100.00%]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [26.32%, 18.04%, 3.67%, 3.99%, 39.65%, 0.00%]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [0.00%, 0.00%, 0.00%, 0.00%, 0.00%, 0.00%]}
@@ -264,38 +264,38 @@ reports:
           winner: min
           wins: true
           rows:
-            - {label: go-zc310, values: [24ms, 84ms, 220ms, 390ms, 1.06s, 872ms, 1.40s]}
-            - {label: go-ofdgo, values: [45ms, 285ms, 262ms, 580ms, 1.36s, 8.74s, 3.62s]}
-            - {label: java-ofdrw, values: [770ms, 1.48s, 1.61s, 7.54s, 4.48s, 4.50s, 80.07s]}
-            - {label: python-pdf2ofd, values: [113ms, 849ms, 538ms, 2.51s, 967ms, 52.92s, 18.61s]}
-            - {label: node-jsofd, values: [244ms, 423ms, 3.27s, 9.58s, 4.98s, 2.44s, 7.49s]}
+            - {label: go-zc310, values: [17ms, 78ms, 257ms, 393ms, 1.00s, 804ms, 1.47s]}
+            - {label: go-ofdgo, values: [47ms, FAILED, FAILED, 435ms, FAILED, 7.02s, 2.10s]}
+            - {label: java-ofdrw, values: [853ms, 1.52s, 1.63s, 7.63s, 4.52s, 4.10s, 81.37s]}
+            - {label: python-pdf2ofd, values: [121ms, 859ms, 549ms, 2.53s, 981ms, 54.97s, 18.98s]}
+            - {label: node-jsofd, values: [232ms, 457ms, 3.28s, 9.67s, 5.00s, 2.62s, 7.60s]}
         - id: pdf-cpu
           headers: [转换器, hello.pdf, ano.pdf, 999.pdf, intro.pdf, zsbk.pdf, 1000-pages.pdf, GBT_33190-2016.pdf]
           winner: min
           wins: true
           rows:
-            - {label: go-zc310, values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: go-ofdgo, values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: java-ofdrw, values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: python-pdf2ofd, values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: node-jsofd, values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
+            - {label: go-zc310, values: [21ms, 93ms, 295ms, 426ms, 1.10s, 1.01s, 1.74s]}
+            - {label: go-ofdgo, values: [64ms, FAILED, FAILED, 1.23s, FAILED, 13.47s, 5.78s]}
+            - {label: java-ofdrw, values: [2.28s, 4.62s, 4.87s, 14.43s, 9.45s, 12.32s, 99.79s]}
+            - {label: python-pdf2ofd, values: [121ms, 858ms, 548ms, 2.53s, 981ms, 54.97s, 18.98s]}
+            - {label: node-jsofd, values: [297ms, 799ms, 700ms, 5.86s, 5.15s, 4.25s, 8.51s]}
         - id: pdf-memory
           headers: [转换器, hello.pdf, ano.pdf, 999.pdf, intro.pdf, zsbk.pdf, 1000-pages.pdf, GBT_33190-2016.pdf]
           winner: min
           wins: true
           rows:
-            - {label: go-zc310, values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: go-ofdgo, values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: java-ofdrw, values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: python-pdf2ofd, values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
-            - {label: node-jsofd, values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
+            - {label: go-zc310, values: [34.64MB, 53.73MB, 208.85MB, 118.48MB, 240.94MB, 193.70MB, 148.31MB]}
+            - {label: go-ofdgo, values: [55.01MB, FAILED, FAILED, 144.18MB, FAILED, 2185.64MB, 491.35MB]}
+            - {label: java-ofdrw, values: [207.18MB, 460.09MB, 453.72MB, 598.07MB, 601.69MB, 948.95MB, 1710.12MB]}
+            - {label: python-pdf2ofd, values: [69.09MB, 99.29MB, 81.70MB, 171.33MB, 148.79MB, 94.92MB, 233.12MB]}
+            - {label: node-jsofd, values: [144.65MB, 211.30MB, 190.78MB, 510.03MB, 456.39MB, 652.04MB, 1053.11MB]}
         - id: pdf-ofd-size
           headers: [转换器, hello.pdf, ano.pdf, 999.pdf, intro.pdf, zsbk.pdf, 1000-pages.pdf, GBT_33190-2016.pdf]
           winner: min
           wins: true
           rows:
             - {label: go-zc310, values: [1.7K, 405.4K, 62.3K, 7.3M, 1.6M, 4.8M, 7.1M]}
-            - {label: go-ofdgo, values: [6.3K, 713.4K, 119.5K, 9.3M, 3.0M, 64.8M, 17.3M]}
+            - {label: go-ofdgo, values: [6.2K, FAILED, FAILED, 8.9M, FAILED, 64.7M, 13.8M]}
             - {label: java-ofdrw, values: [5.6K, 601.3K, 817.6K, 34.2M, 20.4M, 3.5M, 30.5M]}
             - {label: python-pdf2ofd, values: [4.6K, 1.3M, 733.7K, 8.9M, 1.6M, 86.5M, 36.8M]}
             - {label: node-jsofd, values: [3.0K, 2.2M, 590.2K, 34.8M, 12.9M, 31.8M, 34.3M]}
@@ -304,7 +304,7 @@ reports:
           winner: min
           rows:
             - {label: go-zc310, values: ["0.48", "0.45", "0.78", "1.09", "1.02", "2.54", "1.46"]}
-            - {label: go-ofdgo, values: ["1.78", "0.79", "1.49", "1.38", "1.93", "34.13", "3.59"]}
+            - {label: go-ofdgo, values: ["1.77", FAILED, FAILED, "1.33", FAILED, "34.05", "2.85"]}
             - {label: java-ofdrw, values: ["1.58", "0.67", "10.23", "5.10", "13.00", "1.83", "6.32"]}
             - {label: python-pdf2ofd, values: ["1.32", "1.43", "9.18", "1.33", "1.04", "45.55", "7.62"]}
             - {label: node-jsofd, values: ["0.84", "2.47", "7.38", "5.18", "8.18", "16.72", "7.10"]}
@@ -315,8 +315,8 @@ reports:
           tie-break:
             hello.pdf: java-ofdrw
           rows:
-            - {label: go-zc310, values: [99.63%, 99.77%, 98.43%, 99.93%, 99.56%, 99.84%, 99.98%]}
-            - {label: go-ofdgo, values: [99.63%, 99.39%, 98.34%, 98.02%, 99.17%, 99.64%, 99.82%]}
+            - {label: go-zc310, values: [99.63%, 99.77%, 98.57%, 99.93%, 99.56%, 99.84%, 99.98%]}
+            - {label: go-ofdgo, values: [99.63%, FAILED, FAILED, 98.02%, FAILED, 99.64%, 99.82%]}
             - {label: java-ofdrw, values: [99.85%, 98.72%, 98.75%, 99.49%, 99.06%, 97.99%, 99.66%]}
             - {label: python-pdf2ofd, values: [99.72%, 98.35%, 98.94%, 99.34%, 97.70%, 98.40%, FAILED]}
             - {label: node-jsofd, values: [99.37%, 96.77%, 98.14%, FAILED, 98.82%, 99.50%, 99.94%]}
@@ -325,8 +325,8 @@ reports:
           winner: none
           rows:
             - {label: go-zc310, values: ["22", "9222", "9737", "9314", "2740", "326022", "170697"]}
-            - {label: go-ofdgo, values: ["8", "14127", "10009", "10920", "3373", "179998", "234709"]}
-            - {label: java-ofdrw, values: ["0", "7049", "0", "1598", "3", "321998", "167"]}
+            - {label: go-ofdgo, values: ["8", FAILED, FAILED, "10920", FAILED, "179998", "234709"]}
+            - {label: java-ofdrw, values: ["0", "7049", "0", "1598", "3", "321998", "714"]}
             - {label: python-pdf2ofd, values: ["0", "0", "0", "0", "0", "0", "0"]}
             - {label: node-jsofd, values: ["25", "10812", "9941", "10222", "2796", "326448", "225807"]}
         - id: pdf-text-similarity
@@ -334,7 +334,7 @@ reports:
           winner: none
           rows:
             - {label: go-zc310, values: [100.00%, 33.33%, 64.41%, 15.41%, 10.43%, 98.54%, 41.99%]}
-            - {label: go-ofdgo, values: [26.32%, 19.19%, 44.56%, 13.67%, 4.63%, 2.63%, 1.08%]}
-            - {label: java-ofdrw, values: [0.00%, 64.59%, 0.00%, 4.58%, 0.00%, 98.86%, 0.00%]}
+            - {label: go-ofdgo, values: [26.32%, FAILED, FAILED, 13.67%, FAILED, 2.63%, 1.08%]}
+            - {label: java-ofdrw, values: [0.00%, 64.59%, 0.00%, 4.58%, 0.00%, 98.86%, 0.01%]}
             - {label: python-pdf2ofd, values: [0.00%, 0.00%, 0.00%, 0.00%, 0.00%, 0.00%, 0.00%]}
             - {label: node-jsofd, values: [100.00%, 36.08%, 18.27%, 15.12%, 6.94%, 30.25%, 1.08%]}

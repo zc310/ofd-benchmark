@@ -10,7 +10,7 @@
 
 | 转换器         | 语言   | 库                                                                          | 版本                    | 说明                                                                                                         |
 |----------------|--------|-----------------------------------------------------------------------------|-------------------------|--------------------------------------------------------------------------------------------------------------|
-| go-zc310       | Go     | [zc310/ofd](https://github.com/zc310/ofd)                                   | v0.2.2 | 基于 pdfcpu 的 PDF→OFD 导入器（路径/文本/图片/注解/渐变/图案/网格/大纲/元数据），文本保留为可提取 TextObject |
+| go-zc310       | Go     | [zc310/ofd](https://github.com/zc310/ofd)                                   | v0.2.3-0.20261122083812-2c7628759b38 | 基于 pdfcpu 的 PDF→OFD 导入器（路径/文本/图片/注解/渐变/图案/网格/大纲/元数据），文本保留为可提取 TextObject |
 | go-ofdgo       | Go     | [xiaoqidun/ofdgo](https://github.com/xiaoqidun/ofdgo)（ConvertPDF + pdfgo） | v0.0.0-20261122015454-e70fdfb4451c | 基于 pdfgo 的 PDF→OFD 导入器（路径/文本/图片/注解）                                                          |
 | java-ofdrw     | Java   | [ofdrw](https://github.com/ofdrw/ofdrw)（ofdrw-converter PDFConverter）     | 2.5.2 | 文本转为矢量轮廓，保留原始外观                                                                               |
 | python-pdf2ofd | Python | [pdf2ofd](https://github.com/wanglrebe/pdf2ofd)                             | 0.1.0                   | 基于 PyMuPDF 渲染，文本栅格化                                                                                |
@@ -39,8 +39,8 @@
 <!-- benchmark-environment:start -->
 
 - 系统：Ubuntu 24.04.5 LTS (x86_64)
-- CPU：INTEL(R) XEON(R) PLATINUM 8573C（4 逻辑核心）
-- 内存：15.6 GiB
+- CPU：Intel(R) Xeon(R) 6975P-C（4 逻辑核心）
+- 内存：15.3 GiB
 <!-- benchmark-environment:end -->
 - 系统已安装 `apt-get install fonts-wqy-zenhei fonts-noto-cjk`
 - 测试前运行 `bash tools/install-fonts.sh`，下载 `doc-foundertype.zip`、`doc-zhongyi-etc.zip`、`latin-fonts.zip` 并安装到用户目录 `~/.local/share/fonts/hanzi-fonts/`，随后刷新字体缓存。字体下载链接与依赖安装命令见 [README：快速开始](../README.md#快速开始)；GitHub Actions 已加入此准备步骤。
@@ -53,11 +53,11 @@
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310 | **22ms** | **97ms** | **298ms** | **497ms** | 1.29s | **1.04s** | **1.84s** | 6 |
-| go-ofdgo | 56ms | FAILED | FAILED | 566ms | FAILED | 8.83s | 2.69s | 0 |
-| java-ofdrw | 1.08s | 1.92s | 2.32s | 9.98s | 5.96s | 5.89s | 104.59s | 0 |
-| python-pdf2ofd | 149ms | 1.10s | 705ms | 3.28s | **1.26s** | 70.91s | 24.49s | 1 |
-| node-jsofd | 291ms | 604ms | 3.36s | 10.69s | 5.54s | 3.31s | 8.94s | 0 |
+| go-zc310 | **17ms** | **78ms** | **257ms** | **393ms** | 1.00s | **804ms** | **1.47s** | 6 |
+| go-ofdgo | 47ms | FAILED | FAILED | 435ms | FAILED | 7.02s | 2.10s | 0 |
+| java-ofdrw | 853ms | 1.52s | 1.63s | 7.63s | 4.52s | 4.10s | 81.37s | 0 |
+| python-pdf2ofd | 121ms | 859ms | 549ms | 2.53s | **981ms** | 54.97s | 18.98s | 1 |
+| node-jsofd | 232ms | 457ms | 3.28s | 9.67s | 5.00s | 2.62s | 7.60s | 0 |
 <!-- benchmark-table:pdf-speed:end -->
 
 ### CPU 总时间
@@ -68,11 +68,11 @@ CPU 总时间为进程用户态与内核态时间之和，累加所有线程及�
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310 | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
-| go-ofdgo | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
-| java-ofdrw | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
-| python-pdf2ofd | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
-| node-jsofd | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
+| go-zc310 | **21ms** | **93ms** | **295ms** | **426ms** | 1.10s | **1.01s** | **1.74s** | 6 |
+| go-ofdgo | 64ms | FAILED | FAILED | 1.23s | FAILED | 13.47s | 5.78s | 0 |
+| java-ofdrw | 2.28s | 4.62s | 4.87s | 14.43s | 9.45s | 12.32s | 99.79s | 0 |
+| python-pdf2ofd | 121ms | 858ms | 548ms | 2.53s | **981ms** | 54.97s | 18.98s | 1 |
+| node-jsofd | 297ms | 799ms | 700ms | 5.86s | 5.15s | 4.25s | 8.51s | 0 |
 <!-- benchmark-table:pdf-cpu:end -->
 
 ### 进程树内存峰值
@@ -83,11 +83,11 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310 | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
-| go-ofdgo | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
-| java-ofdrw | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
-| python-pdf2ofd | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
-| node-jsofd | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
+| go-zc310 | **34.64MB** | **53.73MB** | 208.85MB | **118.48MB** | 240.94MB | 193.70MB | **148.31MB** | 4 |
+| go-ofdgo | 55.01MB | FAILED | FAILED | 144.18MB | FAILED | 2185.64MB | 491.35MB | 0 |
+| java-ofdrw | 207.18MB | 460.09MB | 453.72MB | 598.07MB | 601.69MB | 948.95MB | 1710.12MB | 0 |
+| python-pdf2ofd | 69.09MB | 99.29MB | **81.70MB** | 171.33MB | **148.79MB** | **94.92MB** | 233.12MB | 3 |
+| node-jsofd | 144.65MB | 211.30MB | 190.78MB | 510.03MB | 456.39MB | 652.04MB | 1053.11MB | 0 |
 <!-- benchmark-table:pdf-memory:end -->
 
 ## OFD 文件大小
