@@ -121,7 +121,7 @@ func main() {
 		if c, ok := converters[name]; ok {
 			if r, ok := results[c.Name]; ok {
 				if r.ok {
-					sizeStr := fmt.Sprintf("%.1f KB", float64(r.size)/1024)
+					sizeStr := fmt.Sprintf("%.2f KB", float64(r.size)/1024)
 					fmt.Printf("%-20s %10v  CPU: %v  peak RSS: %s  %s\n", c.Name+":", r.duration, r.cpu, converter.FormatPeakRSS(r.memory), sizeStr)
 				} else {
 					fmt.Printf("%-20s %10v  FAILED\n", c.Name+":", r.duration)

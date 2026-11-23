@@ -113,14 +113,14 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 
 | 转换器 | 999.ofd | intro.ofd | zsbk.ofd | 胜出次数 |
 |---|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | 1.6MB | 40.1MB | 7.4MB | 0 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 1.7MB | 50.8MB | 8.5MB | 0 |
-| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 2.4MB | FAILED | **335.1KB** | 1 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 972.5KB | 40.0MB | 7.3MB | 0 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 1.4MB | 43.2MB | 3.9MB | 0 |
-| [rust-sofd](https://github.com/emfox/sOFD) | 2.4MB | 42.1MB | 9.1MB | 0 |
-| [java-ofdrw](https://github.com/ofdrw/ofdrw) | **567.9KB** | **25.6MB** | 7.0MB | 2 |
-| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 2.4MB | 31.9MB | 8.9MB | 0 |
+| [go-zc310](https://github.com/zc310/ofd) | 1.60MB | 40.10MB | 7.40MB | 0 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 1.70MB | 50.80MB | 8.50MB | 0 |
+| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 2.40MB | FAILED | **335.10KB** | 1 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 972.50KB | 40.00MB | 7.30MB | 0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 1.40MB | 43.20MB | 3.90MB | 0 |
+| [rust-sofd](https://github.com/emfox/sOFD) | 2.40MB | 42.10MB | 9.10MB | 0 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw) | **567.90KB** | **25.60MB** | 7.00MB | 2 |
+| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 2.40MB | 31.90MB | 8.90MB | 0 |
 <!-- benchmark-table:png-size:end -->
 
 ### 内容相似度

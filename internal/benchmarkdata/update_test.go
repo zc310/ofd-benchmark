@@ -10,6 +10,32 @@ import (
 	"go.yaml.in/yaml/v4"
 )
 
+func TestFormatSize(t *testing.T) {
+	for _, tt := range []struct {
+		name string
+		size int64
+		pdf  string
+		ofd  string
+	}{
+		{"zero", 0, "0.00KB", "0.00K"},
+		{"whole KB", 1024, "1.00KB", "1.00K"},
+		{"fractional KB", 1264, "1.23KB", "1.23K"},
+		{"round up KB", 1275, "1.25KB", "1.25K"},
+		{"below MB", 1024*1024 - 1, "1024.00KB", "1024.00K"},
+		{"whole MB", 1024 * 1024, "1.00MB", "1.00M"},
+		{"fractional MB", 1300000, "1.24MB", "1.24M"},
+	} {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := FormatPDFSize(tt.size); got != tt.pdf {
+				t.Errorf("FormatPDFSize(%d) = %q, want %q", tt.size, got, tt.pdf)
+			}
+			if got := FormatOFDSize(tt.size); got != tt.ofd {
+				t.Errorf("FormatOFDSize(%d) = %q, want %q", tt.size, got, tt.ofd)
+			}
+		})
+	}
+}
+
 func TestUpdateCell(t *testing.T) {
 	path := copyBenchmarkYAML(t)
 	want := readResultValues(t, path, "pdf-to-ofd", "pdf-speed", "go-zc310")

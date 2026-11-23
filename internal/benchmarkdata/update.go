@@ -30,17 +30,17 @@ func FormatDuration(duration time.Duration) string {
 func FormatPDFSize(size int64) string {
 	kb := float64(size) / 1024
 	if kb >= 1024 {
-		return fmt.Sprintf("%.1fMB", kb/1024)
+		return fmt.Sprintf("%.2fMB", kb/1024)
 	}
-	return fmt.Sprintf("%.1fKB", kb)
+	return fmt.Sprintf("%.2fKB", kb)
 }
 
 func FormatOFDSize(size int64) string {
 	kb := float64(size) / 1024
 	if kb >= 1024 {
-		return fmt.Sprintf("%.1fM", kb/1024)
+		return fmt.Sprintf("%.2fM", kb/1024)
 	}
-	return fmt.Sprintf("%.1fK", kb)
+	return fmt.Sprintf("%.2fK", kb)
 }
 
 func FormatRatio(size, reference int64) string {

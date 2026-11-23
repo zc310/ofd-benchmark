@@ -58,12 +58,12 @@
 
 | 文件           | 大小 | 说明         |
 |----------------|------|--------------|
-| hello.ofd      | 1.5K | 简单测试文件 |
-| ano.ofd        | 702K | 带签章文件   |
-| intro.ofd      | 7.2M | 介绍文档     |
-| 1000-pages.ofd | 508K | 1000页文件   |
-| 999.ofd        | 30K  | 带签章文件   |
-| zsbk.ofd       | 1.5M | 数科签章文件 |
+| hello.ofd      | 1.50K | 简单测试文件 |
+| ano.ofd        | 702.00K | 带签章文件   |
+| intro.ofd      | 7.20M | 介绍文档     |
+| 1000-pages.ofd | 508.00K | 1000页文件   |
+| 999.ofd        | 30.00K  | 带签章文件   |
+| zsbk.ofd       | 1.50M | 数科签章文件 |
 
 > `testdata/suwell/` 下的 `*.pdf` 为各 OFD 的参考转换结果，由**数科版式阅读器**导出，用作像素级对比基准。
 
@@ -135,14 +135,14 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 
 | 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | 10.0KB | 89.2KB | 7.5MB | 686.8KB | 80.3KB | 1.4MB | 0 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 4.9KB | 57.8KB | 7.5MB | **272.1KB** | 90.3KB | 1.5MB | 1 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 5.4KB | 682.8KB | 9.5MB | 25.8MB | 208.7KB | 2.7MB | 0 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 81.6KB | 258.4KB | 9.0MB | 32.8MB | 602.9KB | 1.9MB | 0 |
-| [rust-sofd](https://github.com/emfox/sOFD) | 4.4KB | 971.2KB | 31.4MB | 88.4MB | 834.7KB | 15.9MB | 0 |
-| [easyofd](https://pypi.org/project/easyofd/) | 23.6KB | **36.1KB** | 38.2MB | 714.1KB | **73.1KB** | 13.6MB | 2 |
-| [ofdrw](https://github.com/ofdrw/ofdrw) | 767.3KB | 2.4MB | 10.9MB | 2.0MB | 1.9MB | 5.0MB | 0 |
-| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | **1.6KB** | 196.5KB | **1.1MB** | 9.2MB | 82.9KB | **559.3KB** | 3 |
+| [go-zc310](https://github.com/zc310/ofd) | 10.00KB | 89.20KB | 7.50MB | 686.80KB | 80.30KB | 1.40MB | 0 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 4.90KB | 57.80KB | 7.50MB | **272.10KB** | 90.30KB | 1.50MB | 1 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 5.40KB | 682.80KB | 9.50MB | 25.80MB | 208.70KB | 2.70MB | 0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 81.60KB | 258.40KB | 9.00MB | 32.80MB | 602.90KB | 1.90MB | 0 |
+| [rust-sofd](https://github.com/emfox/sOFD) | 4.40KB | 971.20KB | 31.40MB | 88.40MB | 834.70KB | 15.90MB | 0 |
+| [easyofd](https://pypi.org/project/easyofd/) | 23.60KB | **36.10KB** | 38.20MB | 714.10KB | **73.10KB** | 13.60MB | 2 |
+| [ofdrw](https://github.com/ofdrw/ofdrw) | 767.30KB | 2.40MB | 10.90MB | 2.00MB | 1.90MB | 5.00MB | 0 |
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | **1.60KB** | 196.50KB | **1.10MB** | 9.20MB | 82.90KB | **559.30KB** | 3 |
 <!-- benchmark-table:ofd-pdf-size:end -->
 
 ### 文本提取能力
