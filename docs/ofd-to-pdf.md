@@ -50,7 +50,7 @@
 - 系统已安装 `apt-get install fonts-wqy-zenhei fonts-noto-cjk`
 - 测试前运行 `bash tools/install-fonts.sh`，下载 `doc-foundertype.zip`、`doc-zhongyi-etc.zip`、`latin-fonts.zip` 并安装到用户目录 `~/.local/share/fonts/hanzi-fonts/`，随后刷新字体缓存。字体下载链接与依赖安装命令见 [README：快速开始](../README.md#快速开始)；GitHub Actions 已加入此准备步骤。
 
-> 所有转换器均由 GitHub Actions 在上述环境统一评测。像素、内容区域及前景 F1 均使用当前算法计算；速度排名及胜出次数应结合输出质量解读，成功生成文件不代表通过质量检查。
+> 所有转换器均由 GitHub Actions 在上述环境统一评测。转换耗时、文件大小、文本提取及像素比较分别记录。
 
 ## 测试文件
 
@@ -87,7 +87,7 @@
 
 ### CPU 总时间
 
-CPU 总时间为进程用户态与内核态时间之和，累加所有线程及已等待回收的子进程；包含启动和包装脚本开销。多核并行时可超过墙钟时间，CPU 时间越小通常表示消耗的计算资源越少。历史数据未采集此指标，FAILED 表示尚未采集或转换失败，需重新运行基准。
+CPU 总时间为进程用户态与内核态时间之和，累加所有线程及已等待回收的子进程；包含启动和包装脚本开销。多核并行时可超过墙钟时间。历史数据未采集此指标，FAILED 表示尚未采集或转换失败，需重新运行基准。
 
 <!-- benchmark-table:ofd-cpu:start -->
 
@@ -145,7 +145,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | **1.64KB** | 196.52KB | **1.08MB** | 9.18MB | 82.92KB | **559.27KB** | 3 |
 <!-- benchmark-table:ofd-pdf-size:end -->
 
-### 文本提取能力
+### 提取文本字符数
 
 <!-- benchmark-table:ofd-text-extraction:start -->
 
@@ -238,7 +238,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | **0.47** | 0.22 | **0.16** | 4.83 | 1.04 | **0.35** |
 <!-- benchmark-table:ofd-size-ratio:end -->
 
-> - 像素相似度越高表示输出越贴近数科版式阅读器；仿色/抗锯齿等平滑差异会小幅降低相似度
+> - 仿色、抗锯齿等渲染差异会影响像素相似度
 > - 若参考页有可见内容而输出页几乎全白，像素对比会标记为 `FAILED`，避免大面积白底虚高
 > - intro 的像素对比跳过 14～19 页（数科导出的参考 PDF 这几页背景图丢失，不计入对比）
 > - 各转换器失败情况以结果表为准；ofd2img、python-ofd2pdf 已移出评测
