@@ -34,7 +34,7 @@ class PNGComparisonTests(unittest.TestCase):
     def test_identical_and_numeric_page_order(self):
         for number in range(1, 16):
             self.save_page(number)
-        self.assertEqual(self.compare(), (100.0, 100.0, 100.0))
+        self.assertEqual(self.compare(), (100.0, 100.0, 100.0, 100.0))
 
     def test_intro_page_14_is_not_excluded(self):
         for number in range(1, 20):
@@ -60,7 +60,7 @@ class PNGComparisonTests(unittest.TestCase):
 
     def test_one_pixel_rounding_is_allowed(self):
         self.save_page(1, src=np.pad(self.image, ((0, 1), (0, 1), (0, 0)), constant_values=255))
-        self.assertEqual(self.compare(), (100.0, 100.0, 100.0))
+        self.assertEqual(self.compare(), (100.0, 100.0, 100.0, 100.0))
 
     def test_reference_dpi_is_checked(self):
         self.save_page(1, dpi=96)
@@ -72,7 +72,7 @@ class PNGComparisonTests(unittest.TestCase):
         rgba = np.zeros((30, 40, 4), dtype=np.uint8)
         rgba[5:25, 10:30, 3] = 255
         Image.fromarray(rgba).save(self.out / 'page_1.png')
-        self.assertEqual(self.compare(), (100.0, 100.0, 100.0))
+        self.assertEqual(self.compare(), (100.0, 100.0, 100.0, 100.0))
 
     def test_corrupt_output_and_empty_output_fail(self):
         with self.assertRaisesRegex(ValueError, 'no PNG'):
@@ -85,7 +85,13 @@ class PNGComparisonTests(unittest.TestCase):
     def test_blank_pages_have_no_content_score(self):
         blank = np.full_like(self.image, 255)
         self.save_page(1, ref=blank, src=blank)
-        self.assertEqual(self.compare(), (100.0, None, None))
+        self.assertEqual(self.compare(), (100.0, None, None, 100.0))
+
+    def test_ssim_penalizes_partial_missing_content(self):
+        src = self.image.copy()
+        src[5:15, 10:30] = 255
+        self.save_page(1, src=src)
+        self.assertLess(self.compare()[3], 100.0)
 
     def test_missing_output_resets_all_quality_cells(self):
         with patch('sys.argv', ['compare_png.py', '999']), \
@@ -94,14 +100,14 @@ class PNGComparisonTests(unittest.TestCase):
                 patch('builtins.print'):
             compare_png.main()
         updates = write.call_args.args[1]
-        self.assertEqual(len(updates), len(compare_png.CONVERTERS) * 3)
+        self.assertEqual(len(updates), len(compare_png.CONVERTERS) * 4)
         self.assertTrue(all(update['value'] == 'FAILED' for update in updates))
         for excluded in ('python-ofd2img', 'python-easyofd', 'node-ofd2pdf', 'rust-easyofd'):
             self.assertNotIn(excluded, compare_png.CONVERTERS)
 
     def test_no_write_does_not_change_yaml(self):
         with patch('sys.argv', ['compare_png.py', '999', '--no-write']), \
-                patch('compare_png.compare', return_value=(100, 100, 100)), \
+                patch('compare_png.compare', return_value=(100, 100, 100, 100)), \
                 patch('compare_png.write_updates') as write, \
                 patch('builtins.print'):
             compare_png.main()

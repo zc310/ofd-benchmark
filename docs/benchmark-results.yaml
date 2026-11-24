@@ -95,6 +95,19 @@ reports:
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [97.44%, 96.97%, 97.87%]}
             - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [98.55%, 95.74%, 98.27%]}
             - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [98.93%, FAILED, 98.16%]}
+        - id: png-ssim
+          headers: [转换器, 999.ofd, intro.ofd, zsbk.ofd]
+          winner: max
+          wins: true
+          rows:
+            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [FAILED, FAILED, FAILED]}
+            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [FAILED, FAILED, FAILED]}
+            - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [FAILED, FAILED, FAILED]}
+            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [FAILED, FAILED, FAILED]}
+            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [FAILED, FAILED, FAILED]}
+            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [FAILED, FAILED, FAILED]}
+            - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [FAILED, FAILED, FAILED]}
+            - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [FAILED, FAILED, FAILED]}
         - id: png-content-similarity
           headers: [转换器, 999.ofd, intro.ofd, zsbk.ofd]
           winner: max
@@ -203,6 +216,19 @@ reports:
             - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
             - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: [99.30%, 99.53%, 99.27%, 99.76%, 97.33%, 99.06%]}
             - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: [99.01%, 97.55%, 96.30%, 97.56%, 95.82%, 94.39%]}
+        - id: ofd-ssim
+          headers: [转换器, hello.ofd, ano.ofd, intro.ofd, 1000-pages.ofd, 999.ofd, zsbk.ofd]
+          winner: max
+          wins: true
+          rows:
+            - {label: '[go-zc310](https://github.com/zc310/ofd)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
+            - {label: '[go-ofdgo](https://github.com/xiaoqidun/ofdgo)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
+            - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
+            - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
+            - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
+            - {label: '[easyofd](https://pypi.org/project/easyofd/)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
+            - {label: '[ofdrw](https://github.com/ofdrw/ofdrw)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
+            - {label: '[@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf)', values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
         - id: ofd-content-similarity
           headers: [转换器, hello.ofd, ano.ofd, intro.ofd, 1000-pages.ofd, 999.ofd, zsbk.ofd]
           winner: max
@@ -320,6 +346,16 @@ reports:
             - {label: java-ofdrw, values: [99.85%, 98.72%, 98.75%, 99.52%, 99.06%, 97.99%, 99.66%]}
             - {label: python-pdf2ofd, values: [99.72%, 98.35%, 98.94%, 99.36%, 97.70%, 98.40%, FAILED]}
             - {label: node-jsofd, values: [99.37%, 96.77%, 98.15%, FAILED, 98.91%, 99.50%, 99.94%]}
+        - id: pdf-ssim
+          headers: [转换器, hello.pdf, ano.pdf, 999.pdf, intro.pdf, zsbk.pdf, 1000-pages.pdf, GBT_33190-2016.pdf]
+          winner: max
+          wins: true
+          rows:
+            - {label: go-zc310, values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
+            - {label: go-ofdgo, values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
+            - {label: java-ofdrw, values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
+            - {label: python-pdf2ofd, values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
+            - {label: node-jsofd, values: [FAILED, FAILED, FAILED, FAILED, FAILED, FAILED, FAILED]}
         - id: pdf-text-extraction
           headers: [转换器, 'hello.pdf(22)', 'ano.pdf(7091)', '999.pdf(3934)', 'intro.pdf(5543)', 'zsbk.pdf(1150)', '1000-pages.pdf(263999)', 'GBT_33190-2016.pdf(107779)']
           winner: none

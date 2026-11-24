@@ -76,7 +76,7 @@ func run(args []string) error {
 		values := map[string]string{}
 		// Reset quality as well as speed/size; never reuse a previous run's score.
 		for _, metric := range []string{"speed", "cpu", "memory", "ms-per-page", "size",
-			"pixel-similarity", "content-similarity", "foreground-f1"} {
+			"pixel-similarity", "content-similarity", "foreground-f1", "ssim"} {
 			values[c.tables+"-"+metric] = "FAILED"
 		}
 		destination := filepath.Join(outputRoot, name+"_"+c.name)

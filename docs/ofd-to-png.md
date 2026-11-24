@@ -30,6 +30,7 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 - 耗时包含进程启动、解析、渲染、PNG 编码及写盘；不含后续质量比较。毫秒/页为总耗时除以完整输出页数。PNG 总大小是所有页面文件的字节数之和，受各库默认无损压缩策略影响。
 - 输出页数、连续页码必须与参考一致；图片尺寸只允许 1 像素的栅格取整差异，统一在右侧/底部补白，不缩放、不裁切、不平移。
 - 比较时透明度统一合成白底并转 RGB。参考图的 DPI 元数据若存在，须在 200±1 范围内（数科导出的约 200.03 属正常取整）。
+- **SSIM 结构相似度**：原尺寸 RGB 三通道分别计算 7×7 均匀窗口 SSIM（样本协方差，`K1=0.01`、`K2=0.03`、`data_range=255`），对有效窗口及通道取平均，负分截为 0 后乘 100%。各页等权平均，不缩放、不平移。SSIM 仍可能被大面积白底抬高，应结合内容相似度与前景 F1 阅读。
 - **内容相似度**：沿用 PDF 评测的参考前景归一化色差，计入丢失内容和额外墨迹的误差，以参考非白像素数归一化。
 - **前景 F1**：允许约 0.265 mm 的物理位置误差，在 200 DPI 对应 2 像素；仅 F1 有容差，颜色比较不移动图像。
 - **全页相似度**：`1 − 平均归一化 RGB 色差`。各页等权平均；全白页不抬高内容/F1 得分。丢失几乎全部前景、损坏 PNG、缺页或尺寸不符均记为 `FAILED`。
@@ -122,6 +123,24 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | **567.95KB** | **25.65MB** | 6.99MB | 2 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 2.39MB | 31.92MB | 8.95MB | 0 |
 <!-- benchmark-table:png-size:end -->
+
+### SSIM 结构相似度
+
+新增指标，尚未统一重测的单元格记为 `FAILED`；原有像素分数不改名、不混用。
+
+<!-- benchmark-table:png-ssim:start -->
+
+| 转换器 | 999.ofd | intro.ofd | zsbk.ofd | 胜出次数 |
+|---|---:|---:|---:|---:|
+| [go-zc310](https://github.com/zc310/ofd) | FAILED | FAILED | FAILED | 0 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | FAILED | FAILED | FAILED | 0 |
+| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | FAILED | FAILED | FAILED | 0 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | FAILED | FAILED | FAILED | 0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | FAILED | FAILED | FAILED | 0 |
+| [rust-sofd](https://github.com/emfox/sOFD) | FAILED | FAILED | FAILED | 0 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw) | FAILED | FAILED | FAILED | 0 |
+| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | FAILED | FAILED | FAILED | 0 |
+<!-- benchmark-table:png-ssim:end -->
 
 ### 内容相似度
 

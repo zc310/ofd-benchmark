@@ -66,6 +66,43 @@ def similarity(ref, src):
     identical = (diff < 0.01).mean()
     return mean_diff, identical
 
+def _window_mean(image, size):
+    """Valid box means using float64 integral images (no resampling)."""
+    integral = np.pad(image, ((1, 0), (1, 0))).cumsum(axis=0).cumsum(axis=1)
+    return (integral[size:, size:] - integral[:-size, size:] -
+            integral[size:, :-size] + integral[:-size, :-size]) / (size * size)
+
+
+def ssim_similarity(ref, src):
+    """RGB SSIM, 7x7 uniform windows, sample covariance, data range 255.
+
+    Average valid windows and RGB channels, then floor negative SSIM at zero
+    for percentage reporting. Process strips to bound memory on 200 DPI pages.
+    This matches the usual non-Gaussian SSIM parameters (K1=.01, K2=.03).
+    """
+    ref, src = align_images(ref, src)
+    size = 7
+    if min(ref.shape[:2]) < size:
+        raise ValueError('SSIM requires images at least 7x7 pixels')
+    c1, c2 = (0.01 * 255) ** 2, (0.03 * 255) ** 2
+    covariance_norm = size * size / (size * size - 1)
+    total, count = 0.0, 0
+    for channel in range(3):
+        for start in range(0, ref.shape[0] - size + 1, 128):
+            end = min(start + 128 + size - 1, ref.shape[0])
+            x = ref[start:end, :, channel].astype(np.float64)
+            y = src[start:end, :, channel].astype(np.float64)
+            ux, uy = _window_mean(x, size), _window_mean(y, size)
+            vx = np.maximum(0, (_window_mean(x * x, size) - ux * ux) * covariance_norm)
+            vy = np.maximum(0, (_window_mean(y * y, size) - uy * uy) * covariance_norm)
+            cov = (_window_mean(x * y, size) - ux * uy) * covariance_norm
+            scores = ((2 * ux * uy + c1) * (2 * cov + c2) /
+                      ((ux * ux + uy * uy + c1) * (vx + vy + c2)))
+            total += scores.sum()
+            count += scores.size
+    return float(np.clip(total / count, 0, 1) * 100)
+
+
 def content_similarity(ref, src):
     """Reference-normalized color error, including extra output ink.
 
@@ -104,6 +141,7 @@ def compare(ref_path, src_path, dpi):
     skip = EXCLUDE_PAGES.get(name, set())
     total_diff = 0.0
     total_ident = 0.0
+    total_ssim = 0.0
     total_content = 0.0
     total_f1 = 0.0
     content_count = 0
@@ -129,6 +167,7 @@ def compare(ref_path, src_path, dpi):
             if ref_ink >= 16 and src_ink < max(4, ref_ink * 0.01):
                 raise ValueError(f'output page {i + 1} is nearly blank compared with reference')
             md, ident = similarity(ref_img, src_img)
+            total_ssim += ssim_similarity(ref_img, src_img)
             content = content_similarity(ref_img, src_img)
             if content is not None:
                 total_content += content
@@ -146,7 +185,8 @@ def compare(ref_path, src_path, dpi):
     # An all-blank document has no content score, not a perfect content score.
     return (pct, mean_diff, ident,
             total_content / content_count if content_count else None,
-            total_f1 / content_count if content_count else None)
+            total_f1 / content_count if content_count else None,
+            total_ssim / count)
 
 def main():
     dpi = 96
@@ -159,8 +199,8 @@ def main():
     base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     odir = os.path.join(base, 'bin', 'output')
 
-    print(f"{'file':<12} {'convert':<16} {'ref_size':>10} {'pdf_size':>10} {'ratio':>6} {'full-page':>10} {'content':>10} {'fg-F1':>10} {'identical':>9}")
-    print("-" * 104)
+    print(f"{'file':<12} {'convert':<16} {'ref_size':>10} {'pdf_size':>10} {'ratio':>6} {'full-page':>10} {'content':>10} {'fg-F1':>10} {'SSIM':>10} {'identical':>9}")
+    print("-" * 115)
     updates = []
     for name in files:
         ref = os.path.join(base, 'testdata', 'suwell', f'{name}.pdf')
@@ -177,12 +217,14 @@ def main():
             pixel = 'FAILED'
             content_pixel = 'FAILED'
             f1_pixel = 'FAILED'
+            ssim_pixel = 'FAILED'
             try:
-                sim, md, ident, content, f1 = compare(ref, src, dpi)
+                sim, md, ident, content, f1, ssim = compare(ref, src, dpi)
                 pixel = f'{sim:.2f}%'
                 content_pixel = f'{content:.2f}%' if content is not None else 'FAILED'
                 f1_pixel = f'{f1:.2f}%' if f1 is not None else 'FAILED'
-                print(f"{name:<12} {conv:<16} {ref_size:>10} {src_size:>10} {ratio:>6.2f} {sim:>9.2f}% {content_pixel:>10} {f1_pixel:>10} {ident:>8.2f}%")
+                ssim_pixel = f'{ssim:.2f}%'
+                print(f"{name:<12} {conv:<16} {ref_size:>10} {src_size:>10} {ratio:>6.2f} {sim:>9.2f}% {content_pixel:>10} {f1_pixel:>10} {ssim_pixel:>10} {ident:>8.2f}%")
             except Exception as e:
                 print(f"{name:<12} {conv:<16} FAILED: {e}")
             row = OFD_CONVERTER_ROWS.get(conv)
@@ -191,6 +233,7 @@ def main():
                 append(updates, 'ofd-to-pdf', 'ofd-pixel-similarity', f'{name}.ofd', row, pixel)
                 append(updates, 'ofd-to-pdf', 'ofd-content-similarity', f'{name}.ofd', row, content_pixel)
                 append(updates, 'ofd-to-pdf', 'ofd-foreground-f1', f'{name}.ofd', row, f1_pixel)
+                append(updates, 'ofd-to-pdf', 'ofd-ssim', f'{name}.ofd', row, ssim_pixel)
         print()
     write_updates(base, updates)
 

@@ -79,7 +79,8 @@ class PixelComparisonTests(unittest.TestCase):
     def test_cropped_images_are_rejected(self):
         ref = np.full((100, 100, 3), 255, dtype=np.uint8)
         ref[20:40, 80:95] = 0
-        for score in (compare_pdf.content_similarity, compare_pdf.similarity):
+        for score in (compare_pdf.content_similarity, compare_pdf.similarity,
+                      compare_pdf.ssim_similarity):
             with self.subTest(score=score), self.assertRaisesRegex(ValueError, 'size mismatch'):
                 score(ref, ref[:, :60])
 
@@ -127,6 +128,7 @@ class PixelComparisonTests(unittest.TestCase):
             self.assertEqual(result[0], 100.0)
             self.assertIsNone(result[3])
             self.assertIsNone(result[4])
+            self.assertEqual(result[5], 100.0)
 
     def test_blank_pages_do_not_inflate_document_content_scores(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -143,7 +145,7 @@ class PixelComparisonTests(unittest.TestCase):
                         doc.new_page(width=100, height=100)
                     doc.saveIncr()
             after = compare_pdf.compare(ref, src, 96)
-            self.assertEqual(before[3:], after[3:])
+            self.assertEqual(before[3:5], after[3:5])
             blank = np.full((10, 10, 3), 255, dtype=np.uint8)
             self.assertIsNone(compare_pdf.content_similarity(blank, blank))
             self.assertIsNone(compare_pdf.foreground_f1(blank, blank, 96))
@@ -167,7 +169,7 @@ class PixelComparisonTests(unittest.TestCase):
                 result = compare_pdf.compare(ref, src, 96)
             self.assertEqual([call.args[1] for call in render.call_args_list], [0, 0, 1, 1, 2, 2])
             self.assertEqual(result[0], 100.0)
-            self.assertEqual(result[3:], (100.0, 100.0))
+            self.assertEqual(result[3:], (100.0, 100.0, 100.0))
 
             # Sampling must not hide missing pages after the sampled range.
             make_pdf(src, 5)
@@ -181,6 +183,65 @@ class PixelComparisonTests(unittest.TestCase):
             doc.update_stream(page.get_contents()[0], b'/Pattern cs /Missing scn 0 0 30 30 re f')
             with self.assertRaisesRegex(ValueError, 'incomplete render'):
                 compare_pdf.render(doc, 0, 96)
+
+
+class SSIMTests(unittest.TestCase):
+    def test_identical_constant_and_textured_images(self):
+        rng = np.random.default_rng(42)
+        for image in (np.zeros((10, 10, 3), dtype=np.uint8),
+                      np.full((10, 10, 3), 255, dtype=np.uint8),
+                      rng.integers(0, 256, (150, 17, 3), dtype=np.uint8)):
+            with self.subTest(shape=image.shape):
+                self.assertAlmostEqual(compare_pdf.ssim_similarity(image, image), 100.0)
+
+    def test_matches_direct_local_ssim_across_strip_boundary(self):
+        # Independent, non-integral-image reference: all 7x7 windows at once.
+        rng = np.random.default_rng(19)
+        ref = rng.integers(0, 256, (150, 17, 3), dtype=np.uint8)
+        src = np.clip(ref.astype(float) * 0.8 + 20, 0, 255).astype(np.uint8)
+        x = np.lib.stride_tricks.sliding_window_view(ref.astype(float), (7, 7), axis=(0, 1))
+        y = np.lib.stride_tricks.sliding_window_view(src.astype(float), (7, 7), axis=(0, 1))
+        ux, uy = x.mean(axis=(-2, -1)), y.mean(axis=(-2, -1))
+        vx, vy = x.var(axis=(-2, -1), ddof=1), y.var(axis=(-2, -1), ddof=1)
+        cov = ((x - ux[..., None, None]) *
+               (y - uy[..., None, None])).sum(axis=(-2, -1)) / 48
+        c1, c2 = (0.01 * 255) ** 2, (0.03 * 255) ** 2
+        expected = ((2 * ux * uy + c1) * (2 * cov + c2) /
+                    ((ux ** 2 + uy ** 2 + c1) * (vx + vy + c2))).mean() * 100
+        self.assertAlmostEqual(compare_pdf.ssim_similarity(ref, src), expected, places=9)
+
+    def test_missing_structure_extra_ink_and_color_are_penalized(self):
+        ref = np.full((50, 50, 3), 255, dtype=np.uint8)
+        ref[10:40:4, 10:40] = 0
+        missing, extra, color = ref.copy(), ref.copy(), ref.copy()
+        missing[10:20] = 255
+        extra[45:48, 10:40] = 0
+        color[ref[:, :, 0] == 0] = (255, 0, 0)
+        for src in (missing, extra, color):
+            with self.subTest():
+                self.assertLess(compare_pdf.ssim_similarity(ref, src), 100.0)
+                self.assertAlmostEqual(compare_pdf.ssim_similarity(ref, src),
+                                       compare_pdf.ssim_similarity(src, ref))
+
+    def test_border_pixels_are_not_discarded(self):
+        ref = np.full((10, 10, 3), 255, dtype=np.uint8)
+        src = ref.copy()
+        src[0, 0] = 0
+        self.assertLess(compare_pdf.ssim_similarity(ref, src), 100.0)
+
+    def test_rounding_is_padded_and_small_images_are_rejected(self):
+        ref = np.full((10, 10, 3), 255, dtype=np.uint8)
+        src = np.pad(ref, ((0, 1), (0, 1), (0, 0)), constant_values=255)
+        self.assertEqual(compare_pdf.ssim_similarity(ref, src), 100.0)
+        src[-1, :] = 0
+        self.assertLess(compare_pdf.ssim_similarity(ref, src), 100.0)
+        with self.assertRaisesRegex(ValueError, 'at least 7x7'):
+            compare_pdf.ssim_similarity(ref[:6], ref[:6])
+
+    def test_negative_ssim_is_reported_as_zero_percent(self):
+        grid = np.indices((20, 20)).sum(axis=0) % 2 * 255
+        ref = np.repeat(grid[:, :, None], 3, axis=2).astype(np.uint8)
+        self.assertEqual(compare_pdf.ssim_similarity(ref, 255 - ref), 0.0)
 
 
 class ComparisonScriptTests(unittest.TestCase):
@@ -214,7 +275,7 @@ class ComparisonScriptTests(unittest.TestCase):
             self.assertEqual(updates['go-zc310', table], '100.00%')
             self.assertEqual(updates['rust-sofd', table], '100.00%')
             self.assertEqual(updates['@miconvert/ofd-to-pdf', table], 'FAILED')
-            for table in ('ofd-content-similarity', 'ofd-foreground-f1'):
+            for table in ('ofd-content-similarity', 'ofd-foreground-f1', 'ofd-ssim'):
                 self.assertEqual(updates['go-ofdgo', table], 'FAILED')
                 self.assertEqual(updates['go-zc310', table], '100.00%')
                 self.assertEqual(updates['rust-sofd', table], '100.00%')
@@ -288,6 +349,8 @@ class ComparisonScriptTests(unittest.TestCase):
             self.assertEqual(updates['go-ofdgo', table], '100.00%')
             self.assertEqual(updates['node-jsofd', table], 'FAILED')
             self.assertEqual(updates['python-pdf2ofd', table], 'FAILED')
+            for converter in ('java-ofdrw', 'go-zc310', 'node-jsofd', 'python-pdf2ofd', 'go-ofdgo'):
+                self.assertEqual(updates[converter, 'pdf-ssim'], updates[converter, table])
             for converter in ('java-ofdrw', 'go-zc310', 'node-jsofd', 'python-pdf2ofd', 'go-ofdgo'):
                 self.assertEqual(updates[converter, 'pdf-text-extraction'], '18')
 

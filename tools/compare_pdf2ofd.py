@@ -3,7 +3,7 @@
 
 For each input PDF, each converter's OFD output is evaluated three ways:
   * OFD size ratio vs the original PDF size
-  * round-trip fidelity: OFD -> PDF (via go-zc310), then pixel similarity
+  * round-trip fidelity: OFD -> PDF (via go-zc310), then pixel similarity and SSIM
     against the original PDF (same metric as compare_pdf.py; 1000-pages samples
     the first three pages while still validating the total page count)
   * text fidelity: characters extracted from the OFD (go-zc310 ofd-converter)
@@ -63,8 +63,8 @@ def main():
     base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     odir = os.path.join(base, 'bin', 'output_ofd')
 
-    print(f"{'file':<12} {'convert':<16} {'pdf_ref':>9} {'ofd_size':>10} {'size_rat':>7} {'pixel':>9} {'ref_ch':>9} {'ofd_ch':>9} {'txt_sim':>9}")
-    print("-" * 96)
+    print(f"{'file':<12} {'convert':<16} {'pdf_ref':>9} {'ofd_size':>10} {'size_rat':>7} {'pixel':>9} {'SSIM':>9} {'ref_ch':>9} {'ofd_ch':>9} {'txt_sim':>9}")
+    print("-" * 106)
     updates = []
     for name in files:
         ref_pdf = next(
@@ -86,10 +86,13 @@ def main():
             rt_pdf = os.path.join(odir, stem + '.pdf')
             txt = os.path.join(odir, stem + '.txt')
             pixel = 'FAILED'
+            ssim = 'FAILED'
             rch, sch, sim = 'FAILED', 'FAILED', 'FAILED'
             if os.path.exists(rt_pdf):
                 try:
-                    pixel = f'{pixel_similarity(ref_pdf, rt_pdf, dpi):.2f}%'
+                    scores = compare(ref_pdf, rt_pdf, dpi)
+                    pixel = f'{scores[0]:.2f}%'
+                    ssim = f'{scores[5]:.2f}%'
                 except Exception as e:
                     print(f"{name:<12} {conv:<16} pixel FAILED: {e}")
             if os.path.exists(txt):
@@ -98,11 +101,12 @@ def main():
                     sim = f'{text_sim:.2f}%'
                 except Exception as e:
                     print(f"{name:<12} {conv:<16} text FAILED: {e}")
-            print(f"{name:<12} {conv:<16} {ref_size:>9} {ofd_size:>10} {ratio:>6.2f} {pixel:>9} {rch:>9} {sch:>9} {sim:>9}")
+            print(f"{name:<12} {conv:<16} {ref_size:>9} {ofd_size:>10} {ratio:>6.2f} {pixel:>9} {ssim:>9} {rch:>9} {sch:>9} {sim:>9}")
             row = PDF_CONVERTER_ROWS.get(conv)
             if row:
                 append(updates, 'pdf-to-ofd', 'pdf-size-ratio', f'{name}.pdf', row, f'{ratio:.2f}')
                 append(updates, 'pdf-to-ofd', 'pdf-pixel-similarity', f'{name}.pdf', row, pixel)
+                append(updates, 'pdf-to-ofd', 'pdf-ssim', f'{name}.pdf', row, ssim)
                 append(updates, 'pdf-to-ofd', 'pdf-text-extraction', f'{name}.pdf', row, str(sch))
                 append(updates, 'pdf-to-ofd', 'pdf-text-similarity', f'{name}.pdf', row, sim)
         print()

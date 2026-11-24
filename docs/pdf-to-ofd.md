@@ -137,6 +137,19 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | node-jsofd | 99.37% | 96.77% | 98.15% | FAILED | 98.91% | 99.50% | 99.94% | 0 |
 <!-- benchmark-table:pdf-pixel-similarity:end -->
 
+**SSIM 结构相似度**（96 DPI）：与 OFD→PDF 使用相同的 RGB 7×7 均匀窗口 SSIM（样本协方差，`K1=0.01`、`K2=0.03`、`data_range=255`），窗口和通道平均后负分截为 0 并乘 100%，各页等权平均。沿用相同的页面尺寸、缺页和近乎空白输出检查，以及 `intro` 排除页和 `1000-pages` 前 3 页采样规则。新增指标尚无统一重测结果时记 `FAILED`。
+
+<!-- benchmark-table:pdf-ssim:start -->
+
+| 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| go-zc310 | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
+| go-ofdgo | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
+| java-ofdrw | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
+| python-pdf2ofd | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
+| node-jsofd | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
+<!-- benchmark-table:pdf-ssim:end -->
+
 **提取文本字符数**（从转换后 OFD 提取，参考 PDF 提取字符数见括号）：
 
 <!-- benchmark-table:pdf-text-extraction:start -->
