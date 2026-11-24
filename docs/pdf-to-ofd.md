@@ -10,8 +10,8 @@
 
 | 转换器         | 语言   | 库                                                                          | 版本                    | 说明                                                                                                         |
 |----------------|--------|-----------------------------------------------------------------------------|-------------------------|--------------------------------------------------------------------------------------------------------------|
-| go-zc310       | Go     | [zc310/ofd](https://github.com/zc310/ofd)                                   | v0.2.3-0.20261123022412-ba42b64e57f4 | 基于 pdfcpu 的 PDF→OFD 导入器（路径/文本/图片/注解/渐变/图案/网格/大纲/元数据），文本保留为可提取 TextObject |
-| go-ofdgo       | Go     | [xiaoqidun/ofdgo](https://github.com/xiaoqidun/ofdgo)（ConvertPDF + pdfgo） | v0.0.0-20261123104115-3711ce780a44 | 基于 pdfgo 的 PDF→OFD 导入器（路径/文本/图片/注解）                                                          |
+| go-zc310       | Go     | [zc310/ofd](https://github.com/zc310/ofd)                                   | v0.2.3-0.20261124113956-09f1815cd2bb | 基于 pdfcpu 的 PDF→OFD 导入器（路径/文本/图片/注解/渐变/图案/网格/大纲/元数据），文本保留为可提取 TextObject |
+| go-ofdgo       | Go     | [xiaoqidun/ofdgo](https://github.com/xiaoqidun/ofdgo)（ConvertPDF + pdfgo） | v0.0.0-20261124073143-9d9bd2ba2cde | 基于 pdfgo 的 PDF→OFD 导入器（路径/文本/图片/注解）                                                          |
 | java-ofdrw     | Java   | [ofdrw](https://github.com/ofdrw/ofdrw)（ofdrw-converter PDFConverter）     | 2.5.2 | 文本转为矢量轮廓                                                                               |
 | python-pdf2ofd | Python | [pdf2ofd](https://github.com/wanglrebe/pdf2ofd)                             | 0.1.0                   | 基于 PyMuPDF 渲染，文本栅格化                                                                                |
 | node-jsofd     | JS     | [Hufe921/jsOFD](https://github.com/Hufe921/jsOFD)（pdfToOfd + pdfjs-dist）  | 1.0.1                   | 基于 pdfjs 重放绘制指令流（路径/文本/图片），不转换注解/渐变/图案/Type3/剪裁                                 |
@@ -39,8 +39,8 @@
 <!-- benchmark-environment:start -->
 
 - 系统：Ubuntu 24.04.5 LTS (x86_64)
-- CPU：AMD EPYC 9V74 80-Core Processor（4 逻辑核心）
-- 内存：15.6 GiB
+- CPU：Intel(R) Xeon(R) 6975P-C（4 逻辑核心）
+- 内存：15.3 GiB
 <!-- benchmark-environment:end -->
 - 系统已安装 `apt-get install fonts-wqy-zenhei fonts-noto-cjk`
 - 测试前运行 `bash tools/install-fonts.sh`，下载 `doc-foundertype.zip`、`doc-zhongyi-etc.zip`、`latin-fonts.zip` 并安装到用户目录 `~/.local/share/fonts/hanzi-fonts/`，随后刷新字体缓存。字体下载链接与依赖安装命令见 [README：快速开始](../README.md#快速开始)；GitHub Actions 已加入此准备步骤。
@@ -53,11 +53,11 @@
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310 | **19ms** | **75ms** | 251ms | **412ms** | **947ms** | **882ms** | **1.48s** | 6 |
-| go-ofdgo | 55ms | 413ms | **215ms** | 491ms | 1.85s | 8.34s | 2.78s | 1 |
-| java-ofdrw | 911ms | 1.68s | 2.01s | 8.32s | 5.02s | 4.94s | 71.09s | 0 |
-| python-pdf2ofd | 125ms | 957ms | 618ms | 2.86s | 1.11s | 61.81s | 21.79s | 0 |
-| node-jsofd | 248ms | 481ms | 3.33s | 9.71s | 5.21s | 2.68s | 7.98s | 0 |
+| go-zc310 | **16ms** | **69ms** | **259ms** | **365ms** | 1.12s | **837ms** | **1.38s** | 6 |
+| go-ofdgo | 72ms | 7.77s | 312ms | 431ms | 1.69s | 6.05s | 1.90s | 0 |
+| java-ofdrw | 905ms | 1.47s | 1.58s | 7.59s | 4.37s | 4.36s | 80.51s | 0 |
+| python-pdf2ofd | 120ms | 856ms | 544ms | 2.53s | **974ms** | 53.75s | 18.97s | 1 |
+| node-jsofd | 227ms | 438ms | 3.27s | 9.62s | 4.99s | 2.45s | 7.61s | 0 |
 <!-- benchmark-table:pdf-speed:end -->
 
 ### CPU 总时间
@@ -68,11 +68,11 @@ CPU 总时间为进程用户态与内核态时间之和，累加所有线程及�
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310 | **24ms** | **89ms** | **291ms** | **448ms** | **1.03s** | **1.06s** | **1.68s** | 7 |
-| go-ofdgo | 69ms | 544ms | 350ms | 1.23s | 2.27s | 15.73s | 6.48s | 0 |
-| java-ofdrw | 2.42s | 5.01s | 5.80s | 15.62s | 10.02s | 12.98s | 89.46s | 0 |
-| python-pdf2ofd | 125ms | 957ms | 618ms | 2.86s | 1.10s | 61.81s | 21.79s | 0 |
-| node-jsofd | 306ms | 834ms | 764ms | 5.64s | 5.51s | 4.27s | 9.52s | 0 |
+| go-zc310 | **23ms** | **84ms** | **296ms** | **399ms** | 1.20s | **1.04s** | **1.60s** | 6 |
+| go-ofdgo | 90ms | 8.00s | 556ms | 1.14s | 2.12s | 10.97s | 5.10s | 0 |
+| java-ofdrw | 2.22s | 4.62s | 4.75s | 14.75s | 9.20s | 11.98s | 99.11s | 0 |
+| python-pdf2ofd | 120ms | 855ms | 543ms | 2.53s | **973ms** | 53.74s | 18.97s | 1 |
+| node-jsofd | 289ms | 773ms | 689ms | 5.74s | 5.14s | 3.93s | 8.55s | 0 |
 <!-- benchmark-table:pdf-cpu:end -->
 
 ### 进程树内存峰值
@@ -83,11 +83,11 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310 | **32.24MB** | **52.88MB** | 209.68MB | **120.80MB** | 291.19MB | 189.56MB | **144.74MB** | 4 |
-| go-ofdgo | 55.52MB | 247.67MB | 141.16MB | 151.40MB | 250.76MB | 2432.06MB | 591.17MB | 0 |
-| java-ofdrw | 206.59MB | 400.80MB | 524.45MB | 596.45MB | 528.52MB | 771.18MB | 1738.66MB | 0 |
-| python-pdf2ofd | 69.21MB | 99.33MB | **81.90MB** | 171.20MB | **148.14MB** | **94.83MB** | 233.23MB | 3 |
-| node-jsofd | 143.58MB | 206.18MB | 189.12MB | 501.66MB | 455.63MB | 652.69MB | 1097.00MB | 0 |
+| go-zc310 | **34.27MB** | **51.36MB** | 208.86MB | **113.47MB** | 319.61MB | 189.99MB | **145.55MB** | 4 |
+| go-ofdgo | 56.10MB | 238.76MB | 191.59MB | 147.19MB | 297.30MB | 1719.03MB | 415.88MB | 0 |
+| java-ofdrw | 208.70MB | 460.90MB | 498.24MB | 561.62MB | 565.47MB | 753.74MB | 1697.20MB | 0 |
+| python-pdf2ofd | 69.06MB | 99.98MB | **82.22MB** | 171.26MB | **148.69MB** | **94.81MB** | 233.21MB | 3 |
+| node-jsofd | 144.44MB | 218.21MB | 193.81MB | 555.91MB | 474.24MB | 652.53MB | 1048.65MB | 0 |
 <!-- benchmark-table:pdf-memory:end -->
 
 ## OFD 文件大小
@@ -96,8 +96,8 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310 | **1.68K** | **405.41K** | **62.26K** | **7.33M** | **1.60M** | 4.83M | **7.07M** | 6 |
-| go-ofdgo | 6.24K | 433.64K | 117.28K | 8.90M | 2.69M | 64.67M | 13.78M | 0 |
+| go-zc310 | **1.68K** | 405.41K | **62.27K** | **7.33M** | **1.60M** | 4.83M | **7.07M** | 5 |
+| go-ofdgo | 5.62K | **393.52K** | 107.44K | 8.80M | 2.68M | 58.63M | 12.99M | 1 |
 | java-ofdrw | 5.55K | 601.33K | 817.57K | 34.24M | 20.45M | **3.48M** | 30.54M | 1 |
 | python-pdf2ofd | 4.64K | 1.26M | 733.68K | 8.92M | 1.64M | 86.51M | 36.83M | 0 |
 | node-jsofd | 2.95K | 2.18M | 590.22K | 34.76M | 12.87M | 31.75M | 34.32M | 0 |
@@ -111,8 +111,8 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310 | **0.48** | **0.45** | **0.78** | **1.09** | **1.02** | 2.54 | **1.46** |
-| go-ofdgo | 1.77 | 0.48 | 1.47 | 1.33 | 1.71 | 34.05 | 2.85 |
+| go-zc310 | **0.48** | 0.45 | **0.78** | **1.09** | **1.02** | 2.54 | **1.46** |
+| go-ofdgo | 1.60 | **0.44** | 1.34 | 1.31 | 1.71 | 30.87 | 2.69 |
 | java-ofdrw | 1.58 | 0.67 | 10.23 | 5.10 | 13.00 | **1.83** | 6.32 |
 | python-pdf2ofd | 1.32 | 1.43 | 9.18 | 1.33 | 1.04 | 45.55 | 7.62 |
 | node-jsofd | 0.84 | 2.47 | 7.38 | 5.18 | 8.18 | 16.72 | 7.10 |
@@ -130,9 +130,9 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310 | 99.63% | **99.77%** | 98.57% | **99.96%** | **99.56%** | **99.84%** | **99.98%** | 5 |
-| go-ofdgo | 99.63% | 99.17% | 98.48% | 98.05% | 99.25% | 99.64% | 99.82% | 0 |
-| java-ofdrw | **99.85%** | 98.72% | 98.75% | 99.52% | 99.06% | 97.99% | 99.66% | 1 |
+| go-zc310 | 99.63% | **99.77%** | 98.57% | **100.00%** | **99.56%** | **99.84%** | **99.98%** | 5 |
+| go-ofdgo | 99.63% | 98.62% | 98.48% | 97.82% | 99.25% | 99.64% | 99.82% | 0 |
+| java-ofdrw | **99.85%** | 98.72% | 98.75% | 99.55% | 99.06% | 97.99% | 99.66% | 1 |
 | python-pdf2ofd | 99.72% | 98.35% | **98.94%** | 99.36% | 97.70% | 98.40% | FAILED | 1 |
 | node-jsofd | 99.37% | 96.77% | 98.15% | FAILED | 98.91% | 99.50% | 99.94% | 0 |
 <!-- benchmark-table:pdf-pixel-similarity:end -->
@@ -143,11 +143,11 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310 | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
-| go-ofdgo | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
-| java-ofdrw | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
-| python-pdf2ofd | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
-| node-jsofd | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
+| go-zc310 | 98.49% | **96.64%** | 94.59% | **100.00%** | **98.36%** | **99.64%** | **99.99%** | 5 |
+| go-ofdgo | 98.49% | 81.90% | 93.83% | 95.17% | 96.05% | 99.63% | 99.70% | 0 |
+| java-ofdrw | 99.36% | 90.11% | 96.02% | 98.31% | 96.58% | 95.48% | 98.99% | 0 |
+| python-pdf2ofd | **99.40%** | 90.19% | **97.97%** | 97.09% | 80.03% | 96.21% | FAILED | 2 |
+| node-jsofd | 97.93% | 89.76% | 93.25% | FAILED | 96.46% | 99.01% | 99.92% | 0 |
 <!-- benchmark-table:pdf-ssim:end -->
 
 **提取文本字符数**（从转换后 OFD 提取，参考 PDF 提取字符数见括号）：
@@ -157,7 +157,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | 转换器 | hello.pdf(22) | ano.pdf(7091) | 999.pdf(3934) | intro.pdf(5543) | zsbk.pdf(1150) | 1000-pages.pdf(263999) | GBT_33190-2016.pdf(107779) |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | go-zc310 | 22 | 9222 | 9737 | 9314 | 2740 | 326022 | 170697 |
-| go-ofdgo | 8 | 14127 | 10009 | 10920 | 3347 | 179998 | 234709 |
+| go-ofdgo | 8 | 12861 | 9781 | 8793 | 3290 | 151998 | 201415 |
 | java-ofdrw | 0 | 7049 | 0 | 1598 | 3 | 321998 | 714 |
 | python-pdf2ofd | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | node-jsofd | 25 | 10812 | 9941 | 10222 | 2796 | 326448 | 225807 |
@@ -170,7 +170,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | go-zc310 | 100.00% | 33.33% | 64.41% | 15.41% | 10.43% | 98.54% | 41.99% |
-| go-ofdgo | 26.32% | 19.19% | 44.56% | 13.67% | 6.98% | 2.63% | 1.08% |
+| go-ofdgo | 26.32% | 51.85% | 39.01% | 55.77% | 8.86% | 3.99% | 33.53% |
 | java-ofdrw | 0.00% | 64.59% | 0.00% | 4.58% | 0.00% | 98.86% | 0.01% |
 | python-pdf2ofd | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% |
 | node-jsofd | 100.00% | 36.08% | 18.27% | 15.12% | 6.94% | 30.25% | 1.08% |
