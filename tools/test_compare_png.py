@@ -113,6 +113,16 @@ class PNGComparisonTests(unittest.TestCase):
             compare_png.main()
         write.assert_not_called()
 
+    def test_scores_are_written_with_four_decimal_places(self):
+        with patch('sys.argv', ['compare_png.py', '999', '--converters', 'go-zc310']), \
+                patch('compare_png.compare', return_value=(99.996, 98.123456, 100, None)), \
+                patch('compare_png.write_updates') as write, \
+                patch('builtins.print'):
+            compare_png.main()
+        updates = write.call_args.args[1]
+        self.assertEqual([cell['value'] for cell in updates],
+                         ['99.9960%', '98.1235%', '100.0000%', 'FAILED'])
+
 
 if __name__ == '__main__':
     unittest.main()

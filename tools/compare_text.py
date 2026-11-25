@@ -13,7 +13,7 @@ import sys
 import os
 import re
 import fitz
-from benchmark_results import OFD_CONVERTER_ROWS, append, write_updates
+from benchmark_results import OFD_CONVERTER_ROWS, append, format_percentage, write_updates
 
 def extract(path):
     doc = fitz.open(path)
@@ -66,10 +66,10 @@ def main():
             except Exception as e:
                 print(f"{name:<12} {conv:<16} ERROR: {e}")
                 continue
-            print(f"{name:<12} {conv:<16} {rlen:>10} {slen:>10} {ratio:>6.2f} {sim:>9.2f}%")
+            print(f"{name:<12} {conv:<16} {rlen:>10} {slen:>10} {ratio:>6.2f} {format_percentage(sim):>10}")
             row = OFD_CONVERTER_ROWS.get(conv)
             if row:
-                append(updates, 'ofd-to-pdf', 'ofd-text-similarity', f'{name}.ofd', row, f'{sim:.2f}%')
+                append(updates, 'ofd-to-pdf', 'ofd-text-similarity', f'{name}.ofd', row, format_percentage(sim))
                 append(updates, 'ofd-to-pdf', 'ofd-text-extraction', f'{name}.ofd', row, str(slen))
         print()
     write_updates(base, updates)

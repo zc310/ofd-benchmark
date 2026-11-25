@@ -130,64 +130,64 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 
 <!-- benchmark-table:png-ssim:start -->
 
-| 转换器 | 999.ofd | intro.ofd | zsbk.ofd | 胜出次数 |
-|---|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | 96.35% | **98.60%** | **92.27%** | 2 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 96.25% | 98.50% | 91.66% | 0 |
-| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 96.69% | FAILED | FAILED | 0 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 96.88% | 97.18% | 89.54% | 0 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 96.71% | 95.73% | 84.31% | 0 |
-| [rust-sofd](https://github.com/emfox/sOFD) | 91.43% | 94.71% | 90.07% | 0 |
-| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 95.36% | 85.64% | 91.07% | 0 |
-| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | **96.91%** | FAILED | 90.44% | 1 |
+| 转换器                                                         |      999.ofd |    intro.ofd |     zsbk.ofd | 胜出次数 |
+| -------------------------------------------------------------- | -----------: | -----------: | -----------: | -------: |
+| [go-zc310](https://github.com/zc310/ofd)                       |     96.3500% | **98.6000%** | **92.2700%** |        2 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                 |     96.2500% |     98.5000% |     91.6600% |        0 |
+| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) |     96.6900% |       FAILED |       FAILED |        0 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)       |     96.8800% |     97.1800% |     89.5400% |        0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)    |     96.7100% |     95.7300% |     84.3100% |        0 |
+| [rust-sofd](https://github.com/emfox/sOFD)                     |     91.4300% |     94.7100% |     90.0700% |        0 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw)                   |     95.3600% |     85.6400% |     91.0700% |        0 |
+| [rust-ofdmanager](https://github.com/feuvan/ofdmanager)        | **96.9100%** |       FAILED |     90.4400% |        1 |
 <!-- benchmark-table:png-ssim:end -->
 
 ### 内容相似度
 
 <!-- benchmark-table:png-content-similarity:start -->
 
-| 转换器 | 999.ofd | intro.ofd | zsbk.ofd | 胜出次数 |
-|---|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | 66.48% | **99.13%** | 97.86% | 1 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 67.44% | 99.09% | 97.88% | 0 |
-| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 68.58% | FAILED | FAILED | 0 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 69.65% | 98.36% | 97.74% | 0 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 68.87% | 95.01% | 95.57% | 0 |
-| [rust-sofd](https://github.com/emfox/sOFD) | 26.75% | 96.09% | 97.45% | 0 |
-| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 58.56% | 94.56% | **97.93%** | 1 |
-| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | **69.80%** | FAILED | 97.81% | 1 |
+| 转换器                                                         |      999.ofd |    intro.ofd |     zsbk.ofd | 胜出次数 |
+| -------------------------------------------------------------- | -----------: | -----------: | -----------: | -------: |
+| [go-zc310](https://github.com/zc310/ofd)                       |     66.4800% | **99.1300%** |     97.8600% |        1 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                 |     67.4400% |     99.0900% |     97.8800% |        0 |
+| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) |     68.5800% |       FAILED |       FAILED |        0 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)       |     69.6500% |     98.3600% |     97.7400% |        0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)    |     68.8700% |     95.0100% |     95.5700% |        0 |
+| [rust-sofd](https://github.com/emfox/sOFD)                     |     26.7500% |     96.0900% |     97.4500% |        0 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw)                   |     58.5600% |     94.5600% | **97.9300%** |        1 |
+| [rust-ofdmanager](https://github.com/feuvan/ofdmanager)        | **69.8000%** |       FAILED |     97.8100% |        1 |
 <!-- benchmark-table:png-content-similarity:end -->
 
 ### 前景 F1
 
 <!-- benchmark-table:png-foreground-f1:start -->
 
-| 转换器 | 999.ofd | intro.ofd | zsbk.ofd | 胜出次数 |
-|---|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | **100.00%** | **100.00%** | **100.00%** | 3 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | **100.00%** | **100.00%** | **100.00%** | 0 |
-| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 99.20% | FAILED | FAILED | 0 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | **100.00%** | 99.62% | **100.00%** | 0 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 99.07% | 99.67% | 63.37% | 0 |
-| [rust-sofd](https://github.com/emfox/sOFD) | 95.92% | 99.71% | 99.99% | 0 |
-| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 99.73% | 99.97% | **100.00%** | 0 |
-| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | **100.00%** | FAILED | **100.00%** | 0 |
+| 转换器                                                         |       999.ofd |     intro.ofd |      zsbk.ofd | 胜出次数 |
+| -------------------------------------------------------------- | ------------: | ------------: | ------------: | -------: |
+| [go-zc310](https://github.com/zc310/ofd)                       | **100.0000%** | **100.0000%** | **100.0000%** |        3 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                 | **100.0000%** | **100.0000%** | **100.0000%** |        0 |
+| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) |      99.2000% |        FAILED |        FAILED |        0 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)       | **100.0000%** |      99.6200% | **100.0000%** |        0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)    |      99.0700% |      99.6700% |      63.3700% |        0 |
+| [rust-sofd](https://github.com/emfox/sOFD)                     |      95.9200% |      99.7100% |      99.9900% |        0 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw)                   |      99.7300% |      99.9700% | **100.0000%** |        0 |
+| [rust-ofdmanager](https://github.com/feuvan/ofdmanager)        | **100.0000%** |        FAILED | **100.0000%** |        0 |
 <!-- benchmark-table:png-foreground-f1:end -->
 
 ### 全页相似度
 
 <!-- benchmark-table:png-pixel-similarity:start -->
 
-| 转换器 | 999.ofd | intro.ofd | zsbk.ofd | 胜出次数 |
-|---|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | 98.82% | **99.71%** | 98.21% | 1 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 98.80% | 99.69% | 98.23% | 0 |
-| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 98.86% | FAILED | FAILED | 0 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 98.92% | 99.36% | 98.10% | 0 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 98.88% | 97.15% | 96.30% | 0 |
-| [rust-sofd](https://github.com/emfox/sOFD) | 97.44% | 96.97% | 97.87% | 0 |
-| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 98.55% | 95.74% | **98.27%** | 1 |
-| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | **98.93%** | FAILED | 98.16% | 1 |
+| 转换器                                                         |      999.ofd |    intro.ofd |     zsbk.ofd | 胜出次数 |
+| -------------------------------------------------------------- | -----------: | -----------: | -----------: | -------: |
+| [go-zc310](https://github.com/zc310/ofd)                       |     98.8200% | **99.7100%** |     98.2100% |        1 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                 |     98.8000% |     99.6900% |     98.2300% |        0 |
+| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) |     98.8600% |       FAILED |       FAILED |        0 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)       |     98.9200% |     99.3600% |     98.1000% |        0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)    |     98.8800% |     97.1500% |     96.3000% |        0 |
+| [rust-sofd](https://github.com/emfox/sOFD)                     |     97.4400% |     96.9700% |     97.8700% |        0 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw)                   |     98.5500% |     95.7400% | **98.2700%** |        1 |
+| [rust-ofdmanager](https://github.com/feuvan/ofdmanager)        | **98.9300%** |       FAILED |     98.1600% |        1 |
 <!-- benchmark-table:png-pixel-similarity:end -->
 
 ## 运行

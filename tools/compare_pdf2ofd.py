@@ -18,7 +18,7 @@ import re
 
 import fitz
 from compare_pdf import compare
-from benchmark_results import PDF_CONVERTER_ROWS, append, write_updates
+from benchmark_results import PDF_CONVERTER_ROWS, append, format_percentage, write_updates
 
 
 def pixel_similarity(ref_path, src_path, dpi):
@@ -63,7 +63,7 @@ def main():
     base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     odir = os.path.join(base, 'bin', 'output_ofd')
 
-    print(f"{'file':<12} {'convert':<16} {'pdf_ref':>9} {'ofd_size':>10} {'size_rat':>7} {'pixel':>9} {'SSIM':>9} {'ref_ch':>9} {'ofd_ch':>9} {'txt_sim':>9}")
+    print(f"{'file':<12} {'convert':<16} {'pdf_ref':>9} {'ofd_size':>10} {'size_rat':>7} {'pixel':>10} {'SSIM':>10} {'ref_ch':>9} {'ofd_ch':>9} {'txt_sim':>10}")
     print("-" * 106)
     updates = []
     for name in files:
@@ -91,17 +91,17 @@ def main():
             if os.path.exists(rt_pdf):
                 try:
                     scores = compare(ref_pdf, rt_pdf, dpi)
-                    pixel = f'{scores[0]:.2f}%'
-                    ssim = f'{scores[5]:.2f}%'
+                    pixel = format_percentage(scores[0])
+                    ssim = format_percentage(scores[5])
                 except Exception as e:
                     print(f"{name:<12} {conv:<16} pixel FAILED: {e}")
             if os.path.exists(txt):
                 try:
                     rch, sch, text_sim = text_similarity(ref_pdf, txt)
-                    sim = f'{text_sim:.2f}%'
+                    sim = format_percentage(text_sim)
                 except Exception as e:
                     print(f"{name:<12} {conv:<16} text FAILED: {e}")
-            print(f"{name:<12} {conv:<16} {ref_size:>9} {ofd_size:>10} {ratio:>6.2f} {pixel:>9} {ssim:>9} {rch:>9} {sch:>9} {sim:>9}")
+            print(f"{name:<12} {conv:<16} {ref_size:>9} {ofd_size:>10} {ratio:>6.2f} {pixel:>10} {ssim:>10} {rch:>9} {sch:>9} {sim:>10}")
             row = PDF_CONVERTER_ROWS.get(conv)
             if row:
                 append(updates, 'pdf-to-ofd', 'pdf-size-ratio', f'{name}.pdf', row, f'{ratio:.2f}')

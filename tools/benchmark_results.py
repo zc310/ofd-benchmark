@@ -25,6 +25,11 @@ PDF_CONVERTER_ROWS = {
 }
 
 
+def format_percentage(value):
+    """Scores already use the 0-100 scale; keep four fractional digits."""
+    return f'{value:.4f}%' if value is not None else 'FAILED'
+
+
 def append(updates, report, table, input_name, converter, value):
     updates.append({
         "report": report,

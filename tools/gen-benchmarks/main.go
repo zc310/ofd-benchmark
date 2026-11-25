@@ -9,6 +9,7 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/mattn/go-runewidth"
 	"go.yaml.in/yaml/v4"
 )
 
@@ -314,6 +315,7 @@ func renderTable(table Table) (string, error) {
 		winCounts[winner]++
 	}
 
+	hasPercentage := false
 	var b strings.Builder
 	b.WriteString("| " + strings.Join(table.Headers, " | "))
 	if table.Wins {
@@ -331,6 +333,14 @@ func renderTable(table Table) (string, error) {
 		cells := make([]string, len(row.Values)+1)
 		cells[0] = row.Label
 		for col, value := range row.Values {
+			if strings.HasSuffix(value, "%") {
+				hasPercentage = true
+				n, err := numericValue(value)
+				if err != nil {
+					return "", err
+				}
+				value = fmt.Sprintf("%.4f%%", n)
+			}
 			if twinning[rowIndex][col] {
 				value = "**" + value + "**"
 			}
@@ -342,7 +352,51 @@ func renderTable(table Table) (string, error) {
 		}
 		b.WriteString(" |\n")
 	}
-	return strings.TrimSuffix(b.String(), "\n"), nil
+	rendered := strings.TrimSuffix(b.String(), "\n")
+	if hasPercentage {
+		rendered = alignMarkdownTable(rendered)
+	}
+	return rendered, nil
+}
+
+// Pad source cells too: converter names stay left-aligned and numeric cells
+// right-aligned. Count display columns so Chinese headers line up with ASCII.
+func alignMarkdownTable(table string) string {
+	lines := strings.Split(table, "\n")
+	rows := make([][]string, len(lines))
+	var widths []int
+	for i, line := range lines {
+		rows[i] = strings.Split(strings.Trim(line, "|"), "|")
+		if i == 0 {
+			widths = make([]int, len(rows[i]))
+		}
+		for col, cell := range rows[i] {
+			rows[i][col] = strings.TrimSpace(cell)
+			if i != 1 {
+				widths[col] = max(widths[col], runewidth.StringWidth(rows[i][col]), 4)
+			}
+		}
+	}
+	for i, row := range rows {
+		for col, cell := range row {
+			if i == 1 {
+				cell = strings.Repeat("-", widths[col])
+				if col > 0 {
+					cell = cell[:len(cell)-1] + ":"
+				}
+			} else {
+				padding := strings.Repeat(" ", widths[col]-runewidth.StringWidth(cell))
+				if col == 0 {
+					cell += padding
+				} else {
+					cell = padding + cell
+				}
+			}
+			row[col] = cell
+		}
+		lines[i] = "| " + strings.Join(row, " | ") + " |"
+	}
+	return strings.Join(lines, "\n")
 }
 
 func numericValue(value string) (float64, error) {

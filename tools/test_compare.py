@@ -14,6 +14,7 @@ import numpy as np
 import compare_pdf
 import compare_pdf2ofd
 import compare_text
+from benchmark_results import format_percentage
 
 
 def make_pdf(path, pages=2):
@@ -245,6 +246,17 @@ class SSIMTests(unittest.TestCase):
 
 
 class ComparisonScriptTests(unittest.TestCase):
+    def test_percentage_precision(self):
+        for value, expected in (
+                (None, 'FAILED'),
+                (0, '0.0000%'),
+                (100, '100.0000%'),
+                (98.123456, '98.1235%'),
+                (99.996, '99.9960%'),
+                (99.99996, '100.0000%')):
+            with self.subTest(value=value):
+                self.assertEqual(format_percentage(value), expected)
+
     def run_script(self, module, base):
         with patch.object(module, '__file__', str(base / 'tools' / 'script.py')), \
              patch.object(sys, 'argv', ['script.py', '72', 'hello']), \
@@ -272,13 +284,13 @@ class ComparisonScriptTests(unittest.TestCase):
             self.assertNotIn('rust-easyofd', {converter for converter, _ in updates})
             table = 'ofd-pixel-similarity'
             self.assertEqual(updates['go-ofdgo', table], 'FAILED')
-            self.assertEqual(updates['go-zc310', table], '100.00%')
-            self.assertEqual(updates['rust-sofd', table], '100.00%')
+            self.assertEqual(updates['go-zc310', table], '100.0000%')
+            self.assertEqual(updates['rust-sofd', table], '100.0000%')
             self.assertEqual(updates['@miconvert/ofd-to-pdf', table], 'FAILED')
             for table in ('ofd-content-similarity', 'ofd-foreground-f1', 'ofd-ssim'):
                 self.assertEqual(updates['go-ofdgo', table], 'FAILED')
-                self.assertEqual(updates['go-zc310', table], '100.00%')
-                self.assertEqual(updates['rust-sofd', table], '100.00%')
+                self.assertEqual(updates['go-zc310', table], '100.0000%')
+                self.assertEqual(updates['rust-sofd', table], '100.0000%')
 
     def test_sofd_text_results_are_written(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -299,7 +311,7 @@ class ComparisonScriptTests(unittest.TestCase):
             self.assertNotIn('rust-easyofd',
                              {cell['converter'] for cell in writer.call_args.args[1]})
             self.assertEqual(cells['ofd-text-similarity']['converter'], 'rust-sofd')
-            self.assertEqual(cells['ofd-text-similarity']['value'], '100.00%')
+            self.assertEqual(cells['ofd-text-similarity']['value'], '100.0000%')
             self.assertEqual(cells['ofd-text-extraction']['value'], '19')
 
     def test_1000_pages_text_extraction_is_written_for_entire_document(self):
@@ -322,7 +334,7 @@ class ComparisonScriptTests(unittest.TestCase):
             self.assertEqual(extraction['input'], '1000-pages.ofd')
             self.assertEqual(extraction['converter'], 'go-zc310')
             self.assertEqual(extraction['value'], '49')
-            self.assertEqual(cells['ofd-text-similarity']['value'], '100.00%')
+            self.assertEqual(cells['ofd-text-similarity']['value'], '100.0000%')
 
     def test_round_trip_pixel_failure_does_not_block_text_or_next_output(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -345,8 +357,8 @@ class ComparisonScriptTests(unittest.TestCase):
             self.assertNotIn('rust-easyofd', {converter for converter, _ in updates})
             table = 'pdf-pixel-similarity'
             self.assertEqual(updates['java-ofdrw', table], 'FAILED')
-            self.assertEqual(updates['go-zc310', table], '100.00%')
-            self.assertEqual(updates['go-ofdgo', table], '100.00%')
+            self.assertEqual(updates['go-zc310', table], '100.0000%')
+            self.assertEqual(updates['go-ofdgo', table], '100.0000%')
             self.assertEqual(updates['node-jsofd', table], 'FAILED')
             self.assertEqual(updates['python-pdf2ofd', table], 'FAILED')
             for converter in ('java-ofdrw', 'go-zc310', 'node-jsofd', 'python-pdf2ofd', 'go-ofdgo'):

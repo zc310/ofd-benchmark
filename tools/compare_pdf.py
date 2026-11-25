@@ -10,7 +10,7 @@ import sys
 import os
 import numpy as np
 import fitz
-from benchmark_results import OFD_CONVERTER_ROWS, append, write_updates
+from benchmark_results import OFD_CONVERTER_ROWS, append, format_percentage, write_updates
 
 def render(doc, page_idx, dpi):
     page = doc[page_idx]
@@ -220,11 +220,11 @@ def main():
             ssim_pixel = 'FAILED'
             try:
                 sim, md, ident, content, f1, ssim = compare(ref, src, dpi)
-                pixel = f'{sim:.2f}%'
-                content_pixel = f'{content:.2f}%' if content is not None else 'FAILED'
-                f1_pixel = f'{f1:.2f}%' if f1 is not None else 'FAILED'
-                ssim_pixel = f'{ssim:.2f}%'
-                print(f"{name:<12} {conv:<16} {ref_size:>10} {src_size:>10} {ratio:>6.2f} {sim:>9.2f}% {content_pixel:>10} {f1_pixel:>10} {ssim_pixel:>10} {ident:>8.2f}%")
+                pixel = format_percentage(sim)
+                content_pixel = format_percentage(content)
+                f1_pixel = format_percentage(f1)
+                ssim_pixel = format_percentage(ssim)
+                print(f"{name:<12} {conv:<16} {ref_size:>10} {src_size:>10} {ratio:>6.2f} {pixel:>10} {content_pixel:>10} {f1_pixel:>10} {ssim_pixel:>10} {format_percentage(ident):>10}")
             except Exception as e:
                 print(f"{name:<12} {conv:<16} FAILED: {e}")
             row = OFD_CONVERTER_ROWS.get(conv)

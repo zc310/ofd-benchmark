@@ -173,64 +173,64 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 
 <!-- benchmark-table:ofd-pixel-similarity:start -->
 
-| 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | **99.63%** | 99.70% | **99.93%** | 99.47% | 98.55% | **99.51%** | 3 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 99.62% | **99.71%** | 99.90% | 99.47% | 98.56% | 99.37% | 1 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 99.60% | 99.38% | 99.54% | 98.30% | 98.55% | 99.38% | 0 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 99.61% | 98.89% | 99.46% | 99.52% | 98.48% | 97.46% | 0 |
-| [rust-sofd](https://github.com/emfox/sOFD) | 99.38% | FAILED | FAILED | 99.45% | **98.59%** | 97.84% | 1 |
-| [easyofd](https://pypi.org/project/easyofd/) | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
-| [ofdrw](https://github.com/ofdrw/ofdrw) | 99.30% | 99.53% | 99.27% | **99.76%** | 97.33% | 99.06% | 1 |
-| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 99.01% | 97.55% | 96.30% | 97.56% | 95.82% | 94.39% | 0 |
+| 转换器                                                                       |    hello.ofd |      ano.ofd |    intro.ofd | 1000-pages.ofd |      999.ofd |     zsbk.ofd | 胜出次数 |
+| ---------------------------------------------------------------------------- | -----------: | -----------: | -----------: | -------------: | -----------: | -----------: | -------: |
+| [go-zc310](https://github.com/zc310/ofd)                                     | **99.6300%** |     99.7000% | **99.9300%** |       99.4700% |     98.5500% | **99.5100%** |        3 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                               |     99.6200% | **99.7100%** |     99.9000% |       99.4700% |     98.5600% |     99.3700% |        1 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)                     |     99.6000% |     99.3800% |     99.5400% |       98.3000% |     98.5500% |     99.3800% |        0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)                  |     99.6100% |     98.8900% |     99.4600% |       99.5200% |     98.4800% |     97.4600% |        0 |
+| [rust-sofd](https://github.com/emfox/sOFD)                                   |     99.3800% |       FAILED |       FAILED |       99.4500% | **98.5900%** |     97.8400% |        1 |
+| [easyofd](https://pypi.org/project/easyofd/)                                 |       FAILED |       FAILED |       FAILED |         FAILED |       FAILED |       FAILED |        0 |
+| [ofdrw](https://github.com/ofdrw/ofdrw)                                      |     99.3000% |     99.5300% |     99.2700% |   **99.7600%** |     97.3300% |     99.0600% |        1 |
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |     99.0100% |     97.5500% |     96.3000% |       97.5600% |     95.8200% |     94.3900% |        0 |
 <!-- benchmark-table:ofd-pixel-similarity:end -->
 
 **SSIM 结构相似度**（96 DPI）：原尺寸 RGB 三通道分别计算 7×7 均匀窗口 SSIM，使用样本协方差、`K1=0.01`、`K2=0.03`、`data_range=255`；对有效窗口及通道取平均，负分截为 0 后乘 100%，再对页面等权平均。不缩放、不平移，图片至少为 7×7 像素。白底仍可能抬高 SSIM，应结合内容相似度及前景 F1 阅读。新增指标，尚未统一重测的单元格记为 `FAILED`，不将旧像素分数当作 SSIM。
 
 <!-- benchmark-table:ofd-ssim:start -->
 
-| 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | 98.41% | 96.40% | **99.92%** | 98.93% | 94.61% | **98.28%** | 2 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 98.42% | **96.51%** | 99.79% | 98.94% | 94.63% | 97.92% | 1 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 98.45% | 94.74% | 98.29% | 94.01% | 94.58% | 97.96% | 0 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | **98.51%** | 91.90% | 97.61% | 99.26% | 94.15% | 92.15% | 1 |
-| [rust-sofd](https://github.com/emfox/sOFD) | 98.04% | FAILED | FAILED | 98.94% | **95.74%** | 81.25% | 1 |
-| [easyofd](https://pypi.org/project/easyofd/) | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
-| [ofdrw](https://github.com/ofdrw/ofdrw) | 97.68% | 92.29% | 96.41% | **99.73%** | 88.89% | 96.00% | 1 |
-| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 96.63% | 73.17% | 89.21% | 90.12% | 73.73% | 79.32% | 0 |
+| 转换器                                                                       |    hello.ofd |      ano.ofd |    intro.ofd | 1000-pages.ofd |      999.ofd |     zsbk.ofd | 胜出次数 |
+| ---------------------------------------------------------------------------- | -----------: | -----------: | -----------: | -------------: | -----------: | -----------: | -------: |
+| [go-zc310](https://github.com/zc310/ofd)                                     |     98.4100% |     96.4000% | **99.9200%** |       98.9300% |     94.6100% | **98.2800%** |        2 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                               |     98.4200% | **96.5100%** |     99.7900% |       98.9400% |     94.6300% |     97.9200% |        1 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)                     |     98.4500% |     94.7400% |     98.2900% |       94.0100% |     94.5800% |     97.9600% |        0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)                  | **98.5100%** |     91.9000% |     97.6100% |       99.2600% |     94.1500% |     92.1500% |        1 |
+| [rust-sofd](https://github.com/emfox/sOFD)                                   |     98.0400% |       FAILED |       FAILED |       98.9400% | **95.7400%** |     81.2500% |        1 |
+| [easyofd](https://pypi.org/project/easyofd/)                                 |       FAILED |       FAILED |       FAILED |         FAILED |       FAILED |       FAILED |        0 |
+| [ofdrw](https://github.com/ofdrw/ofdrw)                                      |     97.6800% |     92.2900% |     96.4100% |   **99.7300%** |     88.8900% |     96.0000% |        1 |
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |     96.6300% |     73.1700% |     89.2100% |       90.1200% |     73.7300% |     79.3200% |        0 |
 <!-- benchmark-table:ofd-ssim:end -->
 
 **内容区域像素相似度**（96 DPI）：RGB 任一通道低于 250 视为非白内容。参考内容处的颜色误差与参考内容外的额外输出误差相加，仅除以参考非白像素数；分数为 `max(0, 1 - 归一化误差) × 100%`。不扩边、不裁剪，不允许输出扩大掩码分母稀释误差。双方空白页不参与内容分数平均，全空白文档无内容分数（记 `FAILED`）。此指标有方向性，始终以数科输出为参考；与旧并集扩边分数不可混用。
 
 <!-- benchmark-table:ofd-content-similarity:start -->
 
-| 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | **67.08%** | 96.54% | **99.88%** | 99.39% | 80.52% | **99.41%** | 3 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | 67.02% | **96.74%** | 99.83% | 99.40% | 80.63% | 99.24% | 1 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 65.19% | 91.20% | 99.05% | 98.05% | 80.58% | 99.26% | 0 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 66.08% | 83.10% | 97.86% | 99.45% | 79.65% | 96.96% | 0 |
-| [rust-sofd](https://github.com/emfox/sOFD) | 45.27% | FAILED | FAILED | 99.37% | **81.51%** | 97.42% | 1 |
-| [easyofd](https://pypi.org/project/easyofd/) | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
-| [ofdrw](https://github.com/ofdrw/ofdrw) | 38.55% | 94.92% | 98.77% | **99.72%** | 64.49% | 98.88% | 1 |
-| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 12.94% | 62.67% | 91.96% | 97.21% | 43.51% | 93.31% | 0 |
+| 转换器                                                                       |    hello.ofd |      ano.ofd |    intro.ofd | 1000-pages.ofd |      999.ofd |     zsbk.ofd | 胜出次数 |
+| ---------------------------------------------------------------------------- | -----------: | -----------: | -----------: | -------------: | -----------: | -----------: | -------: |
+| [go-zc310](https://github.com/zc310/ofd)                                     | **67.0800%** |     96.5400% | **99.8800%** |       99.3900% |     80.5200% | **99.4100%** |        3 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                               |     67.0200% | **96.7400%** |     99.8300% |       99.4000% |     80.6300% |     99.2400% |        1 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)                     |     65.1900% |     91.2000% |     99.0500% |       98.0500% |     80.5800% |     99.2600% |        0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)                  |     66.0800% |     83.1000% |     97.8600% |       99.4500% |     79.6500% |     96.9600% |        0 |
+| [rust-sofd](https://github.com/emfox/sOFD)                                   |     45.2700% |       FAILED |       FAILED |       99.3700% | **81.5100%** |     97.4200% |        1 |
+| [easyofd](https://pypi.org/project/easyofd/)                                 |       FAILED |       FAILED |       FAILED |         FAILED |       FAILED |       FAILED |        0 |
+| [ofdrw](https://github.com/ofdrw/ofdrw)                                      |     38.5500% |     94.9200% |     98.7700% |   **99.7200%** |     64.4900% |     98.8800% |        1 |
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |     12.9400% |     62.6700% |     91.9600% |       97.2100% |     43.5100% |     93.3100% |        0 |
 <!-- benchmark-table:ofd-content-similarity:end -->
 
 **前景覆盖 F1**：独立衡量形状覆盖，允许约 0.265 mm 的邻域距离（96 DPI 时为 1 像素），兼顾漏画召回率与多画精确率，不替代颜色误差。双方空白页不参与平均。
 
 <!-- benchmark-table:ofd-foreground-f1:start -->
 
-| 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | 86.46% | 98.30% | **100.00%** | 99.98% | 98.09% | **100.00%** | 2 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | **86.51%** | **98.39%** | **100.00%** | 99.98% | 98.10% | **100.00%** | 2 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 82.35% | 98.34% | 99.50% | 99.62% | 98.10% | **100.00%** | 0 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 82.63% | 92.06% | 99.91% | **100.00%** | 97.50% | 65.34% | 1 |
-| [rust-sofd](https://github.com/emfox/sOFD) | 67.14% | FAILED | FAILED | **100.00%** | **99.27%** | 99.98% | 1 |
-| [easyofd](https://pypi.org/project/easyofd/) | FAILED | FAILED | FAILED | FAILED | FAILED | FAILED | 0 |
-| [ofdrw](https://github.com/ofdrw/ofdrw) | 62.07% | 73.37% | 99.76% | **100.00%** | 87.67% | **100.00%** | 0 |
-| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 6.08% | 4.83% | 92.90% | 99.21% | 11.47% | 20.41% | 0 |
+| 转换器                                                                       |    hello.ofd |      ano.ofd |     intro.ofd | 1000-pages.ofd |      999.ofd |      zsbk.ofd | 胜出次数 |
+| ---------------------------------------------------------------------------- | -----------: | -----------: | ------------: | -------------: | -----------: | ------------: | -------: |
+| [go-zc310](https://github.com/zc310/ofd)                                     |     86.4600% |     98.3000% | **100.0000%** |       99.9800% |     98.0900% | **100.0000%** |        2 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                               | **86.5100%** | **98.3900%** | **100.0000%** |       99.9800% |     98.1000% | **100.0000%** |        2 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)                     |     82.3500% |     98.3400% |      99.5000% |       99.6200% |     98.1000% | **100.0000%** |        0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)                  |     82.6300% |     92.0600% |      99.9100% |  **100.0000%** |     97.5000% |      65.3400% |        1 |
+| [rust-sofd](https://github.com/emfox/sOFD)                                   |     67.1400% |       FAILED |        FAILED |  **100.0000%** | **99.2700%** |      99.9800% |        1 |
+| [easyofd](https://pypi.org/project/easyofd/)                                 |       FAILED |       FAILED |        FAILED |         FAILED |       FAILED |        FAILED |        0 |
+| [ofdrw](https://github.com/ofdrw/ofdrw)                                      |     62.0700% |     73.3700% |      99.7600% |  **100.0000%** |     87.6700% | **100.0000%** |        0 |
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |      6.0800% |      4.8300% |      92.9000% |       99.2100% |     11.4700% |      20.4100% |        0 |
 <!-- benchmark-table:ofd-foreground-f1:end -->
 
 > 页面显示尺寸相差超过 0.5 pt 时判失败；像素尺寸仅允许 1 像素舍入差异，差异部分用白色补齐。MuPDF 渲染警告或错误判为 `FAILED`，不对不完整渲染给分。
@@ -260,22 +260,22 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 > - 各转换器失败情况以结果表为准；ofd2img、python-ofd2pdf 已移出评测
 > - 复现命令：`python3 tools/compare_pdf.py 96 <file>`
 
-**文本相似度**（与数科参考 PDF 提取文本的 4-gram Jaccard 相似度，100% 为文本完全一致；`0.00%` 表示无文本或提取失败）：
+**文本相似度**（与数科参考 PDF 提取文本的 4-gram Jaccard 相似度，100% 为文本完全一致；`0.0000%` 表示无文本或提取失败）：
 
 参考文本长度（fitz 1.26.7 口径）：`hello=22` · `ano=7091` · `intro=5543` · `1000-pages=263999` · `999=3934` · `zsbk=1150`
 
 <!-- benchmark-table:ofd-text-similarity:start -->
 
-| 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| [go-zc310](https://github.com/zc310/ofd) | **100.00%** | 99.06% | **99.71%** | **100.00%** | 95.85% | 98.85% | 2 |
-| [go-ofdgo](https://github.com/xiaoqidun/ofdgo) | **100.00%** | **100.00%** | 99.60% | **100.00%** | 95.85% | **100.00%** | 2 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | **100.00%** | 99.73% | 94.88% | **100.00%** | **100.00%** | **100.00%** | 1 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 26.32% | 18.04% | 3.67% | 3.99% | 39.65% | 0.00% | 0 |
-| [rust-sofd](https://github.com/emfox/sOFD) | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% | 0.00% | 0 |
-| [easyofd](https://pypi.org/project/easyofd/) | **100.00%** | 12.57% | 0.06% | 98.38% | 80.54% | 11.20% | 0 |
-| [ofdrw](https://github.com/ofdrw/ofdrw) | 17.14% | 70.58% | 38.28% | **100.00%** | 56.78% | 64.72% | 1 |
-| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 10.81% | 97.33% | 5.86% | 83.31% | 41.24% | 4.86% | 0 |
+| 转换器                                                                       |     hello.ofd |       ano.ofd |    intro.ofd | 1000-pages.ofd |       999.ofd |      zsbk.ofd | 胜出次数 |
+| ---------------------------------------------------------------------------- | ------------: | ------------: | -----------: | -------------: | ------------: | ------------: | -------: |
+| [go-zc310](https://github.com/zc310/ofd)                                     | **100.0000%** |      99.0600% | **99.7100%** |  **100.0000%** |      95.8500% |      98.8500% |        2 |
+| [go-ofdgo](https://github.com/xiaoqidun/ofdgo)                               | **100.0000%** | **100.0000%** |     99.6000% |  **100.0000%** |      95.8500% | **100.0000%** |        2 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)                     | **100.0000%** |      99.7300% |     94.8800% |  **100.0000%** | **100.0000%** | **100.0000%** |        1 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)                  |      26.3200% |      18.0400% |      3.6700% |        3.9900% |      39.6500% |       0.0000% |        0 |
+| [rust-sofd](https://github.com/emfox/sOFD)                                   |       0.0000% |       0.0000% |      0.0000% |        0.0000% |       0.0000% |       0.0000% |        0 |
+| [easyofd](https://pypi.org/project/easyofd/)                                 | **100.0000%** |      12.5700% |      0.0600% |       98.3800% |      80.5400% |      11.2000% |        0 |
+| [ofdrw](https://github.com/ofdrw/ofdrw)                                      |      17.1400% |      70.5800% |     38.2800% |  **100.0000%** |      56.7800% |      64.7200% |        1 |
+| [@miconvert/ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) |      10.8100% |      97.3300% |      5.8600% |       83.3100% |      41.2400% |       4.8600% |        0 |
 <!-- benchmark-table:ofd-text-similarity:end -->
 
 > - 复现命令：`python3 tools/compare_text.py <file>`
