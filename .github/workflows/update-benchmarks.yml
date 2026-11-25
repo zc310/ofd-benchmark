@@ -42,7 +42,29 @@ jobs:
           export GOFLAGS=-mod=mod
           zc310="$(GOWORK=off go list -m -f '{{.Version}}' github.com/zc310/ofd@main)"
           ofdgo="$(GOWORK=off go list -m -f '{{.Version}}' github.com/xiaoqidun/ofdgo@main)"
-          ofdrw="$(curl -fsSL https://repo.maven.apache.org/maven2/org/ofdrw/ofdrw-converter/maven-metadata.xml | python3 -c 'import sys, xml.etree.ElementTree as ET; root=ET.parse(sys.stdin).getroot(); print(root.findtext("versioning/release") or root.findtext("versioning/latest"))')"
+          metadata="$(mktemp)"
+          trap 'rm -f "$metadata"' EXIT
+          if ! curl --fail --location --silent --show-error \
+            --retry 5 --retry-delay 10 --retry-max-time 180 \
+            --connect-timeout 15 --max-time 45 \
+            --output "$metadata" \
+            https://repo.maven.apache.org/maven2/org/ofdrw/ofdrw-converter/maven-metadata.xml; then
+            echo "::error::Failed to download ofdrw Maven metadata after retries; latest version could not be checked." >&2
+            exit 1
+          fi
+          ofdrw="$(python3 - "$metadata" <<'PY'
+          import sys
+          import xml.etree.ElementTree as ET
+          try:
+              root = ET.parse(sys.argv[1]).getroot()
+          except (OSError, ET.ParseError) as error:
+              sys.exit(f"::error::Invalid ofdrw Maven metadata: {error}")
+          version = (root.findtext("versioning/release") or root.findtext("versioning/latest") or "").strip()
+          if not version:
+              sys.exit("::error::ofdrw Maven metadata has no release/latest version")
+          print(version)
+          PY
+          )"
           changed="$(GOWORK=off go run ./tools/benchmark-versions -yaml docs/benchmark-results.yaml -zc310 "$zc310" -ofdgo "$ofdgo" -ofdrw "$ofdrw" -check)"
           zc310_ref="$zc310"
           if [[ "$zc310" =~ -([0-9a-f]{12})$ ]]; then
