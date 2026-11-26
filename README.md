@@ -85,7 +85,7 @@ GOWORK=off go run ./tools/gen-benchmarks
 GOWORK=off go run ./tools/gen-benchmarks -check  # 校验文档是否最新
 ```
 
-报告中的说明文字不由生成器管理；带 `benchmark-table` 标记的表格由 YAML 生成，勿直接编辑。
+报告中的说明文字不由生成器管理；带 `benchmark-table` 和 `benchmark-charts` 标记的表格及图表由 YAML 生成，勿直接编辑。
 
 基准驱动会将转换耗时、输出大小和大小比写回 YAML；对比脚本会补充像素相似度、文本提取和文本相似度。GitHub Actions 每周检查 `zc310/ofd`、`xiaoqidun/ofdgo` 的最新提交及 Maven Central 上 `org.ofdrw:ofdrw-converter` 的最新发布版，`ofdrw-rs` 当前固定使用 v0.5.0；只有受跟踪版本变化时才运行完整基准并提交更新，也可在 Actions 页面手动触发（手动运行不要求有更新）。Workflow 会下载匹配的 Linux x64 原生库。本轮测试的库版本和 runner 的 OS、CPU 型号/逻辑核心数、内存均记入 YAML 并显示在报告中；Go 模块升级只在 workflow runner 临时生效，不会提交 `go.mod` 变更。完整运行会拉取 `zc310/ofd-fixtures` 样例，并在开始时使用 `-reset` 将待测单元重置为 `FAILED`，避免失败或缺失结果沿用旧数据。
 

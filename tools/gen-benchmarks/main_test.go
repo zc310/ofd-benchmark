@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func TestRenderTablePreservesData(t *testing.T) {
 	table := Table{
@@ -85,5 +88,29 @@ func TestAlignMarkdownTableIsIdempotent(t *testing.T) {
 	aligned := alignMarkdownTable(table)
 	if got := alignMarkdownTable(aligned); got != aligned {
 		t.Fatalf("alignment changed on second pass:\n%s", got)
+	}
+}
+
+func TestPNGChartsConvertUnitsAndOmitFailures(t *testing.T) {
+	tables := []Table{
+		{ID: "png-speed", Headers: []string{"转换器", "a.ofd", "b.ofd"}, Rows: []Row{
+			{Label: "[first](https://example.com)", Values: []string{"523ms", "1.20s"}},
+			{Label: "second", Values: []string{"1.20s", "300ms"}},
+			{Label: "failed", Values: []string{"10ms", "FAILED"}},
+		}},
+	}
+	got, err := renderSpeedChart(tables, "png-speed", "OFD → PNG")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, want := range []string{
+		`xychart-beta horizontal`,
+		`x-axis ["first", "second"]`,
+		`bar [1.723, 1.5]`,
+		"未完成全部文件（括号内为无有效结果的文件）：`failed`（b.ofd）。",
+	} {
+		if !strings.Contains(got, want) {
+			t.Errorf("chart missing %q:\n%s", want, got)
+		}
 	}
 }

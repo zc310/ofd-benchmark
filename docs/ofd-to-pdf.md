@@ -71,6 +71,24 @@
 
 ### 转换速度
 
+图表按库累加下方速度表中全部文件的耗时，单位为秒；耗时为单次测量，多页文件可能主导总耗时。未完成全部文件的库不绘制柱形。
+
+<!-- benchmark-charts:ofd:start -->
+
+```mermaid
+---
+config:
+  xyChart:
+    height: 510
+---
+xychart-beta horizontal
+    title "OFD → PDF 全部文件总耗时（秒，越低越快）"
+    x-axis ["go-zc310", "go-ofdgo", "go-ofdrw-rs", "rust-ofdbox-folio", "rust-sofd", "easyofd", "ofdrw", "@miconvert/ofd-to-pdf"]
+    y-axis "秒" 0 --> 270
+    bar [1.323, 4.156, 269.772, 6.629, 28.135, 21.62, 12.4, 12.885]
+```
+<!-- benchmark-charts:ofd:end -->
+
 <!-- benchmark-table:ofd-speed:start -->
 
 | 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |

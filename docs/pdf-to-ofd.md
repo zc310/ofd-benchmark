@@ -49,6 +49,24 @@
 
 ## 转换速度
 
+图表按库累加下方速度表中全部文件的耗时，单位为秒；耗时为单次测量，多页文件可能主导总耗时。未完成全部文件的库不绘制柱形。
+
+<!-- benchmark-charts:pdf:start -->
+
+```mermaid
+---
+config:
+  xyChart:
+    height: 500
+---
+xychart-beta horizontal
+    title "PDF → OFD 全部文件总耗时（秒，越低越快）"
+    x-axis ["go-zc310", "go-ofdgo", "java-ofdrw", "python-pdf2ofd", "node-jsofd"]
+    y-axis "秒" 0 --> 101
+    bar [4.046, 18.225, 100.785, 77.744, 28.605]
+```
+<!-- benchmark-charts:pdf:end -->
+
 <!-- benchmark-table:pdf-speed:start -->
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |

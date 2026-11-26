@@ -7,6 +7,7 @@ import (
 	"math"
 	"os"
 	"regexp"
+	"strconv"
 	"strings"
 
 	"github.com/mattn/go-runewidth"
@@ -151,6 +152,28 @@ func updateDocument(doc string, report Report, versions, environment map[string]
 		}
 		doc = doc[:startAt] + "\n\n" + rendered + "\n" + doc[endAt:]
 	}
+	chartSpecs := map[string]struct{ marker, table, title string }{
+		"ofd-to-png": {"png", "png-speed", "OFD → PNG"},
+		"ofd-to-pdf": {"ofd", "ofd-speed", "OFD → PDF"},
+		"pdf-to-ofd": {"pdf", "pdf-speed", "PDF → OFD"},
+	}
+	if spec, ok := chartSpecs[report.ID]; ok {
+		startMarker := "<!-- benchmark-charts:" + spec.marker + ":start -->"
+		endMarker := "<!-- benchmark-charts:" + spec.marker + ":end -->"
+		if strings.Count(doc, startMarker) != 1 || strings.Count(doc, endMarker) != 1 {
+			return "", fmt.Errorf("%s chart markers missing or repeated", report.ID)
+		}
+		start := strings.Index(doc, startMarker) + len(startMarker)
+		end := strings.Index(doc, endMarker)
+		if end < start {
+			return "", fmt.Errorf("%s chart markers are reversed", report.ID)
+		}
+		charts, err := renderSpeedChart(report.Tables, spec.table, spec.title)
+		if err != nil {
+			return "", err
+		}
+		doc = doc[:start] + "\n\n" + charts + "\n" + doc[end:]
+	}
 	if err := updateLibraryVersions(&doc, report.ID, versions); err != nil {
 		return "", err
 	}
@@ -173,6 +196,63 @@ func updateDocument(doc string, report Report, versions, environment map[string]
 	block := fmt.Sprintf("\n\n- 系统：%s\n- CPU：%s（%s 逻辑核心）\n- 内存：%s\n", environment["os"], environment["cpu_model"], environment["logical_cores"], environment["memory"])
 	doc = doc[:start] + block + doc[end:]
 	return doc, nil
+}
+
+var markdownLink = regexp.MustCompile(`^\[([^\]]+)\]\([^)]+\)$`)
+
+func renderSpeedChart(tables []Table, tableID, title string) (string, error) {
+	var table *Table
+	for i := range tables {
+		if tables[i].ID == tableID {
+			table = &tables[i]
+			break
+		}
+	}
+	if table == nil {
+		return "", fmt.Errorf("missing chart source %s", tableID)
+	}
+	var labels, values, missing []string
+	maximum := 0.0
+	for _, row := range table.Rows {
+		label := row.Label
+		if match := markdownLink.FindStringSubmatch(label); match != nil {
+			label = match[1]
+		}
+		total := 0.0
+		var failed []string
+		for col, sample := range table.Headers[1:] {
+			value := row.Values[col]
+			if value == "FAILED" {
+				failed = append(failed, sample)
+				continue
+			}
+			n, err := numericValue(value)
+			if err != nil {
+				return "", fmt.Errorf("%s %s %s: %w", tableID, sample, label, err)
+			}
+			total += n
+		}
+		if len(failed) > 0 {
+			missing = append(missing, "`"+label+"`（"+strings.Join(failed, "、")+"）")
+			continue
+		}
+		total /= 1000
+		maximum = math.Max(maximum, total)
+		labels = append(labels, strconv.Quote(label))
+		values = append(values, strconv.FormatFloat(total, 'f', -1, 64))
+	}
+	var b strings.Builder
+	if len(values) > 0 {
+		fmt.Fprintf(&b, "```mermaid\n---\nconfig:\n  xyChart:\n    height: %d\n---\nxychart-beta horizontal\n    title %s\n    x-axis [%s]\n    y-axis \"秒\" 0 --> %s\n    bar [%s]\n```\n\n",
+			max(500, len(values)*45+150), strconv.Quote(title+" 全部文件总耗时（秒，越低越快）"), strings.Join(labels, ", "),
+			strconv.FormatFloat(math.Max(1, math.Ceil(maximum)), 'f', -1, 64), strings.Join(values, ", "))
+	} else {
+		b.WriteString("暂无有效数据。\n\n")
+	}
+	if len(missing) > 0 {
+		fmt.Fprintf(&b, "未完成全部文件（括号内为无有效结果的文件）：%s。\n\n", strings.Join(missing, "；"))
+	}
+	return strings.TrimSpace(b.String()), nil
 }
 
 func updateLibraryVersions(doc *string, reportID string, versions map[string]string) error {
