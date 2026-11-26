@@ -38,16 +38,16 @@ func TestFormatSize(t *testing.T) {
 
 func TestUpdateCell(t *testing.T) {
 	path := copyBenchmarkYAML(t)
-	want := readResultValues(t, path, "pdf-to-ofd", "pdf-speed", "go-zc310")
+	want := readResultValues(t, path, "pdf-to-ofd", "pdf-speed", "go-zc310-ofd")
 	want[0] = "42ms"
 	updates := []CellUpdate{{
 		Report: "pdf-to-ofd", Table: "pdf-speed", Input: "hello.pdf",
-		Converter: "go-zc310", Value: "42ms",
+		Converter: "go-zc310-ofd", Value: "42ms",
 	}}
 	if err := Update(path, updates, false); err != nil {
 		t.Fatal(err)
 	}
-	got := readResultValues(t, path, "pdf-to-ofd", "pdf-speed", "go-zc310")
+	got := readResultValues(t, path, "pdf-to-ofd", "pdf-speed", "go-zc310-ofd")
 	if !slices.Equal(got, want) {
 		t.Fatalf("updated values = %v, want %v", got, want)
 	}
@@ -55,16 +55,16 @@ func TestUpdateCell(t *testing.T) {
 
 func TestUpdateColumnWithReferenceCountInHeader(t *testing.T) {
 	path := copyBenchmarkYAML(t)
-	want := readResultValues(t, path, "pdf-to-ofd", "pdf-text-extraction", "go-zc310")
+	want := readResultValues(t, path, "pdf-to-ofd", "pdf-text-extraction", "go-zc310-ofd")
 	want[0] = "31"
 	updates := []CellUpdate{{
 		Report: "pdf-to-ofd", Table: "pdf-text-extraction", Input: "hello.pdf",
-		Converter: "go-zc310", Value: "31",
+		Converter: "go-zc310-ofd", Value: "31",
 	}}
 	if err := Update(path, updates, false); err != nil {
 		t.Fatal(err)
 	}
-	got := readResultValues(t, path, "pdf-to-ofd", "pdf-text-extraction", "go-zc310")
+	got := readResultValues(t, path, "pdf-to-ofd", "pdf-text-extraction", "go-zc310-ofd")
 	if !slices.Equal(got, want) {
 		t.Fatalf("updated values for header with reference count = %v, want %v", got, want)
 	}

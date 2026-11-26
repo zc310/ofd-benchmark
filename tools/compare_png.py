@@ -99,7 +99,9 @@ def main():
             except Exception as error:
                 print(f'{name:<10} {converter:<20} FAILED: {error}')
             for metric, value in zip(('pixel-similarity', 'content-similarity', 'foreground-f1', 'ssim'), values):
-                append(updates, 'ofd-to-png', f'png-{metric}', name + '.ofd', converter, value)
+                row = {'go-zc310': 'go-zc310-ofd', 'go-ofdgo': 'go-xiaoqidun-ofdgo',
+                       'rust-sofd': 'rust-sOFD'}.get(converter, converter)
+                append(updates, 'ofd-to-png', f'png-{metric}', name + '.ofd', row, value)
     if not args.no_write:
         write_updates(str(base), updates)
 

@@ -58,7 +58,7 @@ func TestRegistryMatchesReportGroups(t *testing.T) {
 			for _, row := range table.Rows {
 				matched := false
 				for _, c := range registry {
-					if strings.HasPrefix(row.Label, "["+c.name+"](") {
+					if strings.HasPrefix(row.Label, "["+pngRowName(c.name)+"](") {
 						matched = true
 						if !strings.HasPrefix(table.ID, c.tables+"-") ||
 							(c.tables == "png" && strings.HasPrefix(table.ID, "png-via-pdf-")) {

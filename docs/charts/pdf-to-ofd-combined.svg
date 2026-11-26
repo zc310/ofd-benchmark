@@ -7,12 +7,12 @@
 <text x="28" y="62" font-size="14" fill="#5c6a7d">7 个文件合计 · 各栏使用独立刻度</text>
 <text x="240" y="95" font-size="15" font-weight="700">总耗时（秒）</text>
 <text x="655" y="95" font-size="15" font-weight="700">输出总大小（MB）</text>
-<text x="28" y="133" font-size="15">go-zc310</text>
+<text x="28" y="133" font-size="15">go-zc310-ofd</text>
 <rect x="240" y="115" width="13.21" height="24" rx="4" fill="#2563eb"/>
 <text x="261.21" y="133" font-size="14" font-weight="700">5.716</text>
 <rect x="655" y="115" width="43.88" height="24" rx="4" fill="#2563eb"/>
 <text x="706.88" y="133" font-size="14" font-weight="700">21.299</text>
-<text x="28" y="187" font-size="15">go-ofdgo</text>
+<text x="28" y="187" font-size="15">go-xiaoqidun-ofdgo</text>
 <rect x="240" y="169" width="55.50" height="24" rx="4" fill="#0f766e"/>
 <text x="303.50" y="187" font-size="14" font-weight="700">24.018</text>
 <rect x="655" y="169" width="172.26" height="24" rx="4" fill="#0f766e"/>

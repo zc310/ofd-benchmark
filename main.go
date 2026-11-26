@@ -155,11 +155,11 @@ func main() {
 			continue
 		}
 		rowName, hasRow := map[string]string{
-			"ofdgo": "go-ofdgo", "zc310": "go-zc310", "python": "easyofd",
+			"ofdgo": "go-xiaoqidun-ofdgo", "zc310": "go-zc310-ofd", "python": "python-easyofd",
 			"ofdrw-rs":     "go-ofdrw-rs",
 			"ofdbox-folio": "rust-ofdbox-folio",
-			"sofd":         "rust-sofd",
-			"java":         "ofdrw", "node": "@miconvert/ofd-to-pdf",
+			"sofd":         "rust-sOFD",
+			"java":         "java-ofdrw", "node": "node-ofd-to-pdf",
 		}[name]
 		if !hasRow {
 			continue

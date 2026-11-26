@@ -136,8 +136,8 @@ func main() {
 		refSize = info.Size()
 	}
 	rowNames := map[string]string{
-		"zc310":   "go-zc310",
-		"ofdgo":   "go-ofdgo",
+		"zc310":   "go-zc310-ofd",
+		"ofdgo":   "go-xiaoqidun-ofdgo",
 		"java":    "java-ofdrw",
 		"pdf2ofd": "python-pdf2ofd",
 		"jsofd":   "node-jsofd",

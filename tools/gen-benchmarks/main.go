@@ -409,8 +409,8 @@ func updateLibraryVersions(doc *string, reportID string, versions map[string]str
 	ofdrw := versions["org.ofdrw:ofdrw-converter"]
 	if reportID == "ofd-to-png" {
 		for _, update := range []struct{ prefix, version string }{
-			{"| [go-zc310]", zc310},
-			{"| [go-ofdgo]", ofdgo},
+			{"| [go-zc310-ofd]", zc310},
+			{"| [go-xiaoqidun-ofdgo]", ofdgo},
 			{"| [rust-ofd-utility]", versions["github.com/ofd-utility/ofd-utility"]},
 			{"| [go-ofdrw-rs]", ofdrwRS},
 			{"| [java-ofdrw]", ofdrw},
@@ -431,10 +431,10 @@ func updateLibraryVersions(doc *string, reportID string, versions map[string]str
 			column         int
 			version        string
 		}{
-			{"| [zc310-ofd]", "", 2, zc310},
-			{"| [xiaoqidun-ofdgo]", "", 2, ofdgo},
-			{"| [ofdrw-rs Go binding]", "✅", 2, ofdrwRS},
-			{"| [ofdrw](https://github.com/ofdrw/ofdrw)", "✅", 2, ofdrw},
+			{"| [go-zc310-ofd]", "✅", 2, zc310},
+			{"| [go-xiaoqidun-ofdgo]", "✅", 2, ofdgo},
+			{"| [go-ofdrw-rs]", "✅", 2, ofdrwRS},
+			{"| [java-ofdrw]", "✅", 2, ofdrw},
 		} {
 			if err := replaceMarkdownRowCell(doc, update.prefix, update.marker, update.column, update.version); err != nil {
 				return err
@@ -447,9 +447,9 @@ func updateLibraryVersions(doc *string, reportID string, versions map[string]str
 			column         int
 			version        string
 		}{
-			{"| go-zc310", "zc310/ofd", 4, zc310},
-			{"| go-ofdgo", "ConvertPDF", 4, ofdgo},
-			{"| java-ofdrw", "PDFConverter", 4, ofdrw},
+			{"| [go-zc310-ofd]", "zc310/ofd", 2, zc310},
+			{"| [go-xiaoqidun-ofdgo]", "ConvertPDF", 2, ofdgo},
+			{"| [java-ofdrw]", "PDFConverter", 2, ofdrw},
 		} {
 			if err := replaceMarkdownRowCell(doc, update.prefix, update.marker, update.column, update.version); err != nil {
 				return err

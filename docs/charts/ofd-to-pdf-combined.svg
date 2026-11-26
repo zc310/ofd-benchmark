@@ -7,12 +7,12 @@
 <text x="28" y="62" font-size="14" fill="#5c6a7d">6 个文件合计 · 各栏使用独立刻度</text>
 <text x="240" y="95" font-size="15" font-weight="700">总耗时（秒）</text>
 <text x="655" y="95" font-size="15" font-weight="700">输出总大小（MB）</text>
-<text x="28" y="133" font-size="15">go-zc310</text>
+<text x="28" y="133" font-size="15">go-zc310-ofd</text>
 <rect x="240" y="115" width="1.24" height="24" rx="4" fill="#2563eb"/>
 <text x="249.24" y="133" font-size="14" font-weight="700">1.846</text>
 <rect x="655" y="115" width="19.88" height="24" rx="4" fill="#2563eb"/>
 <text x="682.88" y="133" font-size="14" font-weight="700">9.766</text>
-<text x="28" y="187" font-size="15">go-ofdgo</text>
+<text x="28" y="187" font-size="15">go-xiaoqidun-ofdgo</text>
 <rect x="240" y="169" width="2.03" height="24" rx="4" fill="#0f766e"/>
 <text x="250.03" y="187" font-size="14" font-weight="700">3.029</text>
 <rect x="655" y="169" width="19.36" height="24" rx="4" fill="#0f766e"/>
@@ -22,22 +22,22 @@
 <text x="253.87" y="241" font-size="14" font-weight="700">8.763</text>
 <rect x="655" y="223" width="90.89" height="24" rx="4" fill="#7e22ce"/>
 <text x="753.89" y="241" font-size="14" font-weight="700">44.653</text>
-<text x="28" y="295" font-size="15">@miconvert/ofd-to-pdf</text>
+<text x="28" y="295" font-size="15">node-ofd-to-pdf</text>
 <rect x="240" y="277" width="12.82" height="24" rx="4" fill="#b45309"/>
 <text x="260.82" y="295" font-size="14" font-weight="700">19.148</text>
 <rect x="655" y="277" width="22.59" height="24" rx="4" fill="#b45309"/>
 <text x="685.59" y="295" font-size="14" font-weight="700">11.100</text>
-<text x="28" y="349" font-size="15">ofdrw</text>
+<text x="28" y="349" font-size="15">java-ofdrw</text>
 <rect x="240" y="331" width="13.35" height="24" rx="4" fill="#0369a1"/>
 <text x="261.35" y="349" font-size="14" font-weight="700">19.940</text>
 <rect x="655" y="331" width="46.53" height="24" rx="4" fill="#0369a1"/>
 <text x="709.53" y="349" font-size="14" font-weight="700">22.857</text>
-<text x="28" y="403" font-size="15">easyofd</text>
+<text x="28" y="403" font-size="15">python-easyofd</text>
 <rect x="240" y="385" width="19.23" height="24" rx="4" fill="#4d7c0f"/>
 <text x="267.23" y="403" font-size="14" font-weight="700">28.720</text>
 <rect x="655" y="385" width="107.10" height="24" rx="4" fill="#4d7c0f"/>
 <text x="770.10" y="403" font-size="14" font-weight="700">52.617</text>
-<text x="28" y="457" font-size="15">rust-sofd</text>
+<text x="28" y="457" font-size="15">rust-sOFD</text>
 <rect x="240" y="439" width="23.09" height="24" rx="4" fill="#be185d"/>
 <text x="271.09" y="457" font-size="14" font-weight="700">34.494</text>
 <rect x="655" y="439" width="280.00" height="24" rx="4" fill="#be185d"/>

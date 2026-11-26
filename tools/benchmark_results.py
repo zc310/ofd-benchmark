@@ -6,19 +6,19 @@ import subprocess
 
 
 OFD_CONVERTER_ROWS = {
-    "go-zc310": "go-zc310",
-    "go-ofdgo": "go-ofdgo",
+    "go-zc310": "go-zc310-ofd",
+    "go-ofdgo": "go-xiaoqidun-ofdgo",
     "go-ofdrw-rs": "go-ofdrw-rs",
     "rust-ofdbox-folio": "rust-ofdbox-folio",
-    "rust-sofd": "rust-sofd",
-    "python-easyofd": "easyofd",
-    "java-ofdrw": "ofdrw",
-    "node-ofd2pdf": "@miconvert/ofd-to-pdf",
+    "rust-sofd": "rust-sOFD",
+    "python-easyofd": "python-easyofd",
+    "java-ofdrw": "java-ofdrw",
+    "node-ofd2pdf": "node-ofd-to-pdf",
 }
 
 PDF_CONVERTER_ROWS = {
-    "pdf2ofd-zc310": "go-zc310",
-    "pdf2ofd-ofdgo": "go-ofdgo",
+    "pdf2ofd-zc310": "go-zc310-ofd",
+    "pdf2ofd-ofdgo": "go-xiaoqidun-ofdgo",
     "pdf2ofd-ofdrw": "java-ofdrw",
     "python-pdf2ofd": "python-pdf2ofd",
     "node-jsofd": "node-jsofd",

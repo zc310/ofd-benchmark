@@ -117,11 +117,22 @@ func run(args []string) error {
 		}
 		for table, value := range values {
 			updates = append(updates, benchmarkdata.CellUpdate{
-				Report: "ofd-to-png", Table: table, Input: name + ".ofd", Converter: c.name, Value: value,
+				Report: "ofd-to-png", Table: table, Input: name + ".ofd", Converter: pngRowName(c.name), Value: value,
 			})
 		}
 	}
 	return benchmarkdata.Update(filepath.Join(base, "docs", "benchmark-results.yaml"), updates, false)
+}
+
+func pngRowName(name string) string {
+	if label, ok := map[string]string{
+		"go-zc310":  "go-zc310-ofd",
+		"go-ofdgo":  "go-xiaoqidun-ofdgo",
+		"rust-sofd": "rust-sOFD",
+	}[name]; ok {
+		return label
+	}
+	return name
 }
 
 func pngConverters(bin, base string) map[string]pngConverter {

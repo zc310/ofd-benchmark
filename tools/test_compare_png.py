@@ -120,6 +120,7 @@ class PNGComparisonTests(unittest.TestCase):
                 patch('builtins.print'):
             compare_png.main()
         updates = write.call_args.args[1]
+        self.assertTrue(all(cell['converter'] == 'go-zc310-ofd' for cell in updates))
         self.assertEqual([cell['value'] for cell in updates],
                          ['99.9960%', '98.1235%', '100.0000%', 'FAILED'])
 
