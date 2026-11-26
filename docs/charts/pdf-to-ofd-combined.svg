@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="408" viewBox="0 0 1100 408" role="img" aria-labelledby="title desc">
+<title id="title">PDF → OFD 总耗时及输出总大小</title>
+<desc id="desc">按总耗时排序，两项各使用独立线性刻度。</desc>
+<rect width="1100" height="408" rx="12" fill="#ffffff"/>
+<g font-family="Arial, 'Noto Sans CJK SC', sans-serif" fill="#172033">
+<text x="28" y="36" font-size="21" font-weight="700">PDF → OFD 总耗时及输出总大小</text>
+<text x="28" y="62" font-size="14" fill="#5c6a7d">7 个文件合计 · 各栏使用独立刻度</text>
+<text x="240" y="95" font-size="15" font-weight="700">总耗时（秒）</text>
+<text x="655" y="95" font-size="15" font-weight="700">输出总大小（MB）</text>
+<text x="28" y="133" font-size="15">go-zc310</text>
+<rect x="240" y="115" width="13.21" height="24" rx="4" fill="#2563eb"/>
+<text x="261.21" y="133" font-size="14" font-weight="700">5.716</text>
+<rect x="655" y="115" width="43.88" height="24" rx="4" fill="#2563eb"/>
+<text x="706.88" y="133" font-size="14" font-weight="700">21.299</text>
+<text x="28" y="187" font-size="15">go-ofdgo</text>
+<rect x="240" y="169" width="55.50" height="24" rx="4" fill="#0f766e"/>
+<text x="303.50" y="187" font-size="14" font-weight="700">24.018</text>
+<rect x="655" y="169" width="172.26" height="24" rx="4" fill="#0f766e"/>
+<text x="835.26" y="187" font-size="14" font-weight="700">83.607</text>
+<text x="28" y="241" font-size="15">node-jsofd</text>
+<rect x="240" y="223" width="78.58" height="24" rx="4" fill="#be185d"/>
+<text x="326.58" y="241" font-size="14" font-weight="700">34.010</text>
+<rect x="655" y="223" width="239.98" height="24" rx="4" fill="#be185d"/>
+<text x="902.98" y="241" font-size="14" font-weight="700">116.473</text>
+<text x="28" y="295" font-size="15">python-pdf2ofd</text>
+<rect x="240" y="277" width="263.05" height="24" rx="4" fill="#7e22ce"/>
+<text x="511.05" y="295" font-size="14" font-weight="700">113.843</text>
+<rect x="655" y="277" width="280.00" height="24" rx="4" fill="#7e22ce"/>
+<text x="943.00" y="295" font-size="14" font-weight="700">135.898</text>
+<text x="28" y="349" font-size="15">java-ofdrw</text>
+<rect x="240" y="331" width="280.00" height="24" rx="4" fill="#c2410c"/>
+<text x="528.00" y="349" font-size="14" font-weight="700">121.180</text>
+<rect x="655" y="331" width="185.71" height="24" rx="4" fill="#c2410c"/>
+<text x="848.71" y="349" font-size="14" font-weight="700">90.134</text>
+</g>
+</svg>

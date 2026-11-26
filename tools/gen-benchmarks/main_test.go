@@ -97,7 +97,7 @@ func TestPNGSpeedSVG(t *testing.T) {
 		{Label: "fast & safe", Values: []string{"100ms", "200ms"}},
 		{Label: "incomplete", Values: []string{"1ms", "FAILED"}},
 	}}}
-	svg, missing, err := renderSpeedSVG(tables, "png-speed", "OFD → PNG")
+	svg, missing, err := renderChartSVG(tables, chartSpec{table: "png-speed", title: "OFD → PNG"}, "speed")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -105,5 +105,42 @@ func TestPNGSpeedSVG(t *testing.T) {
 		strings.Index(svg, "fast &amp; safe") > strings.Index(svg, ">slow</text>") ||
 		strings.Contains(svg, ">incomplete</text>") || len(missing) != 1 || missing[0] != "`incomplete`（b）" {
 		t.Fatalf("unexpected chart or missing results: %s, %v", svg, missing)
+	}
+}
+
+func TestSizeChartTotalsAndMissing(t *testing.T) {
+	tables := []Table{{ID: "size", Headers: []string{"库", "a", "b"}, Rows: []Row{
+		{Label: "large", Values: []string{"2MB", "500KB"}},
+		{Label: "small", Values: []string{"200KB", "100KB"}},
+		{Label: "incomplete", Values: []string{"1MB", "FAILED"}},
+	}}}
+	svg, missing, err := renderChartSVG(tables, chartSpec{sizeTable: "size", title: "test"}, "size")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(svg, "0.300 MB") || !strings.Contains(svg, "2.500 MB") ||
+		strings.Index(svg, ">small</text>") > strings.Index(svg, ">large</text>") ||
+		strings.Contains(svg, ">incomplete</text>") || len(missing) != 1 || missing[0] != "`incomplete`（b）" {
+		t.Fatalf("unexpected size chart or missing results: %s, %v", svg, missing)
+	}
+}
+
+func TestCombinedChartIndependentMissingValues(t *testing.T) {
+	tables := []Table{
+		{ID: "speed", Headers: []string{"库", "a", "b"}, Rows: []Row{
+			{Label: "first", Values: []string{"1s", "500ms"}},
+			{Label: "second", Values: []string{"FAILED", "1s"}},
+		}},
+		{ID: "size", Headers: []string{"库", "a", "b"}, Rows: []Row{
+			{Label: "first", Values: []string{"FAILED", "1MB"}},
+			{Label: "second", Values: []string{"500KB", "1MB"}},
+		}},
+	}
+	svg, err := renderCombinedSVG(tables, chartSpec{table: "speed", sizeTable: "size"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if strings.Count(svg, "无完整结果") != 2 || strings.Count(svg, ">1.500</text>") != 2 {
+		t.Fatalf("unexpected combined chart: %s", svg)
 	}
 }

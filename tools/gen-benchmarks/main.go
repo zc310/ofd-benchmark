@@ -44,12 +44,12 @@ type Row struct {
 
 var valuePattern = regexp.MustCompile(`^([0-9]+(?:\.[0-9]+)?)(.*)$`)
 
-type chartSpec struct{ marker, table, title string }
+type chartSpec struct{ marker, table, sizeTable, title string }
 
 var chartSpecs = map[string]chartSpec{
-	"ofd-to-png": {"png", "png-speed", "OFD → PNG"},
-	"ofd-to-pdf": {"ofd", "ofd-speed", "OFD → PDF"},
-	"pdf-to-ofd": {"pdf", "pdf-speed", "PDF → OFD"},
+	"ofd-to-png": {"png", "png-speed", "png-size", "OFD → PNG"},
+	"ofd-to-pdf": {"ofd", "ofd-speed", "ofd-pdf-size", "OFD → PDF"},
+	"pdf-to-ofd": {"pdf", "pdf-speed", "pdf-ofd-size", "PDF → OFD"},
 }
 
 func main() {
@@ -71,22 +71,24 @@ func main() {
 
 	for _, report := range source.Reports {
 		if spec, ok := chartSpecs[report.ID]; ok {
-			svg, _, err := renderSpeedSVG(report.Tables, spec.table, spec.title)
-			if err != nil {
-				fatal(err)
-			}
-			svgPath := "docs/charts/" + report.ID + "-speed.svg"
-			if *check {
-				existing, err := os.ReadFile(svgPath)
-				if err != nil || string(existing) != svg {
-					fatal(fmt.Errorf("%s: generated chart missing or out of date", svgPath))
-				}
-			} else {
-				if err := os.MkdirAll(filepath.Dir(svgPath), 0o755); err != nil {
+			{
+				svg, err := renderCombinedSVG(report.Tables, spec)
+				if err != nil {
 					fatal(err)
 				}
-				if err := os.WriteFile(svgPath, []byte(svg), 0o644); err != nil {
-					fatal(err)
+				svgPath := "docs/charts/" + report.ID + "-combined.svg"
+				if *check {
+					existing, err := os.ReadFile(svgPath)
+					if err != nil || string(existing) != svg {
+						fatal(fmt.Errorf("%s: generated chart missing or out of date", svgPath))
+					}
+				} else {
+					if err := os.MkdirAll(filepath.Dir(svgPath), 0o755); err != nil {
+						fatal(err)
+					}
+					if err := os.WriteFile(svgPath, []byte(svg), 0o644); err != nil {
+						fatal(err)
+					}
 				}
 			}
 		}
@@ -194,15 +196,23 @@ func updateDocument(doc string, report Report, versions, environment map[string]
 		if end < start {
 			return "", fmt.Errorf("%s chart markers are reversed", report.ID)
 		}
-		_, missing, err := renderSpeedSVG(report.Tables, spec.table, spec.title)
-		if err != nil {
-			return "", err
+		{
+			charts := "![" + spec.title + " 各库总耗时及输出总大小](charts/" + report.ID + "-combined.svg)\n\n每项仅在全部文件有有效结果时显示；缺失项标为“无完整结果”。大小按表格中的取整数值累加，MB 为 100 万字节。"
+			if report.ID == "ofd-to-png" {
+				charts += "PNG 大小包含所有页面。"
+			}
+			charts += "文件较小不一定表示质量更好，请结合还原度等结果查看。"
+			for _, metric := range []struct{ id, label string }{{"speed", "耗时"}, {"size", "大小"}} {
+				_, missing, err := renderChartSVG(report.Tables, spec, metric.id)
+				if err != nil {
+					return "", err
+				}
+				if len(missing) > 0 {
+					charts += "\n\n" + metric.label + "无完整结果：" + strings.Join(missing, "；") + "。"
+				}
+			}
+			doc = doc[:start] + "\n\n" + charts + "\n" + doc[end:]
 		}
-		charts := "![" + spec.title + " 各库全部文件总耗时](charts/" + report.ID + "-speed.svg)"
-		if len(missing) > 0 {
-			charts += "\n\n未完成全部文件（括号内为无有效结果的文件）：" + strings.Join(missing, "；") + "。"
-		}
-		doc = doc[:start] + "\n\n" + charts + "\n" + doc[end:]
 	}
 	if err := updateLibraryVersions(&doc, report.ID, versions); err != nil {
 		return "", err
@@ -230,7 +240,101 @@ func updateDocument(doc string, report Report, versions, environment map[string]
 
 var markdownLink = regexp.MustCompile(`^\[([^\]]+)\]\([^)]+\)$`)
 
-func renderSpeedSVG(tables []Table, tableID, title string) (string, []string, error) {
+func renderCombinedSVG(tables []Table, spec chartSpec) (string, error) {
+	type result struct {
+		name, color string
+		values      [2]float64
+		complete    [2]bool
+	}
+	var sources [2]*Table
+	for i := range tables {
+		if tables[i].ID == spec.table {
+			sources[0] = &tables[i]
+		}
+		if tables[i].ID == spec.sizeTable {
+			sources[1] = &tables[i]
+		}
+	}
+	if sources[0] == nil || sources[1] == nil {
+		return "", fmt.Errorf("missing combined chart source")
+	}
+	colors := []string{"#2563eb", "#0f766e", "#c2410c", "#7e22ce", "#be185d", "#4d7c0f", "#0369a1", "#b45309"}
+	var rows []result
+	index := map[string]int{}
+	var maxima [2]float64
+	for metric, table := range sources {
+		for _, row := range table.Rows {
+			name := row.Label
+			if match := markdownLink.FindStringSubmatch(name); match != nil {
+				name = match[1]
+			}
+			i, ok := index[name]
+			if !ok {
+				i = len(rows)
+				index[name] = i
+				rows = append(rows, result{name: name, color: colors[i%len(colors)]})
+			}
+			total := 0.0
+			complete := true
+			for _, value := range row.Values {
+				if value == "FAILED" {
+					complete = false
+					continue
+				}
+				n, err := numericValue(value)
+				if err != nil {
+					return "", fmt.Errorf("%s %s: %w", table.ID, name, err)
+				}
+				total += n
+			}
+			if complete {
+				divisor := 1000.0
+				if metric == 1 {
+					divisor = 1000000
+				}
+				rows[i].values[metric] = total / divisor
+				rows[i].complete[metric] = true
+				maxima[metric] = math.Max(maxima[metric], total/divisor)
+			}
+		}
+	}
+	sort.SliceStable(rows, func(i, j int) bool {
+		if rows[i].complete[0] != rows[j].complete[0] {
+			return rows[i].complete[0]
+		}
+		return rows[i].complete[0] && rows[i].values[0] < rows[j].values[0]
+	})
+	height := 138 + max(1, len(rows))*54
+	var b strings.Builder
+	fmt.Fprintf(&b, "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1100\" height=\"%d\" viewBox=\"0 0 1100 %d\" role=\"img\" aria-labelledby=\"title desc\">\n", height, height)
+	fmt.Fprintf(&b, "<title id=\"title\">%s 总耗时及输出总大小</title>\n<desc id=\"desc\">按总耗时排序，两项各使用独立线性刻度。</desc>\n", html.EscapeString(spec.title))
+	fmt.Fprintf(&b, "<rect width=\"1100\" height=\"%d\" rx=\"12\" fill=\"#ffffff\"/>\n", height)
+	fmt.Fprintf(&b, "<g font-family=\"Arial, 'Noto Sans CJK SC', sans-serif\" fill=\"#172033\">\n<text x=\"28\" y=\"36\" font-size=\"21\" font-weight=\"700\">%s 总耗时及输出总大小</text>\n<text x=\"28\" y=\"62\" font-size=\"14\" fill=\"#5c6a7d\">%d 个文件合计 · 各栏使用独立刻度</text>\n<text x=\"240\" y=\"95\" font-size=\"15\" font-weight=\"700\">总耗时（秒）</text>\n<text x=\"655\" y=\"95\" font-size=\"15\" font-weight=\"700\">输出总大小（MB）</text>\n", html.EscapeString(spec.title), len(sources[0].Headers)-1)
+	for i, row := range rows {
+		y := 115 + i*54
+		fmt.Fprintf(&b, "<text x=\"28\" y=\"%d\" font-size=\"15\">%s</text>\n", y+18, html.EscapeString(row.name))
+		for metric, x := range []int{240, 655} {
+			if !row.complete[metric] {
+				fmt.Fprintf(&b, "<text x=\"%d\" y=\"%d\" font-size=\"14\" fill=\"#6b7280\">无完整结果</text>\n", x, y+18)
+				continue
+			}
+			width := 0.0
+			if maxima[metric] > 0 {
+				width = row.values[metric] / maxima[metric] * 280
+			}
+			fmt.Fprintf(&b, "<rect x=\"%d\" y=\"%d\" width=\"%.2f\" height=\"24\" rx=\"4\" fill=\"%s\"/>\n", x, y, width, row.color)
+			fmt.Fprintf(&b, "<text x=\"%.2f\" y=\"%d\" font-size=\"14\" font-weight=\"700\">%.3f</text>\n", float64(x)+width+8, y+18, row.values[metric])
+		}
+	}
+	b.WriteString("</g>\n</svg>\n")
+	return b.String(), nil
+}
+
+func renderChartSVG(tables []Table, spec chartSpec, metric string) (string, []string, error) {
+	tableID, title, divisor, caption, unit, guidance := spec.table, spec.title, 1000.0, "全部文件总耗时", "s", "秒 · 越低越快"
+	if metric == "size" {
+		tableID, divisor, caption, unit, guidance = spec.sizeTable, 1000000, "输出总大小", "MB", "MB · 越小不一定质量越好"
+	}
 	type entry struct {
 		name  string
 		total float64
@@ -270,17 +374,17 @@ func renderSpeedSVG(tables []Table, tableID, title string) (string, []string, er
 		if len(failed) != 0 {
 			missing = append(missing, "`"+name+"`（"+strings.Join(failed, "、")+"）")
 		} else {
-			entries = append(entries, entry{name, total / 1000, colors[rowIndex%len(colors)]})
+			entries = append(entries, entry{name, total / divisor, colors[rowIndex%len(colors)]})
 		}
 	}
 	sort.SliceStable(entries, func(i, j int) bool { return entries[i].total < entries[j].total })
 	height := 120 + max(1, len(entries))*54
 	var b strings.Builder
 	fmt.Fprintf(&b, "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"960\" height=\"%d\" viewBox=\"0 0 960 %d\" role=\"img\" aria-labelledby=\"title desc\">\n", height, height)
-	fmt.Fprintf(&b, "<title id=\"title\">%s 全部文件总耗时</title>\n<desc id=\"desc\">各转换器总耗时，单位为秒，越低越快。</desc>\n", html.EscapeString(title))
+	fmt.Fprintf(&b, "<title id=\"title\">%s %s</title>\n<desc id=\"desc\">各转换器%s，单位为%s。</desc>\n", html.EscapeString(title), caption, caption, unit)
 	fmt.Fprintf(&b, "<rect width=\"960\" height=\"%d\" rx=\"12\" fill=\"#ffffff\"/>\n", height)
 	b.WriteString("<g font-family=\"Arial, 'Noto Sans CJK SC', sans-serif\" fill=\"#172033\">\n")
-	fmt.Fprintf(&b, "<text x=\"28\" y=\"36\" font-size=\"21\" font-weight=\"700\">%s 全部文件总耗时</text>\n<text x=\"28\" y=\"62\" font-size=\"14\" fill=\"#5c6a7d\">秒 · 越低越快 · %d 个文件</text>\n", html.EscapeString(title), len(table.Headers)-1)
+	fmt.Fprintf(&b, "<text x=\"28\" y=\"36\" font-size=\"21\" font-weight=\"700\">%s %s</text>\n<text x=\"28\" y=\"62\" font-size=\"14\" fill=\"#5c6a7d\">%s · %d 个文件</text>\n", html.EscapeString(title), caption, guidance, len(table.Headers)-1)
 	maximum := 1.0
 	if len(entries) > 0 && entries[len(entries)-1].total > 0 {
 		maximum = entries[len(entries)-1].total
@@ -289,7 +393,7 @@ func renderSpeedSVG(tables []Table, tableID, title string) (string, []string, er
 		y := 96 + i*54
 		fmt.Fprintf(&b, "<text x=\"28\" y=\"%d\" font-size=\"15\">%s</text>\n", y+18, html.EscapeString(item.name))
 		fmt.Fprintf(&b, "<rect x=\"230\" y=\"%d\" width=\"%.2f\" height=\"24\" rx=\"4\" fill=\"%s\"/>\n", y, item.total/maximum*590, item.color)
-		fmt.Fprintf(&b, "<text x=\"%.2f\" y=\"%d\" font-size=\"15\" font-weight=\"700\">%s s</text>\n", 240+item.total/maximum*590, y+18, strconv.FormatFloat(item.total, 'f', 3, 64))
+		fmt.Fprintf(&b, "<text x=\"%.2f\" y=\"%d\" font-size=\"15\" font-weight=\"700\">%s %s</text>\n", 240+item.total/maximum*590, y+18, strconv.FormatFloat(item.total, 'f', 3, 64), unit)
 	}
 	if len(entries) == 0 {
 		b.WriteString("<text x=\"28\" y=\"114\" font-size=\"15\">暂无完整结果</text>\n")

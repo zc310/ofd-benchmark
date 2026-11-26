@@ -71,11 +71,13 @@
 
 ### 转换速度
 
-图表按库累加下方速度表中全部文件的耗时，单位为秒；耗时为单次测量，多页文件可能主导总耗时。未完成全部文件的库不绘制柱形。
+图表按库累加全部文件的耗时和输出大小；耗时为单次测量，多页文件可能主导总耗时。
 
 <!-- benchmark-charts:ofd:start -->
 
-![OFD → PDF 各库全部文件总耗时](charts/ofd-to-pdf-speed.svg)
+![OFD → PDF 各库总耗时及输出总大小](charts/ofd-to-pdf-combined.svg)
+
+每项仅在全部文件有有效结果时显示；缺失项标为“无完整结果”。大小按表格中的取整数值累加，MB 为 100 万字节。文件较小不一定表示质量更好，请结合还原度等结果查看。
 <!-- benchmark-charts:ofd:end -->
 
 <!-- benchmark-table:ofd-speed:start -->

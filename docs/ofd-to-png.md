@@ -42,13 +42,17 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 
 ### 图表概览
 
-图表按库累加下方速度表中三个文件的耗时，单位为秒；耗时为单次测量，较长的 `intro` 文件对总耗时影响较大。未完成全部文件的库不绘制柱形。
+图表按库累加三个文件的耗时和输出大小；耗时为单次测量，较长的 `intro` 文件对总耗时影响较大。
 
 <!-- benchmark-charts:png:start -->
 
-![OFD → PNG 各库全部文件总耗时](charts/ofd-to-png-speed.svg)
+![OFD → PNG 各库总耗时及输出总大小](charts/ofd-to-png-combined.svg)
 
-未完成全部文件（括号内为无有效结果的文件）：`rust-ofd-utility`（intro.ofd）。
+每项仅在全部文件有有效结果时显示；缺失项标为“无完整结果”。大小按表格中的取整数值累加，MB 为 100 万字节。PNG 大小包含所有页面。文件较小不一定表示质量更好，请结合还原度等结果查看。
+
+耗时无完整结果：`rust-ofd-utility`（intro.ofd）。
+
+大小无完整结果：`rust-ofd-utility`（intro.ofd）。
 <!-- benchmark-charts:png:end -->
 
 ### 总耗时
