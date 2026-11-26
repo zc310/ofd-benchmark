@@ -1,0 +1,10 @@
+[package]
+name = "linuxdeepin-rofd-png"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[dependencies]
+cairo-rs = { version = "=0.20.12", features = ["png"] }
+rofd-core = { git = "https://github.com/linuxdeepin/rofd", rev = "af6d562a649df85487e91b88375894a6049ad4de" }
+rofd-render = { git = "https://github.com/linuxdeepin/rofd", rev = "af6d562a649df85487e91b88375894a6049ad4de" }

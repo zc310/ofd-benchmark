@@ -36,5 +36,6 @@ target
 bin/
 *.lock
 !rust/ofdbox-folio-convert/Cargo.lock
+!rust/linuxdeepin-rofd-png/Cargo.lock
 *.sum
 testdata/

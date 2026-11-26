@@ -59,7 +59,7 @@ func run(args []string) error {
 	selected := args[1:]
 	if len(selected) == 0 {
 		selected = []string{"zc310", "ofdgo", "ofdrw-rs", "ofdbox-folio", "sofd",
-			"java", "ofdmanager", "ofd-utility"}
+			"java", "ofdmanager", "ofd-utility", "linuxdeepin-rofd"}
 	}
 	for _, key := range selected {
 		if _, ok := converters[key]; !ok {
@@ -126,14 +126,15 @@ func run(args []string) error {
 
 func pngConverters(bin, base string) map[string]pngConverter {
 	return map[string]pngConverter{
-		"zc310":        {"go-zc310", []string{filepath.Join(bin, "zc310-png")}, "png"},
-		"ofdgo":        {"go-ofdgo", []string{filepath.Join(bin, "ofdgo-png")}, "png"},
-		"ofd-utility":  {"rust-ofd-utility", []string{"python3", filepath.Join(base, "tools", "ofd_utility_png.py")}, "png"},
-		"ofdrw-rs":     {"go-ofdrw-rs", []string{filepath.Join(bin, "ofdrw-rs-png")}, "png"},
-		"ofdbox-folio": {"rust-ofdbox-folio", []string{filepath.Join(bin, "ofdbox-folio-convert"), "--png"}, "png"},
-		"sofd":         {"rust-sofd", []string{"python3", filepath.Join(base, "tools", "native_cli_png.py"), "sofd"}, "png"},
-		"java":         {"java-ofdrw", []string{"bash", filepath.Join(base, "java", "ofd2png_java.sh")}, "png"},
-		"ofdmanager":   {"rust-ofdmanager", []string{"python3", filepath.Join(base, "tools", "native_cli_png.py"), "ofdmanager"}, "png"},
+		"zc310":            {"go-zc310", []string{filepath.Join(bin, "zc310-png")}, "png"},
+		"ofdgo":            {"go-ofdgo", []string{filepath.Join(bin, "ofdgo-png")}, "png"},
+		"ofd-utility":      {"rust-ofd-utility", []string{"python3", filepath.Join(base, "tools", "ofd_utility_png.py")}, "png"},
+		"ofdrw-rs":         {"go-ofdrw-rs", []string{filepath.Join(bin, "ofdrw-rs-png")}, "png"},
+		"ofdbox-folio":     {"rust-ofdbox-folio", []string{filepath.Join(bin, "ofdbox-folio-convert"), "--png"}, "png"},
+		"sofd":             {"rust-sofd", []string{"python3", filepath.Join(base, "tools", "native_cli_png.py"), "sofd"}, "png"},
+		"java":             {"java-ofdrw", []string{"bash", filepath.Join(base, "java", "ofd2png_java.sh")}, "png"},
+		"ofdmanager":       {"rust-ofdmanager", []string{"python3", filepath.Join(base, "tools", "native_cli_png.py"), "ofdmanager"}, "png"},
+		"linuxdeepin-rofd": {"rust-linuxdeepin-rofd", []string{filepath.Join(bin, "linuxdeepin-rofd-png")}, "png"},
 	}
 }
 

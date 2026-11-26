@@ -27,6 +27,7 @@ reports:
             - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [333ms, FAILED, 132ms]}
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [6.30s, 35.97s, 6.27s]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [437ms, 6.60s, 1.15s]}
+            - {label: '[rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)', values: [FAILED, FAILED, FAILED]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [259ms, 2.81s, 599ms]}
             - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [2.39s, 18.17s, 6.36s]}
             - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [838ms, 12.05s, 1.58s]}
@@ -40,6 +41,7 @@ reports:
             - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [333ms, FAILED, 132ms]}
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [6.30s, 36.05s, 6.29s]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [437ms, 6.65s, 1.20s]}
+            - {label: '[rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)', values: [FAILED, FAILED, FAILED]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [259ms, 2.81s, 599ms]}
             - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [6.00s, 25.90s, 11.13s]}
             - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [838ms, 12.05s, 1.58s]}
@@ -53,6 +55,7 @@ reports:
             - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [76.51MB, FAILED, 56.58MB]}
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [68.64MB, 216.04MB, 149.71MB]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [116.49MB, 151.87MB, 212.39MB]}
+            - {label: '[rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)', values: [FAILED, FAILED, FAILED]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [97.13MB, 99.03MB, 159.99MB]}
             - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [395.18MB, 653.18MB, 1126.25MB]}
             - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [163.27MB, 198.20MB, 300.43MB]}
@@ -66,6 +69,7 @@ reports:
             - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [66.60ms, FAILED, 66.09ms]}
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [1259.93ms, 856.46ms, 3137.12ms]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [87.33ms, 157.15ms, 573.90ms]}
+            - {label: '[rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)', values: [FAILED, FAILED, FAILED]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [51.77ms, 67.02ms, 299.59ms]}
             - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [478.84ms, 432.68ms, 3178.96ms]}
             - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [167.64ms, 286.90ms, 791.57ms]}
@@ -79,6 +83,7 @@ reports:
             - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [2.36MB, FAILED, 335.15KB]}
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [972.55KB, 40.02MB, 7.35MB]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [1.41MB, 43.16MB, 3.92MB]}
+            - {label: '[rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)', values: [FAILED, FAILED, FAILED]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [2.40MB, 42.10MB, 9.13MB]}
             - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [567.95KB, 25.65MB, 6.99MB]}
             - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [2.39MB, 31.92MB, 8.95MB]}
@@ -92,6 +97,7 @@ reports:
             - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [98.8639%, FAILED, FAILED]}
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [98.9199%, 99.3554%, 98.1046%]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [98.8786%, 97.1462%, 96.2988%]}
+            - {label: '[rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)', values: [FAILED, FAILED, FAILED]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [97.4386%, 96.9713%, 97.8652%]}
             - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [98.5471%, 95.7350%, 98.2651%]}
             - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [98.9278%, FAILED, 98.1643%]}
@@ -105,6 +111,7 @@ reports:
             - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [96.6870%, FAILED, FAILED]}
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [96.8824%, 97.1827%, 89.5420%]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [96.7114%, 95.7257%, 84.3126%]}
+            - {label: '[rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)', values: [FAILED, FAILED, FAILED]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [91.4255%, 94.7092%, 90.0743%]}
             - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [95.3582%, 85.6372%, 91.0660%]}
             - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [96.9060%, FAILED, 90.4407%]}
@@ -118,6 +125,7 @@ reports:
             - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [68.5766%, FAILED, FAILED]}
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [69.6528%, 98.3647%, 97.7372%]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [68.8659%, 95.0080%, 95.5662%]}
+            - {label: '[rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)', values: [FAILED, FAILED, FAILED]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [26.7512%, 96.0890%, 97.4508%]}
             - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [58.5568%, 94.5649%, 97.9273%]}
             - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [69.7961%, FAILED, 97.8081%]}
@@ -131,6 +139,7 @@ reports:
             - {label: '[rust-ofd-utility](https://github.com/ofd-utility/ofd-utility)', values: [99.2002%, FAILED, FAILED]}
             - {label: '[go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)', values: [99.9964%, 99.6204%, 100.0000%]}
             - {label: '[rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)', values: [99.0750%, 99.6675%, 63.3698%]}
+            - {label: '[rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)', values: [FAILED, FAILED, FAILED]}
             - {label: '[rust-sofd](https://github.com/emfox/sOFD)', values: [95.9189%, 99.7055%, 99.9942%]}
             - {label: '[java-ofdrw](https://github.com/ofdrw/ofdrw)', values: [99.7257%, 99.9699%, 100.0000%]}
             - {label: '[rust-ofdmanager](https://github.com/feuvan/ofdmanager)', values: [100.0000%, FAILED, 100.0000%]}

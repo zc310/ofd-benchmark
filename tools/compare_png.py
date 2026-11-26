@@ -13,7 +13,8 @@ from compare_pdf import align_images, content_similarity, foreground_f1, similar
 
 DPI = 200
 CONVERTERS = ('go-zc310', 'go-ofdgo', 'go-ofdrw-rs', 'rust-ofdbox-folio',
-              'rust-sofd', 'java-ofdrw', 'rust-ofdmanager', 'rust-ofd-utility')
+              'rust-sofd', 'java-ofdrw', 'rust-ofdmanager', 'rust-ofd-utility',
+              'rust-linuxdeepin-rofd')
 
 
 def page_files(directory, prefix):

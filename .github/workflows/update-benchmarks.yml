@@ -123,7 +123,7 @@ jobs:
       - name: Install system fonts and Maven
         run: |
           sudo apt-get update
-          sudo apt-get install -y fonts-wqy-zenhei fonts-noto-cjk fontconfig libfontconfig1-dev pkg-config curl unzip maven
+          sudo apt-get install -y fonts-wqy-zenhei fonts-noto-cjk fontconfig libfontconfig1-dev libcairo2-dev libfreetype-dev libjbig2dec0-dev pkg-config curl unzip maven
 
       - name: Install document fonts in user directory
         run: bash tools/install-fonts.sh
@@ -178,6 +178,8 @@ jobs:
           go build -o bin/ofdrw-rs-png ./cmd/ofdrw-rs-png
           cargo build --release --locked --manifest-path rust/ofdbox-folio-convert/Cargo.toml --target-dir rust/target
           cp rust/target/release/ofdbox-folio-convert bin/ofdbox-folio-convert
+          cargo build --release --locked --manifest-path rust/linuxdeepin-rofd-png/Cargo.toml --target-dir rust/target
+          cp rust/target/release/linuxdeepin-rofd-png bin/linuxdeepin-rofd-png
           cargo install sofd-cli --git https://github.com/emfox/sOFD --rev 65cff468ecc2af676180f540899fdf74da849c3a --locked --bin sofd --root "$RUNNER_TEMP/sofd-install"
           cp "$RUNNER_TEMP/sofd-install/bin/sofd" bin/sofd-cli
           cargo install --git https://github.com/ofd-utility/ofd-utility --rev d603791e933a81936b23c91dcab90fdc4c2c0edf --locked --bin ofd-cli --root "$RUNNER_TEMP/ofd-utility-install" ofd-cli

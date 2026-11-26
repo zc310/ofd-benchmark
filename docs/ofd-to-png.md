@@ -16,12 +16,15 @@
 | [rust-sofd](https://github.com/emfox/sOFD) | 65cff468ecc2af676180f540899fdf74da849c3a | 原生 CLI `convert --format png --dpi 200` |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | 2.5.2 | 原生 AWT `ImageMaker(reader, 200.0 / 25.4)`（200 DPI） |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | a9b1d29ef90141a369ad47cc32fd6c62dd8b8450 | 原生 CLI `render --dpi 200 --page n`（200 DPI） |
+| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd) | af6d562a649df85487e91b88375894a6049ad4de | `rofd-render` Cairo 原生渲染，200 DPI / 白底 |
 
-选择键为 `zc310`、`ofdgo`、`ofd-utility`、`ofdrw-rs`、`ofdbox-folio`、`sofd`、`java`、`ofdmanager`，不指定时全部运行。
+选择键为 `zc310`、`ofdgo`、`ofd-utility`、`ofdrw-rs`、`ofdbox-folio`、`sofd`、`java`、`ofdmanager`、`linuxdeepin-rofd`，不指定时全部运行。
 
 `ofd-utility` 的 Python 适配器仅传递固定参数并统一页码/文件名，不解码或重绘图片。`ofdmanager` 上游 CLI 一次只渲染一页，适配器按 OFD 中的页数循环调用，重复解析/字体加载计入耗时；多文档 OFD 会明确拒绝，不静默只测第一个文档。原生 Java `ImageMaker` 的构造参数是**像素/毫米，不是 DPI**。
 
 sOFD 与现有 PDF 包装器保持一致：仅在返回码 1 且 stderr 完整匹配缺字警告时，保留完整 PNG 继续质量比较，让缺字反映在画质得分中；其他非零退出、缺页及损坏文件仍记失败。
+
+linuxdeepin-rofd 使用系统字体以及 `Noto Sans CJK SC`、`Noto Sans Mono` 回退字体，逐页输出上游渲染诊断；上游签章绘制可能静默跳过无法解码的印章，因此仍须结合图片质量判断。
 
 Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固定以 144 DPI 渲染，故不参加本项评测；Node `@miconvert/ofd-to-pdf` 当前发布包仅有 PDF 输出接口，也不参与 PNG 比较。已有 OFD→PDF 评测保持不变。
 
@@ -36,7 +39,7 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 - **全页相似度**：`1 − 平均归一化 RGB 色差`。各页等权平均；全白页不抬高内容/F1 得分。丢失几乎全部前景、损坏 PNG、缺页或尺寸不符均记为 `FAILED`。
 - 单次转换默认限时 15 分钟，可通过 `BENCHMARK_CONVERTER_TIMEOUT=30m` 调整；超时终止整个进程组并清理部分输出。重跑时清除该转换器旧输出，质量得分重置，避免沿用旧结果。
 
-## 原生 PNG 结果（8 个转换器）
+## 原生 PNG 结果（9 个转换器）
 
 表格由 `docs/benchmark-results.yaml` 生成，勿直接编辑。`FAILED` 表示尚无本轮有效测量或转换/比较失败；首次正式结果由 CI 统一环境测量，本地验证不覆盖已有 PDF 报告的运行环境。
 
@@ -50,9 +53,9 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 
 每项仅在全部文件有有效结果时显示；缺失项标为“无完整结果”。大小按表格中的取整数值累加，MB 为 100 万字节。PNG 大小包含所有页面。文件较小不一定表示质量更好，请结合还原度等结果查看。
 
-耗时无完整结果：`rust-ofd-utility`（intro.ofd）。
+耗时无完整结果：`rust-ofd-utility`（intro.ofd）；`rust-linuxdeepin-rofd`（999.ofd、intro.ofd、zsbk.ofd）。
 
-大小无完整结果：`rust-ofd-utility`（intro.ofd）。
+大小无完整结果：`rust-ofd-utility`（intro.ofd）；`rust-linuxdeepin-rofd`（999.ofd、intro.ofd、zsbk.ofd）。
 <!-- benchmark-charts:png:end -->
 
 ### 总耗时
@@ -66,6 +69,7 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 | [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 333ms | FAILED | **132ms** | 1 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 6.30s | 35.97s | 6.27s | 0 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 437ms | 6.60s | 1.15s | 0 |
+| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd) | FAILED | FAILED | FAILED | 0 |
 | [rust-sofd](https://github.com/emfox/sOFD) | **259ms** | **2.81s** | 599ms | 2 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | 2.39s | 18.17s | 6.36s | 0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 838ms | 12.05s | 1.58s | 0 |
@@ -84,6 +88,7 @@ CPU 总时间为进程用户态与内核态时间之和，累加所有线程及�
 | [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 333ms | FAILED | **132ms** | 1 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 6.30s | 36.05s | 6.29s | 0 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 437ms | 6.65s | 1.20s | 0 |
+| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd) | FAILED | FAILED | FAILED | 0 |
 | [rust-sofd](https://github.com/emfox/sOFD) | **259ms** | **2.81s** | 599ms | 2 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | 6.00s | 25.90s | 11.13s | 0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 838ms | 12.05s | 1.58s | 0 |
@@ -102,6 +107,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 76.51MB | FAILED | **56.58MB** | 1 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | **68.64MB** | 216.04MB | 149.71MB | 1 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 116.49MB | 151.87MB | 212.39MB | 0 |
+| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd) | FAILED | FAILED | FAILED | 0 |
 | [rust-sofd](https://github.com/emfox/sOFD) | 97.13MB | **99.03MB** | 159.99MB | 1 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | 395.18MB | 653.18MB | 1126.25MB | 0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 163.27MB | 198.20MB | 300.43MB | 0 |
@@ -118,6 +124,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 66.60ms | FAILED | **66.09ms** | 1 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 1259.93ms | 856.46ms | 3137.12ms | 0 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 87.33ms | 157.15ms | 573.90ms | 0 |
+| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd) | FAILED | FAILED | FAILED | 0 |
 | [rust-sofd](https://github.com/emfox/sOFD) | **51.77ms** | **67.02ms** | 299.59ms | 2 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | 478.84ms | 432.68ms | 3178.96ms | 0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 167.64ms | 286.90ms | 791.57ms | 0 |
@@ -134,6 +141,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 2.36MB | FAILED | **335.15KB** | 1 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 972.55KB | 40.02MB | 7.35MB | 0 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 1.41MB | 43.16MB | 3.92MB | 0 |
+| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd) | FAILED | FAILED | FAILED | 0 |
 | [rust-sofd](https://github.com/emfox/sOFD) | 2.40MB | 42.10MB | 9.13MB | 0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | **567.95KB** | **25.65MB** | 6.99MB | 2 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 2.39MB | 31.92MB | 8.95MB | 0 |
@@ -152,6 +160,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) |     96.6870% |       FAILED |       FAILED |        0 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)       |     96.8824% |     97.1827% |     89.5420% |        0 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)    |     96.7114% |     95.7257% |     84.3126% |        0 |
+| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)   |       FAILED |       FAILED |       FAILED |        0 |
 | [rust-sofd](https://github.com/emfox/sOFD)                     |     91.4255% |     94.7092% |     90.0743% |        0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw)                   |     95.3582% |     85.6372% |     91.0660% |        0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager)        | **96.9060%** |       FAILED |     90.4407% |        1 |
@@ -168,6 +177,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) |     68.5766% |       FAILED |       FAILED |        0 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)       |     69.6528% |     98.3647% |     97.7372% |        0 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)    |     68.8659% |     95.0080% |     95.5662% |        0 |
+| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)   |       FAILED |       FAILED |       FAILED |        0 |
 | [rust-sofd](https://github.com/emfox/sOFD)                     |     26.7512% |     96.0890% |     97.4508% |        0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw)                   |     58.5568% |     94.5649% | **97.9273%** |        1 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager)        | **69.7961%** |       FAILED |     97.8081% |        1 |
@@ -184,6 +194,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) |      99.2002% |       FAILED |        FAILED |        0 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)       |      99.9964% |     99.6204% | **100.0000%** |        0 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)    |      99.0750% |     99.6675% |      63.3698% |        0 |
+| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)   |        FAILED |       FAILED |        FAILED |        0 |
 | [rust-sofd](https://github.com/emfox/sOFD)                     |      95.9189% |     99.7055% |      99.9942% |        0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw)                   |      99.7257% |     99.9699% | **100.0000%** |        0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager)        | **100.0000%** |       FAILED | **100.0000%** |        0 |
@@ -200,6 +211,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) |     98.8639% |       FAILED |       FAILED |        0 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)       |     98.9199% |     99.3554% |     98.1046% |        0 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)    |     98.8786% |     97.1462% |     96.2988% |        0 |
+| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)   |       FAILED |       FAILED |       FAILED |        0 |
 | [rust-sofd](https://github.com/emfox/sOFD)                     |     97.4386% |     96.9713% |     97.8652% |        0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw)                   |     98.5471% |     95.7350% | **98.2651%** |        1 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager)        | **98.9278%** |       FAILED |     98.1643% |        1 |
@@ -207,7 +219,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 
 ## 运行
 
-先准备项目字体环境及 `python/requirements.txt` 中的 Python 依赖（见 README）。
+先准备项目字体环境及 `python/requirements.txt` 中的 Python 依赖（见 README）。linuxdeepin-rofd 需要 Cairo、FreeType、fontconfig 和 jbig2dec 开发库，例如 Ubuntu 安装 `libcairo2-dev libfreetype-dev libfontconfig1-dev libjbig2dec0-dev`。
 
 ```bash
 GOWORK=off go build -o bin/ofd2png-benchmark ./cmd/ofd2png-benchmark
@@ -216,6 +228,8 @@ GOWORK=off go build -o bin/ofdgo-png ./cmd/ofdgo-png
 GOWORK=off go build -o bin/ofdrw-rs-png ./cmd/ofdrw-rs-png
 cargo build --release --locked --manifest-path rust/ofdbox-folio-convert/Cargo.toml --target-dir rust/target
 cp rust/target/release/ofdbox-folio-convert bin/
+cargo build --release --locked --manifest-path rust/linuxdeepin-rofd-png/Cargo.toml --target-dir rust/target
+cp rust/target/release/linuxdeepin-rofd-png bin/
 # Java 依赖按 java/pom.xml 安装。排除本地历史损坏占位 JAR。
 CP=$(find java/lib -name '*.jar' ! -name 'jaxen.jar' ! -name 'pdfbox-sandbox.jar' ! -name 'sqlite.jar' -printf '%p:')
 javac -cp "$CP" java/Ofd2Png.java
@@ -231,7 +245,7 @@ cargo install --git https://github.com/feuvan/ofdmanager \
 cp /tmp/opencode/ofdmanager-install/bin/ofd-cli bin/ofdmanager-cli
 # sOFD CLI、ofdrw-rs 原生库按 README 的现有构建说明准备。
 
-# 全部 8 个原生转换器，固定 200 DPI。
+# 全部 9 个原生转换器，固定 200 DPI。
 for name in 999 intro zsbk; do
   ./bin/ofd2png-benchmark "testdata/ofdrw/$name.ofd"
 done
