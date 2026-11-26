@@ -91,26 +91,19 @@ func TestAlignMarkdownTableIsIdempotent(t *testing.T) {
 	}
 }
 
-func TestPNGChartsConvertUnitsAndOmitFailures(t *testing.T) {
-	tables := []Table{
-		{ID: "png-speed", Headers: []string{"转换器", "a.ofd", "b.ofd"}, Rows: []Row{
-			{Label: "[first](https://example.com)", Values: []string{"523ms", "1.20s"}},
-			{Label: "second", Values: []string{"1.20s", "300ms"}},
-			{Label: "failed", Values: []string{"10ms", "FAILED"}},
-		}},
-	}
-	got, err := renderSpeedChart(tables, "png-speed", "OFD → PNG")
+func TestPNGSpeedSVG(t *testing.T) {
+	tables := []Table{{ID: "png-speed", Headers: []string{"库", "a", "b"}, Rows: []Row{
+		{Label: "slow", Values: []string{"1s", "500ms"}},
+		{Label: "fast & safe", Values: []string{"100ms", "200ms"}},
+		{Label: "incomplete", Values: []string{"1ms", "FAILED"}},
+	}}}
+	svg, missing, err := renderSpeedSVG(tables, "png-speed", "OFD → PNG")
 	if err != nil {
 		t.Fatal(err)
 	}
-	for _, want := range []string{
-		`xychart-beta horizontal`,
-		`x-axis ["first", "second"]`,
-		`bar [1.723, 1.5]`,
-		"未完成全部文件（括号内为无有效结果的文件）：`failed`（b.ofd）。",
-	} {
-		if !strings.Contains(got, want) {
-			t.Errorf("chart missing %q:\n%s", want, got)
-		}
+	if !strings.Contains(svg, "fast &amp; safe") || !strings.Contains(svg, "0.300 s") ||
+		strings.Index(svg, "fast &amp; safe") > strings.Index(svg, ">slow</text>") ||
+		strings.Contains(svg, ">incomplete</text>") || len(missing) != 1 || missing[0] != "`incomplete`（b）" {
+		t.Fatalf("unexpected chart or missing results: %s, %v", svg, missing)
 	}
 }

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="498" viewBox="0 0 960 498" role="img" aria-labelledby="title desc">
+<title id="title">OFD → PNG 全部文件总耗时</title>
+<desc id="desc">各转换器总耗时，单位为秒，越低越快。</desc>
+<rect width="960" height="498" rx="12" fill="#ffffff"/>
+<g font-family="Arial, 'Noto Sans CJK SC', sans-serif" fill="#172033">
+<text x="28" y="36" font-size="21" font-weight="700">OFD → PNG 全部文件总耗时</text>
+<text x="28" y="62" font-size="14" fill="#5c6a7d">秒 · 越低越快 · 3 个文件</text>
+<text x="28" y="114" font-size="15">rust-sofd</text>
+<rect x="230" y="96" width="44.58" height="24" rx="4" fill="#4d7c0f"/>
+<text x="284.58" y="114" font-size="15" font-weight="700">3.668 s</text>
+<text x="28" y="168" font-size="15">rust-ofdbox-folio</text>
+<rect x="230" y="150" width="99.51" height="24" rx="4" fill="#be185d"/>
+<text x="339.51" y="168" font-size="15" font-weight="700">8.187 s</text>
+<text x="28" y="222" font-size="15">rust-ofdmanager</text>
+<rect x="230" y="204" width="175.86" height="24" rx="4" fill="#b45309"/>
+<text x="415.86" y="222" font-size="15" font-weight="700">14.468 s</text>
+<text x="28" y="276" font-size="15">go-zc310</text>
+<rect x="230" y="258" width="193.03" height="24" rx="4" fill="#2563eb"/>
+<text x="433.03" y="276" font-size="15" font-weight="700">15.881 s</text>
+<text x="28" y="330" font-size="15">go-ofdgo</text>
+<rect x="230" y="312" width="257.81" height="24" rx="4" fill="#0f766e"/>
+<text x="497.81" y="330" font-size="15" font-weight="700">21.210 s</text>
+<text x="28" y="384" font-size="15">java-ofdrw</text>
+<rect x="230" y="366" width="327.21" height="24" rx="4" fill="#0369a1"/>
+<text x="567.21" y="384" font-size="15" font-weight="700">26.920 s</text>
+<text x="28" y="438" font-size="15">go-ofdrw-rs</text>
+<rect x="230" y="420" width="590.00" height="24" rx="4" fill="#7e22ce"/>
+<text x="830.00" y="438" font-size="15" font-weight="700">48.540 s</text>
+</g>
+</svg>

@@ -4,9 +4,12 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"html"
 	"math"
 	"os"
+	"path/filepath"
 	"regexp"
+	"sort"
 	"strconv"
 	"strings"
 
@@ -41,6 +44,14 @@ type Row struct {
 
 var valuePattern = regexp.MustCompile(`^([0-9]+(?:\.[0-9]+)?)(.*)$`)
 
+type chartSpec struct{ marker, table, title string }
+
+var chartSpecs = map[string]chartSpec{
+	"ofd-to-png": {"png", "png-speed", "OFD → PNG"},
+	"ofd-to-pdf": {"ofd", "ofd-speed", "OFD → PDF"},
+	"pdf-to-ofd": {"pdf", "pdf-speed", "PDF → OFD"},
+}
+
 func main() {
 	srcPath := flag.String("src", "docs/benchmark-results.yaml", "结果数据 YAML")
 	check := flag.Bool("check", false, "仅检查文档是否与 YAML 一致")
@@ -59,6 +70,26 @@ func main() {
 	}
 
 	for _, report := range source.Reports {
+		if spec, ok := chartSpecs[report.ID]; ok {
+			svg, _, err := renderSpeedSVG(report.Tables, spec.table, spec.title)
+			if err != nil {
+				fatal(err)
+			}
+			svgPath := "docs/charts/" + report.ID + "-speed.svg"
+			if *check {
+				existing, err := os.ReadFile(svgPath)
+				if err != nil || string(existing) != svg {
+					fatal(fmt.Errorf("%s: generated chart missing or out of date", svgPath))
+				}
+			} else {
+				if err := os.MkdirAll(filepath.Dir(svgPath), 0o755); err != nil {
+					fatal(err)
+				}
+				if err := os.WriteFile(svgPath, []byte(svg), 0o644); err != nil {
+					fatal(err)
+				}
+			}
+		}
 		path := "docs/" + report.ID + ".md"
 		contents, err := os.ReadFile(path)
 		if err != nil {
@@ -152,11 +183,6 @@ func updateDocument(doc string, report Report, versions, environment map[string]
 		}
 		doc = doc[:startAt] + "\n\n" + rendered + "\n" + doc[endAt:]
 	}
-	chartSpecs := map[string]struct{ marker, table, title string }{
-		"ofd-to-png": {"png", "png-speed", "OFD → PNG"},
-		"ofd-to-pdf": {"ofd", "ofd-speed", "OFD → PDF"},
-		"pdf-to-ofd": {"pdf", "pdf-speed", "PDF → OFD"},
-	}
 	if spec, ok := chartSpecs[report.ID]; ok {
 		startMarker := "<!-- benchmark-charts:" + spec.marker + ":start -->"
 		endMarker := "<!-- benchmark-charts:" + spec.marker + ":end -->"
@@ -168,9 +194,13 @@ func updateDocument(doc string, report Report, versions, environment map[string]
 		if end < start {
 			return "", fmt.Errorf("%s chart markers are reversed", report.ID)
 		}
-		charts, err := renderSpeedChart(report.Tables, spec.table, spec.title)
+		_, missing, err := renderSpeedSVG(report.Tables, spec.table, spec.title)
 		if err != nil {
 			return "", err
+		}
+		charts := "![" + spec.title + " 各库全部文件总耗时](charts/" + report.ID + "-speed.svg)"
+		if len(missing) > 0 {
+			charts += "\n\n未完成全部文件（括号内为无有效结果的文件）：" + strings.Join(missing, "；") + "。"
 		}
 		doc = doc[:start] + "\n\n" + charts + "\n" + doc[end:]
 	}
@@ -200,7 +230,12 @@ func updateDocument(doc string, report Report, versions, environment map[string]
 
 var markdownLink = regexp.MustCompile(`^\[([^\]]+)\]\([^)]+\)$`)
 
-func renderSpeedChart(tables []Table, tableID, title string) (string, error) {
+func renderSpeedSVG(tables []Table, tableID, title string) (string, []string, error) {
+	type entry struct {
+		name  string
+		total float64
+		color string
+	}
 	var table *Table
 	for i := range tables {
 		if tables[i].ID == tableID {
@@ -209,50 +244,58 @@ func renderSpeedChart(tables []Table, tableID, title string) (string, error) {
 		}
 	}
 	if table == nil {
-		return "", fmt.Errorf("missing chart source %s", tableID)
+		return "", nil, fmt.Errorf("missing chart source %s", tableID)
 	}
-	var labels, values, missing []string
-	maximum := 0.0
-	for _, row := range table.Rows {
-		label := row.Label
-		if match := markdownLink.FindStringSubmatch(label); match != nil {
-			label = match[1]
+	var entries []entry
+	var missing []string
+	colors := []string{"#2563eb", "#0f766e", "#c2410c", "#7e22ce", "#be185d", "#4d7c0f", "#0369a1", "#b45309"}
+	for rowIndex, row := range table.Rows {
+		name := row.Label
+		if match := markdownLink.FindStringSubmatch(name); match != nil {
+			name = match[1]
 		}
-		total := 0.0
+		var total float64
 		var failed []string
-		for col, sample := range table.Headers[1:] {
-			value := row.Values[col]
+		for i, value := range row.Values {
 			if value == "FAILED" {
-				failed = append(failed, sample)
+				failed = append(failed, table.Headers[i+1])
 				continue
 			}
 			n, err := numericValue(value)
 			if err != nil {
-				return "", fmt.Errorf("%s %s %s: %w", tableID, sample, label, err)
+				return "", nil, fmt.Errorf("%s %s %s: %w", tableID, table.Headers[i+1], name, err)
 			}
 			total += n
 		}
-		if len(failed) > 0 {
-			missing = append(missing, "`"+label+"`（"+strings.Join(failed, "、")+"）")
-			continue
+		if len(failed) != 0 {
+			missing = append(missing, "`"+name+"`（"+strings.Join(failed, "、")+"）")
+		} else {
+			entries = append(entries, entry{name, total / 1000, colors[rowIndex%len(colors)]})
 		}
-		total /= 1000
-		maximum = math.Max(maximum, total)
-		labels = append(labels, strconv.Quote(label))
-		values = append(values, strconv.FormatFloat(total, 'f', -1, 64))
 	}
+	sort.SliceStable(entries, func(i, j int) bool { return entries[i].total < entries[j].total })
+	height := 120 + max(1, len(entries))*54
 	var b strings.Builder
-	if len(values) > 0 {
-		fmt.Fprintf(&b, "```mermaid\n---\nconfig:\n  xyChart:\n    height: %d\n---\nxychart-beta horizontal\n    title %s\n    x-axis [%s]\n    y-axis \"秒\" 0 --> %s\n    bar [%s]\n```\n\n",
-			max(500, len(values)*45+150), strconv.Quote(title+" 全部文件总耗时（秒，越低越快）"), strings.Join(labels, ", "),
-			strconv.FormatFloat(math.Max(1, math.Ceil(maximum)), 'f', -1, 64), strings.Join(values, ", "))
-	} else {
-		b.WriteString("暂无有效数据。\n\n")
+	fmt.Fprintf(&b, "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"960\" height=\"%d\" viewBox=\"0 0 960 %d\" role=\"img\" aria-labelledby=\"title desc\">\n", height, height)
+	fmt.Fprintf(&b, "<title id=\"title\">%s 全部文件总耗时</title>\n<desc id=\"desc\">各转换器总耗时，单位为秒，越低越快。</desc>\n", html.EscapeString(title))
+	fmt.Fprintf(&b, "<rect width=\"960\" height=\"%d\" rx=\"12\" fill=\"#ffffff\"/>\n", height)
+	b.WriteString("<g font-family=\"Arial, 'Noto Sans CJK SC', sans-serif\" fill=\"#172033\">\n")
+	fmt.Fprintf(&b, "<text x=\"28\" y=\"36\" font-size=\"21\" font-weight=\"700\">%s 全部文件总耗时</text>\n<text x=\"28\" y=\"62\" font-size=\"14\" fill=\"#5c6a7d\">秒 · 越低越快 · %d 个文件</text>\n", html.EscapeString(title), len(table.Headers)-1)
+	maximum := 1.0
+	if len(entries) > 0 && entries[len(entries)-1].total > 0 {
+		maximum = entries[len(entries)-1].total
 	}
-	if len(missing) > 0 {
-		fmt.Fprintf(&b, "未完成全部文件（括号内为无有效结果的文件）：%s。\n\n", strings.Join(missing, "；"))
+	for i, item := range entries {
+		y := 96 + i*54
+		fmt.Fprintf(&b, "<text x=\"28\" y=\"%d\" font-size=\"15\">%s</text>\n", y+18, html.EscapeString(item.name))
+		fmt.Fprintf(&b, "<rect x=\"230\" y=\"%d\" width=\"%.2f\" height=\"24\" rx=\"4\" fill=\"%s\"/>\n", y, item.total/maximum*590, item.color)
+		fmt.Fprintf(&b, "<text x=\"%.2f\" y=\"%d\" font-size=\"15\" font-weight=\"700\">%s s</text>\n", 240+item.total/maximum*590, y+18, strconv.FormatFloat(item.total, 'f', 3, 64))
 	}
-	return strings.TrimSpace(b.String()), nil
+	if len(entries) == 0 {
+		b.WriteString("<text x=\"28\" y=\"114\" font-size=\"15\">暂无完整结果</text>\n")
+	}
+	b.WriteString("</g>\n</svg>\n")
+	return b.String(), missing, nil
 }
 
 func updateLibraryVersions(doc *string, reportID string, versions map[string]string) error {

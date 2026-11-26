@@ -53,18 +53,7 @@
 
 <!-- benchmark-charts:pdf:start -->
 
-```mermaid
----
-config:
-  xyChart:
-    height: 500
----
-xychart-beta horizontal
-    title "PDF → OFD 全部文件总耗时（秒，越低越快）"
-    x-axis ["go-zc310", "go-ofdgo", "java-ofdrw", "python-pdf2ofd", "node-jsofd"]
-    y-axis "秒" 0 --> 101
-    bar [4.046, 18.225, 100.785, 77.744, 28.605]
-```
+![PDF → OFD 各库全部文件总耗时](charts/pdf-to-ofd-speed.svg)
 <!-- benchmark-charts:pdf:end -->
 
 <!-- benchmark-table:pdf-speed:start -->

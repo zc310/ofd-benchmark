@@ -75,18 +75,7 @@
 
 <!-- benchmark-charts:ofd:start -->
 
-```mermaid
----
-config:
-  xyChart:
-    height: 510
----
-xychart-beta horizontal
-    title "OFD → PDF 全部文件总耗时（秒，越低越快）"
-    x-axis ["go-zc310", "go-ofdgo", "go-ofdrw-rs", "rust-ofdbox-folio", "rust-sofd", "easyofd", "ofdrw", "@miconvert/ofd-to-pdf"]
-    y-axis "秒" 0 --> 270
-    bar [1.323, 4.156, 269.772, 6.629, 28.135, 21.62, 12.4, 12.885]
-```
+![OFD → PDF 各库全部文件总耗时](charts/ofd-to-pdf-speed.svg)
 <!-- benchmark-charts:ofd:end -->
 
 <!-- benchmark-table:ofd-speed:start -->

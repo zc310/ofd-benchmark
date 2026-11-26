@@ -46,18 +46,7 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 
 <!-- benchmark-charts:png:start -->
 
-```mermaid
----
-config:
-  xyChart:
-    height: 500
----
-xychart-beta horizontal
-    title "OFD → PNG 全部文件总耗时（秒，越低越快）"
-    x-axis ["go-zc310", "go-ofdgo", "go-ofdrw-rs", "rust-ofdbox-folio", "rust-sofd", "java-ofdrw", "rust-ofdmanager"]
-    y-axis "秒" 0 --> 44
-    bar [11.623, 15.573, 43.08, 6.84, 2.845, 17.96, 11.265]
-```
+![OFD → PNG 各库全部文件总耗时](charts/ofd-to-png-speed.svg)
 
 未完成全部文件（括号内为无有效结果的文件）：`rust-ofd-utility`（intro.ofd）。
 <!-- benchmark-charts:png:end -->

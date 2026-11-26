@@ -4,7 +4,8 @@ go 1.27.0
 
 require (
 	github.com/lihongjie0209/ofdrw-rs/bindings/go v0.5.0
-	github.com/xiaoqidun/ofdgo v0.0.0-20261122015454-e70fdfb4451c
+	github.com/mattn/go-runewidth v0.0.31
+	github.com/xiaoqidun/ofdgo v0.0.0-20261124073143-9d9bd2ba2cde
 	github.com/zc310/ofd v0.2.2
 	go.yaml.in/yaml/v4 v4.0.0
 )
@@ -33,7 +34,6 @@ require (
 	github.com/kovidgoyal/go-parallel v1.1.1 // indirect
 	github.com/kovidgoyal/go-shm v1.0.0 // indirect
 	github.com/kovidgoyal/imaging v1.9.0 // indirect
-	github.com/mattn/go-runewidth v0.0.31 // indirect
 	github.com/pdfcpu/pdfcpu v0.16.4 // indirect
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd // indirect
 	github.com/srwiley/rasterx v0.0.0-20220730225603-2ab79fcdd4ef // indirect
@@ -44,9 +44,9 @@ require (
 	github.com/tdewolff/parse/v2 v2.25.0 // indirect
 	github.com/woozymasta/png v1.2.0 // indirect
 	github.com/xdg-go/stringprep v1.0.4 // indirect
-	github.com/xiaoqidun/j2kgo v1.0.5 // indirect
-	github.com/xiaoqidun/jbig2 v1.1.12 // indirect
-	github.com/xiaoqidun/pdfgo v0.0.0-20261121121720-dcae895fe522 // indirect
+	github.com/xiaoqidun/j2kgo v1.0.7 // indirect
+	github.com/xiaoqidun/jbig2 v1.1.13 // indirect
+	github.com/xiaoqidun/pdfgo v0.0.0-20261124061921-cf8ac7f49ff3 // indirect
 	github.com/yuin/goldmark v1.8.7 // indirect
 	go.yaml.in/yaml/v3 v3.0.6 // indirect
 	golang.org/x/crypto v0.59.0 // indirect

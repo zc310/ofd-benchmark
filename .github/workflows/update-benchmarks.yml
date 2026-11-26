@@ -281,7 +281,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/benchmark-results.yaml docs/ofd-to-pdf.md docs/pdf-to-ofd.md docs/ofd-to-png.md
+          git add docs/benchmark-results.yaml docs/ofd-to-pdf.md docs/pdf-to-ofd.md docs/ofd-to-png.md docs/charts/*.svg
           if git diff --cached --quiet; then
             echo "Benchmark reports are unchanged."
             exit 0
