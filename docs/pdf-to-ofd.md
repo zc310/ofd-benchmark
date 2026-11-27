@@ -39,8 +39,8 @@
 <!-- benchmark-environment:start -->
 
 - 系统：Ubuntu 24.04.5 LTS (x86_64)
-- CPU：AMD EPYC 7763 64-Core Processor（4 逻辑核心）
-- 内存：15.6 GiB
+- CPU：Intel(R) Xeon(R) 6975P-C（4 逻辑核心）
+- 内存：15.3 GiB
 <!-- benchmark-environment:end -->
 - 系统已安装 `apt-get install fonts-wqy-zenhei fonts-noto-cjk`
 - 测试前运行 `bash tools/install-fonts.sh`，下载 `doc-foundertype.zip`、`doc-zhongyi-etc.zip`、`latin-fonts.zip` 并安装到用户目录 `~/.local/share/fonts/hanzi-fonts/`，随后刷新字体缓存。字体下载链接与依赖安装命令见 [README：快速开始](../README.md#快速开始)；GitHub Actions 已加入此准备步骤。
@@ -62,11 +62,11 @@
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310-ofd | **23ms** | **97ms** | **315ms** | **511ms** | 1.63s | **1.23s** | **1.91s** | 6 |
-| go-xiaoqidun-ofdgo | 94ms | 9.78s | 392ms | 622ms | 2.48s | 7.81s | 2.84s | 0 |
-| java-ofdrw | 1.39s | 2.39s | 2.62s | 10.27s | 6.58s | 7.03s | 90.90s | 0 |
-| python-pdf2ofd | 168ms | 1.23s | 795ms | 3.55s | **1.39s** | 79.09s | 27.62s | 1 |
-| node-jsofd | 327ms | 643ms | 3.40s | 10.64s | 5.62s | 3.57s | 9.81s | 0 |
+| go-zc310-ofd | **16ms** | **71ms** | **262ms** | **369ms** | 1.13s | **795ms** | **1.42s** | 6 |
+| go-xiaoqidun-ofdgo | 76ms | 8.92s | 311ms | 431ms | 1.69s | 5.76s | 1.87s | 0 |
+| java-ofdrw | 863ms | 1.53s | 1.60s | 7.58s | 4.64s | 4.72s | 80.93s | 0 |
+| python-pdf2ofd | 125ms | 860ms | 551ms | 2.54s | **975ms** | 54.72s | 18.99s | 1 |
+| node-jsofd | 229ms | 451ms | 3.29s | 9.60s | 4.99s | 2.55s | 7.60s | 0 |
 <!-- benchmark-table:pdf-speed:end -->
 
 ### CPU 总时间
@@ -77,11 +77,11 @@ CPU 总时间为进程用户态与内核态时间之和，累加所有线程及�
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310-ofd | **34ms** | **118ms** | **382ms** | **560ms** | 1.77s | **1.51s** | **2.26s** | 6 |
-| go-xiaoqidun-ofdgo | 116ms | 10.09s | 708ms | 1.68s | 3.01s | 15.92s | 7.45s | 0 |
-| java-ofdrw | 3.51s | 7.15s | 7.83s | 20.04s | 14.05s | 18.76s | 114.46s | 0 |
-| python-pdf2ofd | 168ms | 1.23s | 795ms | 3.55s | **1.39s** | 79.09s | 27.62s | 1 |
-| node-jsofd | 405ms | 1.09s | 992ms | 7.40s | 6.51s | 5.65s | 12.41s | 0 |
+| go-zc310-ofd | **22ms** | **87ms** | **302ms** | **403ms** | 1.22s | **996ms** | **1.67s** | 6 |
+| go-xiaoqidun-ofdgo | 93ms | 9.15s | 558ms | 1.17s | 2.12s | 11.66s | 5.11s | 0 |
+| java-ofdrw | 2.30s | 4.75s | 4.85s | 14.10s | 9.59s | 13.72s | 99.22s | 0 |
+| python-pdf2ofd | 125ms | 860ms | 551ms | 2.54s | **975ms** | 54.71s | 18.99s | 1 |
+| node-jsofd | 294ms | 796ms | 704ms | 5.64s | 5.13s | 4.13s | 8.61s | 0 |
 <!-- benchmark-table:pdf-cpu:end -->
 
 ### 进程树内存峰值
@@ -92,11 +92,11 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 
 | 转换器 | hello.pdf | ano.pdf | 999.pdf | intro.pdf | zsbk.pdf | 1000-pages.pdf | GBT_33190-2016.pdf | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| go-zc310-ofd | **37.33MB** | **50.56MB** | 209.39MB | **118.87MB** | 324.11MB | 190.98MB | **140.99MB** | 4 |
-| go-xiaoqidun-ofdgo | 56.26MB | 238.39MB | 190.32MB | 138.87MB | 298.45MB | 1722.63MB | 377.95MB | 0 |
-| java-ofdrw | 205.95MB | 461.40MB | 542.09MB | 610.77MB | 528.33MB | 759.55MB | 1715.90MB | 0 |
-| python-pdf2ofd | 69.25MB | 99.33MB | **81.80MB** | 171.29MB | **148.03MB** | **94.77MB** | 233.14MB | 3 |
-| node-jsofd | 142.72MB | 207.14MB | 180.38MB | 548.72MB | 462.73MB | 652.61MB | 1051.13MB | 0 |
+| go-zc310-ofd | **34.31MB** | **51.90MB** | 207.15MB | **120.80MB** | 310.50MB | 191.97MB | **143.99MB** | 4 |
+| go-xiaoqidun-ofdgo | 56.95MB | 239.12MB | 192.06MB | 148.45MB | 294.12MB | 1865.28MB | 408.26MB | 0 |
+| java-ofdrw | 206.80MB | 465.45MB | 489.18MB | 583.66MB | 748.25MB | 832.20MB | 1701.54MB | 0 |
+| python-pdf2ofd | 69.19MB | 99.30MB | **81.95MB** | 171.10MB | **148.71MB** | **94.75MB** | 233.11MB | 3 |
+| node-jsofd | 144.02MB | 200.67MB | 184.43MB | 539.21MB | 463.25MB | 641.60MB | 1091.01MB | 0 |
 <!-- benchmark-table:pdf-memory:end -->
 
 ## OFD 文件大小
