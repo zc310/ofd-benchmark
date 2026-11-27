@@ -113,17 +113,18 @@
 
 ## .NET
 
-|                                            库                                             |   许可证   | 预览 | 解析 | 发票 | → 图片 | → PDF | → TXT | → SVG | → Md | → HTML | PDF → OFD | 生成 | 签章 | 加密文档 | 打印 | 检索 | 注释 | 归档 | 修改 | 编辑器 |
-|:-----------------------------------------------------------------------------------------:|:----------:|:----:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:------:|:---------:|:----:|:----:|:--------:|:----:|:----:|:----:|:----:|:----:|:------:|
-|                  [XiaoFeng.Ofd](https://github.com/zhuovi/XiaoFeng.Ofd)                   |    MIT     |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ✅  |  ✅  |    ❌    |  ❌  |  ❌  |  ✅  |  ❌  |  ❌  |   ❌   |
-|                    [OfdViewer](https://github.com/LvYueMing/OfdViewer)                    |    MIT     |  ✅  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ✅  |  ⚠️  |    ❌    |  ❌  |  ❌  |  ✅  |  ❌  |  ❌  |   ❌   |
-|                     [ofdrw.net](https://github.com/whynpc9/ofdrw.net)                     |    MIT     |  ❌  |  ✅  |  ❌  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |   ✅   |    ✅     |  ✅  |  ⚠️  |    ✅    |  ❌  |  ❌  |  ✅  |  ✅  |  ✅  |   ❌   |
-|                   [ofdrw-net](https://github.com/lllooollpp/ofdrw-net)                    |     无     |  ❌  |  ✅  |  ❌  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ✅  |  ✅  |    ✅    |  ❌  |  ❌  |  ✅  |  ❌  |  ❌  |   ❌   |
-|                 [OFDConverter](https://github.com/wukonggo/OFDConverter)                  | Apache-2.0 |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
-|                    [ofdparser](https://github.com/wangyi160/ofdparser)                    |     无     |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
-| [BootstrapBlazor.OfdReader](https://github.com/BootstrapBlazor/BootstrapBlazor.OfdReader) |    MIT     |  ✅  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
-|                      [Ofd2Pdf](https://github.com/taurusxin/Ofd2Pdf)                      |    MIT     |  ❌  |  ✅  |  ❌  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
-|                      [ofd2pdf](https://github.com/lanbo0829/ofd2pdf)                      |     无     |  ❌  |  ✅  |  ❌  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
+|                                            库                                             |      许可证      | 预览 | 解析 | 发票 | → 图片 | → PDF | → TXT | → SVG | → Md | → HTML | PDF → OFD | 生成 | 签章 | 加密文档 | 打印 | 检索 | 注释 | 归档 | 修改 | 编辑器 |
+|:-----------------------------------------------------------------------------------------:|:----------------:|:----:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:------:|:---------:|:----:|:----:|:--------:|:----:|:----:|:----:|:----:|:----:|:------:|
+|                       [NetOfd](https://github.com/sdhzth/ofdrwnet)                        | MIT / Apache-2.0 |  ❌  |  ✅  |  ⚠️  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |   ✅   |    ❌     |  ✅  |  ✅  |    ✅    |  ❌  |  ✅  |  ✅  |  ✅  |  ✅  |   ❌   |
+|                  [XiaoFeng.Ofd](https://github.com/zhuovi/XiaoFeng.Ofd)                   |       MIT        |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ✅  |  ✅  |    ❌    |  ❌  |  ❌  |  ✅  |  ❌  |  ❌  |   ❌   |
+|                    [OfdViewer](https://github.com/LvYueMing/OfdViewer)                    |       MIT        |  ✅  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ✅  |  ⚠️  |    ❌    |  ❌  |  ❌  |  ✅  |  ❌  |  ❌  |   ❌   |
+|                     [ofdrw.net](https://github.com/whynpc9/ofdrw.net)                     |       MIT        |  ❌  |  ✅  |  ❌  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |   ✅   |    ✅     |  ✅  |  ⚠️  |    ✅    |  ❌  |  ❌  |  ✅  |  ✅  |  ✅  |   ❌   |
+|                   [ofdrw-net](https://github.com/lllooollpp/ofdrw-net)                    |        无        |  ❌  |  ✅  |  ❌  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ✅  |  ✅  |    ✅    |  ❌  |  ❌  |  ✅  |  ❌  |  ❌  |   ❌   |
+|                 [OFDConverter](https://github.com/wukonggo/OFDConverter)                  |    Apache-2.0    |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ✅     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
+|                    [ofdparser](https://github.com/wangyi160/ofdparser)                    |        无        |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
+| [BootstrapBlazor.OfdReader](https://github.com/BootstrapBlazor/BootstrapBlazor.OfdReader) |       MIT        |  ✅  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
+|                      [Ofd2Pdf](https://github.com/taurusxin/Ofd2Pdf)                      |       MIT        |  ❌  |  ✅  |  ❌  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
+|                      [ofd2pdf](https://github.com/lanbo0829/ofd2pdf)                      |        无        |  ❌  |  ✅  |  ❌  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
 
 ## JavaScript
 
