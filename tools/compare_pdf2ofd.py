@@ -18,6 +18,7 @@ import re
 
 import fitz
 from compare_pdf import compare
+from benchmark_paths import output_root
 from benchmark_results import PDF_CONVERTER_ROWS, append, format_percentage, write_updates
 
 
@@ -61,7 +62,7 @@ def main():
 
     files = args or ['hello', 'ano', '999', '1000-pages', 'intro', 'zsbk', 'GBT_33190-2016']
     base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    odir = os.path.join(base, 'bin', 'output_ofd')
+    odir = str(output_root() / 'output_ofd')
 
     print(f"{'file':<12} {'convert':<16} {'pdf_ref':>9} {'ofd_size':>10} {'size_rat':>7} {'pixel':>10} {'SSIM':>10} {'ref_ch':>9} {'ofd_ch':>9} {'txt_sim':>10}")
     print("-" * 106)

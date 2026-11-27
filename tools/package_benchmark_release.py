@@ -8,6 +8,7 @@ from pathlib import Path
 import shutil
 from urllib.parse import quote
 import zipfile
+from benchmark_paths import output_root
 
 
 # Output suffixes come from main.go and cmd/pdf2ofd-benchmark/main.go.
@@ -46,7 +47,7 @@ def sha256(path):
         return hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
-def package(root, output, tag, commit='', run_url=''):
+def package(root, output, tag, commit='', run_url='', benchmark_output=None):
     root, output = Path(root), Path(output)
     if not tag.startswith('v'):
         raise ValueError('Release tags must start with v')
@@ -63,7 +64,7 @@ def package(root, output, tag, commit='', run_url=''):
         ('output', ('.pdf',), 0),
         ('output_ofd', ('.ofd', '.pdf'), 1),
     ):
-        source_dir = root / 'bin' / directory
+        source_dir = Path(benchmark_output or output_root()) / directory
         if not source_dir.is_dir():
             raise ValueError(f'Missing benchmark output directory: {source_dir}')
         for path in sorted(source_dir.iterdir()):
@@ -89,7 +90,7 @@ def package(root, output, tag, commit='', run_url=''):
                 direction = 'ofd-to-pdf' if index == 0 else 'pdf-to-ofd'
             destination = f'{library}/{direction}/{sample}{path.suffix}'
             records[library]['files'].append({
-                'source': path.relative_to(root).as_posix(),
+                'source': (Path(directory) / path.name).as_posix(),
                 'path': destination,
                 'size': path.stat().st_size,
             })

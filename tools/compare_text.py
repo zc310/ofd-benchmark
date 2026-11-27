@@ -13,6 +13,7 @@ import sys
 import os
 import re
 import fitz
+from benchmark_paths import output_root
 from benchmark_results import OFD_CONVERTER_ROWS, append, format_percentage, write_updates
 
 def extract(path):
@@ -47,7 +48,7 @@ def main():
     args = sys.argv[1:]
     files = args or ['hello', 'ano', '999', '1000-pages', 'intro', 'zsbk']
     base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    odir = os.path.join(base, 'bin', 'output')
+    odir = str(output_root() / 'output')
 
     print(f"{'file':<12} {'convert':<16} {'ref_chars':>10} {'pdf_chars':>10} {'ratio':>6} {'similarity':>10}")
     print("-" * 76)

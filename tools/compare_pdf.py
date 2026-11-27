@@ -10,6 +10,7 @@ import sys
 import os
 import numpy as np
 import fitz
+from benchmark_paths import output_root
 from benchmark_results import OFD_CONVERTER_ROWS, append, format_percentage, write_updates
 
 def render(doc, page_idx, dpi):
@@ -197,7 +198,7 @@ def main():
 
     files = args or ['hello', 'ano', '999', '1000-pages', 'intro', 'zsbk']
     base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    odir = os.path.join(base, 'bin', 'output')
+    odir = str(output_root() / 'output')
 
     print(f"{'file':<12} {'convert':<16} {'ref_size':>10} {'pdf_size':>10} {'ratio':>6} {'full-page':>10} {'content':>10} {'fg-F1':>10} {'SSIM':>10} {'identical':>9}")
     print("-" * 115)

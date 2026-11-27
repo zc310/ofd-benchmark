@@ -208,6 +208,6 @@ for f in testdata/suwell/*.pdf testdata/standards/*.pdf; do
   ./bin/pdf2ofd-benchmark "$f"
 done
 
-# 还原度/文本对比（输出位于 bin/output_ofd/）
+# 还原度/文本对比（输出位于 /tmp/ofd-benchmark/output_ofd/）
 python3 tools/compare_pdf2ofd.py 96
 ```

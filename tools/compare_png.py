@@ -9,6 +9,7 @@ import numpy as np
 from PIL import Image
 
 from benchmark_results import append, format_percentage, write_updates
+from benchmark_paths import output_root
 from compare_pdf import align_images, content_similarity, foreground_f1, similarity, ssim_similarity
 
 DPI = 200
@@ -93,7 +94,7 @@ def main():
             values = ['FAILED'] * 4
             try:
                 scores = compare(base / 'testdata' / 'suwell' / name,
-                                 base / 'bin' / 'output_png' / f'{name}_{converter}', name)
+                                 output_root() / 'output_png' / f'{name}_{converter}', name)
                 values = [format_percentage(value) for value in scores]
                 print(f'{name:<10} {converter:<20} {values[0]:>12} {values[1]:>12} {values[2]:>12} {values[3]:>12}')
             except Exception as error:

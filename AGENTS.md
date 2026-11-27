@@ -75,7 +75,7 @@ for f in testdata/suwell/*.pdf testdata/standards/*.pdf; do
 done
 ```
 
-结果保存到 `bin/output_ofd/<name>_<converter>.ofd`。回环还原度/文本对比：
+结果保存到 `/tmp/ofd-benchmark/output_ofd/<name>_<converter>.ofd`。回环还原度/文本对比：
 
 ```bash
 python3 tools/compare_pdf2ofd.py 96
@@ -96,7 +96,7 @@ python3 tools/compare_png.py
 GOWORK=off go run ./tools/gen-benchmarks
 ```
 
-数科直接导出的参考 PNG 位于 `testdata/suwell/{999,intro,zsbk}/<name>_<页码>.png`（由 ofd-fixtures 同步）。输出位于 `bin/output_png/<name>_<converter>/page_<页码>.png`，统计总耗时、毫秒/页、PNG 总大小、内容/全页相似度和前景 F1，结果写入现有 `docs/benchmark-results.yaml`。PNG 比较使用全部页面，**包含 intro 第 14～19 页**，不得继承参考 PDF 的缺背景页排除规则。
+数科直接导出的参考 PNG 位于 `testdata/suwell/{999,intro,zsbk}/<name>_<页码>.png`（由 ofd-fixtures 同步）。输出位于 `/tmp/ofd-benchmark/output_png/<name>_<converter>/page_<页码>.png`，统计总耗时、毫秒/页、PNG 总大小、内容/全页相似度和前景 F1，结果写入现有 `docs/benchmark-results.yaml`。PNG 比较使用全部页面，**包含 intro 第 14～19 页**，不得继承参考 PDF 的缺背景页排除规则。
 
 ## 测试文件
 
@@ -144,8 +144,6 @@ ofd-benchmark/
 │   ├── ofdgo-convert          # Go ofdgo OFD→PDF 转换器
 │   ├── ofdgo-pdf2ofd          # Go ofdgo PDF→OFD 转换器
 │   ├── zc310-convert          # Go 转换器
-│   ├── output/                # OFD→PDF 生成文件
-│   ├── output_ofd/            # PDF→OFD 生成文件（.ofd + 回环 .pdf + .txt）
 │   ├── python/                # Python 脚本副本
 │   ├── java/                  # Java 脚本副本
 │   └── node/                  # Node 脚本副本
@@ -169,7 +167,7 @@ ofd-benchmark/
 
 1. 每个转换器是一个独立进程，接收 `<input.ofd> <output.pdf>` 参数
 2. 转换器在 `os.TempDir()` 中执行
-3. 生成的 PDF 移动到 `bin/output/<input>_<converter>.pdf`
+3. 生成的 PDF 移动到 `/tmp/ofd-benchmark/output/<input>_<converter>.pdf`
 4. 输出转换耗时和文件大小
 
 ## 文本提取测试
@@ -179,7 +177,7 @@ ofd-benchmark/
 ```python
 import fitz  # pip install pymupdf
 
-doc = fitz.open("bin/output/hello_go-zc310.pdf")
+doc = fitz.open("/tmp/ofd-benchmark/output/hello_go-zc310.pdf")
 text = ""
 for page in doc:
     text += page.get_text()

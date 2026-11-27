@@ -258,7 +258,8 @@ class ComparisonScriptTests(unittest.TestCase):
                 self.assertEqual(format_percentage(value), expected)
 
     def run_script(self, module, base):
-        with patch.object(module, '__file__', str(base / 'tools' / 'script.py')), \
+        with patch.dict('os.environ', {'BENCHMARK_OUTPUT_DIR': str(base)}), \
+             patch.object(module, '__file__', str(base / 'tools' / 'script.py')), \
              patch.object(sys, 'argv', ['script.py', '72', 'hello']), \
              patch.object(module, 'write_updates') as writer, \
              contextlib.redirect_stdout(io.StringIO()):
@@ -273,7 +274,7 @@ class ComparisonScriptTests(unittest.TestCase):
             ref = base / 'testdata' / 'suwell' / 'hello.pdf'
             ref.parent.mkdir(parents=True)
             make_pdf(ref)
-            output = base / 'bin' / 'output'
+            output = base / 'output'
             output.mkdir(parents=True)
             (output / 'hello_go-ofdgo.pdf').write_bytes(b'invalid PDF')
             make_pdf(output / 'hello_go-zc310.pdf')
@@ -298,11 +299,12 @@ class ComparisonScriptTests(unittest.TestCase):
             ref = base / 'testdata' / 'suwell' / 'hello.pdf'
             ref.parent.mkdir(parents=True)
             make_pdf(ref)
-            output = base / 'bin' / 'output'
+            output = base / 'output'
             output.mkdir(parents=True)
             make_pdf(output / 'hello_rust-sofd.pdf')
             make_pdf(output / 'hello_rust-easyofd.pdf')  # Ignore retired converter output.
-            with patch.object(compare_text, '__file__', str(base / 'tools' / 'script.py')), \
+            with patch.dict('os.environ', {'BENCHMARK_OUTPUT_DIR': str(base)}), \
+                 patch.object(compare_text, '__file__', str(base / 'tools' / 'script.py')), \
                  patch.object(sys, 'argv', ['script.py', 'hello']), \
                  patch.object(compare_text, 'write_updates') as writer, \
                  contextlib.redirect_stdout(io.StringIO()):
@@ -320,10 +322,11 @@ class ComparisonScriptTests(unittest.TestCase):
             ref = base / 'testdata' / 'suwell' / '1000-pages.pdf'
             ref.parent.mkdir(parents=True)
             make_pdf(ref, 5)
-            output = base / 'bin' / 'output'
+            output = base / 'output'
             output.mkdir(parents=True)
             make_pdf(output / '1000-pages_go-zc310.pdf', 5)
-            with patch.object(compare_text, '__file__', str(base / 'tools' / 'script.py')), \
+            with patch.dict('os.environ', {'BENCHMARK_OUTPUT_DIR': str(base)}), \
+                 patch.object(compare_text, '__file__', str(base / 'tools' / 'script.py')), \
                  patch.object(sys, 'argv', ['script.py', '1000-pages']), \
                  patch.object(compare_text, 'write_updates') as writer, \
                  contextlib.redirect_stdout(io.StringIO()):
@@ -342,7 +345,7 @@ class ComparisonScriptTests(unittest.TestCase):
             ref = base / 'testdata' / 'suwell' / 'hello.pdf'
             ref.parent.mkdir(parents=True)
             make_pdf(ref)
-            output = base / 'bin' / 'output_ofd'
+            output = base / 'output_ofd'
             output.mkdir(parents=True)
             for converter in ('pdf2ofd-ofdrw', 'pdf2ofd-zc310', 'node-jsofd', 'python-pdf2ofd',
                               'pdf2ofd-ofdgo', 'pdf2ofd-easyofd-rust'):

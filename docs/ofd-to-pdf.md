@@ -301,7 +301,7 @@ cd node && npm ci && cd ..
 ./bin/ofd-benchmark <file.ofd> node
 ```
 
-转换后的 PDF 文件保存在 `bin/output/` 目录，命名格式：`{原文件名}_{转换器}.pdf`
+转换后的 PDF 文件保存在 `/tmp/ofd-benchmark/output/` 目录，命名格式：`{原文件名}_{转换器}.pdf`
 
 转换器名称：
 

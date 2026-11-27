@@ -43,9 +43,9 @@ cd ../ofd-benchmark && go build -o bin/pdf2ofd-benchmark ./cmd/pdf2ofd-benchmark
 ./bin/pdf2ofd-benchmark testdata/suwell/hello.pdf
 ```
 
-转换结果分别保存在 `bin/output/`（OFD→PDF）与 `bin/output_ofd/`（PDF→OFD）。
+可设置环境变量 `BENCHMARK_OUTPUT_DIR` 覆盖输出根目录（运行转换、比较及打包时须一致）。默认转换结果分别保存在 `/tmp/ofd-benchmark/output/`（OFD→PDF）与 `/tmp/ofd-benchmark/output_ofd/`（PDF→OFD）。
 
-OFD→PNG 独立评测见 [运行说明](docs/ofd-to-png.md#运行)，输出到 `bin/output_png/`。当前参考图为 `testdata/suwell/{999,intro,zsbk}/` 下数科直接导出的 200 DPI PNG，逐页比较，`intro` 第 14～19 页正常参与；参考图通过 `ofd-fixtures` 同步，不提交到本仓库。
+OFD→PNG 独立评测见 [运行说明](docs/ofd-to-png.md#运行)，输出到 `/tmp/ofd-benchmark/output_png/`。当前参考图为 `testdata/suwell/{999,intro,zsbk}/` 下数科直接导出的 200 DPI PNG，逐页比较，`intro` 第 14～19 页正常参与；参考图通过 `ofd-fixtures` 同步，不提交到本仓库。
 
 `ofdrw-rs` 使用 Go bindings v0.5.0 和同版本 Linux x64 原生库。首次运行前下载原生库：
 
@@ -60,7 +60,7 @@ cp /tmp/ofdrw-native/ofdrw-native-linux-x64-v0.5.0/libofdrw_ffi.so bin/ofdrw-rs/
 
 三个基准驱动的单次转换默认限时 15 分钟，可通过 `BENCHMARK_CONVERTER_TIMEOUT=30m` 调整。超时会终止转换器及其子进程，将结果记为 `FAILED`，并继续测试其他转换器。像素比较遇到损坏文件、页数不一致或无可比较页时，同样将该项记为 `FAILED`，不会中断其他输出的比较。
 
-回环 PDF/TXT 生成使用 `bash tools/roundtrip-pdf2ofd.sh bin/ofd-converter bin/output_ofd`，每个格式单独限时 15 分钟；可通过 `BENCHMARK_ROUNDTRIP_TIMEOUT=30m` 调整（GNU timeout 时长格式）。失败或超时会删除该格式的部分输出并继续。
+回环 PDF/TXT 生成使用 `bash tools/roundtrip-pdf2ofd.sh bin/ofd-converter /tmp/ofd-benchmark/output_ofd`，每个格式单独限时 15 分钟；可通过 `BENCHMARK_ROUNDTRIP_TIMEOUT=30m` 调整（GNU timeout 时长格式）。失败或超时会删除该格式的部分输出并继续。
 
 CI 的 Python 依赖（含间接依赖）由 `python/requirements.txt` 锁定版本及哈希，Node 由 `node/package-lock.json` 锁定并用 `npm ci` 安装。pdf2ofd 依赖旧版 PyMuPDF，须安装到独立环境，避免将像素评测渲染器降级：
 
@@ -125,9 +125,7 @@ ofd-benchmark/
 │   ├── zc310-png          # zc310 原生 PNG 适配器
 │   ├── ofdgo-png          # ofdgo 原生 PNG 适配器
 │   ├── ofd-utility-cli    # 固定 revision 的 Rust ofd-cli
-│   ├── output_png/        # OFD→PNG 按样本/转换器分目录输出
 │   ├── output/             # OFD→PDF 转换结果
-│   └── output_ofd/         # PDF→OFD 转换结果（含回环 PDF / 提取文本）
 ├── cmd/
 │   ├── ofdgo-convert/
 │   ├── ofdrw-rs-convert/

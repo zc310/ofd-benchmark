@@ -23,18 +23,18 @@ class ReleaseTests(unittest.TestCase):
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name)
         self.output = self.root / 'release assets'
-        for directory in ('docs', 'bin/output', 'bin/output_ofd'):
+        for directory in ('docs', 'output', 'output_ofd'):
             (self.root / directory).mkdir(parents=True)
         for name in REPORTS:
             (self.root / 'docs' / name).write_text(f'report: {name}\n')
 
     def document(self, name, content=b'document', directory='output'):
-        path = self.root / 'bin' / directory / name
+        path = self.root / directory / name
         path.write_bytes(content)
         return path
 
     def bundle(self, tag='v2026.11.16'):
-        return package(self.root, self.output, tag, 'commit123', 'https://example.org/run/1')
+        return package(self.root, self.output, tag, 'commit123', 'https://example.org/run/1', self.root)
 
     def test_all_converters_are_classified_and_directions_are_separate(self):
         expected = {}
@@ -128,7 +128,7 @@ class ReleaseTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Missing report'):
             self.bundle()
         report.write_text('restored')
-        (self.root / 'bin/output_ofd').rmdir()
+        (self.root / 'output_ofd').rmdir()
         with self.assertRaisesRegex(ValueError, 'Missing benchmark output directory'):
             self.bundle()
 

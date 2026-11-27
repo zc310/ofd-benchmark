@@ -66,7 +66,7 @@ func run(args []string) error {
 			return fmt.Errorf("unknown PNG converter %q", key)
 		}
 	}
-	outputRoot := filepath.Join(bin, "output_png")
+	outputRoot := filepath.Join(converter.OutputRoot(), "output_png")
 	if err := os.MkdirAll(outputRoot, 0o755); err != nil {
 		return err
 	}

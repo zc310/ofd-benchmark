@@ -237,12 +237,12 @@ javac -cp "$CP" java/Ofd2Png.java
 # Rust 1.93+；固定源码 revision，使用上游 Cargo.lock。
 cargo install --git https://github.com/ofd-utility/ofd-utility \
   --rev d603791e933a81936b23c91dcab90fdc4c2c0edf \
-  --locked --bin ofd-cli --root /tmp/opencode/ofd-utility-install ofd-cli
-cp /tmp/opencode/ofd-utility-install/bin/ofd-cli bin/ofd-utility-cli
+  --locked --bin ofd-cli --root /tmp/ofd-utility-install ofd-cli
+cp /tmp/ofd-utility-install/bin/ofd-cli bin/ofd-utility-cli
 cargo install --git https://github.com/feuvan/ofdmanager \
   --rev a9b1d29ef90141a369ad47cc32fd6c62dd8b8450 \
-  --locked --bin ofd-cli --root /tmp/opencode/ofdmanager-install ofd-cli
-cp /tmp/opencode/ofdmanager-install/bin/ofd-cli bin/ofdmanager-cli
+  --locked --bin ofd-cli --root /tmp/ofdmanager-install ofd-cli
+cp /tmp/ofdmanager-install/bin/ofd-cli bin/ofdmanager-cli
 # sOFD CLI、ofdrw-rs 原生库按 README 的现有构建说明准备。
 
 # 全部 9 个原生转换器，固定 200 DPI。
@@ -258,7 +258,7 @@ GOWORK=off go run ./tools/gen-benchmarks -check
 python3 tools/compare_png.py 999 --converters rust-ofd-utility
 ```
 
-输出保存为 `bin/output_png/<name>_<converter>/page_<页码>.png`。仅查看质量、不修改结果 YAML 可加 `--no-write`。
+输出保存为 `/tmp/ofd-benchmark/output_png/<name>_<converter>/page_<页码>.png`。仅查看质量、不修改结果 YAML 可加 `--no-write`。
 
 ## 运行环境
 

@@ -38,8 +38,10 @@ func main() {
 	binDir := filepath.Join(filepath.Dir(exePath))
 
 	// Create output directory
-	outputDir := filepath.Join(binDir, "output")
-	os.MkdirAll(outputDir, 0755)
+	outputDir := filepath.Join(converter.OutputRoot(), "output")
+	if err := os.MkdirAll(outputDir, 0755); err != nil {
+		log.Fatal(err)
+	}
 
 	// Get input filename without extension
 	inputBase := filepath.Base(inputFile)
@@ -48,43 +50,43 @@ func main() {
 	converters := map[string]Converter{
 		"ofdgo": {
 			Name:       "go-ofdgo",
-			Command:    []string{filepath.Join(binDir, "ofdgo-convert"), inputFile, filepath.Join(binDir, "output_ofdgo.pdf")},
-			OutputFile: filepath.Join(binDir, "output_ofdgo.pdf"),
+			Command:    []string{filepath.Join(binDir, "ofdgo-convert"), inputFile, filepath.Join(outputDir, "output_ofdgo.pdf")},
+			OutputFile: filepath.Join(outputDir, "output_ofdgo.pdf"),
 		},
 		"ofdrw-rs": {
 			Name:       "go-ofdrw-rs",
-			Command:    []string{filepath.Join(binDir, "ofdrw-rs-convert"), inputFile, filepath.Join(binDir, "output_ofdrw_rs.pdf")},
-			OutputFile: filepath.Join(binDir, "output_ofdrw_rs.pdf"),
+			Command:    []string{filepath.Join(binDir, "ofdrw-rs-convert"), inputFile, filepath.Join(outputDir, "output_ofdrw_rs.pdf")},
+			OutputFile: filepath.Join(outputDir, "output_ofdrw_rs.pdf"),
 		},
 		"ofdbox-folio": {
 			Name:       "rust-ofdbox-folio",
-			Command:    []string{filepath.Join(binDir, "ofdbox-folio-convert"), inputFile, filepath.Join(binDir, "output_ofdbox_folio.pdf")},
-			OutputFile: filepath.Join(binDir, "output_ofdbox_folio.pdf"),
+			Command:    []string{filepath.Join(binDir, "ofdbox-folio-convert"), inputFile, filepath.Join(outputDir, "output_ofdbox_folio.pdf")},
+			OutputFile: filepath.Join(outputDir, "output_ofdbox_folio.pdf"),
 		},
 		"sofd": {
 			Name:       "rust-sofd",
-			Command:    []string{"bash", filepath.Join(binDir, "..", "rust", "sofd-convert.sh"), inputFile, filepath.Join(binDir, "output_sofd.pdf")},
-			OutputFile: filepath.Join(binDir, "output_sofd.pdf"),
+			Command:    []string{"bash", filepath.Join(binDir, "..", "rust", "sofd-convert.sh"), inputFile, filepath.Join(outputDir, "output_sofd.pdf")},
+			OutputFile: filepath.Join(outputDir, "output_sofd.pdf"),
 		},
 		"zc310": {
 			Name:       "go-zc310",
-			Command:    []string{filepath.Join(binDir, "zc310-convert"), inputFile, filepath.Join(binDir, "output_zc310.pdf")},
-			OutputFile: filepath.Join(binDir, "output_zc310.pdf"),
+			Command:    []string{filepath.Join(binDir, "zc310-convert"), inputFile, filepath.Join(outputDir, "output_zc310.pdf")},
+			OutputFile: filepath.Join(outputDir, "output_zc310.pdf"),
 		},
 		"python": {
 			Name:       "python-easyofd",
-			Command:    []string{"python3", filepath.Join(binDir, "..", "python", "ofd2pdf.py"), inputFile, filepath.Join(binDir, "output_python.pdf")},
-			OutputFile: filepath.Join(binDir, "output_python.pdf"),
+			Command:    []string{"python3", filepath.Join(binDir, "..", "python", "ofd2pdf.py"), inputFile, filepath.Join(outputDir, "output_python.pdf")},
+			OutputFile: filepath.Join(outputDir, "output_python.pdf"),
 		},
 		"java": {
 			Name:       "java-ofdrw",
-			Command:    []string{filepath.Join(binDir, "..", "java", "ofd2pdf_java.sh"), inputFile, filepath.Join(binDir, "output_java.pdf")},
-			OutputFile: filepath.Join(binDir, "output_java.pdf"),
+			Command:    []string{filepath.Join(binDir, "..", "java", "ofd2pdf_java.sh"), inputFile, filepath.Join(outputDir, "output_java.pdf")},
+			OutputFile: filepath.Join(outputDir, "output_java.pdf"),
 		},
 		"node": {
 			Name:       "node-ofd2pdf",
-			Command:    []string{filepath.Join(binDir, "..", "node", "ofd2pdf_node.sh"), inputFile, filepath.Join(binDir, "output_node.pdf")},
-			OutputFile: filepath.Join(binDir, "output_node.pdf"),
+			Command:    []string{filepath.Join(binDir, "..", "node", "ofd2pdf_node.sh"), inputFile, filepath.Join(outputDir, "output_node.pdf")},
+			OutputFile: filepath.Join(outputDir, "output_node.pdf"),
 		},
 	}
 
