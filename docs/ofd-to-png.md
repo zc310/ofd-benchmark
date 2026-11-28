@@ -54,9 +54,9 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 
 每项仅在全部文件有有效结果时显示；缺失项标为“无完整结果”。大小按表格中的取整数值累加，MB 为 100 万字节。PNG 大小包含所有页面。文件较小不一定表示质量更好，请结合还原度等结果查看。
 
-耗时无完整结果：`rust-ofd-utility`（intro.ofd）；`dotnet-sdhzth-ofdrwnet`（999.ofd、intro.ofd、zsbk.ofd）。
+耗时无完整结果：`rust-ofd-utility`（intro.ofd）。
 
-大小无完整结果：`rust-ofd-utility`（intro.ofd）；`dotnet-sdhzth-ofdrwnet`（999.ofd、intro.ofd、zsbk.ofd）。
+大小无完整结果：`rust-ofd-utility`（intro.ofd）。
 <!-- benchmark-charts:png:end -->
 
 ### 总耗时
@@ -65,16 +65,16 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 
 | 转换器 | 999.ofd | intro.ofd | zsbk.ofd | 胜出次数 |
 |---|---:|---:|---:|---:|
-| [go-zc310-ofd](https://github.com/zc310/ofd) | 529ms | 8.72s | 2.40s | 0 |
-| [go-xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | 745ms | 12.63s | 2.17s | 0 |
-| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 267ms | FAILED | **108ms** | 1 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 6.91s | 30.38s | 5.92s | 0 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 354ms | 5.56s | 909ms | 0 |
-| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd) | 744ms | 9.75s | 2.31s | 0 |
-| [rust-sOFD](https://github.com/emfox/sOFD) | **201ms** | **2.10s** | 495ms | 2 |
-| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 1.61s | 12.29s | 4.17s | 0 |
-| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 711ms | 9.36s | 1.24s | 0 |
-| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet) | FAILED | FAILED | FAILED | 0 |
+| [go-zc310-ofd](https://github.com/zc310/ofd) | 706ms | 11.70s | 3.38s | 0 |
+| [go-xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | 997ms | 17.01s | 3.00s | 0 |
+| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 333ms | FAILED | **132ms** | 1 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 5.67s | 33.03s | 6.21s | 0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 430ms | 6.58s | 1.15s | 0 |
+| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd) | 1.21s | 14.49s | 3.07s | 0 |
+| [rust-sOFD](https://github.com/emfox/sOFD) | **253ms** | **2.74s** | 587ms | 2 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 2.44s | 18.41s | 5.99s | 0 |
+| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 823ms | 11.99s | 1.56s | 0 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet) | 2.90s | 11.57s | 3.07s | 0 |
 <!-- benchmark-table:png-speed:end -->
 
 ### CPU 总时间
@@ -85,16 +85,16 @@ CPU 总时间为进程用户态与内核态时间之和，累加所有线程及�
 
 | 转换器 | 999.ofd | intro.ofd | zsbk.ofd | 胜出次数 |
 |---|---:|---:|---:|---:|
-| [go-zc310-ofd](https://github.com/zc310/ofd) | 556ms | 8.84s | 2.48s | 0 |
-| [go-xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | 781ms | 15.15s | 3.41s | 0 |
-| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 267ms | FAILED | **107ms** | 1 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 6.91s | 30.42s | 5.92s | 0 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 354ms | 5.60s | 949ms | 0 |
-| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd) | 727ms | 9.75s | 2.31s | 0 |
-| [rust-sOFD](https://github.com/emfox/sOFD) | **201ms** | **2.10s** | 495ms | 2 |
-| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 4.22s | 17.61s | 7.84s | 0 |
-| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 711ms | 9.36s | 1.24s | 0 |
-| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet) | FAILED | FAILED | FAILED | 0 |
+| [go-zc310-ofd](https://github.com/zc310/ofd) | 753ms | 11.87s | 3.49s | 0 |
+| [go-xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | 1.09s | 20.55s | 4.90s | 0 |
+| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 333ms | FAILED | **132ms** | 1 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 5.68s | 33.10s | 6.22s | 0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 430ms | 6.63s | 1.20s | 0 |
+| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd) | 1.13s | 14.48s | 3.07s | 0 |
+| [rust-sOFD](https://github.com/emfox/sOFD) | **253ms** | **2.74s** | 587ms | 2 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 6.18s | 26.04s | 10.70s | 0 |
+| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 823ms | 11.99s | 1.56s | 0 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet) | 1.47s | 12.54s | 3.29s | 0 |
 <!-- benchmark-table:png-cpu:end -->
 
 ### 进程树内存峰值
@@ -105,16 +105,16 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 
 | 转换器 | 999.ofd | intro.ofd | zsbk.ofd | 胜出次数 |
 |---|---:|---:|---:|---:|
-| [go-zc310-ofd](https://github.com/zc310/ofd) | 227.93MB | 225.74MB | 363.21MB | 0 |
-| [go-xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | 319.90MB | 260.57MB | 451.42MB | 0 |
-| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | **76.61MB** | FAILED | **57.07MB** | 2 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 80.67MB | 216.15MB | 149.91MB | 0 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 116.90MB | 152.15MB | 218.57MB | 0 |
-| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd) | 223.71MB | 190.27MB | 205.09MB | 0 |
-| [rust-sOFD](https://github.com/emfox/sOFD) | 97.37MB | **99.09MB** | 160.23MB | 1 |
-| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 400.43MB | 762.09MB | 1001.46MB | 0 |
-| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 163.44MB | 198.30MB | 300.78MB | 0 |
-| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet) | FAILED | FAILED | FAILED | 0 |
+| [go-zc310-ofd](https://github.com/zc310/ofd) | 227.62MB | 224.80MB | 363.25MB | 0 |
+| [go-xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | 310.47MB | 267.79MB | 460.73MB | 0 |
+| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 76.31MB | FAILED | **56.62MB** | 1 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | **70.67MB** | 216.28MB | 149.77MB | 1 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 116.60MB | 151.54MB | 218.25MB | 0 |
+| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd) | 223.40MB | 190.11MB | 205.08MB | 0 |
+| [rust-sOFD](https://github.com/emfox/sOFD) | 97.36MB | **106.44MB** | 159.90MB | 1 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 362.52MB | 587.78MB | 688.07MB | 0 |
+| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 163.21MB | 198.12MB | 300.08MB | 0 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet) | 108.78MB | 211.34MB | 242.36MB | 0 |
 <!-- benchmark-table:png-memory:end -->
 
 ### 平均每页耗时
@@ -123,16 +123,16 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 
 | 转换器 | 999.ofd | intro.ofd | zsbk.ofd | 胜出次数 |
 |---|---:|---:|---:|---:|
-| [go-zc310-ofd](https://github.com/zc310/ofd) | 105.74ms | 207.67ms | 1201.43ms | 0 |
-| [go-xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | 149.02ms | 300.63ms | 1082.60ms | 0 |
-| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 53.43ms | FAILED | **53.82ms** | 1 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 1382.28ms | 723.37ms | 2958.08ms | 0 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 70.73ms | 132.45ms | 454.41ms | 0 |
-| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd) | 148.83ms | 232.15ms | 1153.22ms | 0 |
-| [rust-sOFD](https://github.com/emfox/sOFD) | **40.18ms** | **50.09ms** | 247.47ms | 2 |
-| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 322.79ms | 292.55ms | 2082.79ms | 0 |
-| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 142.25ms | 222.78ms | 617.67ms | 0 |
-| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet) | FAILED | FAILED | FAILED | 0 |
+| [go-zc310-ofd](https://github.com/zc310/ofd) | 141.18ms | 278.53ms | 1690.46ms | 0 |
+| [go-xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | 199.37ms | 405.06ms | 1501.36ms | 0 |
+| [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 66.58ms | FAILED | **66.09ms** | 1 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 1134.88ms | 786.45ms | 3104.37ms | 0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 85.98ms | 156.70ms | 573.89ms | 0 |
+| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd) | 241.34ms | 345.04ms | 1533.50ms | 0 |
+| [rust-sOFD](https://github.com/emfox/sOFD) | **50.68ms** | **65.17ms** | 293.72ms | 2 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 487.38ms | 438.23ms | 2995.59ms | 0 |
+| [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 164.69ms | 285.47ms | 781.90ms | 0 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet) | 580.97ms | 275.49ms | 1532.96ms | 0 |
 <!-- benchmark-table:png-ms-per-page:end -->
 
 ### PNG 总大小
@@ -146,11 +146,11 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-ofd-utility](https://github.com/ofd-utility/ofd-utility) | 2.36MB | FAILED | **335.15KB** | 1 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 972.55KB | 40.02MB | 7.35MB | 0 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 1.41MB | 43.16MB | 3.92MB | 0 |
-| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd) | 1.85MB | **22.28MB** | 7.33MB | 1 |
+| [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd) | 1.85MB | 22.28MB | 7.33MB | 0 |
 | [rust-sOFD](https://github.com/emfox/sOFD) | 2.40MB | 42.10MB | 9.13MB | 0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | **567.95KB** | 25.65MB | 6.99MB | 1 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 2.39MB | 31.92MB | 8.95MB | 0 |
-| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet) | FAILED | FAILED | FAILED | 0 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet) | 1.47MB | **19.18MB** | 6.95MB | 1 |
 <!-- benchmark-table:png-size:end -->
 
 ### SSIM 结构相似度
@@ -170,7 +170,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-sOFD](https://github.com/emfox/sOFD)                     |     91.4255% |     94.7092% |     90.0743% |        0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw)                   |     95.3582% |     85.6372% |     91.0660% |        0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager)        | **96.9060%** |       FAILED |     90.4407% |        1 |
-| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet)   |       FAILED |       FAILED |       FAILED |        0 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet)   |     95.5446% |     85.3323% |     87.4886% |        0 |
 <!-- benchmark-table:png-ssim:end -->
 
 ### 内容相似度
@@ -188,7 +188,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-sOFD](https://github.com/emfox/sOFD)                     |     26.7512% |     96.0890% |     97.4508% |        0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw)                   |     58.5568% |     94.5649% | **97.9273%** |        1 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager)        |     69.7961% |       FAILED |     97.8081% |        0 |
-| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet)   |       FAILED |       FAILED |       FAILED |        0 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet)   |     61.9366% |     94.1656% |     97.1414% |        0 |
 <!-- benchmark-table:png-content-similarity:end -->
 
 ### 前景 F1
@@ -206,7 +206,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-sOFD](https://github.com/emfox/sOFD)                     |      95.9189% |     99.7055% |      99.9942% |        0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw)                   |      99.7257% |     99.9699% | **100.0000%** |        0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager)        | **100.0000%** |       FAILED | **100.0000%** |        0 |
-| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet)   |        FAILED |       FAILED |        FAILED |        0 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet)   |      99.8126% |     99.8825% | **100.0000%** |        0 |
 <!-- benchmark-table:png-foreground-f1:end -->
 
 ### 全页相似度
@@ -224,7 +224,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-sOFD](https://github.com/emfox/sOFD)                     |     97.4386% |     96.9713% |     97.8652% |        0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw)                   |     98.5471% |     95.7350% | **98.2651%** |        1 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager)        |     98.9278% |       FAILED |     98.1643% |        0 |
-| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet)   |       FAILED |       FAILED |       FAILED |        0 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet)   |     98.6483% |     95.5819% |     97.6073% |        0 |
 <!-- benchmark-table:png-pixel-similarity:end -->
 
 ## 运行
@@ -283,6 +283,6 @@ python3 tools/compare_png.py 999 --converters dotnet-sdhzth-ofdrwnet
 <!-- benchmark-environment:start -->
 
 - 系统：Ubuntu 24.04.5 LTS (x86_64)
-- CPU：Intel(R) Xeon(R) 6975P-C（4 逻辑核心）
-- 内存：15.3 GiB
+- CPU：AMD EPYC 7763 64-Core Processor（4 逻辑核心）
+- 内存：15.6 GiB
 <!-- benchmark-environment:end -->
