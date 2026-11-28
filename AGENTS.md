@@ -83,7 +83,7 @@ python3 tools/compare_pdf2ofd.py 96
 
 ## 运行 OFD→PNG 基准测试
 
-图片评测固定 **200 DPI**，默认运行 8 个原生转换器（zc310 / ofdgo / ofdrw-rs / ofdbox-folio / sOFD / Java ofdrw / ofdmanager / ofd-utility）。Python ofd2img / easyofd 图片接口固定 144 DPI 且经过 PDF，Node ofd2pdf 仅提供 PDF 输出，均不参加 PNG 评测；不接受 PDF 中转或放大低 DPI 图片。完整构建及固定 Rust revision 见 `docs/ofd-to-png.md`；ofdmanager CLI 每页调用一次，重复解析计入耗时。
+图片评测固定 **200 DPI**，默认运行 10 个原生转换器（zc310 / ofdgo / ofdrw-rs / ofdbox-folio / sOFD / Java ofdrw / ofdmanager / ofd-utility / linuxdeepin-rofd / sdhzth-ofdrwnet）。Python ofd2img / easyofd 图片接口固定 144 DPI 且经过 PDF，Node ofd2pdf 仅提供 PDF 输出，均不参加 PNG 评测；不接受 PDF 中转或放大低 DPI 图片。完整构建及固定源码版本见 `docs/ofd-to-png.md`；ofdmanager CLI 每页调用一次，重复解析计入耗时。
 
 ```bash
 GOWORK=off go build -o bin/ofd2png-benchmark ./cmd/ofd2png-benchmark

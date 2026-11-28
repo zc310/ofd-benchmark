@@ -90,6 +90,17 @@ jobs:
 
       - uses: dtolnay/rust-toolchain@stable
 
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Checkout sdhzth/ofdrwnet
+        uses: actions/checkout@v5
+        with:
+          repository: sdhzth/ofdrwnet
+          ref: 85b47e1c3c8c244236658ea3914e421bc2b25c66
+          path: ofdrwnet
+
       - name: Checkout OFD fixtures
         uses: actions/checkout@v5
         with:
@@ -178,6 +189,7 @@ jobs:
           go build -o bin/zc310-png ./cmd/zc310-png
           go build -o bin/ofdgo-png ./cmd/ofdgo-png
           go build -o bin/ofdrw-rs-png ./cmd/ofdrw-rs-png
+          dotnet publish dotnet/sdhzth-ofdrwnet-png/OfdrwNetPng.csproj -c Release -o bin/sdhzth-ofdrwnet-png
           cargo build --release --locked --manifest-path rust/ofdbox-folio-convert/Cargo.toml --target-dir rust/target
           cp rust/target/release/ofdbox-folio-convert bin/ofdbox-folio-convert
           cargo build --release --locked --manifest-path rust/linuxdeepin-rofd-png/Cargo.toml --target-dir rust/target

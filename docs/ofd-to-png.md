@@ -17,8 +17,9 @@
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | 2.5.2 | 原生 AWT `ImageMaker(reader, 200.0 / 25.4)`（200 DPI） |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | a9b1d29ef90141a369ad47cc32fd6c62dd8b8450 | 原生 CLI `render --dpi 200 --page n`（200 DPI） |
 | [rust-linuxdeepin-rofd](https://github.com/linuxdeepin/rofd) | af6d562a649df85487e91b88375894a6049ad4de | `rofd-render` Cairo 原生渲染，200 DPI / 白底 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet) | 85b47e1c3c8c244236658ea3914e421bc2b25c66 | `OfdImageMaker` Skia 原生渲染，200 DPI / 白底 |
 
-选择键为 `zc310`、`ofdgo`、`ofd-utility`、`ofdrw-rs`、`ofdbox-folio`、`sofd`、`java`、`ofdmanager`、`linuxdeepin-rofd`，不指定时全部运行。
+选择键为 `zc310`、`ofdgo`、`ofd-utility`、`ofdrw-rs`、`ofdbox-folio`、`sofd`、`java`、`ofdmanager`、`linuxdeepin-rofd`、`sdhzth-ofdrwnet`，不指定时全部运行。
 
 `ofd-utility` 的 Python 适配器仅传递固定参数并统一页码/文件名，不解码或重绘图片。`ofdmanager` 上游 CLI 一次只渲染一页，适配器按 OFD 中的页数循环调用，重复解析/字体加载计入耗时；多文档 OFD 会明确拒绝，不静默只测第一个文档。原生 Java `ImageMaker` 的构造参数是**像素/毫米，不是 DPI**。
 
@@ -39,7 +40,7 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 - **全页相似度**：`1 − 平均归一化 RGB 色差`。各页等权平均；全白页不抬高内容/F1 得分。丢失几乎全部前景、损坏 PNG、缺页或尺寸不符均记为 `FAILED`。
 - 单次转换默认限时 15 分钟，可通过 `BENCHMARK_CONVERTER_TIMEOUT=30m` 调整；超时终止整个进程组并清理部分输出。重跑时清除该转换器旧输出，质量得分重置，避免沿用旧结果。
 
-## 原生 PNG 结果（9 个转换器）
+## 原生 PNG 结果（10 个转换器）
 
 表格由 `docs/benchmark-results.yaml` 生成，勿直接编辑。`FAILED` 表示尚无本轮有效测量或转换/比较失败；首次正式结果由 CI 统一环境测量，本地验证不覆盖已有 PDF 报告的运行环境。
 
@@ -53,9 +54,9 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 
 每项仅在全部文件有有效结果时显示；缺失项标为“无完整结果”。大小按表格中的取整数值累加，MB 为 100 万字节。PNG 大小包含所有页面。文件较小不一定表示质量更好，请结合还原度等结果查看。
 
-耗时无完整结果：`rust-ofd-utility`（intro.ofd）。
+耗时无完整结果：`rust-ofd-utility`（intro.ofd）；`dotnet-sdhzth-ofdrwnet`（999.ofd、intro.ofd、zsbk.ofd）。
 
-大小无完整结果：`rust-ofd-utility`（intro.ofd）。
+大小无完整结果：`rust-ofd-utility`（intro.ofd）；`dotnet-sdhzth-ofdrwnet`（999.ofd、intro.ofd、zsbk.ofd）。
 <!-- benchmark-charts:png:end -->
 
 ### 总耗时
@@ -73,6 +74,7 @@ Python `ofd2img 0.1.2` 与 Python easyofd 的图片接口均先转 PDF，再固�
 | [rust-sOFD](https://github.com/emfox/sOFD) | **201ms** | **2.10s** | 495ms | 2 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | 1.61s | 12.29s | 4.17s | 0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 711ms | 9.36s | 1.24s | 0 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet) | FAILED | FAILED | FAILED | 0 |
 <!-- benchmark-table:png-speed:end -->
 
 ### CPU 总时间
@@ -92,6 +94,7 @@ CPU 总时间为进程用户态与内核态时间之和，累加所有线程及�
 | [rust-sOFD](https://github.com/emfox/sOFD) | **201ms** | **2.10s** | 495ms | 2 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | 4.22s | 17.61s | 7.84s | 0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 711ms | 9.36s | 1.24s | 0 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet) | FAILED | FAILED | FAILED | 0 |
 <!-- benchmark-table:png-cpu:end -->
 
 ### 进程树内存峰值
@@ -111,6 +114,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-sOFD](https://github.com/emfox/sOFD) | 97.37MB | **99.09MB** | 160.23MB | 1 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | 400.43MB | 762.09MB | 1001.46MB | 0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 163.44MB | 198.30MB | 300.78MB | 0 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet) | FAILED | FAILED | FAILED | 0 |
 <!-- benchmark-table:png-memory:end -->
 
 ### 平均每页耗时
@@ -128,6 +132,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-sOFD](https://github.com/emfox/sOFD) | **40.18ms** | **50.09ms** | 247.47ms | 2 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | 322.79ms | 292.55ms | 2082.79ms | 0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 142.25ms | 222.78ms | 617.67ms | 0 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet) | FAILED | FAILED | FAILED | 0 |
 <!-- benchmark-table:png-ms-per-page:end -->
 
 ### PNG 总大小
@@ -145,6 +150,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-sOFD](https://github.com/emfox/sOFD) | 2.40MB | 42.10MB | 9.13MB | 0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw) | **567.95KB** | 25.65MB | 6.99MB | 1 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager) | 2.39MB | 31.92MB | 8.95MB | 0 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet) | FAILED | FAILED | FAILED | 0 |
 <!-- benchmark-table:png-size:end -->
 
 ### SSIM 结构相似度
@@ -164,6 +170,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-sOFD](https://github.com/emfox/sOFD)                     |     91.4255% |     94.7092% |     90.0743% |        0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw)                   |     95.3582% |     85.6372% |     91.0660% |        0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager)        | **96.9060%** |       FAILED |     90.4407% |        1 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet)   |       FAILED |       FAILED |       FAILED |        0 |
 <!-- benchmark-table:png-ssim:end -->
 
 ### 内容相似度
@@ -181,6 +188,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-sOFD](https://github.com/emfox/sOFD)                     |     26.7512% |     96.0890% |     97.4508% |        0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw)                   |     58.5568% |     94.5649% | **97.9273%** |        1 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager)        |     69.7961% |       FAILED |     97.8081% |        0 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet)   |       FAILED |       FAILED |       FAILED |        0 |
 <!-- benchmark-table:png-content-similarity:end -->
 
 ### 前景 F1
@@ -198,6 +206,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-sOFD](https://github.com/emfox/sOFD)                     |      95.9189% |     99.7055% |      99.9942% |        0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw)                   |      99.7257% |     99.9699% | **100.0000%** |        0 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager)        | **100.0000%** |       FAILED | **100.0000%** |        0 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet)   |        FAILED |       FAILED |        FAILED |        0 |
 <!-- benchmark-table:png-foreground-f1:end -->
 
 ### 全页相似度
@@ -215,6 +224,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | [rust-sOFD](https://github.com/emfox/sOFD)                     |     97.4386% |     96.9713% |     97.8652% |        0 |
 | [java-ofdrw](https://github.com/ofdrw/ofdrw)                   |     98.5471% |     95.7350% | **98.2651%** |        1 |
 | [rust-ofdmanager](https://github.com/feuvan/ofdmanager)        |     98.9278% |       FAILED |     98.1643% |        0 |
+| [dotnet-sdhzth-ofdrwnet](https://github.com/sdhzth/ofdrwnet)   |       FAILED |       FAILED |       FAILED |        0 |
 <!-- benchmark-table:png-pixel-similarity:end -->
 
 ## 运行
@@ -226,6 +236,10 @@ GOWORK=off go build -o bin/ofd2png-benchmark ./cmd/ofd2png-benchmark
 GOWORK=off go build -o bin/zc310-png ./cmd/zc310-png
 GOWORK=off go build -o bin/ofdgo-png ./cmd/ofdgo-png
 GOWORK=off go build -o bin/ofdrw-rs-png ./cmd/ofdrw-rs-png
+# .NET 10；固定 ofdrwnet 源码版本。
+git clone https://github.com/sdhzth/ofdrwnet.git ofdrwnet
+git -C ofdrwnet checkout 85b47e1c3c8c244236658ea3914e421bc2b25c66
+dotnet publish dotnet/sdhzth-ofdrwnet-png/OfdrwNetPng.csproj -c Release -o bin/sdhzth-ofdrwnet-png
 cargo build --release --locked --manifest-path rust/ofdbox-folio-convert/Cargo.toml --target-dir rust/target
 cp rust/target/release/ofdbox-folio-convert bin/
 cargo build --release --locked --manifest-path rust/linuxdeepin-rofd-png/Cargo.toml --target-dir rust/target
@@ -245,7 +259,7 @@ cargo install --git https://github.com/feuvan/ofdmanager \
 cp /tmp/ofdmanager-install/bin/ofd-cli bin/ofdmanager-cli
 # sOFD CLI、ofdrw-rs 原生库按 README 的现有构建说明准备。
 
-# 全部 9 个原生转换器，固定 200 DPI。
+# 全部 10 个原生转换器，固定 200 DPI。
 for name in 999 intro zsbk; do
   ./bin/ofd2png-benchmark "testdata/ofdrw/$name.ofd"
 done
@@ -256,6 +270,8 @@ GOWORK=off go run ./tools/gen-benchmarks -check
 # 单独选择转换器；质量比较选择键使用完整输出名称。
 ./bin/ofd2png-benchmark testdata/ofdrw/999.ofd ofd-utility
 python3 tools/compare_png.py 999 --converters rust-ofd-utility
+./bin/ofd2png-benchmark testdata/ofdrw/999.ofd sdhzth-ofdrwnet
+python3 tools/compare_png.py 999 --converters dotnet-sdhzth-ofdrwnet
 ```
 
 输出保存为 `/tmp/ofd-benchmark/output_png/<name>_<converter>/page_<页码>.png`。仅查看质量、不修改结果 YAML 可加 `--no-write`。

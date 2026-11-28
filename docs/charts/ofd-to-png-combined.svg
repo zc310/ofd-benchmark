@@ -1,7 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="624" viewBox="0 0 1100 624" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="678" viewBox="0 0 1100 678" role="img" aria-labelledby="title desc">
 <title id="title">OFD → PNG 总耗时及输出总大小</title>
 <desc id="desc">按总耗时排序，两项各使用独立线性刻度。</desc>
-<rect width="1100" height="624" rx="12" fill="#ffffff"/>
+<rect width="1100" height="678" rx="12" fill="#ffffff"/>
 <g font-family="Arial, 'Noto Sans CJK SC', sans-serif" fill="#172033">
 <text x="28" y="36" font-size="21" font-weight="700">OFD → PNG 总耗时及输出总大小</text>
 <text x="28" y="62" font-size="14" fill="#5c6a7d">3 个文件合计 · 各栏使用独立刻度</text>
@@ -50,5 +50,8 @@
 <text x="28" y="565" font-size="15">rust-ofd-utility</text>
 <text x="240" y="565" font-size="14" fill="#6b7280">无完整结果</text>
 <text x="655" y="565" font-size="14" fill="#6b7280">无完整结果</text>
+<text x="28" y="619" font-size="15">dotnet-sdhzth-ofdrwnet</text>
+<text x="240" y="619" font-size="14" fill="#6b7280">无完整结果</text>
+<text x="655" y="619" font-size="14" fill="#6b7280">无完整结果</text>
 </g>
 </svg>

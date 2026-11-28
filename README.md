@@ -8,7 +8,7 @@
 |-----------|------------------------------------------|----------------------------------------------------------------------------------------------|
 | OFD → PDF | [docs/ofd-to-pdf.md](docs/ofd-to-pdf.md) | 8 种转换器（Go×3 / Rust×2 / Python / Java / Node）的速度、文件大小、文本提取与数科版式还原度 |
 | PDF → OFD | [docs/pdf-to-ofd.md](docs/pdf-to-ofd.md) | 5 种转换器（zc310 / ofdgo / ofdrw / pdf2ofd / jsOFD）的速度、文件大小与回环还原度 |
-| OFD → PNG | [docs/ofd-to-png.md](docs/ofd-to-png.md) | 9 个原生 200 DPI 转换器的速度、体积与数科直接导出 PNG 的还原度，不使用 PDF 中转 |
+| OFD → PNG | [docs/ofd-to-png.md](docs/ofd-to-png.md) | 10 个原生 200 DPI 转换器的速度、体积与数科直接导出 PNG 的还原度，不使用 PDF 中转 |
 
 基准参考输出来自**数科版式阅读器**（`testdata`），保证同一组文档双向可测。测试用的 PDF/OFD 可在 [zc310/ofd-fixtures](https://github.com/zc310/ofd-fixtures) 下载。
 

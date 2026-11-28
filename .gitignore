@@ -33,6 +33,8 @@ go.work.sum
 .venv-benchmark/
 .venv-pdf2ofd/
 target
+dotnet/**/obj/
+/ofdrwnet/
 bin/
 *.lock
 !rust/ofdbox-folio-convert/Cargo.lock

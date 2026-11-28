@@ -73,7 +73,7 @@ func TestRegistryMatchesReportGroups(t *testing.T) {
 			}
 		}
 	}
-	if native != 9 || rows != len(registry)*9 {
+	if native != 10 || rows != len(registry)*9 {
 		t.Fatalf("native=%d report rows=%d", native, rows)
 	}
 	for _, excluded := range []string{"ofd2img", "python", "node", "easyofd-rust"} {
