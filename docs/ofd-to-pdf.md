@@ -22,8 +22,8 @@
 <!-- benchmark-environment:start -->
 
 - 系统：Ubuntu 24.04.5 LTS (x86_64)
-- CPU：Intel(R) Xeon(R) 6975P-C（4 逻辑核心）
-- 内存：15.3 GiB
+- CPU：AMD EPYC 7763 64-Core Processor（4 逻辑核心）
+- 内存：15.6 GiB
 <!-- benchmark-environment:end -->
 - 系统已安装 `apt-get install fonts-wqy-zenhei fonts-noto-cjk`
 - 测试前运行 `bash tools/install-fonts.sh`，下载 `doc-foundertype.zip`、`doc-zhongyi-etc.zip`、`latin-fonts.zip` 并安装到用户目录 `~/.local/share/fonts/hanzi-fonts/`，随后刷新字体缓存。字体下载链接与依赖安装命令见 [README：快速开始](../README.md#快速开始)；GitHub Actions 已加入此准备步骤。
@@ -62,14 +62,14 @@
 
 | 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| [go-zc310-ofd](https://github.com/zc310/ofd) | 87ms | 170ms | **329ms** | 166ms | **213ms** | 341ms | 2 |
-| [go-xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | 1.23s | 398ms | 357ms | **154ms** | 634ms | 566ms | 1 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | **30ms** | 514ms | 2.76s | 268.90s | 482ms | 572ms | 1 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 115ms | **135ms** | 447ms | 5.31s | 337ms | **277ms** | 2 |
-| [rust-sOFD](https://github.com/emfox/sOFD) | 36ms | 342ms | 2.67s | 22.25s | 297ms | 2.93s | 0 |
-| [python-easyofd](https://pypi.org/project/easyofd/) | 1.54s | 991ms | 9.47s | 1.56s | 1.03s | 5.70s | 0 |
-| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 1.06s | 1.12s | 2.79s | 3.23s | 1.74s | 1.80s | 0 |
-| [node-ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 225ms | 590ms | 1.48s | 9.05s | 446ms | 937ms | 0 |
+| [go-zc310-ofd](https://github.com/zc310/ofd) | 112ms | 205ms | **477ms** | 339ms | **256ms** | 414ms | 2 |
+| [go-xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | 232ms | 477ms | 552ms | **238ms** | 830ms | 719ms | 1 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | **35ms** | 1.01s | 4.15s | 399.11s | 755ms | 844ms | 1 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 175ms | **196ms** | 626ms | 7.20s | 450ms | **399ms** | 2 |
+| [rust-sOFD](https://github.com/emfox/sOFD) | 58ms | 425ms | 3.29s | 25.98s | 362ms | 3.50s | 0 |
+| [python-easyofd](https://pypi.org/project/easyofd/) | 2.04s | 1.43s | 13.59s | 2.44s | 1.37s | 7.71s | 0 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 1.46s | 1.73s | 4.35s | 4.85s | 2.86s | 2.71s | 0 |
+| [node-ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 343ms | 885ms | 2.19s | 12.66s | 665ms | 1.38s | 0 |
 <!-- benchmark-table:ofd-speed:end -->
 
 ### CPU 总时间
@@ -80,14 +80,14 @@ CPU 总时间为进程用户态与内核态时间之和，累加所有线程及�
 
 | 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| [go-zc310-ofd](https://github.com/zc310/ofd) | 99ms | 181ms | **376ms** | **196ms** | **239ms** | 380ms | 3 |
-| [go-xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | 192ms | 492ms | 1.12s | 486ms | 1.44s | 665ms | 0 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | **15ms** | 511ms | 2.76s | 268.65s | 478ms | 571ms | 1 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 114ms | **135ms** | 447ms | 5.31s | 337ms | **277ms** | 2 |
-| [rust-sOFD](https://github.com/emfox/sOFD) | 36ms | 342ms | 2.67s | 22.25s | 297ms | 2.93s | 0 |
-| [python-easyofd](https://pypi.org/project/easyofd/) | 911ms | 990ms | 9.47s | 1.56s | 1.03s | 5.70s | 0 |
-| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 1.76s | 3.29s | 7.80s | 9.96s | 4.26s | 5.16s | 0 |
-| [node-ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 391ms | 1.26s | 2.49s | 13.92s | 908ms | 1.72s | 0 |
+| [go-zc310-ofd](https://github.com/zc310/ofd) | 133ms | 221ms | **545ms** | **383ms** | **299ms** | 466ms | 3 |
+| [go-xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | 254ms | 628ms | 1.65s | 754ms | 1.82s | 853ms | 0 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | **25ms** | 1.01s | 4.16s | 398.91s | 751ms | 844ms | 1 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 148ms | **196ms** | 626ms | 7.20s | 450ms | **399ms** | 2 |
+| [rust-sOFD](https://github.com/emfox/sOFD) | 59ms | 426ms | 3.28s | 25.98s | 362ms | 3.50s | 0 |
+| [python-easyofd](https://pypi.org/project/easyofd/) | 1.25s | 1.43s | 13.59s | 2.44s | 1.37s | 7.71s | 0 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 2.60s | 4.91s | 11.80s | 14.47s | 6.28s | 7.82s | 0 |
+| [node-ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 566ms | 1.76s | 3.67s | 18.11s | 1.26s | 2.39s | 0 |
 <!-- benchmark-table:ofd-cpu:end -->
 
 ### 进程树内存峰值
@@ -98,14 +98,14 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 
 | 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| [go-zc310-ofd](https://github.com/zc310/ofd) | 86.47MB | 143.84MB | 146.23MB | **31.58MB** | 182.89MB | 159.44MB | 1 |
-| [go-xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | 137.63MB | 313.05MB | 150.73MB | 50.28MB | 795.91MB | 287.19MB | 0 |
-| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | **15.57MB** | 67.48MB | 98.57MB | 210.61MB | 69.52MB | 123.90MB | 1 |
-| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 39.12MB | 54.22MB | **64.47MB** | 236.16MB | 68.64MB | **45.50MB** | 2 |
-| [rust-sOFD](https://github.com/emfox/sOFD) | 23.61MB | **16.27MB** | 109.15MB | 328.31MB | **56.53MB** | 143.85MB | 2 |
-| [python-easyofd](https://pypi.org/project/easyofd/) | 215.96MB | 227.22MB | 364.34MB | 221.21MB | 232.11MB | 371.97MB | 0 |
-| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 144.22MB | 355.00MB | 724.43MB | 542.15MB | 443.95MB | 490.26MB | 0 |
-| [node-ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 99.78MB | 149.59MB | 262.45MB | 1076.46MB | 134.58MB | 187.64MB | 0 |
+| [go-zc310-ofd](https://github.com/zc310/ofd) | 84.47MB | 142.50MB | 148.16MB | **31.44MB** | 182.77MB | 143.31MB | 1 |
+| [go-xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | 137.02MB | 312.24MB | 140.40MB | 49.78MB | 810.28MB | 283.98MB | 0 |
+| [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 34.24MB | 58.99MB | 93.44MB | 206.19MB | 64.97MB | 123.75MB | 0 |
+| [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 38.93MB | 38.31MB | **62.35MB** | 245.74MB | 68.51MB | **45.20MB** | 2 |
+| [rust-sOFD](https://github.com/emfox/sOFD) | **31.21MB** | **15.90MB** | 116.16MB | 345.82MB | **56.27MB** | 143.62MB | 3 |
+| [python-easyofd](https://pypi.org/project/easyofd/) | 227.80MB | 232.41MB | 369.09MB | 232.97MB | 228.74MB | 372.01MB | 0 |
+| [java-ofdrw](https://github.com/ofdrw/ofdrw) | 151.17MB | 349.31MB | 640.42MB | 462.46MB | 398.89MB | 459.79MB | 0 |
+| [node-ofd-to-pdf](https://www.npmjs.com/package/@miconvert/ofd-to-pdf) | 101.13MB | 149.38MB | 268.95MB | 1082.88MB | 134.27MB | 187.08MB | 0 |
 <!-- benchmark-table:ofd-memory:end -->
 
 > - `python-easyofd`: `pip install easyofd`，仅使用 easyofd，不再回退到 ofd2img
@@ -123,7 +123,7 @@ Linux 下每 10ms 采样转换进程及其存活子孙进程的 RSS（驻留物�
 | 转换器 | hello.ofd | ano.ofd | intro.ofd | 1000-pages.ofd | 999.ofd | zsbk.ofd | 胜出次数 |
 |---|---:|---:|---:|---:|---:|---:|---:|
 | [go-zc310-ofd](https://github.com/zc310/ofd) | 10.02KB | 90.54KB | 7.46MB | 683.92KB | 81.90KB | 1.44MB | 0 |
-| [go-xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | 4.87KB | 56.07KB | 7.56MB | **295.70KB** | **63.12KB** | 1.53MB | 2 |
+| [go-xiaoqidun-ofdgo](https://github.com/xiaoqidun/ofdgo) | 4.87KB | 56.09KB | 7.56MB | **295.66KB** | **63.11KB** | 1.53MB | 2 |
 | [go-ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs) | 5.41KB | 682.85KB | 9.54MB | 25.81MB | 208.70KB | 2.66MB | 0 |
 | [rust-ofdbox-folio](https://github.com/ofdbox/ofdbox-folio) | 81.64KB | 258.43KB | 9.03MB | 32.78MB | 602.89KB | 1.90MB | 0 |
 | [rust-sOFD](https://github.com/emfox/sOFD) | 4.45KB | 971.23KB | 31.44MB | 88.40MB | 834.72KB | 15.91MB | 0 |
