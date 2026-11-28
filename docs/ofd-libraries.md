@@ -34,26 +34,26 @@
 
 ## Rust
 
-|                             库                              |     许可证     | 预览 | 解析 | 发票 | → 图片 | → PDF | → TXT | → SVG | → Md | → HTML | PDF → OFD | 生成 | 签章 | 加密文档 | 打印 | 检索 | 注释 | 归档 | 修改 | 编辑器 |
-|:-----------------------------------------------------------:|:--------------:|:----:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:------:|:---------:|:----:|:----:|:--------:|:----:|:----:|:----:|:----:|:----:|:------:|
-| [easyofd-rust](https://github.com/easy-4-rust/easyofd-rust) |   Apache-2.0   |  ❌  |  ✅  |  ⚠️  |   ✅   |  ✅   |  ❌   |  ❌   |  ✅  |   ❌   |    ⚠️     |  ✅  |  ✅  |    ✅    |  ❌  |  ✅  |  ❌  |  ✅  |  ✅  |   ❌   |
-|     [ofdmanager](https://github.com/feuvan/ofdmanager)      |      MIT       |  ✅  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ⚠️  |  ❌  |  ❌  |   ❌   |
-|        [rs_ofd](https://github.com/geniusnut/rs_ofd)        |      MIT       |  ❌  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
-|  [ofd-utility](https://github.com/ofd-utility/ofd-utility)  |      MIT       |  ❌  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ✅  |    ❌    |  ❌  |  ❌  |  ✅  |  ❌  |  ❌  |   ❌   |
-|       [ofdbox-rust](https://github.com/ofdbox/ofdbox)       |   Apache-2.0   |  ❌  |  ✅  |  ❌  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ⚠️     |  ❌  |  ✅  |    ✅    |  ❌  |  ❌  |  ✅  |  ❌  |  ✅  |   ❌   |
-|         [ofdsdk](https://github.com/KaiserY/ofdsdk)         |   Apache-2.0   |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
-|          [rofd](https://github.com/office-rs/rofd)          |   Apache-2.0   |  ✅  |  ✅  |  ❌  |   ⚠️   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ✅  |  ✅  |  ❌  |  ✅  |   ❌   |
-|   [ofd-viewer](https://github.com/shaoyi1998/ofd-viewer)    |      MIT       |  ✅  |  ✅  |  ❌  |   ❌   |  ✅   |  ✅   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ✅  |  ✅  |  ✅  |  ❌  |  ❌  |   ❌   |
-|    [fapiao-print](https://github.com/erma0/fapiao-print)    |      MIT       |  ✅  |  ✅  |  ✅  |   ⚠️   |  ✅   |  ❌   |  ✅   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
-|      [jian-yue](https://github.com/lapin2024/jian-yue)      |      MIT       |  ✅  |  ✅  |  ⚠️  |   ✅   |  ⚠️   |  ✅   |  ❌   |  ❌  |   ❌   |    ⚠️     |  ❌  |  ⚠️  |    ❌    |  ✅  |  ✅  |  ✅  |  ❌  |  ⚠️  |   ✅   |
-|   [linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)   |    LGPL-2.1    |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
-|      [easy_print](https://github.com/qzue/easy_print)       |      MIT       |  ✅  |  ✅  |  ✅  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ✅  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
-|        [ofd-rs](https://github.com/YeaLooooo/ofd-rs)        |   Apache-2.0   |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ✅  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
-|        [SteleOFD](https://github.com/emfox/SteleOFD)        |   Apache-2.0   |  ✅  |  ✅  |  ⚠️  |   ✅   |  ✅   |  ❌   |  ✅   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ✅  |    ❌    |  ✅  |  ✅  |  ✅  |  ✅  |  ✅  |   ❌   |
-|    [ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)    |   Apache-2.0   |  ❌  |  ✅  |  ⚠️  |   ❌   |  ✅   |  ✅   |  ✅   |  ❌  |   ❌   |    ⚠️     |  ✅  |  ✅  |    ✅    |  ❌  |  ✅  |  ✅  |  ✅  |  ✅  |   ❌   |
-|   [ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)    | MIT/Apache-2.0 |  ❌  |  ✅  |  ⚠️  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ⚠️     |  ✅  |  ❌  |    ❌    |  ❌  |  ✅  |  ❌  |  ❌  |  ❌  |   ❌   |
-|    [vofdreader](https://github.com/btstream/vofdreader)     |    GPL-3.0     |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ✅   |  ✅   |  ❌  |   ❌   |    ❌     |  ❌  |  ⚠️  |    ❌    |  ❌  |  ✅  |  ✅  |  ❌  |  ❌  |   ❌   |
-|    [ibis-office](https://github.com/ibisjp/ibis-office)     | AGPL-3.0/商业  |  ✅  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ⚠️  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
+|                             库                              |      许可证      | 预览 | 解析 | 发票 | → 图片 | → PDF | → TXT | → SVG | → Md | → HTML | PDF → OFD | 生成 | 签章 | 加密文档 | 打印 | 检索 | 注释 | 归档 | 修改 | 编辑器 |
+|:-----------------------------------------------------------:|:----------------:|:----:|:----:|:----:|:------:|:-----:|:-----:|:-----:|:----:|:------:|:---------:|:----:|:----:|:--------:|:----:|:----:|:----:|:----:|:----:|:------:|
+| [easyofd-rust](https://github.com/easy-4-rust/easyofd-rust) |    Apache-2.0    |  ❌  |  ✅  |  ⚠️  |   ✅   |  ✅   |  ❌   |  ❌   |  ✅  |   ❌   |    ⚠️     |  ✅  |  ✅  |    ✅    |  ❌  |  ✅  |  ❌  |  ✅  |  ✅  |   ❌   |
+|     [ofdmanager](https://github.com/feuvan/ofdmanager)      |       MIT        |  ✅  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ⚠️  |  ❌  |  ❌  |   ❌   |
+|        [rs_ofd](https://github.com/geniusnut/rs_ofd)        |       MIT        |  ❌  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
+|  [ofd-utility](https://github.com/ofd-utility/ofd-utility)  |       MIT        |  ❌  |  ✅  |  ❌  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ✅  |    ❌    |  ❌  |  ❌  |  ✅  |  ❌  |  ❌  |   ❌   |
+|       [ofdbox-rust](https://github.com/ofdbox/ofdbox)       |    Apache-2.0    |  ❌  |  ✅  |  ❌  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ⚠️     |  ❌  |  ✅  |    ✅    |  ❌  |  ❌  |  ✅  |  ❌  |  ✅  |   ❌   |
+|         [ofdsdk](https://github.com/KaiserY/ofdsdk)         |    Apache-2.0    |  ❌  |  ✅  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
+|          [rofd](https://github.com/office-rs/rofd)          |    Apache-2.0    |  ✅  |  ✅  |  ❌  |   ⚠️   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ✅  |  ✅  |  ❌  |  ✅  |   ❌   |
+|   [ofd-viewer](https://github.com/shaoyi1998/ofd-viewer)    |       MIT        |  ✅  |  ✅  |  ❌  |   ❌   |  ✅   |  ✅   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ✅  |  ✅  |  ✅  |  ❌  |  ❌  |   ❌   |
+|    [fapiao-print](https://github.com/erma0/fapiao-print)    |       MIT        |  ✅  |  ✅  |  ✅  |   ⚠️   |  ✅   |  ❌   |  ✅   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
+|      [jian-yue](https://github.com/lapin2024/jian-yue)      |       MIT        |  ✅  |  ✅  |  ⚠️  |   ✅   |  ⚠️   |  ✅   |  ❌   |  ❌  |   ❌   |    ⚠️     |  ❌  |  ⚠️  |    ❌    |  ✅  |  ✅  |  ✅  |  ❌  |  ⚠️  |   ✅   |
+|   [linuxdeepin-rofd](https://github.com/linuxdeepin/rofd)   |     LGPL-2.1     |  ✅  |  ✅  |  ⚠️  |   ✅   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
+|      [easy_print](https://github.com/qzue/easy_print)       |       MIT        |  ✅  |  ✅  |  ✅  |   ❌   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ❌  |    ❌    |  ✅  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
+|        [ofd-rs](https://github.com/YeaLooooo/ofd-rs)        |    Apache-2.0    |  ❌  |  ❌  |  ❌  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ✅  |  ❌  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
+|        [SteleOFD](https://github.com/emfox/SteleOFD)        |    Apache-2.0    |  ✅  |  ✅  |  ⚠️  |   ✅   |  ✅   |  ❌   |  ✅   |  ❌  |   ⚠️   |    ❌     |  ❌  |  ✅  |    ❌    |  ✅  |  ✅  |  ✅  |  ✅  |  ✅  |   ❌   |
+|    [ofdrw-rs](https://github.com/lihongjie0209/ofdrw-rs)    |    Apache-2.0    |  ❌  |  ✅  |  ⚠️  |   ❌   |  ✅   |  ✅   |  ✅   |  ❌  |   ❌   |    ⚠️     |  ✅  |  ✅  |    ✅    |  ❌  |  ✅  |  ✅  |  ✅  |  ✅  |   ❌   |
+|   [ofdbox-folio](https://github.com/ofdbox/ofdbox-folio)    |  MIT/Apache-2.0  |  ❌  |  ✅  |  ⚠️  |   ✅   |  ✅   |  ❌   |  ❌   |  ❌  |   ❌   |    ⚠️     |  ✅  |  ❌  |    ❌    |  ❌  |  ✅  |  ❌  |  ❌  |  ❌  |   ❌   |
+|    [vofdreader](https://github.com/btstream/vofdreader)     | GPL-3.0-or-later |  ✅  |  ✅  |  ⚠️  |   ✅   |  ✅   |  ✅   |  ✅   |  ❌  |   ❌   |    ❌     |  ❌  |  ⚠️  |    ❌    |  ✅  |  ✅  |  ✅  |  ❌  |  ❌  |   ❌   |
+|    [ibis-office](https://github.com/ibisjp/ibis-office)     |  AGPL-3.0/商业   |  ✅  |  ✅  |  ⚠️  |   ❌   |  ❌   |  ❌   |  ❌   |  ❌  |   ❌   |    ❌     |  ❌  |  ⚠️  |    ❌    |  ❌  |  ❌  |  ❌  |  ❌  |  ❌  |   ❌   |
 
 ## Python
 
