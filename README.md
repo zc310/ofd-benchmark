@@ -4,6 +4,8 @@
 
 本项目对比多种开源 OFD 库的转换与渲染能力：
 
+文档通过 GitHub Actions 发布到 GitHub Pages；在仓库 Settings → Pages 中将 Source 设置为 **GitHub Actions** 即可启用。`docs/` 中的 Markdown 和 SVG 更新后会自动发布，也可手动运行 `Publish documentation` 工作流。
+
 | 方向      | 文档                                     | 对比内容                                                                                     |
 |-----------|------------------------------------------|----------------------------------------------------------------------------------------------|
 | OFD → PDF | [docs/ofd-to-pdf.md](docs/ofd-to-pdf.md) | 8 种转换器（Go×3 / Rust×2 / Python / Java / Node）的速度、文件大小、文本提取与数科版式还原度 |
