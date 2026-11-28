@@ -43,6 +43,34 @@ jobs:
         with:
           source: _pages
           destination: _site
+      - name: Verify rendered tables
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          import re
+
+          class TableCounter(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.count = 0
+
+              def handle_starttag(self, tag, attrs):
+                  if tag == "table":
+                      self.count += 1
+
+          for source in Path("_pages").rglob("*.md"):
+              markdown = source.read_text(encoding="utf-8")
+              expected = len(re.findall(r"^\|[^\n]*\|\s*\n\|[ \t:|-]+\|[ \t]*$", markdown, re.MULTILINE))
+              if not expected:
+                  continue
+              page = Path("_site") / source.relative_to("_pages").with_suffix(".html")
+              counter = TableCounter()
+              counter.feed(page.read_text(encoding="utf-8"))
+              if counter.count != expected:
+                  raise SystemExit(f"{page}: expected {expected} tables, rendered {counter.count}")
+              print(f"{page}: {counter.count} tables")
+          PY
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

@@ -33,6 +33,8 @@ def main():
         text = document.read_text(encoding="utf-8")
         heading = re.search(r"^#\s+(.+)$", text, re.MULTILINE)
         title = heading.group(1).strip() if heading else document.stem
+        # Generator markers can interrupt Jekyll's table parsing.
+        text = re.sub(r"^<!-- benchmark-[^\n]* -->[ \t]*$", "", text, flags=re.MULTILINE)
         text = re.sub(r"(\]\((?![a-zA-Z][a-zA-Z0-9+.-]*://)[^)\s]*?)\.md(?=[#)])", r"\1.html", text)
         if document == source.parent / "README.md":
             text = text.replace("](docs/", "](")
